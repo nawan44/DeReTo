@@ -1,101 +1,264 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import { Toolbar, Tooltip } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-// import { useHistory } from "react-router-dom";
-import { Outlet, Link } from "react-router-dom";
-import ClippedDrawer from "./clippedDrawer"
-import Avatar from "../../assets/avatar/avatar.png"
-import { NavLink, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import Input from "@mui/material/Input";
+import Grid from "@mui/material/Grid";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import IconButton from "@mui/material/IconButton";
+import CreateIcon from "@mui/icons-material/Create";
+import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
+import Button from "@mui/material/Button";
+import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
+import SortIcon from "@mui/icons-material/Sort";
+import SouthIcon from "@mui/icons-material/South";
+import NorthIcon from "@mui/icons-material/North";
+import "../../assets/css/style.css";
+import SortDialog from "../dialog/sort";
+import AddListItem from "../dialog/addListItem";
+const ariaLabel = { "aria-label": "description" };
 
-export default function TopBar() {
+const sorts = [
+  {
+    title: "Terbaru",
+    icon: (
+      <span>
+        <SortIcon
+          style={{
+            fontSize: "16px",
+            color: "#16ABF8",
+          }}
+        />
+        <SouthIcon
+          style={{
+            fontSize: "16px",
+            color: "#16ABF8",
+          }}
+        />
+      </span>
+    ),
+  },
+  {
+    title: "Terlama",
+    icon: (
+      <span>
+        <SortIcon
+          style={{
+            fontSize: "16px",
+            color: "#16ABF8",
+          }}
+        />
+        <NorthIcon
+          style={{
+            fontSize: "16px",
+            color: "#16ABF8",
+          }}
+        />
+      </span>
+    ),
+  },
+  {
+    title: "A - Z",
+    icon: (
+      <span>
+        <SouthIcon
+          style={{
+            fontSize: "16px",
+            color: "#16ABF8",
+          }}
+        />
+        <SortByAlphaIcon
+          style={{
+            fontSize: "16px",
+            color: "#16ABF8",
+          }}
+        />
+      </span>
+    ),
+  },
+  {
+    title: "Z - A",
+    icon: (
+      <span>
+        <NorthIcon
+          style={{
+            fontSize: "16px",
+            color: "#16ABF8",
+          }}
+        />
+        <SortByAlphaIcon
+          style={{
+            fontSize: "16px",
+            color: "#16ABF8",
+          }}
+        />
+      </span>
+    ),
+  },
+  {
+    title: "Belum Selesai",
+    icon: (
+      <SwapVertRoundedIcon
+        style={{
+          fontSize: "24px",
+          color: "#16ABF8",
+        }}
+      />
+    ),
+  },
+];
+const AppBar = (props) => {
+  const { handle, click } = props;
+  const navigate = useNavigate();
   let location = useLocation();
-
-  // const history = useHistory();
-
-  // const routeLogin = (a) => {
-  //   a.preventDefault();
-  //   history.push("/login");
-  // };
-  // const routeProfile = (a) => {
-  //   a.preventDefault();
-  //   history.push("/profile");
-  // };
+  const toDashboard = () => {
+    navigate("/dashboard-empty");
+  };
+  const toListActivity = () => {
+    navigate("/list-activity");
+  };
   const Title = () => {
-    if (location.pathname === "/login" || location.pathname === "/profile") {
-      return <span>TO DO LIST APP Log</span>
-
-    } else {
-      return <span>TO DO LIST APP</span>
-    }
-  }
-  const RightBar = () => {
-    if (location.pathname === "/login" || location.pathname === "/profile") {
+    if (
+      location.pathname === "/dashboard" ||
+      location.pathname === "/dashboard-empty"
+    ) {
+      return <span>Activity</span>;
+    } else if (location.pathname === "/item-list") {
       return (
-        <>
-          <Typography style={{ height: "65px", padding: "20px 10px 0 10px" }} className="4 text-lg hover:bg-black active:bg-black focus:outline-none mx-4" >
-            <Link to="/profile" >Profile</Link>
-          </Typography>
-          <Typography style={{ height: "65px", padding: "20px 10px 0 10px" }} className="4 text-lg hover:bg-black active:bg-black focus:outline-none mx-4" >
-            <Link to="/login" >
-              Login
-            </Link>
-          </Typography>
-        </>
-      )
-
+        <span>
+          {" "}
+          <ArrowBackIosIcon onClick={toListActivity} /> Daftar Belanja Bulanan{" "}
+          <IconButton edge="end" aria-label="comments">
+            <CreateIcon style={{ color: "#888888" }} />
+          </IconButton>{" "}
+        </span>
+      );
     } else {
       return (
-        <Box sx={{ flexGrow: 0 }}>
-           <Link to="/profile" >
-          <Tooltip title="Open settings" style={{ float: "left", padding: "5px" }}>
-            <IconButton sx={{ p: 0 }}>
-              <img alt="Remy Sharp" width={50} src={Avatar} />
-            </IconButton>
+        <span>
+          {" "}
+          <span>
+            <ArrowBackIosIcon onClick={toDashboard}/>
 
-          </Tooltip>
-          <Typography style={{ height: "65px", padding: "20px 10px 0 10px", float: "left" }} className="4 text-lg hover:bg-black active:bg-black focus:outline-none mx-4" >
-           Tony
-          </Typography>
-          </Link>
-        </Box>
-      )
+            <Input
+              defaultValue="New Activity"
+              inputProps={ariaLabel}
+              sx={{ fontSize: "24px", fontWeight: "bold" }}
+            />
+          </span>
+          <IconButton edge="end" aria-label="comments">
+            <CreateIcon style={{ color: "#888888" }} />
+          </IconButton>{" "}
+        </span>
+      );
     }
-  }
+  };
+  const RightButton = () => {
+    if (
+      location.pathname === "/dashboard-empty"
+    ) {
+      return (
+        <span>
+          {" "}
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+          >
+            + Tambah
+          </Button>
+        </span>
+      );
+    } else if (location.pathname === "/list-activity" && click == true) {
+      return (
+        <span>
+          {" "}
+          <Button
+            variant="contained"
+            onClick={handleOpenAddList}
+            style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+          >
+            + Tambah
+          </Button>
+        </span>
+      );
+    } else if (location.pathname === "/list-activity" && click == false) {
+      return (
+        <span>
+          {" "}
+          <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
+            <SwapVertRoundedIcon onClick={handleOpenSort} />
+          </IconButton>
+          <Button
+ onClick={handle}             variant="contained"
+            style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+          >
+            + Tambah
+          </Button>
+        </span>
+      );
+    }
+  };
+  const [openSort, setOpenSort] = useState(false);
+  const [selectedSort, setSelectedSort] = useState(sorts[1]);
+  const [openAddList, setOpenAddList] = useState(false);
+  const [selectedAddList, setSelectedAddList] = useState(sorts[1]);
 
+  const handleOpenSort = () => {
+    setOpenSort(true);
+  };
+
+  const handleCloseSort = (value) => {
+    setOpenSort(false);
+    setSelectedSort(value);
+  };
+
+  const handleOpenAddList = () => {
+    setOpenAddList(true);
+  };
+
+  const handleCloseAddList = (value) => {
+    setOpenAddList(false);
+    setSelectedAddList(value);
+  };
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed" color="primary" sx={{ top: 'auto', top: 0, zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-
-          <Toolbar>
-            {/* <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              KLEDO TEST
-              {/* <MenuIcon /> 
-            </IconButton> */}
-
-            <Typography variant="h6" style={{ height: "65px", paddingTop: "12px", fontWeight: "bold" }} component="div" sx={{ flexGrow: 1 }}>
-              {Title()}
-            </Typography>
-
-        
-            {RightBar()}
-            {/* <AccountCircle /> */}
-          </Toolbar>
-        </AppBar>
-      </Box>
-      {/* <ClippedDrawer /> */}
+      <Grid
+        style={{
+          margin: "0 auto",
+          textAlign: "center",
+          margin: "50px",
+        }}
+        container
+        rowSpacing={1}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      >
+        <Grid
+          item
+          xs={6}
+          style={{
+            fontSize: "24px",
+            textAlign: "left",
+            fontWeight: "bold",
+          }}
+        >
+       
+          {Title()}
+        </Grid>
+        <Grid item xs={6}>
+          {RightButton()}
+        </Grid>
+      </Grid>
+      <SortDialog
+        selectedValue={selectedSort}
+        open={openSort}
+        onClose={handleCloseSort}
+        sorts={sorts}
+      />
+      <AddListItem
+        selectedValue={selectedAddList}
+        open={openAddList}
+        onClose={handleCloseAddList}
+      />
     </>
   );
-}
+};
+export default AppBar;
