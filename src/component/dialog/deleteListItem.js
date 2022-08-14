@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import Grid from "@mui/material/Grid";
-import { Container, Divider, TextField, Typography } from "@mui/material";
+import {  Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
-import MenuItem from "@mui/material/MenuItem";
 import CircleIcon from "@mui/icons-material/Circle";
 import { withStyles } from "@material-ui/core/styles";
 import "../../assets/css/style.css";
 import { useSnackbar } from 'notistack';
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -78,7 +76,7 @@ const styles = {
 };
 
 function DeleteListItem(props) {
-  const { onRemove , onClose, selectedValue, open, classes, lempar, list, setList} = props;
+  const { onRemove ,deleteTitleList, onClose, selectedValue, open, classes, lempar, list, setList} = props;
 
 const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -90,16 +88,14 @@ const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     onClose(value);
   };
 
-  const [priority, setPriority] = React.useState("EUR");
 
-  const handleChange = (event) => {
-    setPriority(event.target.value);
-  };
   function handleRemove(id) {
     const newList = list.filter((item) => item.id !== id);
 
     setList(newList);
   }
+
+ 
   return (
     <ThemeProvider theme={theme}>
       <Dialog
@@ -123,7 +119,7 @@ Apakah anda yakin menghapus List Item
               lineHeight: "18px",
             }}
           >
-           " {lempar} " ?
+           " {deleteTitleList} " ?
           </Typography>
         
         </div>
@@ -162,7 +158,7 @@ Apakah anda yakin menghapus List Item
             // onClick ={() => deleteData(lempar.id) }
             onClick={() => onRemove(lempar)}
           >
-            Hapus aa
+            Hapus 
           </Button>
           </Grid>
         </Grid>

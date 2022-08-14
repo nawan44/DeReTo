@@ -1,21 +1,54 @@
-import React, { PureComponent } from "react";
-import Grid from "@mui/material/Grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CreateIcon from "@mui/icons-material/Create";
-import { Container } from "@mui/material";
-import AppBar from "../../component/view/appBar";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import FiberManualRecordRoundedIcon from "@mui/icons-material/FiberManualRecordRounded";
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
+import React, { useState, useEffect } from "react";
 
-const ItemList = () => {
-  const [checked, setChecked] = React.useState([1]);
+import DeleteIcon from '@mui/icons-material/Delete';
+import FiberManualRecordRoundedIcon from '@mui/icons-material/FiberManualRecordRounded';
+import CreateIcon from '@mui/icons-material/Create';
 
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Checkbox,
+  IconButton,
+  Container,
+  Grid,
+} from "@mui/material";
+import DeleteListItem from "../../component/dialog/deleteListItem";
+
+import "../../assets/css/style.css";
+
+const ItemList = (props) => {
+  const {
+    list,
+    lempar,
+    checkToDo,
+    setCheckToDo,
+    setOpenAddTodoItems,
+    openAddTodoItems,
+    handleCloseAddTodoItems,
+    handleOpenAddTodoItems,
+    open,
+    selectedValue,
+    onClose,
+    setList,
+    onRemove,
+    deleteTitleList,
+    handleDeleteList,
+    item,
+  } = props;
+  const [checked, setChecked] = useState([1]);
+  const [todoItem, setTodoItem] = useState(checkToDo?.todo_items);
+
+  const [listDataItem, setListDataItem] = useState({
+    activity_group_id: checked.activity_group_id,
+    id: checked.id,
+    is_active: checked.is_active,
+    priority: checked.priority,
+    title: checked.title,
+  });
+  // https://todo.api.devcode.gethired.id/activity-groups/23752388
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -28,9 +61,26 @@ const ItemList = () => {
 
     setChecked(newChecked);
   };
+  const line = (value) => {
+    if (value.target === true) {
+      return "line-through";
+    } else {
+      return false;
+    }
+  };
+  const checkedItems = checked.length
+    ? checked.reduce((total, item) => {
+        return total + ", " + item;
+      })
+    : "";
+
+  // Return classes based on whether item is checked
+  var isChecked = (item) =>
+    checked.includes(item) ? "checked-item" : "not-checked-item";
+
   return (
     <Container style={{ width: "100%" }}>
-      <AppBar />
+      {/* <AppBar /> */}
       <Grid
         style={{
           margin: "0 auto",
@@ -44,13 +94,13 @@ const ItemList = () => {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         <List sx={{ width: "100%", maxWidth: "90%" }}>
-          {[0, 1, 2, 3].map((value) => {
+          {todoItem?.map((value) => {
             const labelId = `checkbox-list-label-${value}`;
 
             return (
               <ListItem
                 sx={{ display: "list-item" }}
-                key={value}
+                key={value.id}
                 style={{
                   margin: "20px 0",
                   backgroundColor: "#fff",
@@ -58,7 +108,10 @@ const ItemList = () => {
                 }}
                 secondaryAction={
                   <IconButton edge="end" aria-label="comments">
-                    <DeleteIcon style={{ color: "#888888" }} />
+                    <DeleteIcon
+                      onClick={(id) => handleDeleteList(item)}
+                      style={{ color: "#888888" }}
+                    />
                   </IconButton>
                 }
                 disablePadding
@@ -83,19 +136,41 @@ const ItemList = () => {
                     />
                   </IconButton>
                   <ListItemText
-                    style={{ maxWidth: "100px" }}
+                    style={{
+                      maxWidth: value.title.length + 25,
+                      textDecoration: line(value.id),
+                    }}
                     id={labelId}
-                    primary={`Line item ${value + 1}`}
-                  />
+                    // primary={value.title}
+                    className={isChecked(value)}
+                  >
+                    {value.title}
+                  </ListItemText>
 
                   <IconButton edge="end" aria-label="comments">
-                    <CreateIcon style={{ color: "#888888" }} />
+                    <CreateIcon
+                      style={{
+                        color: "#888888",
+                        fontSize: "18px",
+                        margin: "0 0 0 10px",
+                      }}
+                    />
                   </IconButton>
                 </ListItemButton>
               </ListItem>
             );
           })}
         </List>
+        <DeleteListItem
+          selectedValue={selectedValue}
+          lempar={lempar}
+          open={open}
+          onClose={onClose}
+          list={list}
+          setList={setList}
+          onRemove={onRemove}
+          deleteTitleList={deleteTitleList}
+        />
       </Grid>
     </Container>
   );

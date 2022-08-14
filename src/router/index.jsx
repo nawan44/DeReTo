@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import DashboardEmpty from "../page/DashboardEmpty"
+// import Dashboard from "../page/Dashboard"
 import Layout from "../component/view/layout";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { reducer } from "../reducer";
 import thunk from "redux-thunk";
-import NewActivity from "../page/NewActivity";
+import Detail from "../page/Detail";
 import ItemList from "../page/ItemList";
-import ListActivity from "../page/ListActivity";
+import Activity from "../page/Activity";
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -19,10 +19,10 @@ export default function Routers() {
 
         <Routes>
           <Route element={<Layout />}>
-            <Route index path="/" element={<DashboardEmpty />} />
-            <Route path="/dashboard-empty" element={<DashboardEmpty />} />
-            <Route path="/list-activity" element={<ListActivity />} />
-            <Route path="/new-activity" element={<NewActivity />} />
+            <Route index path="/" element={<Activity />} />
+            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+            <Route path="/activity" element={<Activity />} />
+            <Route path="/detail/:id" element={<Detail />} />
             <Route path="/item-list" element={<ItemList />} />
 
             <Route path="*" element={<p>There's nothing here: 404!</p>} />

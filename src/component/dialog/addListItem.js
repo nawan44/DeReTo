@@ -67,56 +67,111 @@ const priorities = [
 const styles = {
   dialogPaper: {
     width: "500px",
-    height: "400px",  
-
+    height: "400px",
   },
 };
 
 function AddListItem(props) {
-  const { onClose, selectedValue, open, classes,lempar,setLempar } = props;
-console.log(lempar)
-const navigate = useNavigate();
+  const { 
+    onClose, selectedValue, open, classes, lempar, setLempar } = props;
+  const navigate = useNavigate();
+  const [valueKirim, setValueKirim] = useState({
+    namaList :"",
+    priorityList:""
+  });
+  const [namaList, setNamaList] = useState("")
+  const [priority, setPriority] = useState("");
+  const [kirim, setKirim] = useState({
+    id: null,
+    title: "",
+    list_kegiatan: {
+      nama_list: "",
+      priority: "",
+    },
+  });
+  const [newLempar, setNewLempar] = useState({
+    title: "New Activity",
+    name: "",
+  });
+  useEffect(
+    () => {
+      setValueKirim({
+        ...valueKirim,
+        id_list: lempar,
+        title: lempar?.title,
+        list_kegiatan: {
+          nama_list: valueKirim.namaList,
+          priority: valueKirim.priorityList,
+        },
+      });
+    },
+    [lempar?.title]
+    ,[ valueKirim]  
+  );
+  const addData = async (e) => {
+   
+    e.preventDefault();
 
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
-const [kirim, setKirim] = useState({
-  id:null,
-title : "",
-list_kegiatan : {
-  nama_list : "",
-  priority : "",
-  
-}
-})
-
-const [newLempar, setNewLempar] = useState({
-  title: "New Activity",
-  name: "",
-});
-useEffect(() => {
-  setKirim ({...kirim,
-    title : lempar?.title,
+    try {
+      let form = {
+        activity_group_id : valueKirim.id_list,
+        title : valueKirim.namaList,
+        _comment :  valueKirim.priorityList
+      };
+      const response = await fetch(
+        process.env.REACT_APP_URL + "/todo-items",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: localStorage.getItem("token"),
+          },
+          body: JSON.stringify(form),
+        }
+      );
+      // const res = await response.json();
+      // navigate("/item-list");
+      onClose()
+    } catch (err) {
+      console.log(err.message);
     }
-    )
-}, [lempar?.title] )
-console.log("kirim", kirim)
+  };
+
   const handleListItemClick = (value) => {
     onClose(value);
   };
-  const [priority, setPriority] = React.useState("EUR");
-
-  const handleChange = (event) => {
-    setPriority(event.target.value);
+  const handleClose = () => {
+    onClose(selectedValue);
   };
-  const addData = () => {
+  // const handleChangePriority = (event) => {
+  //   // event.preventDefault();
+  //   setPriority(event.target.value);
+  // };
+  const handleChange = (event) => {
+    // event.preventDefault();
+    setValueKirim({
+            ...valueKirim,
+            [event.target.name] :event.target.value
+            
+          })
+    // setNamaList(event.target.value);
+  };
+  // const handleChange = (event) => {
+  //   event.preventDefault();
+  //   setPriority(event.target.value);
+  //   setNamaList(event.target.value);
+  // setKirim({
+  //   ...kirim,
+  //   [event.target.name]: event.target.value,
+  // });
+  // };
 
-    const newItems = [...lempar, newLempar];
+  // const addData = () => {
+  //   const newItems = [...lempar, newLempar];
 
-    setLempar(newItems);
-    navigate("/item-list");
-
-  }
+  //   setLempar(newItems);
+  //   navigate("/item-list");
+  // };
   return (
     <ThemeProvider theme={theme}>
       <Dialog
@@ -134,6 +189,9 @@ console.log("kirim", kirim)
           </Typography>
           <TextField
             id="id"
+            value={valueKirim.namaList}
+            name="namaList"
+            onChange={handleChange}
             label="Tambahkan nama list item"
             variant="outlined"
             style={{ margin: "10px 0", width: "100%" }}
@@ -152,7 +210,8 @@ console.log("kirim", kirim)
             id="id"
             select
             label="Pilih Priority"
-            value={priority}
+            name="priorityList"
+            value={valueKirim.priorityList}
             onChange={handleChange}
             style={{ margin: "10px 0 10px 0", width: "100%" }}
           >
@@ -166,9 +225,13 @@ console.log("kirim", kirim)
         </div>
 
         <Divider />
-        <Grid container sx={{ padding: "0 0 20px 0 ",}} justifyContent="flex-end">
+        <Grid
+          container
+          sx={{ padding: "0 0 20px 0 " }}
+          justifyContent="flex-end"
+        >
           <Button
-          onClick= {addData}
+            onClick={addData}
             variant="contained"
             color="secondary"
             sx={{

@@ -13,7 +13,6 @@ import {
 // };
 
 export const startLogin = content => {
-  console.log("vvvvvvvvvv",content)
   return dispatch => {
     dispatch(loginProcessing());
     axios.post(process.env.REACT_APP_URL+"authentication/login", {

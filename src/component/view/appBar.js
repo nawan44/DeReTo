@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Input from "@mui/material/Input";
 import Grid from "@mui/material/Grid";
@@ -14,6 +14,9 @@ import NorthIcon from "@mui/icons-material/North";
 import "../../assets/css/style.css";
 import SortDialog from "../dialog/sort";
 import AddListItem from "../dialog/addListItem";
+import { useSnackbar } from "notistack";
+import { formControlUnstyledClasses } from "@mui/base";
+
 const ariaLabel = { "aria-label": "description" };
 
 const sorts = [
@@ -106,40 +109,74 @@ const sorts = [
   },
 ];
 const AppBar = (props) => {
-  const { handle, click } = props;
+  const {
+    addActivity, setAddActivity,newAddActivity, setNewAddActivity,
+    handleAddActivityGroup,
+    handle,
+    clickItemList,
+    setTitle,
+    title,
+    lempar,
+    click,
+    list,
+    todoItem,
+    newList,
+    setList,item,idDetail, setIdDetail,clickTitle,handleCloseAddTodoItems,
+    // handleOpenAddToDoItems,setO
+    // openAddToDoItems,
+    //  setOpenAddToDoItems
+  } = props;
   const navigate = useNavigate();
   let location = useLocation();
-  const toDashboard = () => {
-    navigate("/dashboard-empty");
+  const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const [openSort, setOpenSort] = useState(false);
+  const [selectedSort, setSelectedSort] = useState(sorts[1]);
+  const [openAddList, setOpenAddList] = useState(false);
+  const [selectedAddList, setSelectedAddList] = useState(sorts[1]);
+console.log("openAddToDoItems",openAddToDoItems)
+const handleOpenAddToDoItems = () =>{
+  setOpenAddToDoItems(true)
+  console.log("sahbcasbc")
+}
+const handleCloseAddToDoItems = (value) => {
+  setOpenAddToDoItems(false);
+};
+
+useEffect((value) => {
+
+}, [idDetail]);
+console.log("APP BAR lempar", idDetail)
+  // const toDashboard = () => {
+  //   navigate("/dashboard");
+  // };
+  const toActivity = () => {
+    navigate("/");
   };
-  const toListActivity = () => {
-    navigate("/list-activity");
+  const handleTitle = (event) => {
+    setTitle(event.target.value);
   };
+  console.log("app clickTitle",clickTitle)
+
+console.log("kk", location.pathname === `/detail/${idDetail}`)
   const Title = () => {
-    if (
-      location.pathname === "/dashboard" ||
-      location.pathname === "/dashboard-empty"
-    ) {
+    if ( location.pathname === `/`) {
       return <span>Activity</span>;
-    } else if (location.pathname === "/item-list") {
-      return (
-        <span>
-          {" "}
-          <ArrowBackIosIcon onClick={toListActivity} /> Daftar Belanja Bulanan{" "}
-          <IconButton edge="end" aria-label="comments">
-            <CreateIcon style={{ color: "#888888" }} />
-          </IconButton>{" "}
-        </span>
-      );
-    } else {
+    }
+  else  if ( location.pathname === `/` && clickTitle == false) {
       return (
         <span>
           {" "}
           <span>
-            <ArrowBackIosIcon onClick={toDashboard}/>
+            <ArrowBackIosIcon onClick={toActivity} />
 
             <Input
-              defaultValue="New Activity"
+              value={title}
+              onChange={handleTitle}
+              label="Rachmat Gunawan"
+              // defaultValue="New Activity"
+              placeholder="New Activity"
               inputProps={ariaLabel}
               sx={{ fontSize: "24px", fontWeight: "bold" }}
             />
@@ -149,57 +186,155 @@ const AppBar = (props) => {
           </IconButton>{" "}
         </span>
       );
+    } 
+    // if ( location.pathname === `/detail/${lempar}` && clickTitle == true)
+    else  {
+      return (
+        <span>
+        <ArrowBackIosIcon onClick={toActivity} />
+
+        <Input
+          value={title}
+          onChange={handleTitle}
+          label="Rachmat Gunawan"
+          // defaultValue="New Activity"
+          placeholder="New Activity"
+          inputProps={ariaLabel}
+          sx={{ fontSize: "24px", fontWeight: "bold" }}
+        />
+      </span>
+      );
+    }   
+  };
+//   <span>
+//   {" "}
+//   <ArrowBackIosIcon onClick={toActivity} /> Daftar Belanja Bulanan{" "}
+//   <IconButton edge="end" aria-label="comments">
+//     <CreateIcon style={{ color: "#888888" }} />
+//   </IconButton>{" "}
+// </span>
+  //     try {
+  //       console.log(
+  //         "form",  {
+  //           title: title,
+  //          email:"rachmat.d.gunawan@gmail.com",
+  //           _comment: "list of priority is : very-high, high, normal, low, very-low"
+  //       }
+  //       )
+  //       const response = await fetch(
+  //         process.env.REACT_APP_URL +
+  //           `/activity-groups`,
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+
+  //           body: JSON.stringify(
+  //             {
+  //     title: title,
+  //    email:"rachmat.d.gunawan@gmail.com",
+  //     _comment: "list of priority is : very-high, high, normal, low, very-low"
+  // }
+  //           ),
+  //         }
+  //       );
+  // } catch (err) {
+  //   console.log(err.message);
+  // }
+
+  const handleAddTodoItems = async () => {
+    const newItems = [...list, newList];
+
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_URL +
+          // `/todo-items/${id_todo_items}`,
+          `/todo-items/id`,
+
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          //           body: JSON.stringify(
+          //             {
+          //     "title": "item 5.1-2",
+          //     "is_active": 1,
+          //     "priority": "normal",
+          //     "_comment": "list of priority is : very-high, high, normal, low, very-low"
+          // }
+          //           ),
+        }
+      );
+      setList(newList);
+      enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
+    } catch (err) {
+      console.log(err.message);
     }
   };
+const viewSort = () => {
+  if (clickTitle == true) {
+    return  (<IconButton variant="outlined" sx={{ margin: "0 10px" }}>
+             <SwapVertRoundedIcon onClick={handleOpenSort} />
+           </IconButton>
+    )
+  } else {
+    return (<span></span>)
+  }
+}
   const RightButton = () => {
-    if (
-      location.pathname === "/dashboard-empty"
-    ) {
+    if (location.pathname === "/") {
       return (
         <span>
-          {" "}
+          {viewSort ()}
+              
           <Button
+          onClick={handleAddActivityGroup}
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
-            + Tambah
+            + rgr
           </Button>
         </span>
-      );
-    } else if (location.pathname === "/list-activity" && click == true) {
+      ) }
+         
+    // } else if ( location.pathname === `/detail/${idDetail}` ){
+    //   return (
+    //     <span>
+    //       {" "}
+    //       <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
+    //         <SwapVertRoundedIcon onClick={handleOpenSort} />
+    //       </IconButton>
+    //       <Button
+    //         onClick={handle}
+    //         // onClick={handleAddActivityGroup}
+
+    //         variant="contained"
+    //         style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+    //       >
+    //         + sadsd
+    //       </Button>
+    //     </span>
+    //   );
+    // }
+    else    {
       return (
         <span>
           {" "}
           <Button
+            // onClick={handleAddActivityGroup}
+            onClick={handleOpenAddToDoItems}
+
             variant="contained"
-            onClick={handleOpenAddList}
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
-            + Tambah
-          </Button>
-        </span>
-      );
-    } else if (location.pathname === "/list-activity" && click == false) {
-      return (
-        <span>
-          {" "}
-          <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
-            <SwapVertRoundedIcon onClick={handleOpenSort} />
-          </IconButton>
-          <Button
- onClick={handle}             variant="contained"
-            style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
-          >
-            + Tambah
+            + Tambacsch
           </Button>
         </span>
       );
     }
   };
-  const [openSort, setOpenSort] = useState(false);
-  const [selectedSort, setSelectedSort] = useState(sorts[1]);
-  const [openAddList, setOpenAddList] = useState(false);
-  const [selectedAddList, setSelectedAddList] = useState(sorts[1]);
 
   const handleOpenSort = () => {
     setOpenSort(true);
@@ -210,14 +345,6 @@ const AppBar = (props) => {
     setSelectedSort(value);
   };
 
-  const handleOpenAddList = () => {
-    setOpenAddList(true);
-  };
-
-  const handleCloseAddList = (value) => {
-    setOpenAddList(false);
-    setSelectedAddList(value);
-  };
 
   return (
     <>
@@ -240,7 +367,6 @@ const AppBar = (props) => {
             fontWeight: "bold",
           }}
         >
-       
           {Title()}
         </Grid>
         <Grid item xs={6}>
@@ -255,8 +381,8 @@ const AppBar = (props) => {
       />
       <AddListItem
         selectedValue={selectedAddList}
-        open={openAddList}
-        onClose={handleCloseAddList}
+        open={openAddToDoItems}
+        onClose={handleCloseAddToDoItems}
       />
     </>
   );
