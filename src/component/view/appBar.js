@@ -108,7 +108,7 @@ const sorts = [
     ),
   },
 ];
-const AppBar = (props) => {
+const AppBar = (props,ss) => {
   const {
     addActivity, setAddActivity,newAddActivity, setNewAddActivity,
     handleAddActivityGroup,
@@ -120,7 +120,7 @@ const AppBar = (props) => {
     click,
     list,
     todoItem,
-    newList,
+    newList, handleTitle,tendered,onChange,
     setList,item,idDetail, setIdDetail,clickTitle,handleCloseAddTodoItems,
     // handleOpenAddToDoItems,setO
     // openAddToDoItems,
@@ -130,12 +130,15 @@ const AppBar = (props) => {
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
 
+  // const [title, setTitle] = useState("");
+
+
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [openSort, setOpenSort] = useState(false);
   const [selectedSort, setSelectedSort] = useState(sorts[1]);
   const [openAddList, setOpenAddList] = useState(false);
   const [selectedAddList, setSelectedAddList] = useState(sorts[1]);
-console.log("openAddToDoItems",openAddToDoItems)
+console.log("title",title)
 const handleOpenAddToDoItems = () =>{
   setOpenAddToDoItems(true)
   console.log("sahbcasbc")
@@ -143,7 +146,10 @@ const handleOpenAddToDoItems = () =>{
 const handleCloseAddToDoItems = (value) => {
   setOpenAddToDoItems(false);
 };
-
+function handleChange(event) {
+  // Here, we invoke the callback with the new value
+  onChange(event.target.value);
+}
 useEffect((value) => {
 
 }, [idDetail]);
@@ -154,10 +160,8 @@ console.log("APP BAR lempar", idDetail)
   const toActivity = () => {
     navigate("/");
   };
-  const handleTitle = (event) => {
-    setTitle(event.target.value);
-  };
-  console.log("app clickTitle",clickTitle)
+
+  console.log("app clickTitle",title)
 
 console.log("kk", location.pathname === `/detail/${idDetail}`)
   const Title = () => {
@@ -170,11 +174,13 @@ console.log("kk", location.pathname === `/detail/${idDetail}`)
           {" "}
           <span>
             <ArrowBackIosIcon onClick={toActivity} />
+            {/* Child:{title} */}
 
             <Input
-              value={title}
-              onChange={handleTitle}
-              label="Rachmat Gunawan"
+              // value={title}
+              value={props.title}
+
+              onChange={handleChange}               label="Rachmat Gunawan"
               // defaultValue="New Activity"
               placeholder="New Activity"
               inputProps={ariaLabel}
@@ -194,12 +200,15 @@ console.log("kk", location.pathname === `/detail/${idDetail}`)
         <ArrowBackIosIcon onClick={toActivity} />
 
         <Input
-          value={title}
-          onChange={handleTitle}
+        value={props.title}
+        onChange={handleChange} 
+
+          // value={title}
+          // onChange={title =>handleTitle(title)}
           label="Rachmat Gunawan"
           // defaultValue="New Activity"
           placeholder="New Activity"
-          inputProps={ariaLabel}
+          // inputProps={ariaLabel}
           sx={{ fontSize: "24px", fontWeight: "bold" }}
         />
       </span>
@@ -380,6 +389,7 @@ const viewSort = () => {
         sorts={sorts}
       />
       <AddListItem
+      idDetail={idDetail}
         selectedValue={selectedAddList}
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}

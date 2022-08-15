@@ -12,8 +12,15 @@ const Detail = (props) => {
     setOpenAddTodoItems,
     openAddTodoItems,
     handleCloseAddTodoItems,
-    handleOpenAddToDoItems,
   } = props;
+  const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
+
+  const handleCloseAddToDoItems = (value) => {
+    setOpenAddToDoItems(false);
+  };const handleOpenAddToDoItems = () =>{
+    setOpenAddToDoItems(true)
+    console.log("sahbcasbc")
+  }
 
   return (
     <Container style={{ width: "100%" }}>
@@ -38,10 +45,8 @@ const Detail = (props) => {
         />
       </Grid>
       <AddListItem
-        lempar={lempar}
-        setLempar={setLempar}
-        open={handleOpenAddToDoItems}
-        onClose={() => handleCloseAddTodoItems()}
+           open={openAddToDoItems}
+           onClose={handleCloseAddToDoItems}
       />
     </Container>
   );

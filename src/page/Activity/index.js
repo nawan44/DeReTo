@@ -63,7 +63,7 @@ console.log()
   //   setOpenAddTodoItems(true);
   // };
   
-console.log("<<<<<<<<<idDetail>>>>>>>>>", clickTitle)
+console.log("<<<<<<<<<title>>>>>>>>>", title)
 
   useEffect(() => {
     getListData();
@@ -71,6 +71,27 @@ console.log("<<<<<<<<<idDetail>>>>>>>>>", clickTitle)
   useEffect(() => {
     getListData();
   }, [click]);
+  const [tendered, updateTendered] = useState();
+
+  console.log("tendered",tendered)
+
+  console.log("titlescscscsc",title)
+
+  const handleChange = (e) => updateTendered(e.target.value);
+
+  useEffect(() => {
+    // Apply the login based on value change
+}, [title]);
+
+  const handleTitle = (newValue) => {
+    setTitle(newValue);
+
+
+    // if (event.target === event.currentTarget) {
+    //   console.log('parent clicked');
+    //   setTitle(event.target.value);
+    // }
+  };
   const getListData = async () => {
     try {
       const response = await fetch(
@@ -225,6 +246,9 @@ console.log("<<<<<<<<<idDetail>>>>>>>>>", clickTitle)
         setOpenAddToDoItems={setOpenAddToDoItems}
         clickTitle={clickTitle}
         openAddToDoItems={openAddToDoItems}
+        onChange={handleTitle}
+
+        tendered={tendered}
       />
       {/* {conditionalActivity()} */}
       <List

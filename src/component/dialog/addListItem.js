@@ -72,13 +72,16 @@ const styles = {
 };
 
 function AddListItem(props) {
-  const { 
+  const { idDetail,
     onClose, selectedValue, open, classes, lempar, setLempar } = props;
   const navigate = useNavigate();
   const [valueKirim, setValueKirim] = useState({
     namaList :"",
     priorityList:""
   });
+  console.log(" valueKirim.id_list",  idDetail)
+
+
   const [namaList, setNamaList] = useState("")
   const [priority, setPriority] = useState("");
   const [kirim, setKirim] = useState({
@@ -97,7 +100,7 @@ function AddListItem(props) {
     () => {
       setValueKirim({
         ...valueKirim,
-        id_list: lempar,
+        activity_group_id: idDetail,
         title: lempar?.title,
         list_kegiatan: {
           nama_list: valueKirim.namaList,
@@ -106,7 +109,7 @@ function AddListItem(props) {
       });
     },
     [lempar?.title]
-    ,[ valueKirim]  
+    ,[ valueKirim]  ,[idDetail]
   );
   const addData = async (e) => {
    
@@ -114,7 +117,7 @@ function AddListItem(props) {
 
     try {
       let form = {
-        activity_group_id : valueKirim.id_list,
+        activity_group_id : idDetail,
         title : valueKirim.namaList,
         _comment :  valueKirim.priorityList
       };

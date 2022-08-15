@@ -8,7 +8,7 @@ const Layout = () => {
       <TopBar />
       <main
         style={{ padding: "70px 0 0 0", height: "100vh" }}
-        className="bg-gray-300 "
+        className="bg-gray-100 "
       >
         <Outlet />
       </main>
