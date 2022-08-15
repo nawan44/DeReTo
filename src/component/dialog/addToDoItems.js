@@ -71,67 +71,81 @@ const styles = {
   },
 };
 
-function AddListItem(props) {
-  const { idDetail,
-    onClose, selectedValue, open, classes, lempar, setLempar } = props;
+function AddToDoItems(props) {
+  const { detailId, onClose, selectedValue, open,ididi, classes,idDetail  } =
+    props;
   const navigate = useNavigate();
   const [valueKirim, setValueKirim] = useState({
-    namaList: "",
-    priorityList: ""
+    activity_group_id :  detailId == undefined? idDetail : detailId ,
+    title: "",
+    _comment: "",
   });
-  const [namaList, setNamaList] = useState("")
+  const [id, setId] = useState(null)
+  const [namaList, setNamaList] = useState("");
   const [priority, setPriority] = useState("");
   const [kirim, setKirim] = useState({
-    id: null,
+    activity_group_id : detailId == undefined? idDetail : detailId,
     title: "",
-    list_kegiatan: {
-      nama_list: "",
-      priority: "",
-    },
+   
+    _comment: "",
+    
   });
   const [newLempar, setNewLempar] = useState({
     title: "New Activity",
     name: "",
   });
+
+  console.log("valueKirim",valueKirim )
+  console.log("id",id )
+  console.log("kirim", kirim)
+  console.log("ididi",ididi )
   useEffect(
     () => {
       setValueKirim({
         ...valueKirim,
-        activity_group_id: idDetail,
-        title: lempar?.title,
-        list_kegiatan: {
-          nama_list: valueKirim.namaList,
-          priority: valueKirim.priorityList,
-        },
+        activity_group_id : kirim.activity_group_id == undefined ? id : detailId,
+          title: kirim.title,
+          _comment: kirim._comment,
       });
     },
-    [lempar?.title]
-    , [valueKirim], [idDetail]
+      [detailId] , [idDetail]
+  );
+
+  useEffect(
+    () => {
+    
+    },
+      [detailId]
   );
   const addData = async (e) => {
+    // e.preventDefault();
+    console.log("akxmskcmklsa",{
+      activity_group_id: detailId === undefined? id : detailId,
+      title: valueKirim.namaList,
+      _comment: valueKirim.priorityList,
+    });
+    console.log("detailId", detailId)
 
-    e.preventDefault();
+    console.log("krim", kirim)
 
+    console.log("valueKirim", valueKirim)
     try {
-      let form = {
-        activity_group_id: idDetail,
-        title: valueKirim.namaList,
-        _comment: valueKirim.priorityList
-      };
-      const response = await fetch(
-        process.env.REACT_APP_URL + "/todo-items",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // Authorization: localStorage.getItem("token"),
-          },
-          body: JSON.stringify(form),
-        }
-      );
+      // let form = {
+      //   activity_group_id: detailId,
+      //   title: valueKirim.namaList,
+      //   _comment: valueKirim.priorityList,
+      // };
+      const response = await fetch(process.env.REACT_APP_URL + "/todo-items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify(kirim),
+      });
       // const res = await response.json();
-      // navigate("/item-list");
-      onClose()
+      navigate("/item-list");
+      onClose();
     } catch (err) {
       console.log(err.message);
     }
@@ -148,12 +162,13 @@ function AddListItem(props) {
   //   setPriority(event.target.value);
   // };
   const handleChange = (event) => {
-    // event.preventDefault();
-    setValueKirim({
-      ...valueKirim,
-      [event.target.name]: event.target.value
+setId (detailId)
 
-    })
+setKirim({
+      ...kirim,
+      [event.target.name]: event.target.value,
+    });
+    
     // setNamaList(event.target.value);
   };
   // const handleChange = (event) => {
@@ -179,7 +194,7 @@ function AddListItem(props) {
         open={open}
         classes={{ paper: classes.dialogPaper }}
       >
-        <DialogTitle>Tambah List Item</DialogTitle>
+        <DialogTitle>Tambah List Item {detailId}</DialogTitle>
         <Divider />
         <div style={{ padding: "20px" }}>
           <Typography
@@ -189,8 +204,8 @@ function AddListItem(props) {
           </Typography>
           <TextField
             id="id"
-            value={valueKirim.namaList}
-            name="namaList"
+            value={kirim.title}
+            name="title"
             onChange={handleChange}
             label="Tambahkan nama list item"
             variant="outlined"
@@ -210,8 +225,8 @@ function AddListItem(props) {
             id="id"
             select
             label="Pilih Priority"
-            name="priorityList"
-            value={valueKirim.priorityList}
+            name="_comment"
+            value={kirim._comment}
             onChange={handleChange}
             style={{ margin: "10px 0 10px 0", width: "100%" }}
           >
@@ -250,4 +265,4 @@ function AddListItem(props) {
   );
 }
 
-export default withStyles(styles)(AddListItem);
+export default withStyles(styles)(AddToDoItems);

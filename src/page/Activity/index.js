@@ -72,6 +72,7 @@ const Activity = () => {
   useEffect(() => {
     getListData();
   }, [click]);
+  console.log(idDetail, "<<<<<<<<<<<<<<");
 
   const getListData = async () => {
     try {

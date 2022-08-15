@@ -36,10 +36,11 @@ const ItemList = (props) => {
     onRemove,
     deleteTitleList,
     handleDeleteList,
-    item,
+    item, toDoItemList
   } = props;
   const [checked, setChecked] = useState([1]);
-  const [todoItem, setTodoItem] = useState(checkToDo?.todo_items);
+  // const [todoItem, setTodoItem] = useState(checkToDo?.todo_items);
+  const [todoItem, setTodoItem] = useState(toDoItemList);
 
   const [listDataItem, setListDataItem] = useState({
     activity_group_id: checked.activity_group_id,

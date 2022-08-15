@@ -93,7 +93,7 @@ const List = ({
             list?.map((item, index) => (
               <CardActivity
                 checkToDo={checkToDo}
-                key={list?.id}
+                key={item.id}
                 setClickItemList={setClickItemList}
                 clickItemList={clickItemList}
                 click={click}

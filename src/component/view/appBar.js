@@ -13,9 +13,10 @@ import SouthIcon from "@mui/icons-material/South";
 import NorthIcon from "@mui/icons-material/North";
 import "../../assets/css/style.css";
 import SortDialog from "../dialog/sort";
-import AddListItem from "../dialog/addListItem";
+import AddListItem from "../dialog/addToDoItems";
 import { useSnackbar } from "notistack";
 import { formControlUnstyledClasses } from "@mui/base";
+import AddToDoItems from "../dialog/addToDoItems";
 
 const ariaLabel = { "aria-label": "description" };
 
@@ -132,10 +133,10 @@ const AppBar = (props, ss) => {
     setList,
     item,
     idDetail,
-    setIdDetail,
+    setIdDetail,detailId,
     clickTitle,
     handleCloseAddTodoItems,
-    sendTitle,
+    sendTitle,detailTitle
     // handleOpenAddToDoItems,setO
     // openAddToDoItems,
     //  setOpenAddToDoItems
@@ -144,7 +145,7 @@ const AppBar = (props, ss) => {
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(detailTitle? detailTitle :"");
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [openSort, setOpenSort] = useState(false);
@@ -163,15 +164,20 @@ const AppBar = (props, ss) => {
     }
   }, [title]);
   const handleChangeTitle = (event) => {
+    const keyValue = event.key;
+
     // setTitle(event.target.value)
     // Here, we invoke the callback with the new value
     // handleChangeTitleActivity(event.target.value);
     // handleChangeTitleDetil(event.target.value);
-    setTitle(event.target.value);
+    setTitle(value => 
+       value + keyValue
+    );
     // setTitleDetail(value);
+    sendTitle(event)
   };
-  useEffect(() => {}, []);
-  useEffect((value) => {}, [idDetail]);
+
+  console.log(idDetail, "<<<<<<<<idDetail<<<<<<");
 
   const toActivity = () => {
     navigate("/");
@@ -191,8 +197,8 @@ const AppBar = (props, ss) => {
             <Input
               // value={title}
               value={title}
-              onChange={handleChangeTitle}
-              onKeyUp={sendTitle}
+             // onChange={handleChangeTitle}
+             onKeyUp={handleChangeTitle}
               label="Rachmat Gunawan"
               // defaultValue="New Activity"
               placeholder="New Activity"
@@ -215,8 +221,8 @@ const AppBar = (props, ss) => {
           <Input
             value={title}
             // onChange={handleChange}
-            onChange={handleChangeTitle}
-            onKeyUp={sendTitle}
+            // onChange={handleChangeTitle}
+            onKeyUp={handleChangeTitle}
             // value={title}
             // onChange={title =>handleTitle(title)}
             label="Rachmat Gunawan"
@@ -402,12 +408,8 @@ const AppBar = (props, ss) => {
         onClose={handleCloseSort}
         sorts={sorts}
       />
-      <AddListItem
-        idDetail={idDetail}
-        selectedValue={selectedAddList}
-        open={openAddToDoItems}
-        onClose={handleCloseAddToDoItems}
-      />
+      <AddToDoItems ididi={idDetail} open={openAddToDoItems} onClose={handleCloseAddToDoItems} />
+
     </>
   );
 };
