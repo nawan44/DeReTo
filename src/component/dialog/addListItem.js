@@ -76,12 +76,9 @@ function AddListItem(props) {
     onClose, selectedValue, open, classes, lempar, setLempar } = props;
   const navigate = useNavigate();
   const [valueKirim, setValueKirim] = useState({
-    namaList :"",
-    priorityList:""
+    namaList: "",
+    priorityList: ""
   });
-  console.log(" valueKirim.id_list",  idDetail)
-
-
   const [namaList, setNamaList] = useState("")
   const [priority, setPriority] = useState("");
   const [kirim, setKirim] = useState({
@@ -109,17 +106,17 @@ function AddListItem(props) {
       });
     },
     [lempar?.title]
-    ,[ valueKirim]  ,[idDetail]
+    , [valueKirim], [idDetail]
   );
   const addData = async (e) => {
-   
+
     e.preventDefault();
 
     try {
       let form = {
-        activity_group_id : idDetail,
-        title : valueKirim.namaList,
-        _comment :  valueKirim.priorityList
+        activity_group_id: idDetail,
+        title: valueKirim.namaList,
+        _comment: valueKirim.priorityList
       };
       const response = await fetch(
         process.env.REACT_APP_URL + "/todo-items",
@@ -153,10 +150,10 @@ function AddListItem(props) {
   const handleChange = (event) => {
     // event.preventDefault();
     setValueKirim({
-            ...valueKirim,
-            [event.target.name] :event.target.value
-            
-          })
+      ...valueKirim,
+      [event.target.name]: event.target.value
+
+    })
     // setNamaList(event.target.value);
   };
   // const handleChange = (event) => {

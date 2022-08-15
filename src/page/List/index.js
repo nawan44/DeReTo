@@ -14,14 +14,12 @@ const List = ({
   click,
   setClick,
   toDashboard,
-  checkToDo,idDetail, setIdDetail,
-  checkActivity,toDetail,setClickTitle , handleAddActivityGroup
+  checkToDo, idDetail, setIdDetail,
+  checkActivity, toDetail, setClickTitle, handleAddActivityGroup
 }) => {
-  console.log(list.length);
 
 
 
-  console.log("sdasdascasvsdasdascasvsdasdascasv",idDetail)
   return (
     <Container style={{ width: "100%" }}>
       {list.length === 0 ? (
@@ -61,7 +59,7 @@ const List = ({
             }}
           >
             <Button
-               onClick={handleAddActivityGroup}
+              onClick={handleAddActivityGroup}
               sx={{ padding: "30px 90px" }}
               variant="outlined"
             >
@@ -107,10 +105,10 @@ const List = ({
                 setLempar={setLempar}
                 handleDeleteList={handleDeleteList}
                 toDashboard={toDashboard}
-                toDetail={() => toDetail (item)}
+                toDetail={() => toDetail(item)}
                 setClickTitle={setClickTitle(true)}
-                setIdDetail={setIdDetail(item.id)} 
-                // setIdDetail ={setIdDetail}
+                setIdDetail={setIdDetail(item.id)}
+              // setIdDetail ={setIdDetail}
               />
             ))}
         </Grid>

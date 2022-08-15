@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Input from "@mui/material/Input";
 import Grid from "@mui/material/Grid";
@@ -108,20 +108,34 @@ const sorts = [
     ),
   },
 ];
-const AppBar = (props,ss) => {
+const AppBar = (props, ss) => {
   const {
-    addActivity, setAddActivity,newAddActivity, setNewAddActivity,
+    addActivity,
+    setAddActivity,
+    newAddActivity,
+    setNewAddActivity,
     handleAddActivityGroup,
     handle,
     clickItemList,
-    setTitle,
-    title,
+    titleActivity,
+    handleChangeTitleActivity,
     lempar,
     click,
     list,
     todoItem,
-    newList, handleTitle,tendered,onChange,
-    setList,item,idDetail, setIdDetail,clickTitle,handleCloseAddTodoItems,
+    param,
+    handleChange,
+    newList,
+    titleDetail,
+    setTitleDetail,
+    handleChangeTitleDetil,
+    setList,
+    item,
+    idDetail,
+    setIdDetail,
+    clickTitle,
+    handleCloseAddTodoItems,
+    sendTitle,
     // handleOpenAddToDoItems,setO
     // openAddToDoItems,
     //  setOpenAddToDoItems
@@ -130,45 +144,43 @@ const AppBar = (props,ss) => {
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
 
-  // const [title, setTitle] = useState("");
-
+  const [title, setTitle] = useState("");
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [openSort, setOpenSort] = useState(false);
   const [selectedSort, setSelectedSort] = useState(sorts[1]);
   const [openAddList, setOpenAddList] = useState(false);
   const [selectedAddList, setSelectedAddList] = useState(sorts[1]);
-console.log("title",title)
-const handleOpenAddToDoItems = () =>{
-  setOpenAddToDoItems(true)
-  console.log("sahbcasbc")
-}
-const handleCloseAddToDoItems = (value) => {
-  setOpenAddToDoItems(false);
-};
-function handleChange(event) {
-  // Here, we invoke the callback with the new value
-  onChange(event.target.value);
-}
-useEffect((value) => {
+  const handleOpenAddToDoItems = () => {
+    setOpenAddToDoItems(true);
+  };
+  const handleCloseAddToDoItems = (value) => {
+    setOpenAddToDoItems(false);
+  };
+  useEffect(() => {
+    if (title) {
+      setTitleDetail(title);
+    }
+  }, [title]);
+  const handleChangeTitle = (event) => {
+    // setTitle(event.target.value)
+    // Here, we invoke the callback with the new value
+    // handleChangeTitleActivity(event.target.value);
+    // handleChangeTitleDetil(event.target.value);
+    setTitle(event.target.value);
+    // setTitleDetail(value);
+  };
+  useEffect(() => {}, []);
+  useEffect((value) => {}, [idDetail]);
 
-}, [idDetail]);
-console.log("APP BAR lempar", idDetail)
-  // const toDashboard = () => {
-  //   navigate("/dashboard");
-  // };
   const toActivity = () => {
     navigate("/");
   };
 
-  console.log("app clickTitle",title)
-
-console.log("kk", location.pathname === `/detail/${idDetail}`)
   const Title = () => {
-    if ( location.pathname === `/`) {
+    if (location.pathname === `/`) {
       return <span>Activity</span>;
-    }
-  else  if ( location.pathname === `/` && clickTitle == false) {
+    } else if (location.pathname === `/` && clickTitle == false) {
       return (
         <span>
           {" "}
@@ -178,9 +190,10 @@ console.log("kk", location.pathname === `/detail/${idDetail}`)
 
             <Input
               // value={title}
-              value={props.title}
-
-              onChange={handleChange}               label="Rachmat Gunawan"
+              value={title}
+              onChange={handleChangeTitle}
+              onKeyUp={sendTitle}
+              label="Rachmat Gunawan"
               // defaultValue="New Activity"
               placeholder="New Activity"
               inputProps={ariaLabel}
@@ -192,36 +205,37 @@ console.log("kk", location.pathname === `/detail/${idDetail}`)
           </IconButton>{" "}
         </span>
       );
-    } 
+    }
     // if ( location.pathname === `/detail/${lempar}` && clickTitle == true)
-    else  {
+    else {
       return (
         <span>
-        <ArrowBackIosIcon onClick={toActivity} />
+          <ArrowBackIosIcon onClick={toActivity} />
 
-        <Input
-        value={props.title}
-        onChange={handleChange} 
-
-          // value={title}
-          // onChange={title =>handleTitle(title)}
-          label="Rachmat Gunawan"
-          // defaultValue="New Activity"
-          placeholder="New Activity"
-          // inputProps={ariaLabel}
-          sx={{ fontSize: "24px", fontWeight: "bold" }}
-        />
-      </span>
+          <Input
+            value={title}
+            // onChange={handleChange}
+            onChange={handleChangeTitle}
+            onKeyUp={sendTitle}
+            // value={title}
+            // onChange={title =>handleTitle(title)}
+            label="Rachmat Gunawan"
+            // defaultValue="New Activity"
+            placeholder="New Activity"
+            // inputProps={ariaLabel}
+            sx={{ fontSize: "24px", fontWeight: "bold" }}
+          />
+        </span>
       );
-    }   
+    }
   };
-//   <span>
-//   {" "}
-//   <ArrowBackIosIcon onClick={toActivity} /> Daftar Belanja Bulanan{" "}
-//   <IconButton edge="end" aria-label="comments">
-//     <CreateIcon style={{ color: "#888888" }} />
-//   </IconButton>{" "}
-// </span>
+  //   <span>
+  //   {" "}
+  //   <ArrowBackIosIcon onClick={toActivity} /> Daftar Belanja Bulanan{" "}
+  //   <IconButton edge="end" aria-label="comments">
+  //     <CreateIcon style={{ color: "#888888" }} />
+  //   </IconButton>{" "}
+  // </span>
   //     try {
   //       console.log(
   //         "form",  {
@@ -282,32 +296,34 @@ console.log("kk", location.pathname === `/detail/${idDetail}`)
       console.log(err.message);
     }
   };
-const viewSort = () => {
-  if (clickTitle == true) {
-    return  (<IconButton variant="outlined" sx={{ margin: "0 10px" }}>
-             <SwapVertRoundedIcon onClick={handleOpenSort} />
-           </IconButton>
-    )
-  } else {
-    return (<span></span>)
-  }
-}
+  const viewSort = () => {
+    if (clickTitle == true) {
+      return (
+        <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
+          <SwapVertRoundedIcon onClick={handleOpenSort} />
+        </IconButton>
+      );
+    } else {
+      return <span></span>;
+    }
+  };
   const RightButton = () => {
     if (location.pathname === "/") {
       return (
         <span>
-          {viewSort ()}
-              
+          {viewSort()}
+
           <Button
-          onClick={handleAddActivityGroup}
+            onClick={handleAddActivityGroup}
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
             + rgr
           </Button>
         </span>
-      ) }
-         
+      );
+    }
+
     // } else if ( location.pathname === `/detail/${idDetail}` ){
     //   return (
     //     <span>
@@ -327,14 +343,13 @@ const viewSort = () => {
     //     </span>
     //   );
     // }
-    else    {
+    else {
       return (
         <span>
           {" "}
           <Button
             // onClick={handleAddActivityGroup}
             onClick={handleOpenAddToDoItems}
-
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
@@ -353,7 +368,6 @@ const viewSort = () => {
     setOpenSort(false);
     setSelectedSort(value);
   };
-
 
   return (
     <>
@@ -389,7 +403,7 @@ const viewSort = () => {
         sorts={sorts}
       />
       <AddListItem
-      idDetail={idDetail}
+        idDetail={idDetail}
         selectedValue={selectedAddList}
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}

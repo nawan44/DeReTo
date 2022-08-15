@@ -18,22 +18,18 @@ const Activity = () => {
     setOpenAddToDoItems(false);
   };
 
-
   const handleOpenAddToDoItems = () => {
     const newItems = [...list, newList];
-      setList(newItems);
-      setOpenAddToDoItems(true)  
-    console.log("{{{{{{{{{{{{{{{{{{asdfdafdsfdsfs{{{{{{{{{{{{{")
-    };
+    setList(newItems);
+    setOpenAddToDoItems(true);
+  };
 
   const [newList, setNewList] = useState({
     title: "New Activity",
     name: "",
   });
-console.log()
+
   const [list, setList] = useState([]);
-
-
   const [selectedDeleteList, setSelectedDeleteList] = useState(list[1]);
   const [lempar, setLempar] = useState({
     id: list.id,
@@ -43,9 +39,8 @@ console.log()
   });
   const [click, setClick] = useState(false);
   const [clickItemList, setClickItemList] = useState(false);
-  const [title, setTitle] = useState("");
   const [idDetail, setIdDetail] = useState();
-  const [clickTitle, setClickTitle] = useState(false)
+  const [clickTitle, setClickTitle] = useState(false);
   const [todoItem, setTodoItem] = useState();
   const [deleteTitleList, setDeleteTitleList] = useState("");
   const [todoItemDetail, setTodoItemDetail] = useState();
@@ -55,6 +50,8 @@ console.log()
     title: "New Activity",
     name: "",
   });
+  const [titleActivity, setTitleActivity] = useState("New Activity");
+
   // const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   // const handleCloseAddTodoItems = (value) => {
   //   setOpenAddTodoItems(false);
@@ -62,36 +59,20 @@ console.log()
   // const handleOpenAddTodoItems = () => {
   //   setOpenAddTodoItems(true);
   // };
-  
-console.log("<<<<<<<<<title>>>>>>>>>", title)
 
+  // useEffect(() => {
+
+  const handleChangeTitleActivity = (newValue) => {
+    setTitleActivity(newValue);
+  };
+  // }, [titleActivity]);
   useEffect(() => {
     getListData();
   }, []);
   useEffect(() => {
     getListData();
   }, [click]);
-  const [tendered, updateTendered] = useState();
 
-  console.log("tendered",tendered)
-
-  console.log("titlescscscsc",title)
-
-  const handleChange = (e) => updateTendered(e.target.value);
-
-  useEffect(() => {
-    // Apply the login based on value change
-}, [title]);
-
-  const handleTitle = (newValue) => {
-    setTitle(newValue);
-
-
-    // if (event.target === event.currentTarget) {
-    //   console.log('parent clicked');
-    //   setTitle(event.target.value);
-    // }
-  };
   const getListData = async () => {
     try {
       const response = await fetch(
@@ -112,56 +93,35 @@ console.log("<<<<<<<<<title>>>>>>>>>", title)
     }
   };
   const handleAddActivityGroup = async () => {
-    try {
-      console.log("form", {
-        title: title ? title : newAddActivity.title,
-        email: "rachmat.d.gunawan@gmail.com",
-        _comment:
-          "list of priority is : very-high, high, normal, low, very-low",
-      });
-      const response = await fetch(
-        process.env.REACT_APP_URL + `/activity-groups`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({
-            title:  title ? title : newAddActivity.title,
-            email: "rachmat.d.gunawan@gmail.com",
-            _comment:
-              "list of priority is : very-high, high, normal, low, very-low",
-          }),
-        }
-      );
-      const newItems = [...addActivity, newAddActivity];
-      setAddActivity(newItems);
-      enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
-      getListData()
-      // setClick(true)
-    } catch (err) {
-      console.log(err.message);
-    }
+    const newItems = [...addActivity, newAddActivity];
+    setAddActivity(newItems);
+    enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
+    getListData();
+    // setClick(true)
   };
   useEffect(() => {
     getTodoItem();
   }, [lempar]);
 
   const getTodoItem = async () => {
-    try {
-      const response = await fetch(
-        process.env.REACT_APP_URL + `/activity-groups/${lempar}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      let res = await response.json();
-      setTodoItemDetail(res);
-    } catch (err) {
-      console.log(err.message);
+    console.log("todoItem", todoItem);
+    if (lempar) {
+      try {
+        const response = await fetch(
+          process.env.REACT_APP_URL + `/activity-groups/${lempar}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        let res = await response.json();
+        setTodoItemDetail(res);
+      } catch (err) {
+        console.log(err.message);
+      }
+    } else {
+      console.log("err");
     }
   };
   useEffect(() => {
@@ -169,9 +129,11 @@ console.log("<<<<<<<<<title>>>>>>>>>", title)
   }, [lempar]);
   const toDetail = (value) => {
     setLempar(value.id);
-    navigate(`/detail/${value?.id}`);
+    navigate(`/detail/${value?.id}`, {
+      state: { value: value, color: "green" },
+    });
     // setClickTitle(true)
-// setIdDetail( value)
+    // setIdDetail( value)
   };
   const getTodoItemDetail = async () => {
     try {
@@ -210,31 +172,29 @@ console.log("<<<<<<<<<title>>>>>>>>>", title)
     }
   };
 
-
   const handleDeleteList = (value) => {
     setOpenDeleteList(true);
     setLempar(value.id);
     setDeleteTitleList(value.title);
-    setClickTitle (true)
+    setClickTitle(true);
   };
   const handleCloseDeleteList = (value) => {
     setOpenDeleteList(false);
     setSelectedDeleteList(value);
   };
 
-
   return (
     <Container style={{ width: "100%" }}>
       <AppBar
-       idDetail ={idDetail}
-       setIdDetail={setIdDetail}
+        idDetail={idDetail}
+        setIdDetail={setIdDetail}
         handleAddActivityGroup={handleAddActivityGroup}
         newAddActivity={newAddActivity}
         setNewAddActivity={setNewAddActivity}
         addActivity={addActivity}
         setAddActivity={setAddActivity}
-        title={title}
-        setTitle={setTitle}
+        titleActivity={titleActivity}
+        handleChangeTitleActivity={handleChangeTitleActivity}
         newList={newList}
         setList={setList}
         list={list}
@@ -246,27 +206,24 @@ console.log("<<<<<<<<<title>>>>>>>>>", title)
         setOpenAddToDoItems={setOpenAddToDoItems}
         clickTitle={clickTitle}
         openAddToDoItems={openAddToDoItems}
-        onChange={handleTitle}
-
-        tendered={tendered}
       />
       {/* {conditionalActivity()} */}
       <List
-               idDetail ={idDetail}
-               setIdDetail={setIdDetail}
-            checkToDo={checkToDo}
-            clickItemList={clickItemList}
-            setClickItemList={setClickItemList}
-            list={list}
-            click={click}
-            setClick={setClick}
-            lempar={lempar}
-            setLempar={setLempar}
-            handleDeleteList={handleDeleteList}
-            toDetail={toDetail}
- setClickTitle ={setClickTitle}
- handleAddActivityGroup={handleAddActivityGroup}
-          />
+        idDetail={idDetail}
+        setIdDetail={setIdDetail}
+        checkToDo={checkToDo}
+        clickItemList={clickItemList}
+        setClickItemList={setClickItemList}
+        list={list}
+        click={click}
+        setClick={setClick}
+        lempar={lempar}
+        setLempar={setLempar}
+        handleDeleteList={handleDeleteList}
+        toDetail={toDetail}
+        setClickTitle={setClickTitle}
+        handleAddActivityGroup={handleAddActivityGroup}
+      />
       <DeleteListItem
         selectedValue={selectedDeleteList}
         lempar={lempar}
