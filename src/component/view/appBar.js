@@ -133,10 +133,12 @@ const AppBar = (props, ss) => {
     setList,
     item,
     idDetail,
-    setIdDetail,detailId,
+    setIdDetail,
+    detailId,
     clickTitle,
     handleCloseAddTodoItems,
-    sendTitle,detailTitle
+    sendTitle,
+    detailTitle,
     // handleOpenAddToDoItems,setO
     // openAddToDoItems,
     //  setOpenAddToDoItems
@@ -145,7 +147,7 @@ const AppBar = (props, ss) => {
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
 
-  const [title, setTitle] = useState(detailTitle? detailTitle :"");
+  const [title, setTitle] = useState(detailTitle ? detailTitle : "");
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [openSort, setOpenSort] = useState(false);
@@ -170,14 +172,10 @@ const AppBar = (props, ss) => {
     // Here, we invoke the callback with the new value
     // handleChangeTitleActivity(event.target.value);
     // handleChangeTitleDetil(event.target.value);
-    setTitle(value => 
-       value + keyValue
-    );
+    setTitle((value) => value + keyValue);
     // setTitleDetail(value);
-    sendTitle(event)
+    sendTitle(event);
   };
-
-  console.log(idDetail, "<<<<<<<<idDetail<<<<<<");
 
   const toActivity = () => {
     navigate("/");
@@ -197,8 +195,8 @@ const AppBar = (props, ss) => {
             <Input
               // value={title}
               value={title}
-             // onChange={handleChangeTitle}
-             onKeyUp={handleChangeTitle}
+              // onChange={handleChangeTitle}
+              onKeyUp={handleChangeTitle}
               label="Rachmat Gunawan"
               // defaultValue="New Activity"
               placeholder="New Activity"
@@ -408,8 +406,11 @@ const AppBar = (props, ss) => {
         onClose={handleCloseSort}
         sorts={sorts}
       />
-      <AddToDoItems ididi={idDetail} open={openAddToDoItems} onClose={handleCloseAddToDoItems} />
-
+      <AddToDoItems
+        ididi={idDetail}
+        open={openAddToDoItems}
+        onClose={handleCloseAddToDoItems}
+      />
     </>
   );
 };

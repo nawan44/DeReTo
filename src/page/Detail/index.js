@@ -10,10 +10,13 @@ const Detail = (props) => {
   const {
     lempar,
     list,
+    open,
     setLempar,
     setOpenAddTodoItems,
     openAddTodoItems,
-    handleCloseAddTodoItems, idDetail, 
+    handleCloseAddTodoItems,
+    idDetail,
+    handleDeleteList,
   } = props;
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
@@ -23,60 +26,56 @@ const Detail = (props) => {
   const [toDoItemList, setToDoItemList] = useState();
   const [toDoItemTotal, setToDoItemListTotal] = useState();
 
+  const [openDeleteToDoItems, setOpenDeleteToDoItems] = useState(false);
+  const [openEditToDoItems, setOpenEditToDoItems] = useState(false);
+
+  const [idToDoItems, setIdToDoItems] = useState();
+  const [titleToDoItems, setTitleToDoItems] = useState(toDoItemList?.title);
+
   const [detailTitle, setDetailTitle] = useState(value?.title);
   const [detailId, setDetailId] = useState(value?.id);
-  
-  console.log("toDoItemList ???", toDoItemList);
 
-  // const handleChangeTitleDetil = (newValue) => {
-  //   // Here, we invoke the callback with the new value
-  //   if (titleDetail !== "New Activity") {
-  //     setTitleDetail(newValue);
-  //     sendTitle();
-  //   } else {
-  //     return false;
-  //   }
-  // };
-
-  const check = () => {
-    if (titleDetail !== "New Activity") {
-      return true;
-    } else return false;
+  const handleOpenDeleteToDoItems = (item) => {
+    setOpenDeleteToDoItems(true);
+    setIdToDoItems(item.id);
+    setTitleToDoItems(item.title);
   };
-  // console.log("check", check())
+  const handleCloseDeleteToDoItems = (value) => {
+    setOpenDeleteToDoItems(false);
+  };
+  const handleOpenEditToDoItems = (item) => {
+    setOpenEditToDoItems(true);
+    setIdToDoItems(item.id);
+    setTitleToDoItems(item.title);
+  };
+
   useEffect(() => {
     // // check();
-
-    console.log("camer", titleDetail); // // }
   }, [titleDetail]);
-
 
   useEffect(() => {
     getTodoItemList();
   }, []);
 
   const getTodoItemList = async () => {
-      try {
-        const response = await fetch(
-          process.env.REACT_APP_URL + `/todo-items?activity_group_id=${value?.id}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        let res = await response.json();
-        setToDoItemList(res.data);
-        setToDoItemListTotal(res.total);
-
-      } catch (err) {
-        console.log(err.message);
-      }
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_URL +
+          `/todo-items?activity_group_id=${value?.id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      let res = await response.json();
+      setToDoItemList(res.data);
+      setToDoItemListTotal(res.total);
+    } catch (err) {
+      // console.log(err.message);
+    }
   };
 
-
-
-  console.log("ssss", location.pathname !== `/detail`);
   const sendTitle = async () => {
     if (location.pathname !== `/detail`) {
       console.log("form", {
@@ -102,10 +101,10 @@ const Detail = (props) => {
           }
         );
       } catch (err) {
-        console.log(err.message);
+        // console.log(err.message);
       }
     } else {
-      console.log("LLL");
+      // console.log("error");
     }
   };
 
@@ -124,31 +123,47 @@ const Detail = (props) => {
         // handleChangeTitleDetil={handleChangeTitleDetil}
         sendTitle={sendTitle}
       />
-      {toDoItemTotal && toDoItemTotal > 0 ? (<span>
-        <ItemList toDoItemList={toDoItemList}/>
-      </span>) : (
- <Grid
- style={{
-   margin: "0 auto",
-   textAlign: "center",
-   padding: "40px 0px",
-   width: "90%",
- }}
- container
- rowSpacing={1}
- columnSpacing={{ xs: 1, sm: 2, md: 3 }}
->
- <img
-   alt="Remy Sharp"
-   width={300}
-   src={AvatarWoman}
-   style={{ margin: "0 auto", textAlign: "center" }}
-   onClick={handleOpenAddToDoItems}
- />
-</Grid>
+      {toDoItemTotal && toDoItemTotal > 0 ? (
+        <span>
+          <ItemList
+            idToDoItems={idToDoItems}
+            titleToDoItems={titleToDoItems}
+            openDeleteToDoItems={openDeleteToDoItems}
+            toDoItemList={toDoItemList}
+            getTodoItemList={getTodoItemList}
+            handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
+            handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
+            handleOpenEditToDoItems={handleOpenEditToDoItems}
+          />
+        </span>
+      ) : (
+        <Grid
+          style={{
+            margin: "0 auto",
+            textAlign: "center",
+            padding: "40px 0px",
+            width: "90%",
+          }}
+          container
+          rowSpacing={1}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        >
+          <img
+            alt="Remy Sharp"
+            width={300}
+            src={AvatarWoman}
+            style={{ margin: "0 auto", textAlign: "center" }}
+            onClick={handleOpenAddToDoItems}
+          />
+        </Grid>
       )}
-     
-      <AddToDoItems detailId={detailId} open={openAddToDoItems} onClose={handleCloseAddToDoItems} />
+
+      <AddToDoItems
+        getTodoItemList={getTodoItemList}
+        detailId={detailId}
+        open={openAddToDoItems}
+        onClose={handleCloseAddToDoItems}
+      />
     </Container>
   );
 };

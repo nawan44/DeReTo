@@ -72,63 +72,58 @@ const styles = {
 };
 
 function AddToDoItems(props) {
-  const { detailId, onClose, selectedValue, open,ididi, classes,idDetail  } =
-    props;
+  const {
+    detailId,
+    getTodoItemList,
+    onClose,
+    selectedValue,
+    open,
+    ididi,
+    classes,
+    idDetail,
+  } = props;
   const navigate = useNavigate();
   const [valueKirim, setValueKirim] = useState({
-    activity_group_id :  detailId == undefined? idDetail : detailId ,
+    activity_group_id: detailId == undefined ? idDetail : detailId,
     title: "",
     _comment: "",
   });
-  const [id, setId] = useState(null)
+  const [id, setId] = useState(null);
   const [namaList, setNamaList] = useState("");
   const [priority, setPriority] = useState("");
   const [kirim, setKirim] = useState({
-    activity_group_id : detailId == undefined? idDetail : detailId,
+    activity_group_id: detailId == undefined ? idDetail : detailId,
     title: "",
-   
+
     _comment: "",
-    
-  });
-  const [newLempar, setNewLempar] = useState({
-    title: "New Activity",
-    name: "",
   });
 
-  console.log("valueKirim",valueKirim )
-  console.log("id",id )
-  console.log("kirim", kirim)
-  console.log("ididi",ididi )
   useEffect(
     () => {
       setValueKirim({
         ...valueKirim,
-        activity_group_id : kirim.activity_group_id == undefined ? id : detailId,
-          title: kirim.title,
-          _comment: kirim._comment,
+        activity_group_id: kirim.activity_group_id == undefined ? id : detailId,
+        title: kirim.title,
+        _comment: kirim._comment,
       });
     },
-      [detailId] , [idDetail]
+    [detailId],
+    [idDetail]
   );
 
-  useEffect(
-    () => {
-    
-    },
-      [detailId]
-  );
+  useEffect(() => {}, [detailId]);
   const addData = async (e) => {
     // e.preventDefault();
-    console.log("akxmskcmklsa",{
-      activity_group_id: detailId === undefined? id : detailId,
+    console.log("akxmskcmklsa", {
+      activity_group_id: detailId === undefined ? id : detailId,
       title: valueKirim.namaList,
       _comment: valueKirim.priorityList,
     });
-    console.log("detailId", detailId)
+    console.log("detailId", detailId);
 
-    console.log("krim", kirim)
+    console.log("krim", kirim);
 
-    console.log("valueKirim", valueKirim)
+    console.log("valueKirim", valueKirim);
     try {
       // let form = {
       //   activity_group_id: detailId,
@@ -144,7 +139,8 @@ function AddToDoItems(props) {
         body: JSON.stringify(kirim),
       });
       // const res = await response.json();
-      navigate("/item-list");
+      // navigate("/item-list");
+      getTodoItemList();
       onClose();
     } catch (err) {
       console.log(err.message);
@@ -162,13 +158,13 @@ function AddToDoItems(props) {
   //   setPriority(event.target.value);
   // };
   const handleChange = (event) => {
-setId (detailId)
+    setId(detailId);
 
-setKirim({
+    setKirim({
       ...kirim,
       [event.target.name]: event.target.value,
     });
-    
+
     // setNamaList(event.target.value);
   };
   // const handleChange = (event) => {

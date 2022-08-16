@@ -72,7 +72,6 @@ const Activity = () => {
   useEffect(() => {
     getListData();
   }, [click]);
-  console.log(idDetail, "<<<<<<<<<<<<<<");
 
   const getListData = async () => {
     try {
@@ -132,6 +131,7 @@ const Activity = () => {
     setLempar(value.id);
     navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
+      handleDeleteList,
     });
     // setClickTitle(true)
     // setIdDetail( value)
@@ -169,7 +169,7 @@ const Activity = () => {
       handleCloseDeleteList();
       enqueueSnackbar("Activity berhasil dihapus", { variant: "success" });
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
 
@@ -224,6 +224,7 @@ const Activity = () => {
         toDetail={toDetail}
         setClickTitle={setClickTitle}
         handleAddActivityGroup={handleAddActivityGroup}
+        open={openDeleteList}
       />
       <DeleteListItem
         selectedValue={selectedDeleteList}

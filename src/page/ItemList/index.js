@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-
-import DeleteIcon from '@mui/icons-material/Delete';
-import FiberManualRecordRoundedIcon from '@mui/icons-material/FiberManualRecordRounded';
-import CreateIcon from '@mui/icons-material/Create';
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import FiberManualRecordRoundedIcon from "@mui/icons-material/FiberManualRecordRounded";
+import CreateIcon from "@mui/icons-material/Create";
 import {
   List,
   ListItem,
@@ -16,8 +14,9 @@ import {
   Grid,
 } from "@mui/material";
 import DeleteListItem from "../../component/dialog/deleteListItem";
-
+import { useSnackbar } from "notistack";
 import "../../assets/css/style.css";
+import AddToDoItems from "../../component/dialog/addToDoItems";
 
 const ItemList = (props) => {
   const {
@@ -35,11 +34,19 @@ const ItemList = (props) => {
     setList,
     onRemove,
     deleteTitleList,
+    idToDoItems,
+    titleToDoItems,
+    openDeleteToDoItems,
     handleDeleteList,
-    item, toDoItemList
+    item,
+    getTodoItemList,
+    toDoItemList,
+    handleOpenDeleteToDoItems,
+    handleCloseDeleteToDoItems,
+    handleOpenEditToDoItems,
   } = props;
   const [checked, setChecked] = useState([1]);
-  // const [todoItem, setTodoItem] = useState(checkToDo?.todo_items);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [todoItem, setTodoItem] = useState(toDoItemList);
 
   const [listDataItem, setListDataItem] = useState({
@@ -78,7 +85,25 @@ const ItemList = (props) => {
   // Return classes based on whether item is checked
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
-
+  const deleteToDoItems = () => {
+    // const newList = toDoItemList.filter((item) => item.id !== id);
+    try {
+      const response = fetch(
+        process.env.REACT_APP_URL + `/todo-items/${idToDoItems}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      getTodoItemList();
+      handleCloseDeleteToDoItems();
+      enqueueSnackbar("To Do Item berhasil dihapus", { variant: "success" });
+    } catch (err) {
+      // console.log(err.message);
+    }
+  };
   return (
     <Container style={{ width: "100%" }}>
       {/* <AppBar /> */}
@@ -110,7 +135,7 @@ const ItemList = (props) => {
                 secondaryAction={
                   <IconButton edge="end" aria-label="comments">
                     <DeleteIcon
-                      onClick={(id) => handleDeleteList(item)}
+                      onClick={(id) => handleOpenDeleteToDoItems(value)}
                       style={{ color: "#888888" }}
                     />
                   </IconButton>
@@ -133,12 +158,13 @@ const ItemList = (props) => {
                   </ListItemIcon>
                   <IconButton edge="end" aria-label="comments">
                     <FiberManualRecordRoundedIcon
+                      onClick={(id) => handleOpenEditToDoItems(value)}
                       sx={{ fontSize: 10, color: "red", margin: "0 10px 0 0" }}
                     />
                   </IconButton>
                   <ListItemText
                     style={{
-                      maxWidth: value.title.length + 25,
+                      maxWidth: value.title?.length + 25,
                       textDecoration: line(value.id),
                     }}
                     id={labelId}
@@ -163,14 +189,20 @@ const ItemList = (props) => {
           })}
         </List>
         <DeleteListItem
-          selectedValue={selectedValue}
-          lempar={lempar}
-          open={open}
-          onClose={onClose}
-          list={list}
-          setList={setList}
-          onRemove={onRemove}
-          deleteTitleList={deleteTitleList}
+          open={openDeleteToDoItems}
+          onClose={handleCloseDeleteToDoItems}
+          onRemove={deleteToDoItems}
+          idToDoItems={idToDoItems}
+          titleToDoItems={titleToDoItems}
+          toDoItemList={toDoItemList}
+        />
+        <AddToDoItems
+          open={openDeleteToDoItems}
+          onClose={handleCloseDeleteToDoItems}
+          onRemove={deleteToDoItems}
+          idToDoItems={idToDoItems}
+          titleToDoItems={titleToDoItems}
+          toDoItemList={toDoItemList}
         />
       </Grid>
     </Container>
