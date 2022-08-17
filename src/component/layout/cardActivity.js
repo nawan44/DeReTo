@@ -8,7 +8,6 @@ import moment from "moment";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 
 import "moment/locale/id";
-import Detail from "../../page/Detail";
 
 export default function CardActivity(props) {
   const {

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import AvatarWoman from "../../assets/avatar/avatar-woman.jpg";
 import { Container, Grid } from "@mui/material";
-import AddToDoItems from "../../component/dialog/addToDoItems";
-import AppBar from "../../component/view/appBar";
+import AddToDoItems from "../../component/dialog/addData";
+import AppBar from "../../component/layout/appBar";
 import { useLocation } from "react-router-dom";
-import ItemList from "../ItemList";
+import ItemList from "./ListToDoItems";
 
-const Detail = (props) => {
+const DetailToDoItems = (props) => {
   const {
     lempar,
     list,
@@ -122,6 +122,7 @@ const Detail = (props) => {
         setTitleDetail={setTitleDetail}
         // handleChangeTitleDetil={handleChangeTitleDetil}
         sendTitle={sendTitle}
+        toDoItemList={toDoItemList}toDoItemTotal={toDoItemTotal}
       />
       {toDoItemTotal && toDoItemTotal > 0 ? (
         <span>
@@ -167,4 +168,4 @@ const Detail = (props) => {
     </Container>
   );
 };
-export default Detail;
+export default DetailToDoItems;

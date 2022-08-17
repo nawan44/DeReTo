@@ -13,12 +13,12 @@ import {
   Container,
   Grid,
 } from "@mui/material";
-import DeleteListItem from "../../component/dialog/deleteListItem";
+import DeleteListItem from "../../../component/dialog/deleteListItem";
 import { useSnackbar } from "notistack";
-import "../../assets/css/style.css";
-import AddToDoItems from "../../component/dialog/addToDoItems";
+import "../../../assets/css/style.css";
+import AddToDoItems from "../../../component/dialog/addData";
 
-const ItemList = (props) => {
+const ListToDoItems = (props) => {
   const {
     list,
     lempar,
@@ -208,4 +208,4 @@ const ItemList = (props) => {
     </Container>
   );
 };
-export default ItemList;
+export default ListToDoItems;

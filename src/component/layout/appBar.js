@@ -7,108 +7,15 @@ import IconButton from "@mui/material/IconButton";
 import CreateIcon from "@mui/icons-material/Create";
 import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import Button from "@mui/material/Button";
-import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
-import SortIcon from "@mui/icons-material/Sort";
-import SouthIcon from "@mui/icons-material/South";
-import NorthIcon from "@mui/icons-material/North";
 import "../../assets/css/style.css";
 import SortDialog from "../dialog/sort";
-import AddListItem from "../dialog/addToDoItems";
 import { useSnackbar } from "notistack";
-import { formControlUnstyledClasses } from "@mui/base";
-import AddToDoItems from "../dialog/addToDoItems";
-
+import AddToDoItems from "../dialog/addData";
+import {sorts} from "../data/sorts"
+import EmptyDialog from "../dialog/empty";
 const ariaLabel = { "aria-label": "description" };
 
-const sorts = [
-  {
-    title: "Terbaru",
-    icon: (
-      <span>
-        <SortIcon
-          style={{
-            fontSize: "16px",
-            color: "#16ABF8",
-          }}
-        />
-        <SouthIcon
-          style={{
-            fontSize: "16px",
-            color: "#16ABF8",
-          }}
-        />
-      </span>
-    ),
-  },
-  {
-    title: "Terlama",
-    icon: (
-      <span>
-        <SortIcon
-          style={{
-            fontSize: "16px",
-            color: "#16ABF8",
-          }}
-        />
-        <NorthIcon
-          style={{
-            fontSize: "16px",
-            color: "#16ABF8",
-          }}
-        />
-      </span>
-    ),
-  },
-  {
-    title: "A - Z",
-    icon: (
-      <span>
-        <SouthIcon
-          style={{
-            fontSize: "16px",
-            color: "#16ABF8",
-          }}
-        />
-        <SortByAlphaIcon
-          style={{
-            fontSize: "16px",
-            color: "#16ABF8",
-          }}
-        />
-      </span>
-    ),
-  },
-  {
-    title: "Z - A",
-    icon: (
-      <span>
-        <NorthIcon
-          style={{
-            fontSize: "16px",
-            color: "#16ABF8",
-          }}
-        />
-        <SortByAlphaIcon
-          style={{
-            fontSize: "16px",
-            color: "#16ABF8",
-          }}
-        />
-      </span>
-    ),
-  },
-  {
-    title: "Belum Selesai",
-    icon: (
-      <SwapVertRoundedIcon
-        style={{
-          fontSize: "24px",
-          color: "#16ABF8",
-        }}
-      />
-    ),
-  },
-];
+
 const AppBar = (props, ss) => {
   const {
     addActivity,
@@ -138,7 +45,7 @@ const AppBar = (props, ss) => {
     clickTitle,
     handleCloseAddTodoItems,
     sendTitle,
-    detailTitle,
+    detailTitle,toDoItemList
     // handleOpenAddToDoItems,setO
     // openAddToDoItems,
     //  setOpenAddToDoItems
@@ -167,11 +74,6 @@ const AppBar = (props, ss) => {
   }, [title]);
   const handleChangeTitle = (event) => {
     const keyValue = event.key;
-
-    // setTitle(event.target.value)
-    // Here, we invoke the callback with the new value
-    // handleChangeTitleActivity(event.target.value);
-    // handleChangeTitleDetil(event.target.value);
     setTitle((value) => value + keyValue);
     // setTitleDetail(value);
     sendTitle(event);
@@ -180,6 +82,8 @@ const AppBar = (props, ss) => {
   const toActivity = () => {
     navigate("/");
   };
+  console.log("toDoItemTotal", toDoItemList?.length)
+  console.log("list", list)
 
   const Title = () => {
     if (location.pathname === `/`) {
@@ -270,38 +174,38 @@ const AppBar = (props, ss) => {
   //   console.log(err.message);
   // }
 
-  const handleAddTodoItems = async () => {
-    const newItems = [...list, newList];
+  // const handleAddTodoItems = async () => {
+  //   const newItems = [...list, newList];
 
-    try {
-      const response = await fetch(
-        process.env.REACT_APP_URL +
-          // `/todo-items/${id_todo_items}`,
-          `/todo-items/id`,
+  //   try {
+  //     const response = await fetch(
+  //       process.env.REACT_APP_URL +
+  //         // `/todo-items/${id_todo_items}`,
+  //         `/todo-items/id`,
 
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          //           body: JSON.stringify(
-          //             {
-          //     "title": "item 5.1-2",
-          //     "is_active": 1,
-          //     "priority": "normal",
-          //     "_comment": "list of priority is : very-high, high, normal, low, very-low"
-          // }
-          //           ),
-        }
-      );
-      setList(newList);
-      enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         //           body: JSON.stringify(
+  //         //             {
+  //         //     "title": "item 5.1-2",
+  //         //     "is_active": 1,
+  //         //     "priority": "normal",
+  //         //     "_comment": "list of priority is : very-high, high, normal, low, very-low"
+  //         // }
+  //         //           ),
+  //       }
+  //     );
+  //     setList(newList);
+  //     enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
+  //   } catch (err) {
+  //     console.log(err.message);
+  //   }
+  // };
   const viewSort = () => {
-    if (clickTitle == true) {
+    if ( list?.length > 0 ||  toDoItemList?.length > 0) {
       return (
         <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
           <SwapVertRoundedIcon onClick={handleOpenSort} />
@@ -312,52 +216,45 @@ const AppBar = (props, ss) => {
     }
   };
   const RightButton = () => {
-    if (location.pathname === "/") {
+    if ( list && !toDoItemList ) {
       return (
         <span>
           {viewSort()}
-
           <Button
             onClick={handleAddActivityGroup}
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
-            + rgr
+            + Tambah Activity
+          </Button>
+        </span>
+      );
+    }
+    else if (!list && toDoItemList ) {
+      return (
+        <span>
+          {viewSort()}
+          <Button
+            onClick={handleOpenAddToDoItems}
+            variant="contained"
+            style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+          >
+            + Tambah ToDoItems
           </Button>
         </span>
       );
     }
 
-    // } else if ( location.pathname === `/detail/${idDetail}` ){
-    //   return (
-    //     <span>
-    //       {" "}
-    //       <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
-    //         <SwapVertRoundedIcon onClick={handleOpenSort} />
-    //       </IconButton>
-    //       <Button
-    //         onClick={handle}
-    //         // onClick={handleAddActivityGroup}
-
-    //         variant="contained"
-    //         style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
-    //       >
-    //         + sadsd
-    //       </Button>
-    //     </span>
-    //   );
-    // }
     else {
       return (
         <span>
           {" "}
           <Button
-            // onClick={handleAddActivityGroup}
-            onClick={handleOpenAddToDoItems}
+ 
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
-            + Tambacsch
+          +Tambah  Kosong
           </Button>
         </span>
       );
@@ -406,6 +303,13 @@ const AppBar = (props, ss) => {
         onClose={handleCloseSort}
         sorts={sorts}
       />
+
+{/* <EmptyDialog
+        selectedValue={selectedSort}
+        open={openSort}
+        onClose={handleCloseSort}
+        sorts={sorts}
+      /> */}
       <AddToDoItems
         ididi={idDetail}
         open={openAddToDoItems}

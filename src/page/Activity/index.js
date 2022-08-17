@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container } from "@mui/material";
-import AppBar from "../../component/view/appBar";
+import AppBar from "../../component/layout/appBar";
 import DeleteListItem from "../../component/dialog/deleteListItem";
 import { useSnackbar } from "notistack";
-import List from "../List";
+import ListActivity from "./ListActivity";
 
 const Activity = () => {
   let location = useLocation();
@@ -52,20 +52,11 @@ const Activity = () => {
   });
   const [titleActivity, setTitleActivity] = useState("New Activity");
 
-  // const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
-  // const handleCloseAddTodoItems = (value) => {
-  //   setOpenAddTodoItems(false);
-  // };
-  // const handleOpenAddTodoItems = () => {
-  //   setOpenAddTodoItems(true);
-  // };
 
-  // useEffect(() => {
 
   const handleChangeTitleActivity = (newValue) => {
     setTitleActivity(newValue);
   };
-  // }, [titleActivity]);
   useEffect(() => {
     getListData();
   }, []);
@@ -97,7 +88,6 @@ const Activity = () => {
     setAddActivity(newItems);
     enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
     getListData();
-    // setClick(true)
   };
   useEffect(() => {
     getTodoItem();
@@ -133,8 +123,7 @@ const Activity = () => {
       state: { value: value, color: "green" },
       handleDeleteList,
     });
-    // setClickTitle(true)
-    // setIdDetail( value)
+   
   };
   const getTodoItemDetail = async () => {
     try {
@@ -209,7 +198,7 @@ const Activity = () => {
         openAddToDoItems={openAddToDoItems}
       />
       {/* {conditionalActivity()} */}
-      <List
+      <ListActivity
         idDetail={idDetail}
         setIdDetail={setIdDetail}
         checkToDo={checkToDo}

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Container, Typography, Button, Grid } from "@mui/material";
-import CardActivity from "../../component/view/cardActivity";
-import AvatarMan from "../../assets/avatar/avatar-man.png";
+import CardActivity from "../../../component/layout/cardActivity";
+import AvatarMan from "../../../assets/avatar/avatar-man.png";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-const List = ({
+const ListActivity = ({
   lempar,
   setLempar,
   list,
@@ -116,4 +116,4 @@ const List = ({
     </Container>
   );
 };
-export default List;
+export default ListActivity;

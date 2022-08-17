@@ -75,7 +75,7 @@ const styles = {
   },
 };
 
-function DeleteListItem(props) {
+function DeleteData(props) {
   const {
     onRemove,
     deleteTitleList,
@@ -181,4 +181,4 @@ function DeleteListItem(props) {
   );
 }
 
-export default withStyles(styles)(DeleteListItem);
+export default withStyles(styles)(DeleteData);

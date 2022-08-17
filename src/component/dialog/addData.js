@@ -71,7 +71,7 @@ const styles = {
   },
 };
 
-function AddToDoItems(props) {
+function AddData(props) {
   const {
     detailId,
     getTodoItemList,
@@ -261,4 +261,4 @@ function AddToDoItems(props) {
   );
 }
 
-export default withStyles(styles)(AddToDoItems);
+export default withStyles(styles)(AddData);
