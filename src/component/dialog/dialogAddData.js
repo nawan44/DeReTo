@@ -69,6 +69,8 @@ function DialogAddData(props) {
   };
 
   const addData = async (e) => {
+    `[data-cy=modal-add-save-button]`;
+
     e.preventDefault();
     try {
       const response = await fetch(process.env.REACT_APP_URL + switchSend(), {
@@ -91,6 +93,10 @@ function DialogAddData(props) {
   };
 
   const handleChange = (event) => {
+    `[data-cy=modal-add-priority-dropdown]`;
+    `[data-cy=todo-add-button]`;
+    `[data-cy=modal-add-priority-dropdown]`;
+    `[data-cy=modal-add-priority-dropdown]`;
     event.preventDefault();
     setKirim({
       ...kirim,
@@ -163,6 +169,7 @@ function DialogAddData(props) {
           justifyContent="flex-end"
         >
           <Button
+            data-cy="modal-add-name-input"
             onClick={addData}
             variant="contained"
             color="secondary"

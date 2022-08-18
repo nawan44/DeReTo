@@ -144,7 +144,7 @@ const DetailToDoItems = (props) => {
     setOpenAddToDoItems(true);
   };
   return (
-    <Container style={{ width: "100%" }}>
+    <Container style={{ width: "100%" }} data-cy="activity-item">
       <AppBar
         titleDetail={titleDetail}
         setTitleDetail={changeToDoItems}

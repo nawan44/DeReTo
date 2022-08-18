@@ -19,6 +19,7 @@ function TopBar() {
         >
           <Link to="/">
             <Typography
+              data-cy="header-title"
               variant="h6"
               style={{
                 height: "65px",

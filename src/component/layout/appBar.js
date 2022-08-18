@@ -68,11 +68,12 @@ const AppBar = (props, ss) => {
         <span>
           {" "}
           <span>
-            <ArrowBackIosIcon onClick={toActivity} />
+            <ArrowBackIosIcon data-cy="todo-title" onClick={toActivity} />
             <Input
               value={titleDetail}
               onChange={handleChangeTitle}
-              label="Rachmat Gunawan"
+              data-cy="activity-title"
+              // label="Rachmat Gunawan"
               placeholder="New Activity"
               inputProps={ariaLabel}
               sx={{ fontSize: "24px", fontWeight: "bold" }}
@@ -89,8 +90,9 @@ const AppBar = (props, ss) => {
           <ArrowBackIosIcon onClick={toActivity} />
           <Input
             value={titleDetail}
+            data-cy="activity-title"
             onChange={handleChangeTitle}
-            label="Rachmat Gunawan"
+            // label="Rachmat Gunawan"
             placeholder="New Activity"
             sx={{ fontSize: "24px", fontWeight: "bold" }}
           />
@@ -118,6 +120,7 @@ const AppBar = (props, ss) => {
           <Button
             onClick={handleAddActivityGroup}
             variant="contained"
+            data-cy="activity-add-button"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
             + Tambah
@@ -130,6 +133,7 @@ const AppBar = (props, ss) => {
           {viewSort()}
           <Button
             onClick={handleOpenAddToDoItems}
+            data-cy="todo-add-button"
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >

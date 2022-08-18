@@ -86,6 +86,7 @@ const ListToDoItems = (props) => {
   };
 
   const handleToggle = (value) => () => {
+    `[data-cy=todo-item-checkbox]`;
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -118,6 +119,7 @@ const ListToDoItems = (props) => {
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
   const deleteToDoItems = () => {
+    `[data-cy=modal-delete-confirm-button]`;
     try {
       const response = fetch(
         process.env.REACT_APP_URL + `/todo-items/${idToDoItems}`,
@@ -131,7 +133,11 @@ const ListToDoItems = (props) => {
       onToDoItem();
       onClick();
       handleCloseDeleteToDoItems();
-      enqueueSnackbar("To Do Item berhasil dihapus", { variant: "success" });
+      enqueueSnackbar(
+        "To Do Item berhasil dihapus",
+        `[data-cy=modal-information]`,
+        { variant: "success" }
+      );
     } catch (err) {
       // console.log(err.message);
     }

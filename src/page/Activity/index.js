@@ -138,6 +138,7 @@ const Activity = () => {
   const [valueSort, setValueSort] = useState();
 
   const sortActivity = () => {
+    `[data-cy=sort-selection]``[data-cy=todo-sort-button]``[data-cy=todo-sort-button]`;
     if (valueSort === "Terbaru") {
       return list.sort(
         (b, a) =>
@@ -188,6 +189,7 @@ const Activity = () => {
         valueSort={valueSort}
       />
       <DialogDeleteData
+        data-cy="activity-item-delete-button"
         selectedValue={selectedDeleteList}
         clickActivity={clickActivity}
         open={openDeleteList}

@@ -60,6 +60,7 @@ const ListActivity = ({
             }}
           >
             <Button
+              data-cy="activity-add-button"
               onClick={handleAddActivityGroup}
               sx={{ padding: "30px 90px" }}
               variant="outlined"
@@ -88,6 +89,7 @@ const ListActivity = ({
           container
           rowSpacing={1}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          data-cy="todo-sort-button"
         >
           {valueSort == undefined ? (
             <>

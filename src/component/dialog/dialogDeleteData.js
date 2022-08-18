@@ -95,6 +95,7 @@ function DialogDeleteData(props) {
                 margin: "20px 20px 0 20px",
               }}
               onClick={handleClose}
+              data-cy="modal-delete-cancel-button"
             >
               Batal
             </Button>
@@ -110,6 +111,8 @@ function DialogDeleteData(props) {
                 float: "right",
                 margin: "20px 20px 0 20px",
               }}
+              data-cy="activity-item-delete-button"
+              // data-cy="todo-item-delete-button"
               onClick={() => onRemove(clickActivity)}
             >
               Hapus
