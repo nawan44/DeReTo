@@ -5,29 +5,26 @@ import AppBar from "../../component/layout/appBar";
 import { useSnackbar } from "notistack";
 import ListActivity from "./ListActivity";
 import DialogDeleteData from "../../component/dialog/dialogDeleteData";
+import "../../assets/css/style.css";
 
 const Activity = () => {
-  let location = useLocation();
   const navigate = useNavigate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const { state } = useLocation();
-
   const [openDeleteList, setOpenDeleteList] = useState(false);
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const [newList, setNewList] = useState({
     title: "New Activity",
     name: "",
   });
+  const [onClick, setOnClick] = useState(false);
+
   const [list, setList] = useState([]);
   const [selectedDeleteList, setSelectedDeleteList] = useState(list[1]);
-  const [selectedActivity, setSelectedActivity] = useState({
-    itemActivity: null,
-    aksiActivity: "",
-  });
   const [clickActivity, setClickActivity] = useState();
   const [title, setTitle] = useState();
   const [idDetail, setIdDetail] = useState();
-  const [todoItem, setTodoItem] = useState();
+  // const [todoItem, setTodoItem] = useState();
   const [deleteTitleList, setDeleteTitleList] = useState("");
   const [todoItemDetail, setTodoItemDetail] = useState();
   const [addActivity, setAddActivity] = useState([]);
@@ -35,12 +32,14 @@ const Activity = () => {
     title: "New Activity",
     name: "",
   });
-  const [titleActivity, setTitleActivity] = useState("New Activity");
 
   useEffect(() => {
     getListData();
   }, []);
 
+  useEffect(() => {
+    getListData();
+  }, [onClick]);
   const getListData = async () => {
     try {
       const response = await fetch(
@@ -55,61 +54,19 @@ const Activity = () => {
       );
       let res = await response.json();
       setList(res.data);
-      setSelectedActivity(res.data);
+      setOnClick(true);
     } catch (err) {
       console.log(err.message);
     }
   };
 
-  // useEffect(() => {
-  //   getTodoItem();
-  // }, [clickActivity]);
-
-  const getTodoItem = async () => {
-    if (clickActivity) {
-      try {
-        const response = await fetch(
-          process.env.REACT_APP_URL + `/activity-groups/${clickActivity}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        let res = await response.json();
-        setTodoItemDetail(res);
-      } catch (err) {
-        console.log(err.message);
-      }
-    } else {
-      console.log("err");
-    }
-  };
-  useEffect(() => {
-    getTodoItemDetail();
-  }, [clickActivity]);
   const toDetail = (value) => {
     navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
       handleDeleteList,
     });
   };
-  const getTodoItemDetail = async () => {
-    try {
-      const response = await fetch(
-        process.env.REACT_APP_URL + `/todo-items/${clickActivity}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      let res = await response.json();
-      setTodoItem(res);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
+
   const deleteData = (id) => {
     const newList = list.filter((item) => item.id !== id);
     try {
@@ -123,6 +80,7 @@ const Activity = () => {
         }
       );
       getListData();
+      // onClick();
       handleCloseDeleteList();
       enqueueSnackbar("Activity berhasil dihapus", { variant: "success" });
     } catch (err) {
@@ -167,10 +125,6 @@ const Activity = () => {
     setOpenAddToDoItems(true);
   };
 
-  const handleChangeTitleActivity = (newValue) => {
-    setTitleActivity(newValue);
-  };
-
   const handleDeleteList = (value) => {
     setOpenDeleteList(true);
     setClickActivity(value.id);
@@ -179,6 +133,7 @@ const Activity = () => {
   const handleCloseDeleteList = (value) => {
     setOpenDeleteList(false);
     setSelectedDeleteList(value);
+    onClick();
   };
   const [valueSort, setValueSort] = useState();
 
@@ -204,14 +159,13 @@ const Activity = () => {
   const changeToDoSort = (newValue) => {
     setValueSort(newValue);
   };
-  console.log("todoItem ????????????", todoItem);
+  // console.log("todoItem ????????????", todoItem);
   return (
     <Container style={{ width: "100%" }}>
       <AppBar
         idDetail={idDetail}
         setIdDetail={setIdDetail}
         handleAddActivityGroup={handleAddActivityGroup}
-        newList={newList}
         setList={setList}
         list={list}
         clickActivity={clickActivity}
@@ -227,8 +181,6 @@ const Activity = () => {
         setIdDetail={setIdDetail}
         list={list}
         sortActivity={sortActivity()}
-        clickActivity={clickActivity}
-        setClickActivity={setClickActivity}
         handleDeleteList={handleDeleteList}
         toDetail={toDetail}
         handleAddActivityGroup={handleAddActivityGroup}
@@ -240,10 +192,9 @@ const Activity = () => {
         clickActivity={clickActivity}
         open={openDeleteList}
         onClose={handleCloseDeleteList}
-        list={list}
-        setList={setList}
         onRemove={deleteData}
         deleteTitleList={deleteTitleList}
+        onClick={() => setOnClick(!onClick)}
       />
     </Container>
   );

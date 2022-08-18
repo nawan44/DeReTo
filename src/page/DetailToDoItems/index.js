@@ -5,7 +5,7 @@ import AddToDoItems from "../../component/dialog/dialogAddData";
 import AppBar from "../../component/layout/appBar";
 import { useLocation } from "react-router-dom";
 import ItemList from "./ListToDoItems";
-import DialoAddData from "../../component/dialog/dialogAddData";
+import DialogAddData from "../../component/dialog/dialogAddData";
 
 const DetailToDoItems = (props) => {
   const {
@@ -19,7 +19,7 @@ const DetailToDoItems = (props) => {
     idDetail,
     handleDeleteList,
   } = props;
-  let location = useLocation();
+
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const { state } = useLocation();
   const { value } = state;
@@ -41,10 +41,8 @@ const DetailToDoItems = (props) => {
   const [dataToDoItem, setDataToDoItem] = useState();
   const [detailTitle, setDetailTitle] = useState(value?.title);
   const [detailId, setDetailId] = useState(value?.id);
-  const [selectedToDoItems, setSelectedToDoItems] = useState({
-    itemToDoItems: null,
-    aksiToDoItems: "",
-  });
+  const [onToDoItem, setOnToDoItem] = useState(false);
+  const [onClick, setOnClick] = useState(false);
 
   const [valueSort, setValueSort] = useState();
 
@@ -94,6 +92,12 @@ const DetailToDoItems = (props) => {
   useEffect(() => {
     getTodoItemList();
   }, []);
+  useEffect(() => {
+    getTodoItemList([]);
+  }, [onClick]);
+  useEffect(() => {
+    getTodoItemList();
+  }, [onToDoItem]);
   // useEffect(() => {
   //   setChangeTitle(titleDetail);
   // }, [titleDetail]);
@@ -144,9 +148,7 @@ const DetailToDoItems = (props) => {
       <AppBar
         titleDetail={titleDetail}
         setTitleDetail={changeToDoItems}
-        aksiToDoItems={selectedToDoItems.aksiToDoItems}
         handleOpenAddToDoItems={handleOpenAddToDoItems}
-        itemToDoItems={selectedToDoItems.itemToDoItems}
         sendTitle={sendTitle}
         value={value}
         toDoItemList={toDoItemList}
@@ -158,6 +160,7 @@ const DetailToDoItems = (props) => {
       {toDoItemTotal && toDoItemTotal > 0 ? (
         <span>
           <ItemList
+            onToDoItem={() => setOnToDoItem(!onToDoItem)}
             idToDoItems={idToDoItems}
             titleToDoItems={titleToDoItems}
             dataToDoItem={dataToDoItem}
@@ -173,6 +176,9 @@ const DetailToDoItems = (props) => {
             handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
             sortToDoItem={sortToDoItem()}
             valueSort={valueSort}
+            onClick={() => setOnClick(!onClick)}
+
+            // onClick, setOnClick
           />
         </span>
       ) : (
@@ -196,13 +202,13 @@ const DetailToDoItems = (props) => {
           />
         </Grid>
       )}
-      <DialoAddData
+      <DialogAddData
         getTodoItemList={getTodoItemList}
         detailId={detailId}
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}
-        handleOpenEditToDoItems={handleOpenEditToDoItems}
         dataToDoItem={dataToDoItem}
+        onToDoItem={() => setOnToDoItem(!onToDoItem)}
       />
     </Container>
   );

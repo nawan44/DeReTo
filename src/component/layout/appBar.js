@@ -17,13 +17,9 @@ const AppBar = (props, ss) => {
   const {
     handleAddActivityGroup,
     handle,
-    aksiToDoItems,
-    itemToDoItems,
     list,
     todoItem,
     param,
-    handleChange,
-    newList,
     titleDetail,
     setTitleDetail,
     handleChangeTitleDetil,
@@ -124,7 +120,7 @@ const AppBar = (props, ss) => {
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
-            + Tambah Activity
+            + Tambah
           </Button>
         </span>
       );
@@ -137,7 +133,7 @@ const AppBar = (props, ss) => {
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
-            + Tambah ToDoItems
+            + Tambah
           </Button>
         </span>
       );

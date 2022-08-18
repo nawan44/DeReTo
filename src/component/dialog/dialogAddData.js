@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import { Container, Divider, TextField, Typography } from "@mui/material";
+import { Divider, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
@@ -29,28 +29,20 @@ const styles = {
 function DialogAddData(props) {
   const {
     detailId,
+    onToDoItem,
+    onClick,
     getTodoItemList,
     onClose,
-    selectedValue,
-    handleClosEditToDoItems,
     open,
     classes,
-    idDetail,
-    openEditToDoItems,
-    toDoItemList,
-    idToDoItems,
-    titleToDoItems,
     dataToDoItem,
-    value,
   } = props;
-  const navigate = useNavigate();
   const [valueKirim, setValueKirim] = useState({
     activity_group_id: dataToDoItem ? dataToDoItem.id : detailId,
     title: "",
     priority: "",
   });
-  const [namaList, setNamaList] = useState("");
-  const [priority, setPriority] = useState("");
+
   const [kirim, setKirim] = useState();
 
   useEffect(() => {
@@ -76,10 +68,8 @@ function DialogAddData(props) {
     }
   };
 
-  // useEffect(() => {}, [detailId]);
   const addData = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch(process.env.REACT_APP_URL + switchSend(), {
         method: switchMethod(),
@@ -89,7 +79,9 @@ function DialogAddData(props) {
         body: JSON.stringify(dataToDoItem ? kirim : valueKirim),
       });
 
-      getTodoItemList();
+      // onToDoItem();
+      // onClick();
+      // getTodoItemList();
       onClose();
       // handleClosEditToDoItems();
       // window.location.reload();

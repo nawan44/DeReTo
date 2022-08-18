@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import CircleIcon from "@mui/icons-material/Circle";
 import { withStyles } from "@material-ui/core/styles";
 import "../../assets/css/style.css";
-import { useSnackbar } from "notistack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { priorities } from "../data/priorities";
+// import { priorities } from "../data/priorities";
 
 const theme = createTheme({
   palette: {
@@ -35,27 +33,20 @@ function DialogDeleteData(props) {
     onRemove,
     deleteTitleList,
     onClose,
-    titleToDoItems,
     selectedValue,
     open,
     classes,
     clickActivity,
-    list,
-    setList,
-    idToDoItems,
+    dataToDoItem,
+    // onToDoItem,
+    onClick,
   } = props;
-
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleClose = () => {
     onClose(selectedValue);
+    // onToDoItem();
+    onClick();
   };
-
-  function handleRemove(id) {
-    const newList = list.filter((item) => item.id !== id);
-
-    setList(newList);
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -83,8 +74,7 @@ function DialogDeleteData(props) {
               lineHeight: "18px",
             }}
           >
-            " {titleToDoItems == undefined ? deleteTitleList : titleToDoItems} "
-            ?
+            " {dataToDoItem ? dataToDoItem : deleteTitleList} " ?
           </Typography>
         </div>
 

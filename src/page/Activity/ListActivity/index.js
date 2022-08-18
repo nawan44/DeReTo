@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Typography, Button, Grid } from "@mui/material";
 import CardActivity from "../../../component/layout/cardActivity";
 import AvatarMan from "../../../assets/avatar/avatar-man.png";

@@ -17,3 +17,8 @@
   /* -webkit-flex : 0 */
   flex: none !important;
 }
+
+.css-1oqqzyl-MuiContainer-root {
+max-width: 1200px;
+height: 100vh;
+}

@@ -1,19 +1,17 @@
-import React, { useState } from "react";
-import { Container, Divider, Typography } from "@mui/material";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import Dialog from "@mui/material/Dialog";
+import React from "react";
+import {
+  Divider,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Dialog,
+} from "@mui/material";
+
 import "../../assets/css/style.css";
 
 function DialogSort(props) {
-  const { onClose, selectedValue, open, sorts, valueSort, setValueSort } =
-    props;
-  // const [open, setOpen] = useState(false);
-  console.log("sorts", sorts);
-
-  console.log("valueSort", valueSort);
+  const { onClose, selectedValue, open, sorts, setValueSort } = props;
 
   const handleClose = () => {
     onClose(selectedValue);

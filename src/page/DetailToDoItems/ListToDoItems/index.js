@@ -38,7 +38,6 @@ const useStyles = makeStyles({
 const ListToDoItems = (props) => {
   const {
     list,
-    clickActivity,
     openEditToDoItems,
     setOpenAddTodoItems,
     openAddTodoItems,
@@ -49,7 +48,6 @@ const ListToDoItems = (props) => {
     onClose,
     setList,
     onRemove,
-    deleteTitleList,
     idToDoItems,
     titleToDoItems,
     openDeleteToDoItems,
@@ -65,6 +63,8 @@ const ListToDoItems = (props) => {
     value,
     sortToDoItem,
     valueSort,
+    onToDoItem,
+    onClick,
   } = props;
   const classes = useStyles();
 
@@ -110,11 +110,14 @@ const ListToDoItems = (props) => {
       })
     : "";
 
+  // useEffect(() => {
+  //   getTodoItemList([]);
+  // }, [onToDoItem]);
+
   // Return classes based on whether item is checked
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
   const deleteToDoItems = () => {
-    // const newList = toDoItemList.filter((item) => item.id !== id);
     try {
       const response = fetch(
         process.env.REACT_APP_URL + `/todo-items/${idToDoItems}`,
@@ -125,7 +128,8 @@ const ListToDoItems = (props) => {
           },
         }
       );
-      getTodoItemList();
+      onToDoItem();
+      onClick();
       handleCloseDeleteToDoItems();
       enqueueSnackbar("To Do Item berhasil dihapus", { variant: "success" });
     } catch (err) {
@@ -307,21 +311,19 @@ const ListToDoItems = (props) => {
         )}
       </Grid>
       <DialogDeleteData
+        onClick={onClick}
         open={openDeleteToDoItems}
         onClose={handleCloseDeleteToDoItems}
         onRemove={deleteToDoItems}
-        idToDoItems={idToDoItems}
-        titleToDoItems={titleToDoItems}
         toDoItemList={toDoItemList}
+        dataToDoItem={dataToDoItem}
       />
       <DialogAddData
+        onToDoItem={onToDoItem}
         open={openEditToDoItems}
         dataToDoItem={dataToDoItem}
         onClose={handleClosEditToDoItems}
-        idToDoItems={idToDoItems}
-        titleToDoItems={titleToDoItems}
         toDoItemList={toDoItemList}
-        value={value}
         getTodoItemList={getTodoItemList}
       />
     </Container>
