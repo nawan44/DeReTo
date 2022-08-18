@@ -93,7 +93,7 @@ function DialogAddData(props) {
   const [valueKirim, setValueKirim] = useState({
     activity_group_id: dataToDoItem ? dataToDoItem.id : detailId,
     title: "",
-    _comment: "",
+    priority: "",
   });
   const [namaList, setNamaList] = useState("");
   const [priority, setPriority] = useState("");
@@ -103,7 +103,7 @@ function DialogAddData(props) {
   //   // activity_group_id:  dataToDoItem ? dataToDoItem.id : detailId,
   //   title: dataToDoItem?.tile,
 
-  //   _comment: dataToDoItem ? dataToDoItem.priority : "",
+  //   priority: dataToDoItem ? dataToDoItem.priority : "",
   // }
 
   // console.log("dataToDoItem", dataToDoItem);
@@ -152,7 +152,7 @@ function DialogAddData(props) {
       // let form = {
       //   activity_group_id: detailId,
       //   title: valueKirim.namaList,
-      //   _comment: valueKirim.priorityList,
+      //   priority: valueKirim.priorityList,
       // };
       const response = await fetch(process.env.REACT_APP_URL + switchSend(), {
         method: switchMethod(),
@@ -236,8 +236,8 @@ function DialogAddData(props) {
             id="id"
             select
             label="Pilih Priority"
-            name="_comment"
-            value={dataToDoItem ? kirim?._comment : valueKirim._comment}
+            name="priority"
+            value={dataToDoItem ? kirim?.priority : valueKirim.priority}
             onChange={handleChange}
             style={{ margin: "10px 0 10px 0", width: "100%" }}
           >

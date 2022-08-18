@@ -52,14 +52,31 @@ const ListToDoItems = (props) => {
   const [checked, setChecked] = useState([1]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [todoItem, setTodoItem] = useState(toDoItemList);
-
+  const checkColor = (color) => {
+    if (color === "very-high") {
+      return "#ED4C5C";
+    } else if (color === "high") {
+      return "#F8A541";
+    } else if (color === "medium") {
+      return "#00A790";
+    } else if (color === "low") {
+      return "#428BC1";
+    } else if (color === "very-low") {
+      return "#8942C1";
+    }
+  };
+  console.log("todoItem", todoItem);
   const [listDataItem, setListDataItem] = useState({
-    activity_group_id: checked.activity_group_id,
-    id: checked.id,
-    is_active: checked.is_active,
-    priority: checked.priority,
-    title: checked.title,
+    activity_group_id: todoItem.activity_group_id,
+    id: todoItem.id,
+    is_active: todoItem.is_active,
+    priority: todoItem.priority,
+    title: todoItem.title,
+    color: checkColor(todoItem.priority),
   });
+
+  console.log("listDataItem", listDataItem);
+
   // https://todo.api.devcode.gethired.id/activity-groups/23752388
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -162,7 +179,11 @@ const ListToDoItems = (props) => {
                   </ListItemIcon>
                   <IconButton edge="end" aria-label="comments">
                     <FiberManualRecordRoundedIcon
-                      sx={{ fontSize: 10, color: "red", margin: "0 10px 0 0" }}
+                      sx={{
+                        fontSize: 10,
+                        color: checkColor(value.priority),
+                        margin: "0 10px 0 0",
+                      }}
                     />
                   </IconButton>
                   <ListItemText

@@ -11,12 +11,11 @@ import "../../assets/css/style.css";
 import SortDialog from "../dialog/dialogSort";
 import { useSnackbar } from "notistack";
 import AddToDoItems from "../dialog/dialoAddData";
-import {sorts} from "../data/sorts"
+import { sorts } from "../data/sorts";
 import EmptyDialog from "../dialog/empty";
 import DialoAddData from "../dialog/dialoAddData";
 import DialogSort from "../dialog/dialogSort";
 const ariaLabel = { "aria-label": "description" };
-
 
 const AppBar = (props, ss) => {
   const {
@@ -28,7 +27,8 @@ const AppBar = (props, ss) => {
     handle,
     titleActivity,
     handleChangeTitleActivity,
-    aksiToDoItems, itemToDoItems,
+    aksiToDoItems,
+    itemToDoItems,
     list,
     todoItem,
     param,
@@ -44,15 +44,17 @@ const AppBar = (props, ss) => {
     detailId,
     handleCloseAddTodoItems,
     sendTitle,
-    detailTitle,toDoItemList,changeToDoItems,value,
-    handleOpenAddToDoItems
+    detailTitle,
+    toDoItemList,
+    changeToDoItems,
+    value,
+    handleOpenAddToDoItems,
     // openAddToDoItems,
     //  setOpenAddToDoItems
   } = props;
   const navigate = useNavigate();
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
-
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [openSort, setOpenSort] = useState(false);
@@ -67,7 +69,7 @@ const AppBar = (props, ss) => {
   };
   useEffect(() => {
     // if (title) {
-      // setTitleDetail(title);
+    // setTitleDetail(title);
     // }
   }, []);
 
@@ -77,20 +79,19 @@ const AppBar = (props, ss) => {
     // setTitle((value) => value + keyValue);
     // setTitleDetail(value);
     // setTitleDetail(event.target.value);
-    setTitleDetail(event.target.value)
+    setTitleDetail(event.target.value);
     // sendTitle()
   };
 
   const toActivity = (e) => {
     navigate("/");
-    sendTitle(e)
+    sendTitle(e);
   };
-
 
   const Title = () => {
     if (location.pathname === `/`) {
       return <span>Activity</span>;
-    } else if (location.pathname === `/` ) {
+    } else if (location.pathname === `/`) {
       return (
         <span>
           {" "}
@@ -103,8 +104,8 @@ const AppBar = (props, ss) => {
               value={titleDetail}
               // onChange={handleChangeTitle}
               onChange={handleChangeTitle}
-              // onKeyUp={sendTitle}             
-               label="Rachmat Gunawan"
+              // onKeyUp={sendTitle}
+              label="Rachmat Gunawan"
               // defaultValue="New Activity"
               placeholder="New Activity"
               inputProps={ariaLabel}
@@ -116,8 +117,7 @@ const AppBar = (props, ss) => {
           </IconButton>{" "}
         </span>
       );
-    }
-    else {
+    } else {
       return (
         <span>
           <ArrowBackIosIcon onClick={toActivity} />
@@ -126,8 +126,6 @@ const AppBar = (props, ss) => {
             value={titleDetail}
             // onChange={handleChange}
             onChange={handleChangeTitle}
-
-
             // onChange={event => changeToDoItems(event)}
             // onFocus={event => event.currentTarget.select()}
             // autoFocus={props.focus}
@@ -159,7 +157,7 @@ const AppBar = (props, ss) => {
   //         "form",  {
   //           title: title,
   //          email:"rachmat.d.gunawan@gmail.com",
-  //           _comment: "list of priority is : very-high, high, normal, low, very-low"
+  //           priority: "list of priority is : very-high, high, normal, low, very-low"
   //       }
   //       )
   //       const response = await fetch(
@@ -175,7 +173,7 @@ const AppBar = (props, ss) => {
   //             {
   //     title: title,
   //    email:"rachmat.d.gunawan@gmail.com",
-  //     _comment: "list of priority is : very-high, high, normal, low, very-low"
+  //     priority: "list of priority is : very-high, high, normal, low, very-low"
   // }
   //           ),
   //         }
@@ -203,7 +201,7 @@ const AppBar = (props, ss) => {
   //         //     "title": "item 5.1-2",
   //         //     "is_active": 1,
   //         //     "priority": "normal",
-  //         //     "_comment": "list of priority is : very-high, high, normal, low, very-low"
+  //         //     "priority": "list of priority is : very-high, high, normal, low, very-low"
   //         // }
   //         //           ),
   //       }
@@ -215,7 +213,7 @@ const AppBar = (props, ss) => {
   //   }
   // };
   const viewSort = () => {
-    if ( list?.length > 0 ||  toDoItemList?.length > 0) {
+    if (list?.length > 0 || toDoItemList?.length > 0) {
       return (
         <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
           <SwapVertRoundedIcon onClick={handleOpenSort} />
@@ -226,7 +224,7 @@ const AppBar = (props, ss) => {
     }
   };
   const RightButton = () => {
-    if ( list && !toDoItemList ) {
+    if (list && !toDoItemList) {
       return (
         <span>
           {viewSort()}
@@ -239,8 +237,7 @@ const AppBar = (props, ss) => {
           </Button>
         </span>
       );
-    }
-    else if (!list && toDoItemList ) {
+    } else if (!list && toDoItemList) {
       return (
         <span>
           {viewSort()}
@@ -253,18 +250,15 @@ const AppBar = (props, ss) => {
           </Button>
         </span>
       );
-    }
-
-    else {
+    } else {
       return (
         <span>
           {" "}
           <Button
- 
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
-          +Tambah  Kosong
+            +Tambah Kosong
           </Button>
         </span>
       );
@@ -314,7 +308,7 @@ const AppBar = (props, ss) => {
         sorts={sorts}
       />
 
-{/* <EmptyDialog
+      {/* <EmptyDialog
         selectedValue={selectedSort}
         open={openSort}
         onClose={handleCloseSort}

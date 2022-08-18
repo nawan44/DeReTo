@@ -114,7 +114,7 @@ const DetailToDoItems = (props) => {
           body: JSON.stringify({
             title: titleDetail,
             email: "rachmat.d.gunawan@gmail.com",
-            // _comment:
+            // priority:
             // "list of priority is : very-high, high, normal, low, very-low",
           }),
         }

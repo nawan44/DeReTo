@@ -20,12 +20,11 @@ const Activity = () => {
   });
   const [list, setList] = useState([]);
   const [selectedDeleteList, setSelectedDeleteList] = useState(list[1]);
-  const [selectedActivity , setSelectedActivity] = useState({
-    itemActivity : null,
-    aksiActivity : ""
+  const [selectedActivity, setSelectedActivity] = useState({
+    itemActivity: null,
+    aksiActivity: "",
   });
   const [clickActivity, setClickActivity] = useState();
-
 
   const [title, setTitle] = useState();
 
@@ -44,7 +43,6 @@ const Activity = () => {
     getListData();
   }, []);
 
-
   const getListData = async () => {
     try {
       const response = await fetch(
@@ -59,7 +57,7 @@ const Activity = () => {
       );
       let res = await response.json();
       setList(res.data);
-      setSelectedActivity(res.data)
+      setSelectedActivity(res.data);
     } catch (err) {
       console.log(err.message);
     }
@@ -98,7 +96,6 @@ const Activity = () => {
       state: { value: value, color: "green" },
       handleDeleteList,
     });
-   
   };
   const getTodoItemDetail = async () => {
     try {
@@ -112,7 +109,6 @@ const Activity = () => {
       );
       let res = await response.json();
       setTodoItem(res);
-
     } catch (err) {
       console.log(err.message);
     }
@@ -139,9 +135,8 @@ const Activity = () => {
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
   };
-  const handleAddActivityGroup = async  () => {
+  const handleAddActivityGroup = async () => {
     try {
-    
       const response = await fetch(
         process.env.REACT_APP_URL + `/activity-groups`,
         {
@@ -151,23 +146,23 @@ const Activity = () => {
           },
 
           body: JSON.stringify({
-            title:  title ? title : newAddActivity.title,
+            title: title ? title : newAddActivity.title,
             email: "rachmat.d.gunawan@gmail.com",
-            _comment:
+            priority:
               "list of priority is : very-high, high, normal, low, very-low",
           }),
         }
       );
-    const newItems = [...addActivity, newAddActivity];
-    setAddActivity(newItems);
+      const newItems = [...addActivity, newAddActivity];
+      setAddActivity(newItems);
 
-    setOpenAddToDoItems(true);
+      setOpenAddToDoItems(true);
 
-    enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
-    getListData();
-  } catch (err) {
-    console.log(err.message);
-  }
+      enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
+      getListData();
+    } catch (err) {
+      console.log(err.message);
+    }
   };
   const handleOpenAddToDoItems = () => {
     const newItems = [...list, newList];
@@ -205,7 +200,6 @@ const Activity = () => {
         setList={setList}
         list={list}
         clickActivity={clickActivity}
- 
         handleCloseAddToDoItems={handleCloseAddToDoItems}
         handleOpenAddToDoItems={() => handleOpenAddToDoItems()}
         setOpenAddToDoItems={setOpenAddToDoItems}
