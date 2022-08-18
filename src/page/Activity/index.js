@@ -61,7 +61,7 @@ const Activity = () => {
   };
 
   const toDetail = (value) => {
-    `[data-cy=activity-item]`;
+    // `[data-cy=activity-item]`;
     navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
       handleDeleteList,
@@ -69,7 +69,7 @@ const Activity = () => {
   };
 
   const deleteData = (id) => {
-    `[data-cy=activity-item-delete-button]`;
+    // `[data-cy=activity-item-delete-button]`;
     // handleDeleteList
     const newList = list.filter((item) => item.id !== id);
     try {

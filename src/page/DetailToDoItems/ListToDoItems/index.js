@@ -119,7 +119,7 @@ const ListToDoItems = (props) => {
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
   const deleteToDoItems = () => {
-    "[data-cy=modal-delete-confirm-button]";
+    // "[data-cy=modal-delete-confirm-button]";
     try {
       const response = fetch(
         process.env.REACT_APP_URL + `/todo-items/${idToDoItems}`,

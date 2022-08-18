@@ -43,7 +43,7 @@ function DialogDeleteData(props) {
   } = props;
 
   const handleClose = () => {
-    `[data-cy=modal-delete]`;
+    // `[data-cy=modal-delete]`;
     onClose(selectedValue);
     // onToDoItem();
     onClick();
