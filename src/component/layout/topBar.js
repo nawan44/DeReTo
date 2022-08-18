@@ -17,7 +17,7 @@ function TopBar() {
             zIndex: (theme) => theme.zIndex.drawer + 1,
           }}
         >
-          <Link to="/dashboard-empty">
+          <Link to="/">
             <Typography
               variant="h6"
               style={{

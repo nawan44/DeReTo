@@ -2,49 +2,37 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container } from "@mui/material";
 import AppBar from "../../component/layout/appBar";
-import DeleteListItem from "../../component/dialog/deleteListItem";
+import DeleteListItem from "../../component/dialog/dialogDeleteData";
 import { useSnackbar } from "notistack";
 import ListActivity from "./ListActivity";
+import DialogDeleteData from "../../component/dialog/dialogDeleteData";
 
 const Activity = () => {
   let location = useLocation();
+  const navigate = useNavigate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const [openDeleteList, setOpenDeleteList] = useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const navigate = useNavigate();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
-
-  const handleCloseAddToDoItems = (value) => {
-    setOpenAddToDoItems(false);
-  };
-
-  const handleOpenAddToDoItems = () => {
-    const newItems = [...list, newList];
-    setList(newItems);
-    setOpenAddToDoItems(true);
-  };
-
   const [newList, setNewList] = useState({
     title: "New Activity",
     name: "",
   });
-
   const [list, setList] = useState([]);
   const [selectedDeleteList, setSelectedDeleteList] = useState(list[1]);
-  const [lempar, setLempar] = useState({
-    id: list.id,
-    title: list.title,
-    name: "",
-    todoItem: list.todo_items,
+  const [selectedActivity , setSelectedActivity] = useState({
+    itemActivity : null,
+    aksiActivity : ""
   });
-  const [click, setClick] = useState(false);
-  const [clickItemList, setClickItemList] = useState(false);
+  const [clickActivity, setClickActivity] = useState();
+
+
+  const [title, setTitle] = useState();
+
   const [idDetail, setIdDetail] = useState();
-  const [clickTitle, setClickTitle] = useState(false);
   const [todoItem, setTodoItem] = useState();
   const [deleteTitleList, setDeleteTitleList] = useState("");
   const [todoItemDetail, setTodoItemDetail] = useState();
-  const [checkToDo, setCheckToDo] = useState([]);
   const [addActivity, setAddActivity] = useState([]);
   const [newAddActivity, setNewAddActivity] = useState({
     title: "New Activity",
@@ -52,17 +40,10 @@ const Activity = () => {
   });
   const [titleActivity, setTitleActivity] = useState("New Activity");
 
-
-
-  const handleChangeTitleActivity = (newValue) => {
-    setTitleActivity(newValue);
-  };
   useEffect(() => {
     getListData();
   }, []);
-  useEffect(() => {
-    getListData();
-  }, [click]);
+
 
   const getListData = async () => {
     try {
@@ -70,7 +51,6 @@ const Activity = () => {
         process.env.REACT_APP_URL +
           // "/activity-groups?email=yoga%2B1%40skyshi.io",
           "/activity-groups?email=rachmat.d.gunawan@gmail.com",
-
         {
           headers: {
             "Content-Type": "application/json",
@@ -79,26 +59,21 @@ const Activity = () => {
       );
       let res = await response.json();
       setList(res.data);
+      setSelectedActivity(res.data)
     } catch (err) {
       console.log(err.message);
     }
   };
-  const handleAddActivityGroup = async () => {
-    const newItems = [...addActivity, newAddActivity];
-    setAddActivity(newItems);
-    enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
-    getListData();
-  };
+
   useEffect(() => {
     getTodoItem();
-  }, [lempar]);
+  }, [clickActivity]);
 
   const getTodoItem = async () => {
-    console.log("todoItem", todoItem);
-    if (lempar) {
+    if (clickActivity) {
       try {
         const response = await fetch(
-          process.env.REACT_APP_URL + `/activity-groups/${lempar}`,
+          process.env.REACT_APP_URL + `/activity-groups/${clickActivity}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -116,9 +91,9 @@ const Activity = () => {
   };
   useEffect(() => {
     getTodoItemDetail();
-  }, [lempar]);
+  }, [clickActivity]);
   const toDetail = (value) => {
-    setLempar(value.id);
+    // setClickActivity(value.id);
     navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
       handleDeleteList,
@@ -128,7 +103,7 @@ const Activity = () => {
   const getTodoItemDetail = async () => {
     try {
       const response = await fetch(
-        process.env.REACT_APP_URL + `/todo-items/${lempar}`,
+        process.env.REACT_APP_URL + `/todo-items/${clickActivity}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -137,7 +112,7 @@ const Activity = () => {
       );
       let res = await response.json();
       setTodoItem(res);
-      setCheckToDo(res);
+
     } catch (err) {
       console.log(err.message);
     }
@@ -146,7 +121,7 @@ const Activity = () => {
     const newList = list.filter((item) => item.id !== id);
     try {
       const response = fetch(
-        process.env.REACT_APP_URL + `/activity-groups/${lempar}`,
+        process.env.REACT_APP_URL + `/activity-groups/${clickActivity}`,
         {
           method: "DELETE",
           headers: {
@@ -161,12 +136,53 @@ const Activity = () => {
       // console.log(err.message);
     }
   };
+  const handleCloseAddToDoItems = (value) => {
+    setOpenAddToDoItems(false);
+  };
+  const handleAddActivityGroup = async  () => {
+    try {
+    
+      const response = await fetch(
+        process.env.REACT_APP_URL + `/activity-groups`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            title:  title ? title : newAddActivity.title,
+            email: "rachmat.d.gunawan@gmail.com",
+            _comment:
+              "list of priority is : very-high, high, normal, low, very-low",
+          }),
+        }
+      );
+    const newItems = [...addActivity, newAddActivity];
+    setAddActivity(newItems);
+
+    setOpenAddToDoItems(true);
+
+    enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
+    getListData();
+  } catch (err) {
+    console.log(err.message);
+  }
+  };
+  const handleOpenAddToDoItems = () => {
+    const newItems = [...list, newList];
+    setList(newItems);
+    setOpenAddToDoItems(true);
+  };
+
+  const handleChangeTitleActivity = (newValue) => {
+    setTitleActivity(newValue);
+  };
 
   const handleDeleteList = (value) => {
     setOpenDeleteList(true);
-    setLempar(value.id);
+    setClickActivity(value.id);
     setDeleteTitleList(value.title);
-    setClickTitle(true);
   };
   const handleCloseDeleteList = (value) => {
     setOpenDeleteList(false);
@@ -188,36 +204,27 @@ const Activity = () => {
         newList={newList}
         setList={setList}
         list={list}
-        lempar={lempar}
-        click={click}
-        clickItemList={clickItemList}
+        clickActivity={clickActivity}
+ 
         handleCloseAddToDoItems={handleCloseAddToDoItems}
         handleOpenAddToDoItems={() => handleOpenAddToDoItems()}
         setOpenAddToDoItems={setOpenAddToDoItems}
-        clickTitle={clickTitle}
         openAddToDoItems={openAddToDoItems}
       />
-      {/* {conditionalActivity()} */}
       <ListActivity
         idDetail={idDetail}
         setIdDetail={setIdDetail}
-        checkToDo={checkToDo}
-        clickItemList={clickItemList}
-        setClickItemList={setClickItemList}
         list={list}
-        click={click}
-        setClick={setClick}
-        lempar={lempar}
-        setLempar={setLempar}
+        clickActivity={clickActivity}
+        setClickActivity={setClickActivity}
         handleDeleteList={handleDeleteList}
         toDetail={toDetail}
-        setClickTitle={setClickTitle}
         handleAddActivityGroup={handleAddActivityGroup}
         open={openDeleteList}
       />
-      <DeleteListItem
+      <DialogDeleteData
         selectedValue={selectedDeleteList}
-        lempar={lempar}
+        clickActivity={clickActivity}
         open={openDeleteList}
         onClose={handleCloseDeleteList}
         list={list}

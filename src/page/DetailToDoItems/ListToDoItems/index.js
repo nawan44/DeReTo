@@ -13,17 +13,18 @@ import {
   Container,
   Grid,
 } from "@mui/material";
-import DeleteListItem from "../../../component/dialog/deleteListItem";
+import DeleteListItem from "../../../component/dialog/dialogDeleteData";
 import { useSnackbar } from "notistack";
 import "../../../assets/css/style.css";
-import AddToDoItems from "../../../component/dialog/addData";
+import AddToDoItems from "../../../component/dialog/dialoAddData";
+import DialogDeleteData from "../../../component/dialog/dialogDeleteData";
+import DialoAddData from "../../../component/dialog/dialoAddData";
 
 const ListToDoItems = (props) => {
   const {
     list,
-    lempar,
-    checkToDo,
-    setCheckToDo,
+    clickActivity,
+    openEditToDoItems,
     setOpenAddTodoItems,
     openAddTodoItems,
     handleCloseAddTodoItems,
@@ -35,7 +36,7 @@ const ListToDoItems = (props) => {
     onRemove,
     deleteTitleList,
     idToDoItems,
-    titleToDoItems,
+    titleToDoItems, 
     openDeleteToDoItems,
     handleDeleteList,
     item,
@@ -43,7 +44,7 @@ const ListToDoItems = (props) => {
     toDoItemList,
     handleOpenDeleteToDoItems,
     handleCloseDeleteToDoItems,
-    handleOpenEditToDoItems,
+    handleOpenEditToDoItems,handleClosEditToDoItems,dataToDoItem
   } = props;
   const [checked, setChecked] = useState([1]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -158,7 +159,7 @@ const ListToDoItems = (props) => {
                   </ListItemIcon>
                   <IconButton edge="end" aria-label="comments">
                     <FiberManualRecordRoundedIcon
-                      onClick={(id) => handleOpenEditToDoItems(value)}
+
                       sx={{ fontSize: 10, color: "red", margin: "0 10px 0 0" }}
                     />
                   </IconButton>
@@ -174,7 +175,10 @@ const ListToDoItems = (props) => {
                     {value.title}
                   </ListItemText>
 
-                  <IconButton edge="end" aria-label="comments">
+                  <IconButton edge="end" aria-label="comments"
+                                        onClick={(id) => handleOpenEditToDoItems(value)}
+
+                  >
                     <CreateIcon
                       style={{
                         color: "#888888",
@@ -188,7 +192,7 @@ const ListToDoItems = (props) => {
             );
           })}
         </List>
-        <DeleteListItem
+        <DialogDeleteData
           open={openDeleteToDoItems}
           onClose={handleCloseDeleteToDoItems}
           onRemove={deleteToDoItems}
@@ -196,10 +200,11 @@ const ListToDoItems = (props) => {
           titleToDoItems={titleToDoItems}
           toDoItemList={toDoItemList}
         />
-        <AddToDoItems
-          open={openDeleteToDoItems}
-          onClose={handleCloseDeleteToDoItems}
-          onRemove={deleteToDoItems}
+        <DialoAddData
+          open={openEditToDoItems} 
+          dataToDoItem={dataToDoItem}
+          onClose={handleClosEditToDoItems}
+          // handleClosEditToDoItems={handleClosEditToDoItems}
           idToDoItems={idToDoItems}
           titleToDoItems={titleToDoItems}
           toDoItemList={toDoItemList}

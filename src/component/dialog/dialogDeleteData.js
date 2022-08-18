@@ -75,7 +75,7 @@ const styles = {
   },
 };
 
-function DeleteData(props) {
+function DialogDeleteData(props) {
   const {
     onRemove,
     deleteTitleList,
@@ -84,7 +84,7 @@ function DeleteData(props) {
     selectedValue,
     open,
     classes,
-    lempar,
+    clickActivity,
     list,
     setList,
     idToDoItems,
@@ -96,9 +96,6 @@ function DeleteData(props) {
     onClose(selectedValue);
   };
 
-  const handleListItemClick = (value) => {
-    onClose(value);
-  };
 
   function handleRemove(id) {
     const newList = list.filter((item) => item.id !== id);
@@ -169,8 +166,7 @@ function DeleteData(props) {
                 float: "right",
                 margin: "20px 20px 0 20px",
               }}
-              // onClick ={() => deleteData(lempar.id) }
-              onClick={() => onRemove(lempar)}
+              onClick={() => onRemove(clickActivity)}
             >
               Hapus
             </Button>
@@ -181,4 +177,4 @@ function DeleteData(props) {
   );
 }
 
-export default withStyles(styles)(DeleteData);
+export default withStyles(styles)(DialogDeleteData);

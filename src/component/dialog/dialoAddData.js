@@ -71,67 +71,75 @@ const styles = {
   },
 };
 
-function AddData(props) {
+function DialogAddData(props) {
   const {
     detailId,
     getTodoItemList,
     onClose,
-    selectedValue,
+    selectedValue,handleClosEditToDoItems,
     open,
     ididi,
     classes,
     idDetail,
+    openEditToDoItems,toDoItemList,idToDoItems,titleToDoItems,dataToDoItem
   } = props;
   const navigate = useNavigate();
-  const [valueKirim, setValueKirim] = useState({
-    activity_group_id: detailId == undefined ? idDetail : detailId,
-    title: "",
-    _comment: "",
-  });
-  const [id, setId] = useState(null);
+  const [valueKirim, setValueKirim] = useState(dataToDoItem);
   const [namaList, setNamaList] = useState("");
   const [priority, setPriority] = useState("");
   const [kirim, setKirim] = useState({
-    activity_group_id: detailId == undefined ? idDetail : detailId,
-    title: "",
+    // activity_group_id:  dataToDoItem ? dataToDoItem.id : detailId,
+    title:  dataToDoItem?.tile,
 
-    _comment: "",
+    _comment:dataToDoItem?.priority
   });
 
+
+  // console.log("dataToDoItem", dataToDoItem);
+  // useEffect(
+  //   () => {
+
+   
+  //   },
+  //   [valueKirim],
+  // );
   useEffect(
     () => {
-      setValueKirim({
-        ...valueKirim,
-        activity_group_id: kirim.activity_group_id == undefined ? id : detailId,
-        title: kirim.title,
-        _comment: kirim._comment,
-      });
+      console.log("kirim", dataToDoItem);
+   
     },
-    [detailId],
-    [idDetail]
+    [dataToDoItem],
   );
 
+  // const switchSend = () =>{
+  //   if (dataToDoItem) {
+  //     return `/todo-items/${dataToDoItem.id}`
+  //   } else {
+  //    return "/todo-items"
+  //   }
+  // }
+  // const switchMethod = () =>{
+  //   if (dataToDoItem) {
+  //     return "PATCH"
+  //   } else {
+  //    return "POST"
+  //   }
+  // }
   useEffect(() => {}, [detailId]);
   const addData = async (e) => {
     // e.preventDefault();
-    console.log("akxmskcmklsa", {
-      activity_group_id: detailId === undefined ? id : detailId,
-      title: valueKirim.namaList,
-      _comment: valueKirim.priorityList,
-    });
-    console.log("detailId", detailId);
+   
+    console.log(" SEND krim", kirim);
 
-    console.log("krim", kirim);
-
-    console.log("valueKirim", valueKirim);
+    console.log(" SEND VALUEKirim", valueKirim);
     try {
       // let form = {
       //   activity_group_id: detailId,
       //   title: valueKirim.namaList,
       //   _comment: valueKirim.priorityList,
       // };
-      const response = await fetch(process.env.REACT_APP_URL + "/todo-items", {
-        method: "POST",
+      const response = await fetch(process.env.REACT_APP_URL +`/todo-items/${dataToDoItem.id}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           // Authorization: localStorage.getItem("token"),
@@ -139,17 +147,17 @@ function AddData(props) {
         body: JSON.stringify(kirim),
       });
       // const res = await response.json();
+      console.log("response", response)
       // navigate("/item-list");
       getTodoItemList();
       onClose();
+      handleClosEditToDoItems()
     } catch (err) {
       console.log(err.message);
     }
   };
 
-  const handleListItemClick = (value) => {
-    onClose(value);
-  };
+
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -158,31 +166,22 @@ function AddData(props) {
   //   setPriority(event.target.value);
   // };
   const handleChange = (event) => {
-    setId(detailId);
+    event.preventDefault()
+    var clickedId = event.target;
 
-    setKirim({
+    console.log("event", )
+setKirim({
       ...kirim,
-      [event.target.name]: event.target.value,
-    });
+      [event.target.name]: event.target.value,    });
 
+    // setValueKirim({
+    //   ...valueKirim,
+    //   [event.target.name]: event.target.value,
+    // });
     // setNamaList(event.target.value);
   };
-  // const handleChange = (event) => {
-  //   event.preventDefault();
-  //   setPriority(event.target.value);
-  //   setNamaList(event.target.value);
-  // setKirim({
-  //   ...kirim,
-  //   [event.target.name]: event.target.value,
-  // });
-  // };
 
-  // const addData = () => {
-  //   const newItems = [...lempar, newLempar];
-
-  //   setLempar(newItems);
-  //   navigate("/item-list");
-  // };
+  
   return (
     <ThemeProvider theme={theme}>
       <Dialog
@@ -190,7 +189,7 @@ function AddData(props) {
         open={open}
         classes={{ paper: classes.dialogPaper }}
       >
-        <DialogTitle>Tambah List Item {detailId}</DialogTitle>
+        <DialogTitle>Tambah List Item</DialogTitle>
         <Divider />
         <div style={{ padding: "20px" }}>
           <Typography
@@ -200,9 +199,10 @@ function AddData(props) {
           </Typography>
           <TextField
             id="id"
-            value={kirim.title}
+            value={ kirim.title  }
             name="title"
             onChange={handleChange}
+            // onChange={(e) => setValueKirim(e.target.value)}
             label="Tambahkan nama list item"
             variant="outlined"
             style={{ margin: "10px 0", width: "100%" }}
@@ -261,4 +261,4 @@ function AddData(props) {
   );
 }
 
-export default withStyles(styles)(AddData);
+export default withStyles(styles)(DialogAddData);

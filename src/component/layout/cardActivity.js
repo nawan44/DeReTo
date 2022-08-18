@@ -11,35 +11,17 @@ import "moment/locale/id";
 
 export default function CardActivity(props) {
   const {
-    // {title, checkActivity,
-    setClickItemList,
-    clickItemList,
-    checkToDo,
     index,
     item,
     idDetail,
     setIdDetail,
     toDetail,
-    // toDetail,
     handleDeleteList,
     list,
-    setLempar,
-    lempar,
   } = props;
   const navigate = useNavigate();
 
-  //   const toDetail = (value, item) => {
-  //     // setLempar(value.id);
 
-  //     navigate(`/detail/${item.id}`);
-  //     setIdDetail(item.id )
-
-  //   };
-
-  const toItemList = (value) => {
-    setClickItemList(true);
-    setLempar(value.id);
-  };
 
   return (
     <Card key={index} sx={{ width: 200, height: "180px", margin: "10px" }}>

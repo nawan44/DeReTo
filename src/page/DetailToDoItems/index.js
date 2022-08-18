@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import AvatarWoman from "../../assets/avatar/avatar-woman.jpg";
 import { Container, Grid } from "@mui/material";
-import AddToDoItems from "../../component/dialog/addData";
+import AddToDoItems from "../../component/dialog/dialoAddData";
 import AppBar from "../../component/layout/appBar";
 import { useLocation } from "react-router-dom";
 import ItemList from "./ListToDoItems";
+import DialoAddData from "../../component/dialog/dialoAddData";
 
 const DetailToDoItems = (props) => {
   const {
-    lempar,
+    clickActivity,
     list,
     open,
-    setLempar,
+    setClickActivity,
     setOpenAddTodoItems,
     openAddTodoItems,
     handleCloseAddTodoItems,
@@ -21,8 +22,12 @@ const DetailToDoItems = (props) => {
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const { state } = useLocation();
-  const { value, color } = state; // Read values passed on state
-  const [titleDetail, setTitleDetail] = useState();
+  const { value, color } = state; 
+
+  const [titleDetail, setTitleDetail] = useState(value ? value.title : "New Activity");
+
+  const [changeTitle, setChangeTitle] = useState();
+
   const [toDoItemList, setToDoItemList] = useState();
   const [toDoItemTotal, setToDoItemListTotal] = useState();
 
@@ -31,24 +36,38 @@ const DetailToDoItems = (props) => {
 
   const [idToDoItems, setIdToDoItems] = useState();
   const [titleToDoItems, setTitleToDoItems] = useState(toDoItemList?.title);
-
+const [dataToDoItem, setDataToDoItem] = useState()
   const [detailTitle, setDetailTitle] = useState(value?.title);
   const [detailId, setDetailId] = useState(value?.id);
-
+  const [selectedToDoItems , setSelectedToDoItems] = useState({
+    itemToDoItems : null,
+    aksiToDoItems : ""
+  });
+  console.log("openEditToDoItems",openEditToDoItems)
   const handleOpenDeleteToDoItems = (item) => {
     setOpenDeleteToDoItems(true);
     setIdToDoItems(item.id);
-    setTitleToDoItems(item.title);
+    setDataToDoItem(item.title);
   };
   const handleCloseDeleteToDoItems = (value) => {
     setOpenDeleteToDoItems(false);
   };
+  
   const handleOpenEditToDoItems = (item) => {
     setOpenEditToDoItems(true);
     setIdToDoItems(item.id);
     setTitleToDoItems(item.title);
+    setDataToDoItem(item)
   };
 
+  console.log("kkk", openEditToDoItems)
+
+  const handleClosEditToDoItems = (value) => {
+    setOpenEditToDoItems(false);
+  };
+  const changeToDoItems = (newValue) =>{
+    setTitleDetail(newValue);
+  }
   useEffect(() => {
     // // check();
   }, [titleDetail]);
@@ -56,7 +75,9 @@ const DetailToDoItems = (props) => {
   useEffect(() => {
     getTodoItemList();
   }, []);
-
+  useEffect(() => {
+    setChangeTitle(titleDetail);
+  }, [titleDetail]);
   const getTodoItemList = async () => {
     try {
       const response = await fetch(
@@ -76,18 +97,15 @@ const DetailToDoItems = (props) => {
     }
   };
 
-  const sendTitle = async () => {
-    if (location.pathname !== `/detail`) {
-      console.log("form", {
-        title: titleDetail,
-        email: "rachmat.d.gunawan@gmail.com",
-        // _comment: "list of priority is : very-high, high, normal, low, very-low",
-      });
+  const sendTitle = async (e) => {
+    // if (changeTitle) {
+
+
       try {
         const response = await fetch(
-          process.env.REACT_APP_URL + `/activity-groups`,
+          process.env.REACT_APP_URL + `/activity-groups/${detailId}`,
           {
-            method: "POST",
+            method: "PATCH",
             headers: {
               "Content-Type": "application/json",
             },
@@ -103,9 +121,9 @@ const DetailToDoItems = (props) => {
       } catch (err) {
         // console.log(err.message);
       }
-    } else {
-      // console.log("error");
-    }
+    // } else {
+    //   // console.log("error");
+    // }
   };
 
   const handleCloseAddToDoItems = (value) => {
@@ -118,10 +136,17 @@ const DetailToDoItems = (props) => {
     <Container style={{ width: "100%" }}>
       <AppBar
         // detailTitle={detailTitle}
-        // titleDetail={titleDetail}
-        setTitleDetail={setTitleDetail}
+        titleDetail={titleDetail}
+        setTitleDetail={changeToDoItems}
+
+        aksiToDoItems ={selectedToDoItems.aksiToDoItems }
+        handleOpenAddToDoItems ={handleOpenAddToDoItems}
+        itemToDoItems ={selectedToDoItems.itemToDoItems }
+        // changeToDoItems={changeToDoItems}
         // handleChangeTitleDetil={handleChangeTitleDetil}
         sendTitle={sendTitle}
+        value ={value}
+
         toDoItemList={toDoItemList}toDoItemTotal={toDoItemTotal}
       />
       {toDoItemTotal && toDoItemTotal > 0 ? (
@@ -129,12 +154,16 @@ const DetailToDoItems = (props) => {
           <ItemList
             idToDoItems={idToDoItems}
             titleToDoItems={titleToDoItems}
+            dataToDoItem={dataToDoItem}
             openDeleteToDoItems={openDeleteToDoItems}
+            openEditToDoItems={openEditToDoItems}
             toDoItemList={toDoItemList}
             getTodoItemList={getTodoItemList}
             handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
-            handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
+            handle={handleCloseDeleteToDoItems}
+            handleClosEditToDoItems ={handleClosEditToDoItems}
             handleOpenEditToDoItems={handleOpenEditToDoItems}
+            handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
           />
         </span>
       ) : (
@@ -159,11 +188,16 @@ const DetailToDoItems = (props) => {
         </Grid>
       )}
 
-      <AddToDoItems
+      <DialoAddData
         getTodoItemList={getTodoItemList}
         detailId={detailId}
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}
+        handleOpenEditToDoItems={handleOpenEditToDoItems}
+        // itemToDoItems ={
+        //   dataKelengkapan?.filter(
+        //     (row) => row.id_reader === data.id_reader
+        // }
       />
     </Container>
   );

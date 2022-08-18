@@ -5,21 +5,21 @@ import AvatarMan from "../../../assets/avatar/avatar-man.png";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const ListActivity = ({
-  lempar,
-  setLempar,
+  clickActivity,
+  setClickActivity,
   list,
   handleDeleteList,
-  setClickItemList,
-  clickItemList,
+
   click,
   setClick,
   toDashboard,
-  checkToDo, idDetail, setIdDetail,
-  checkActivity, toDetail, setClickTitle, handleAddActivityGroup
+  idDetail,
+  setIdDetail,
+  checkActivity,
+  toDetail,
+  setClickTitle,
+  handleAddActivityGroup,
 }) => {
-
-
-
   return (
     <Container style={{ width: "100%" }}>
       {list.length === 0 ? (
@@ -92,23 +92,19 @@ const ListActivity = ({
           {list &&
             list?.map((item, index) => (
               <CardActivity
-                checkToDo={checkToDo}
                 key={item.id}
-                setClickItemList={setClickItemList}
-                clickItemList={clickItemList}
+           
                 click={click}
                 setClick={setClick}
                 index={index}
                 item={item}
                 list={list}
-                lempar={lempar}
-                setLempar={setLempar}
                 handleDeleteList={handleDeleteList}
                 toDashboard={toDashboard}
                 toDetail={() => toDetail(item)}
-                setClickTitle={setClickTitle(true)}
+                // setClickTitle={setClickTitle(true)}
                 setIdDetail={setIdDetail(item.id)}
-              // setIdDetail ={setIdDetail}
+                // setIdDetail ={setIdDetail}
               />
             ))}
         </Grid>

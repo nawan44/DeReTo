@@ -8,7 +8,7 @@ import Dialog from "@mui/material/Dialog";
 import "../../assets/css/style.css";
 
 
-function SortDialog(props) {
+function DialogSort(props) {
   const { onClose, selectedValue, open, sorts } = props;
   // const [open, setOpen] = useState(false);
 
@@ -36,18 +36,12 @@ function SortDialog(props) {
             <Divider />
           </div>
         ))}
-        {/* <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
-          <ListItemAvatar>
-            <Avatar>
-              <AddIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Add account" />
-        </ListItem> */}
+    
+    
       </List>
     </Dialog>
   );
 }
 
 
-export default SortDialog;
+export default DialogSort;
