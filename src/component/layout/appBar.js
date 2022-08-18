@@ -19,14 +19,8 @@ const ariaLabel = { "aria-label": "description" };
 
 const AppBar = (props, ss) => {
   const {
-    addActivity,
-    setAddActivity,
-    newAddActivity,
-    setNewAddActivity,
     handleAddActivityGroup,
     handle,
-    titleActivity,
-    handleChangeTitleActivity,
     aksiToDoItems,
     itemToDoItems,
     list,
@@ -51,39 +45,26 @@ const AppBar = (props, ss) => {
     handleOpenAddToDoItems,
     valueSort,
     setValueSort,
-    belumSelesai,
-    // openAddToDoItems,
-    //  setOpenAddToDoItems
   } = props;
   const navigate = useNavigate();
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [openSort, setOpenSort] = useState(false);
   const [selectedSort, setSelectedSort] = useState(sorts[1]);
   const [openAddList, setOpenAddList] = useState(false);
   const [selectedAddList, setSelectedAddList] = useState(sorts[1]);
-  // const handleOpenAddToDoItems = () => {
-  //   setOpenAddToDoItems(true);
-  // };
+
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
   };
-  useEffect(() => {
-    // if (title) {
-    // setTitleDetail(title);
-    // }
-  }, []);
 
   const handleChangeTitle = (event) => {
     setTitleDetail(event.target.value);
   };
 
   const toActivity = (e) => {
-    navigate("/", {
-      state: { value: value, belumSelesai: belumSelesai },
-    });
+    navigate("/");
     sendTitle(e);
   };
 
@@ -97,13 +78,9 @@ const AppBar = (props, ss) => {
           <span>
             <ArrowBackIosIcon onClick={toActivity} />
             <Input
-              // value={title}
               value={titleDetail}
-              // onChange={handleChangeTitle}
               onChange={handleChangeTitle}
-              // onKeyUp={sendTitle}
               label="Rachmat Gunawan"
-              // defaultValue="New Activity"
               placeholder="New Activity"
               inputProps={ariaLabel}
               sx={{ fontSize: "24px", fontWeight: "bold" }}
@@ -227,18 +204,7 @@ const AppBar = (props, ss) => {
         valueSort={valueSort}
         setValueSort={setValueSort}
       />
-
-      {/* <EmptyDialog
-        selectedValue={selectedSort}
-        open={openSort}
-        onClose={handleCloseSort}
-        sorts={sorts}
-      /> */}
-      <DialoAddData
-        ididi={idDetail}
-        open={openAddToDoItems}
-        onClose={handleCloseAddToDoItems}
-      />
+      <DialoAddData open={openAddToDoItems} onClose={handleCloseAddToDoItems} />
     </>
   );
 };

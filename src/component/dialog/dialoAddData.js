@@ -6,9 +6,10 @@ import Button from "@mui/material/Button";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import MenuItem from "@mui/material/MenuItem";
-import CircleIcon from "@mui/icons-material/Circle";
 import { withStyles } from "@material-ui/core/styles";
 import "../../assets/css/style.css";
+import { priorities } from "../data/priorities";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
@@ -17,53 +18,7 @@ const theme = createTheme({
     },
   },
 });
-const priorities = [
-  {
-    circle: (
-      <CircleIcon
-        style={{ margin: " 0 10px 0 0", color: "#ED4C5C", fontSize: "12px" }}
-      />
-    ),
-    value: "very-high",
-    label: "Very High",
-  },
-  {
-    circle: (
-      <CircleIcon
-        style={{ margin: " 0 10px 0 0", color: "#F8A541", fontSize: "12px" }}
-      />
-    ),
-    value: "high",
-    label: "High",
-  },
-  {
-    circle: (
-      <CircleIcon
-        style={{ margin: " 0 10px 0 0", color: "#00A790", fontSize: "12px" }}
-      />
-    ),
-    value: "medium",
-    label: "Medium",
-  },
-  {
-    circle: (
-      <CircleIcon
-        style={{ margin: " 0 10px 0 0", color: "#428BC1", fontSize: "12px" }}
-      />
-    ),
-    value: "low",
-    label: "Low",
-  },
-  {
-    circle: (
-      <CircleIcon
-        style={{ margin: " 0 10px 0 0", color: "#8942C1", fontSize: "12px" }}
-      />
-    ),
-    value: "very-low",
-    label: "Very Low",
-  },
-];
+
 const styles = {
   dialogPaper: {
     width: "500px",
@@ -79,7 +34,6 @@ function DialogAddData(props) {
     selectedValue,
     handleClosEditToDoItems,
     open,
-    ididi,
     classes,
     idDetail,
     openEditToDoItems,
@@ -122,8 +76,6 @@ function DialogAddData(props) {
     }
   };
 
-  console.log("ididi", ididi);
-
   useEffect(() => {}, [detailId]);
   const addData = async (e) => {
     e.preventDefault();
@@ -133,12 +85,10 @@ function DialogAddData(props) {
         method: switchMethod(),
         headers: {
           "Content-Type": "application/json",
-          // Authorization: localStorage.getItem("token"),
         },
         body: JSON.stringify(dataToDoItem ? kirim : valueKirim),
       });
-      // const res = await response.json();
-      // navigate("/item-list");
+
       getTodoItemList();
       onClose();
       handleClosEditToDoItems();
@@ -149,6 +99,7 @@ function DialogAddData(props) {
 
   const handleClose = () => {
     onClose(selectedValue);
+    handleClosEditToDoItems(selectedValue);
   };
 
   const handleChange = (event) => {
@@ -162,7 +113,6 @@ function DialogAddData(props) {
       ...valueKirim,
       [event.target.name]: event.target.value,
     });
-    // setNamaList(event.target.value);
   };
 
   return (

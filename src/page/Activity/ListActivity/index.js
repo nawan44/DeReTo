@@ -90,7 +90,7 @@ const ListActivity = ({
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           {valueSort == undefined ? (
-            <span>
+            <>
               {list &&
                 list?.map((item, index) => (
                   <CardActivity
@@ -108,9 +108,9 @@ const ListActivity = ({
                     // setIdDetail ={setIdDetail}
                   />
                 ))}
-            </span>
+            </>
           ) : (
-            <span>
+            <>
               {sortActivity &&
                 sortActivity?.map((item, index) => (
                   <CardActivity
@@ -128,7 +128,7 @@ const ListActivity = ({
                     // setIdDetail ={setIdDetail}
                   />
                 ))}
-            </span>
+            </>
           )}
         </Grid>
       )}

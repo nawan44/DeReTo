@@ -9,3 +9,11 @@
 .checked-item {
   text-decoration: line-through;
 }
+
+
+/* .MuiListItemText-root .MuiListItemText-dense .css-tlelie-MuiListItemText-root  */
+
+.css-tlelie-MuiListItemText-root{
+  /* -webkit-flex : 0 */
+  flex: none !important;
+}

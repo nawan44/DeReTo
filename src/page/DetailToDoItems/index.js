@@ -85,12 +85,11 @@ const DetailToDoItems = (props) => {
   const handleClosEditToDoItems = (value) => {
     setOpenEditToDoItems(false);
   };
+  console.log("toDoItemList", toDoItemList);
   const changeToDoItems = (newValue) => {
     setTitleDetail(newValue);
   };
-  useEffect(() => {
-    // // check();
-  }, [titleDetail]);
+  useEffect(() => {}, [titleDetail]);
 
   useEffect(() => {
     getTodoItemList();
@@ -112,14 +111,10 @@ const DetailToDoItems = (props) => {
       let res = await response.json();
       setToDoItemList(res.data);
       setToDoItemListTotal(res.total);
-    } catch (err) {
-      // console.log(err.message);
-    }
+    } catch (err) {}
   };
 
   const sendTitle = async (e) => {
-    // if (changeTitle) {
-
     try {
       const response = await fetch(
         process.env.REACT_APP_URL + `/activity-groups/${detailId}`,
@@ -132,17 +127,10 @@ const DetailToDoItems = (props) => {
           body: JSON.stringify({
             title: titleDetail,
             email: "rachmat.d.gunawan@gmail.com",
-            // priority:
-            // "list of priority is : very-high, high, normal, low, very-low",
           }),
         }
       );
-    } catch (err) {
-      // console.log(err.message);
-    }
-    // } else {
-    //   // console.log("error");
-    // }
+    } catch (err) {}
   };
 
   const handleCloseAddToDoItems = (value) => {
@@ -154,21 +142,17 @@ const DetailToDoItems = (props) => {
   return (
     <Container style={{ width: "100%" }}>
       <AppBar
-        // detailTitle={detailTitle}
         titleDetail={titleDetail}
         setTitleDetail={changeToDoItems}
         aksiToDoItems={selectedToDoItems.aksiToDoItems}
         handleOpenAddToDoItems={handleOpenAddToDoItems}
         itemToDoItems={selectedToDoItems.itemToDoItems}
-        // changeToDoItems={changeToDoItems}
-        // handleChangeTitleDetil={handleChangeTitleDetil}
         sendTitle={sendTitle}
         value={value}
         toDoItemList={toDoItemList}
         valueSort={valueSort}
         setValueSort={changeToDoSort}
         toDoItemTotal={toDoItemTotal}
-        belumSelesai={toDoItemList?.length}
       />
 
       {toDoItemTotal && toDoItemTotal > 0 ? (
@@ -181,7 +165,7 @@ const DetailToDoItems = (props) => {
             openEditToDoItems={openEditToDoItems}
             toDoItemList={toDoItemList}
             value={value}
-            getTodoItemList={getTodoItemList}
+            getTodoItemList={getTodoItemList()}
             handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
             handle={handleCloseDeleteToDoItems}
             handleClosEditToDoItems={handleClosEditToDoItems}
@@ -213,17 +197,12 @@ const DetailToDoItems = (props) => {
         </Grid>
       )}
       <DialoAddData
-        getTodoItemList={getTodoItemList}
+        getTodoItemList={getTodoItemList()}
         detailId={detailId}
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}
         handleOpenEditToDoItems={handleOpenEditToDoItems}
         dataToDoItem={dataToDoItem}
-
-        // itemToDoItems ={
-        //   dataKelengkapan?.filter(
-        //     (row) => row.id_reader === data.id_reader
-        // }
       />
     </Container>
   );

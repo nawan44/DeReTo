@@ -13,12 +13,27 @@ import {
   Container,
   Grid,
 } from "@mui/material";
-import DeleteListItem from "../../../component/dialog/dialogDeleteData";
 import { useSnackbar } from "notistack";
 import "../../../assets/css/style.css";
-import AddToDoItems from "../../../component/dialog/dialoAddData";
 import DialogDeleteData from "../../../component/dialog/dialogDeleteData";
 import DialoAddData from "../../../component/dialog/dialoAddData";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  list: {
+    width: "100%",
+    padding: "10px 30px",
+    textAlign: "center",
+    margin: "0 auto",
+  },
+  text: {
+    fontWeight: "bold",
+    fontFamily: "courier",
+    color: "blue",
+    textAlign: "left",
+    margin: "0 auto",
+  },
+});
 
 const ListToDoItems = (props) => {
   const {
@@ -51,6 +66,7 @@ const ListToDoItems = (props) => {
     sortToDoItem,
     valueSort,
   } = props;
+  const classes = useStyles();
 
   const [checked, setChecked] = useState([1]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -68,14 +84,15 @@ const ListToDoItems = (props) => {
       return "#8942C1";
     }
   };
-  const [listDataItem, setListDataItem] = useState({
-    activity_group_id: todoItem.activity_group_id,
-    id: todoItem.id,
-    is_active: todoItem.is_active,
-    priority: todoItem.priority,
-    title: todoItem.title,
-    color: checkColor(todoItem.priority),
-  });
+
+  // const [listDataItem, setListDataItem] = useState({
+  //   activity_group_id: todoItem.activity_group_id,
+  //   id: todoItem.id,
+  //   is_active: todoItem.is_active,
+  //   priority: todoItem.priority,
+  //   title: todoItem.title,
+  //   color: checkColor(todoItem.priority),
+  // });
 
   // https://todo.api.devcode.gethired.id/activity-groups/23752388
   const handleToggle = (value) => () => {
@@ -127,200 +144,196 @@ const ListToDoItems = (props) => {
   };
 
   return (
-    <Container style={{ width: "100%" }}>
-      {/* <AppBar /> */}
+    <Container style={{ width: "100%", textAlign: "center", margin: "0 auto" }}>
       <Grid
         style={{
           margin: "0 auto",
           textAlign: "center",
-          padding: "10px 0px",
-          // backgroundColor: "green",
-          width: "90%",
+          padding: "10px 20px",
+          width: "100%",
         }}
         container
-        rowSpacing={1}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
-        {/* sortToDoItem */}
         {valueSort == undefined ? (
-          <span>
-            <List sx={{ width: "100%", maxWidth: "90%" }}>
-              {todoItem?.map((value) => {
-                const labelId = `checkbox-list-label-${value}`;
+          <List className={classes.list}>
+            {todoItem?.map((value) => {
+              const labelId = `checkbox-list-label-${value}`;
 
-                return (
-                  <ListItem
-                    sx={{ display: "list-item" }}
-                    key={value.id}
-                    style={{
-                      margin: "20px 0",
-                      backgroundColor: "#fff",
-                      borderRadius: "7px",
-                    }}
-                    secondaryAction={
-                      <IconButton edge="end" aria-label="comments">
-                        <DeleteIcon
-                          onClick={(id) => handleOpenDeleteToDoItems(value)}
-                          style={{ color: "#888888" }}
-                        />
-                      </IconButton>
-                    }
-                    disablePadding
+              return (
+                <ListItem
+                  sx={{ display: "list-item" }}
+                  key={value.id}
+                  style={{
+                    width: "100%",
+                    margin: "20px 0",
+                    backgroundColor: "#fff",
+                    borderRadius: "7px",
+                  }}
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="comments">
+                      <DeleteIcon
+                        onClick={(id) => handleOpenDeleteToDoItems(value)}
+                        style={{ color: "#888888" }}
+                      />
+                    </IconButton>
+                  }
+                  disablePadding
+                >
+                  <ListItemButton
+                    role={undefined}
+                    onClick={handleToggle(value)}
+                    dense
                   >
-                    <ListItemButton
-                      role={undefined}
-                      onClick={handleToggle(value)}
-                      dense
-                    >
-                      <ListItemIcon>
-                        <Checkbox
-                          edge="start"
-                          checked={checked.indexOf(value) !== -1}
-                          tabIndex={-1}
-                          disableRipple
-                          inputProps={{ "aria-labelledby": labelId }}
-                        />
-                      </ListItemIcon>
-                      <IconButton edge="end" aria-label="comments">
-                        <FiberManualRecordRoundedIcon
-                          sx={{
-                            fontSize: 10,
-                            color: checkColor(value.priority),
-                            margin: "0 10px 0 0",
-                          }}
-                        />
-                      </IconButton>
-                      <ListItemText
-                        style={{
-                          maxWidth: value.title?.length + 25,
-                          textDecoration: line(value.id),
+                    <ListItemIcon>
+                      <Checkbox
+                        edge="start"
+                        checked={checked.indexOf(value) !== -1}
+                        tabIndex={-1}
+                        disableRipple
+                        inputProps={{ "aria-labelledby": labelId }}
+                      />
+                    </ListItemIcon>
+                    <IconButton edge="end" aria-label="comments">
+                      <FiberManualRecordRoundedIcon
+                        sx={{
+                          fontSize: 10,
+                          color: checkColor(value.priority),
+                          margin: "0 10px 0 0",
                         }}
-                        id={labelId}
-                        // primary={value.title}
-                        className={isChecked(value)}
-                      >
-                        {value.title}
-                      </ListItemText>
+                      />
+                    </IconButton>
+                    <ListItemText
+                      style={{
+                        // maxWidth: value.title?.length + 25,
+                        textDecoration: line(value.id),
+                      }}
+                      classes={{ primary: classes.text }}
+                      id={labelId}
+                      // primary={value.title}
+                      className={isChecked(value)}
+                    >
+                      {value.title}
+                    </ListItemText>
 
-                      <IconButton
-                        edge="end"
-                        aria-label="comments"
-                        onClick={(id) => handleOpenEditToDoItems(value)}
-                      >
-                        <CreateIcon
-                          style={{
-                            color: "#888888",
-                            fontSize: "18px",
-                            margin: "0 0 0 10px",
-                          }}
-                        />
-                      </IconButton>
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
-            </List>
-          </span>
+                    <IconButton
+                      edge="end"
+                      aria-label="comments"
+                      onClick={(id) => handleOpenEditToDoItems(value)}
+                    >
+                      <CreateIcon
+                        style={{
+                          color: "#888888",
+                          fontSize: "18px",
+                          margin: "0 0 0 10px",
+                        }}
+                      />
+                    </IconButton>
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+          </List>
         ) : (
-          <span>
-            <List sx={{ width: "100%", maxWidth: "90%" }}>
-              {sortToDoItem?.map((value) => {
-                const labelId = `checkbox-list-label-${value}`;
+          <List
+            style={{ width: "100%", textAlign: "center", margin: "0 auto" }}
+          >
+            {sortToDoItem?.map((value) => {
+              const labelId = `checkbox-list-label-${value}`;
 
-                return (
-                  <ListItem
-                    sx={{ display: "list-item" }}
-                    key={value.id}
-                    style={{
-                      margin: "20px 0",
-                      backgroundColor: "#fff",
-                      borderRadius: "7px",
-                    }}
-                    secondaryAction={
-                      <IconButton edge="end" aria-label="comments">
-                        <DeleteIcon
-                          onClick={(id) => handleOpenDeleteToDoItems(value)}
-                          style={{ color: "#888888" }}
-                        />
-                      </IconButton>
-                    }
-                    disablePadding
+              return (
+                <ListItem
+                  sx={{ display: "list-item" }}
+                  key={value.id}
+                  style={{
+                    width: "100%",
+                    margin: "20px 0",
+                    backgroundColor: "#fff",
+                    borderRadius: "7px",
+                  }}
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="comments">
+                      <DeleteIcon
+                        onClick={(id) => handleOpenDeleteToDoItems(value)}
+                        style={{ color: "#888888" }}
+                      />
+                    </IconButton>
+                  }
+                  disablePadding
+                >
+                  <ListItemButton
+                    role={undefined}
+                    onClick={handleToggle(value)}
+                    dense
                   >
-                    <ListItemButton
-                      role={undefined}
-                      onClick={handleToggle(value)}
-                      dense
-                    >
-                      <ListItemIcon>
-                        <Checkbox
-                          edge="start"
-                          checked={checked.indexOf(value) !== -1}
-                          tabIndex={-1}
-                          disableRipple
-                          inputProps={{ "aria-labelledby": labelId }}
-                        />
-                      </ListItemIcon>
-                      <IconButton edge="end" aria-label="comments">
-                        <FiberManualRecordRoundedIcon
-                          sx={{
-                            fontSize: 10,
-                            color: checkColor(value.priority),
-                            margin: "0 10px 0 0",
-                          }}
-                        />
-                      </IconButton>
-                      <ListItemText
-                        style={{
-                          maxWidth: value.title?.length + 25,
-                          textDecoration: line(value.id),
+                    <ListItemIcon>
+                      <Checkbox
+                        edge="start"
+                        checked={checked.indexOf(value) !== -1}
+                        tabIndex={-1}
+                        disableRipple
+                        inputProps={{ "aria-labelledby": labelId }}
+                      />
+                    </ListItemIcon>
+                    <IconButton edge="end" aria-label="comments">
+                      <FiberManualRecordRoundedIcon
+                        sx={{
+                          fontSize: 10,
+                          color: checkColor(value.priority),
+                          margin: "0 10px 0 0",
                         }}
-                        id={labelId}
-                        // primary={value.title}
-                        className={isChecked(value)}
-                      >
-                        {value.title}
-                      </ListItemText>
+                      />
+                    </IconButton>
+                    <ListItemText
+                      style={{
+                        // maxWidth: value.title?.length + 25,
+                        textDecoration: line(value.id),
+                      }}
+                      id={labelId}
+                      // primary={value.title}
+                      className={isChecked(value)}
+                      classes={{ primary: classes.text }}
+                    >
+                      {value.title}
+                    </ListItemText>
 
-                      <IconButton
-                        edge="end"
-                        aria-label="comments"
-                        onClick={(id) => handleOpenEditToDoItems(value)}
-                      >
-                        <CreateIcon
-                          style={{
-                            color: "#888888",
-                            fontSize: "18px",
-                            margin: "0 0 0 10px",
-                          }}
-                        />
-                      </IconButton>
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
-            </List>
-          </span>
+                    <IconButton
+                      edge="end"
+                      aria-label="comments"
+                      onClick={(id) => handleOpenEditToDoItems(value)}
+                    >
+                      <CreateIcon
+                        style={{
+                          color: "#888888",
+                          fontSize: "18px",
+                          margin: "0 0 0 10px",
+                        }}
+                      />
+                    </IconButton>
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+          </List>
         )}
-
-        <DialogDeleteData
-          open={openDeleteToDoItems}
-          onClose={handleCloseDeleteToDoItems}
-          onRemove={deleteToDoItems}
-          idToDoItems={idToDoItems}
-          titleToDoItems={titleToDoItems}
-          toDoItemList={toDoItemList}
-        />
-        <DialoAddData
-          open={openEditToDoItems}
-          dataToDoItem={dataToDoItem}
-          onClose={handleClosEditToDoItems}
-          // handleClosEditToDoItems={handleClosEditToDoItems}
-          idToDoItems={idToDoItems}
-          titleToDoItems={titleToDoItems}
-          toDoItemList={toDoItemList}
-          value={value}
-        />
       </Grid>
+      <DialogDeleteData
+        open={openDeleteToDoItems}
+        onClose={handleCloseDeleteToDoItems}
+        onRemove={deleteToDoItems}
+        idToDoItems={idToDoItems}
+        titleToDoItems={titleToDoItems}
+        toDoItemList={toDoItemList}
+      />
+      <DialoAddData
+        open={openEditToDoItems}
+        dataToDoItem={dataToDoItem}
+        onClose={handleClosEditToDoItems}
+        idToDoItems={idToDoItems}
+        titleToDoItems={titleToDoItems}
+        toDoItemList={toDoItemList}
+        value={value}
+        getTodoItemList={getTodoItemList}
+      />
     </Container>
   );
 };

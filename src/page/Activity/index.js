@@ -25,10 +25,7 @@ const Activity = () => {
     aksiActivity: "",
   });
   const [clickActivity, setClickActivity] = useState();
-
   const [title, setTitle] = useState();
-  const { value, belumSelesai } = state;
-
   const [idDetail, setIdDetail] = useState();
   const [todoItem, setTodoItem] = useState();
   const [deleteTitleList, setDeleteTitleList] = useState("");
@@ -39,8 +36,6 @@ const Activity = () => {
     name: "",
   });
   const [titleActivity, setTitleActivity] = useState("New Activity");
-  console.log("belumSelesai", belumSelesai);
-  console.log("value", value);
 
   useEffect(() => {
     getListData();
@@ -216,12 +211,6 @@ const Activity = () => {
         idDetail={idDetail}
         setIdDetail={setIdDetail}
         handleAddActivityGroup={handleAddActivityGroup}
-        newAddActivity={newAddActivity}
-        setNewAddActivity={setNewAddActivity}
-        addActivity={addActivity}
-        setAddActivity={setAddActivity}
-        titleActivity={titleActivity}
-        handleChangeTitleActivity={handleChangeTitleActivity}
         newList={newList}
         setList={setList}
         list={list}
