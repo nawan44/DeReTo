@@ -16,7 +16,7 @@ import {
 import { useSnackbar } from "notistack";
 import "../../../assets/css/style.css";
 import DialogDeleteData from "../../../component/dialog/dialogDeleteData";
-import DialoAddData from "../../../component/dialog/dialoAddData";
+import DialogAddData from "../../../component/dialog/dialogAddData";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -85,16 +85,6 @@ const ListToDoItems = (props) => {
     }
   };
 
-  // const [listDataItem, setListDataItem] = useState({
-  //   activity_group_id: todoItem.activity_group_id,
-  //   id: todoItem.id,
-  //   is_active: todoItem.is_active,
-  //   priority: todoItem.priority,
-  //   title: todoItem.title,
-  //   color: checkColor(todoItem.priority),
-  // });
-
-  // https://todo.api.devcode.gethired.id/activity-groups/23752388
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -324,7 +314,7 @@ const ListToDoItems = (props) => {
         titleToDoItems={titleToDoItems}
         toDoItemList={toDoItemList}
       />
-      <DialoAddData
+      <DialogAddData
         open={openEditToDoItems}
         dataToDoItem={dataToDoItem}
         onClose={handleClosEditToDoItems}

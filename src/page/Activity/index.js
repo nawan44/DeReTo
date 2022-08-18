@@ -61,9 +61,9 @@ const Activity = () => {
     }
   };
 
-  useEffect(() => {
-    getTodoItem();
-  }, [clickActivity]);
+  // useEffect(() => {
+  //   getTodoItem();
+  // }, [clickActivity]);
 
   const getTodoItem = async () => {
     if (clickActivity) {

@@ -76,7 +76,7 @@ function DialogAddData(props) {
     }
   };
 
-  useEffect(() => {}, [detailId]);
+  // useEffect(() => {}, [detailId]);
   const addData = async (e) => {
     e.preventDefault();
 
@@ -91,15 +91,11 @@ function DialogAddData(props) {
 
       getTodoItemList();
       onClose();
-      handleClosEditToDoItems();
+      // handleClosEditToDoItems();
+      // window.location.reload();
     } catch (err) {
       console.log(err.message);
     }
-  };
-
-  const handleClose = () => {
-    onClose(selectedValue);
-    handleClosEditToDoItems(selectedValue);
   };
 
   const handleChange = (event) => {
@@ -118,7 +114,7 @@ function DialogAddData(props) {
   return (
     <ThemeProvider theme={theme}>
       <Dialog
-        onClose={handleClose}
+        onClose={onClose}
         open={open}
         classes={{ paper: classes.dialogPaper }}
       >

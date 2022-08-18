@@ -8,12 +8,8 @@ import CreateIcon from "@mui/icons-material/Create";
 import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import Button from "@mui/material/Button";
 import "../../assets/css/style.css";
-import SortDialog from "../dialog/dialogSort";
-import { useSnackbar } from "notistack";
-import AddToDoItems from "../dialog/dialoAddData";
 import { sorts } from "../data/sorts";
-import EmptyDialog from "../dialog/empty";
-import DialoAddData from "../dialog/dialoAddData";
+import DialogAddData from "../dialog/dialogAddData";
 import DialogSort from "../dialog/dialogSort";
 const ariaLabel = { "aria-label": "description" };
 
@@ -204,7 +200,10 @@ const AppBar = (props, ss) => {
         valueSort={valueSort}
         setValueSort={setValueSort}
       />
-      <DialoAddData open={openAddToDoItems} onClose={handleCloseAddToDoItems} />
+      <DialogAddData
+        open={openAddToDoItems}
+        onClose={handleCloseAddToDoItems}
+      />
     </>
   );
 };

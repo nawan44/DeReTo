@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import AvatarWoman from "../../assets/avatar/avatar-woman.jpg";
 import { Container, Grid } from "@mui/material";
-import AddToDoItems from "../../component/dialog/dialoAddData";
+import AddToDoItems from "../../component/dialog/dialogAddData";
 import AppBar from "../../component/layout/appBar";
 import { useLocation } from "react-router-dom";
 import ItemList from "./ListToDoItems";
-import DialoAddData from "../../component/dialog/dialoAddData";
+import DialoAddData from "../../component/dialog/dialogAddData";
 
 const DetailToDoItems = (props) => {
   const {
@@ -89,14 +89,14 @@ const DetailToDoItems = (props) => {
   const changeToDoItems = (newValue) => {
     setTitleDetail(newValue);
   };
-  useEffect(() => {}, [titleDetail]);
+  // useEffect(() => {}, [titleDetail]);
 
   useEffect(() => {
     getTodoItemList();
   }, []);
-  useEffect(() => {
-    setChangeTitle(titleDetail);
-  }, [titleDetail]);
+  // useEffect(() => {
+  //   setChangeTitle(titleDetail);
+  // }, [titleDetail]);
   const getTodoItemList = async () => {
     try {
       const response = await fetch(
@@ -165,7 +165,7 @@ const DetailToDoItems = (props) => {
             openEditToDoItems={openEditToDoItems}
             toDoItemList={toDoItemList}
             value={value}
-            getTodoItemList={getTodoItemList()}
+            getTodoItemList={getTodoItemList}
             handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
             handle={handleCloseDeleteToDoItems}
             handleClosEditToDoItems={handleClosEditToDoItems}
@@ -197,7 +197,7 @@ const DetailToDoItems = (props) => {
         </Grid>
       )}
       <DialoAddData
-        getTodoItemList={getTodoItemList()}
+        getTodoItemList={getTodoItemList}
         detailId={detailId}
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}
