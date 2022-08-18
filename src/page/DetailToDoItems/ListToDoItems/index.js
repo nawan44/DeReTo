@@ -36,7 +36,7 @@ const ListToDoItems = (props) => {
     onRemove,
     deleteTitleList,
     idToDoItems,
-    titleToDoItems, 
+    titleToDoItems,
     openDeleteToDoItems,
     handleDeleteList,
     item,
@@ -44,7 +44,10 @@ const ListToDoItems = (props) => {
     toDoItemList,
     handleOpenDeleteToDoItems,
     handleCloseDeleteToDoItems,
-    handleOpenEditToDoItems,handleClosEditToDoItems,dataToDoItem
+    handleOpenEditToDoItems,
+    handleClosEditToDoItems,
+    dataToDoItem,
+    value,
   } = props;
   const [checked, setChecked] = useState([1]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -159,7 +162,6 @@ const ListToDoItems = (props) => {
                   </ListItemIcon>
                   <IconButton edge="end" aria-label="comments">
                     <FiberManualRecordRoundedIcon
-
                       sx={{ fontSize: 10, color: "red", margin: "0 10px 0 0" }}
                     />
                   </IconButton>
@@ -175,9 +177,10 @@ const ListToDoItems = (props) => {
                     {value.title}
                   </ListItemText>
 
-                  <IconButton edge="end" aria-label="comments"
-                                        onClick={(id) => handleOpenEditToDoItems(value)}
-
+                  <IconButton
+                    edge="end"
+                    aria-label="comments"
+                    onClick={(id) => handleOpenEditToDoItems(value)}
                   >
                     <CreateIcon
                       style={{
@@ -201,13 +204,14 @@ const ListToDoItems = (props) => {
           toDoItemList={toDoItemList}
         />
         <DialoAddData
-          open={openEditToDoItems} 
+          open={openEditToDoItems}
           dataToDoItem={dataToDoItem}
           onClose={handleClosEditToDoItems}
           // handleClosEditToDoItems={handleClosEditToDoItems}
           idToDoItems={idToDoItems}
           titleToDoItems={titleToDoItems}
           toDoItemList={toDoItemList}
+          value={value}
         />
       </Grid>
     </Container>

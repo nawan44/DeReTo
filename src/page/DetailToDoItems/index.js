@@ -22,9 +22,11 @@ const DetailToDoItems = (props) => {
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const { state } = useLocation();
-  const { value, color } = state; 
+  const { value, color } = state;
 
-  const [titleDetail, setTitleDetail] = useState(value ? value.title : "New Activity");
+  const [titleDetail, setTitleDetail] = useState(
+    value ? value.title : "New Activity"
+  );
 
   const [changeTitle, setChangeTitle] = useState();
 
@@ -36,14 +38,14 @@ const DetailToDoItems = (props) => {
 
   const [idToDoItems, setIdToDoItems] = useState();
   const [titleToDoItems, setTitleToDoItems] = useState(toDoItemList?.title);
-const [dataToDoItem, setDataToDoItem] = useState()
+  const [dataToDoItem, setDataToDoItem] = useState();
   const [detailTitle, setDetailTitle] = useState(value?.title);
   const [detailId, setDetailId] = useState(value?.id);
-  const [selectedToDoItems , setSelectedToDoItems] = useState({
-    itemToDoItems : null,
-    aksiToDoItems : ""
+  const [selectedToDoItems, setSelectedToDoItems] = useState({
+    itemToDoItems: null,
+    aksiToDoItems: "",
   });
-  console.log("openEditToDoItems",openEditToDoItems)
+  console.log("openEditToDoItems", openEditToDoItems);
   const handleOpenDeleteToDoItems = (item) => {
     setOpenDeleteToDoItems(true);
     setIdToDoItems(item.id);
@@ -52,22 +54,22 @@ const [dataToDoItem, setDataToDoItem] = useState()
   const handleCloseDeleteToDoItems = (value) => {
     setOpenDeleteToDoItems(false);
   };
-  
+
   const handleOpenEditToDoItems = (item) => {
     setOpenEditToDoItems(true);
     setIdToDoItems(item.id);
     setTitleToDoItems(item.title);
-    setDataToDoItem(item)
+    setDataToDoItem(item);
   };
 
-  console.log("kkk", openEditToDoItems)
+  console.log("kkk", openEditToDoItems);
 
   const handleClosEditToDoItems = (value) => {
     setOpenEditToDoItems(false);
   };
-  const changeToDoItems = (newValue) =>{
+  const changeToDoItems = (newValue) => {
     setTitleDetail(newValue);
-  }
+  };
   useEffect(() => {
     // // check();
   }, [titleDetail]);
@@ -100,27 +102,26 @@ const [dataToDoItem, setDataToDoItem] = useState()
   const sendTitle = async (e) => {
     // if (changeTitle) {
 
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_URL + `/activity-groups/${detailId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-      try {
-        const response = await fetch(
-          process.env.REACT_APP_URL + `/activity-groups/${detailId}`,
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-
-            body: JSON.stringify({
-              title: titleDetail,
-              email: "rachmat.d.gunawan@gmail.com",
-              // _comment:
-              // "list of priority is : very-high, high, normal, low, very-low",
-            }),
-          }
-        );
-      } catch (err) {
-        // console.log(err.message);
-      }
+          body: JSON.stringify({
+            title: titleDetail,
+            email: "rachmat.d.gunawan@gmail.com",
+            // _comment:
+            // "list of priority is : very-high, high, normal, low, very-low",
+          }),
+        }
+      );
+    } catch (err) {
+      // console.log(err.message);
+    }
     // } else {
     //   // console.log("error");
     // }
@@ -138,16 +139,15 @@ const [dataToDoItem, setDataToDoItem] = useState()
         // detailTitle={detailTitle}
         titleDetail={titleDetail}
         setTitleDetail={changeToDoItems}
-
-        aksiToDoItems ={selectedToDoItems.aksiToDoItems }
-        handleOpenAddToDoItems ={handleOpenAddToDoItems}
-        itemToDoItems ={selectedToDoItems.itemToDoItems }
+        aksiToDoItems={selectedToDoItems.aksiToDoItems}
+        handleOpenAddToDoItems={handleOpenAddToDoItems}
+        itemToDoItems={selectedToDoItems.itemToDoItems}
         // changeToDoItems={changeToDoItems}
         // handleChangeTitleDetil={handleChangeTitleDetil}
         sendTitle={sendTitle}
-        value ={value}
-
-        toDoItemList={toDoItemList}toDoItemTotal={toDoItemTotal}
+        value={value}
+        toDoItemList={toDoItemList}
+        toDoItemTotal={toDoItemTotal}
       />
       {toDoItemTotal && toDoItemTotal > 0 ? (
         <span>
@@ -158,10 +158,11 @@ const [dataToDoItem, setDataToDoItem] = useState()
             openDeleteToDoItems={openDeleteToDoItems}
             openEditToDoItems={openEditToDoItems}
             toDoItemList={toDoItemList}
+            value={value}
             getTodoItemList={getTodoItemList}
             handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
             handle={handleCloseDeleteToDoItems}
-            handleClosEditToDoItems ={handleClosEditToDoItems}
+            handleClosEditToDoItems={handleClosEditToDoItems}
             handleOpenEditToDoItems={handleOpenEditToDoItems}
             handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
           />
@@ -194,6 +195,8 @@ const [dataToDoItem, setDataToDoItem] = useState()
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}
         handleOpenEditToDoItems={handleOpenEditToDoItems}
+        dataToDoItem={dataToDoItem}
+
         // itemToDoItems ={
         //   dataKelengkapan?.filter(
         //     (row) => row.id_reader === data.id_reader

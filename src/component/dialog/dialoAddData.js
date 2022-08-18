@@ -76,87 +76,102 @@ function DialogAddData(props) {
     detailId,
     getTodoItemList,
     onClose,
-    selectedValue,handleClosEditToDoItems,
+    selectedValue,
+    handleClosEditToDoItems,
     open,
     ididi,
     classes,
     idDetail,
-    openEditToDoItems,toDoItemList,idToDoItems,titleToDoItems,dataToDoItem
+    openEditToDoItems,
+    toDoItemList,
+    idToDoItems,
+    titleToDoItems,
+    dataToDoItem,
+    value,
   } = props;
   const navigate = useNavigate();
-  const [valueKirim, setValueKirim] = useState(dataToDoItem);
+  const [valueKirim, setValueKirim] = useState({
+    activity_group_id: dataToDoItem ? dataToDoItem.id : detailId,
+    title: "",
+    _comment: "",
+  });
   const [namaList, setNamaList] = useState("");
   const [priority, setPriority] = useState("");
-  const [kirim, setKirim] = useState({
-    // activity_group_id:  dataToDoItem ? dataToDoItem.id : detailId,
-    title:  dataToDoItem?.tile,
+  const [kirim, setKirim] = useState();
+  console.log("valueKirim", valueKirim);
+  //   {
+  //   // activity_group_id:  dataToDoItem ? dataToDoItem.id : detailId,
+  //   title: dataToDoItem?.tile,
 
-    _comment:dataToDoItem?.priority
-  });
-
+  //   _comment: dataToDoItem ? dataToDoItem.priority : "",
+  // }
 
   // console.log("dataToDoItem", dataToDoItem);
   // useEffect(
   //   () => {
 
-   
   //   },
   //   [valueKirim],
   // );
-  useEffect(
-    () => {
-      console.log("kirim", dataToDoItem);
-   
-    },
-    [dataToDoItem],
-  );
+  useEffect(() => {
+    setKirim({
+      // activity_group_id: dataToDoItem ? dataToDoItem?.id : detailId,
+      title: dataToDoItem ? dataToDoItem?.title : "",
 
-  // const switchSend = () =>{
-  //   if (dataToDoItem) {
-  //     return `/todo-items/${dataToDoItem.id}`
-  //   } else {
-  //    return "/todo-items"
-  //   }
-  // }
-  // const switchMethod = () =>{
-  //   if (dataToDoItem) {
-  //     return "PATCH"
-  //   } else {
-  //    return "POST"
-  //   }
-  // }
+      priority: dataToDoItem ? dataToDoItem?.priority : "",
+    });
+    // console.log("kirim", dataToDoItem);
+  }, [dataToDoItem]);
+
+  const switchSend = () => {
+    if (dataToDoItem) {
+      return `/todo-items/${dataToDoItem.id}`;
+    } else {
+      return "/todo-items";
+    }
+  };
+  const switchMethod = () => {
+    if (dataToDoItem) {
+      return "PATCH";
+    } else {
+      return "POST";
+    }
+  };
+  console.log(" SEND value", kirim);
+
+  console.log(" SEND VALUEKirim", valueKirim?.title);
+
   useEffect(() => {}, [detailId]);
   const addData = async (e) => {
     // e.preventDefault();
-   
-    console.log(" SEND krim", kirim);
 
-    console.log(" SEND VALUEKirim", valueKirim);
+    console.log(" SEND value", value);
+
+    console.log(" SEND VALUEKirim", valueKirim?.title);
     try {
       // let form = {
       //   activity_group_id: detailId,
       //   title: valueKirim.namaList,
       //   _comment: valueKirim.priorityList,
       // };
-      const response = await fetch(process.env.REACT_APP_URL +`/todo-items/${dataToDoItem.id}`, {
-        method: "PATCH",
+      const response = await fetch(process.env.REACT_APP_URL + switchSend(), {
+        method: switchMethod(),
         headers: {
           "Content-Type": "application/json",
           // Authorization: localStorage.getItem("token"),
         },
-        body: JSON.stringify(kirim),
+        body: JSON.stringify(dataToDoItem ? kirim : valueKirim),
       });
       // const res = await response.json();
-      console.log("response", response)
+      console.log("response", response);
       // navigate("/item-list");
       getTodoItemList();
       onClose();
-      handleClosEditToDoItems()
+      handleClosEditToDoItems();
     } catch (err) {
       console.log(err.message);
     }
   };
-
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -166,22 +181,22 @@ function DialogAddData(props) {
   //   setPriority(event.target.value);
   // };
   const handleChange = (event) => {
-    event.preventDefault()
-    var clickedId = event.target;
+    event.preventDefault();
+    // var clickedId = event.target;
 
-    console.log("event", )
-setKirim({
+    console.log("event");
+    setKirim({
       ...kirim,
-      [event.target.name]: event.target.value,    });
+      [event.target.name]: event.target.value,
+    });
 
-    // setValueKirim({
-    //   ...valueKirim,
-    //   [event.target.name]: event.target.value,
-    // });
+    setValueKirim({
+      ...valueKirim,
+      [event.target.name]: event.target.value,
+    });
     // setNamaList(event.target.value);
   };
 
-  
   return (
     <ThemeProvider theme={theme}>
       <Dialog
@@ -199,7 +214,7 @@ setKirim({
           </Typography>
           <TextField
             id="id"
-            value={ kirim.title  }
+            value={kirim?.title}
             name="title"
             onChange={handleChange}
             // onChange={(e) => setValueKirim(e.target.value)}
@@ -222,7 +237,7 @@ setKirim({
             select
             label="Pilih Priority"
             name="_comment"
-            value={kirim._comment}
+            value={dataToDoItem ? kirim?._comment : valueKirim._comment}
             onChange={handleChange}
             style={{ margin: "10px 0 10px 0", width: "100%" }}
           >
