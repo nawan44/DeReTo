@@ -72,7 +72,6 @@ const AppBar = (props, ss) => {
             <Input
               value={titleDetail}
               onChange={handleChangeTitle}
-              data-cy="activity-title"
               // label="Rachmat Gunawan"
               placeholder="New Activity"
               inputProps={ariaLabel}
@@ -90,7 +89,6 @@ const AppBar = (props, ss) => {
           <ArrowBackIosIcon onClick={toActivity} />
           <Input
             value={titleDetail}
-            data-cy="activity-title"
             onChange={handleChangeTitle}
             // label="Rachmat Gunawan"
             placeholder="New Activity"
@@ -185,10 +183,11 @@ const AppBar = (props, ss) => {
             textAlign: "left",
             fontWeight: "bold",
           }}
+          data-cy="activity-title"
         >
           {Title()}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} data-cy="todo-add-button">
           {RightButton()}
         </Grid>
       </Grid>

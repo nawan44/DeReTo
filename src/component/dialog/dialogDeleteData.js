@@ -43,6 +43,7 @@ function DialogDeleteData(props) {
   } = props;
 
   const handleClose = () => {
+    `[data-cy=modal-delete]`;
     onClose(selectedValue);
     // onToDoItem();
     onClick();
@@ -54,6 +55,7 @@ function DialogDeleteData(props) {
         onClose={handleClose}
         open={open}
         classes={{ paper: classes.dialogPaper }}
+        data-cy="modal-delete"
       >
         <div style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}>
           <WarningAmberIcon

@@ -69,7 +69,7 @@ function DialogAddData(props) {
   };
 
   const addData = async (e) => {
-    // `[data-cy=modal-add-save-button]`
+    //  data-cy : "modal-add-save-button";
 
     e.preventDefault();
     try {
@@ -93,7 +93,7 @@ function DialogAddData(props) {
   };
 
   const handleChange = (event) => {
-    "[data-cy=modal-add-priority-dropdown]";
+    //  `[data-cy=modal-add-priority-dropdown]`;
     // `[data-cy=todo-add-button]`;
     // `[data-cy=modal-add-priority-dropdown]`;
     // `[data-cy=modal-add-priority-dropdown]`;
@@ -112,6 +112,7 @@ function DialogAddData(props) {
   return (
     <ThemeProvider theme={theme}>
       <Dialog
+        data-cy="modal-add-name-input"
         onClose={onClose}
         open={open}
         classes={{ paper: classes.dialogPaper }}

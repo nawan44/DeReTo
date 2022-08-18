@@ -29,6 +29,7 @@ export default function CardActivity(props) {
           gutterBottom
           style={{ textAlign: "left", fontWeight: "bold" }}
           component="div"
+          data-cy="activity-item-title"
         >
           {item.title}
         </Typography>
@@ -42,6 +43,7 @@ export default function CardActivity(props) {
             textAlign: "left",
             color: "#888888",
           }}
+          data-cy="activity-item-date"
         >
           {" "}
           {moment(item.created_at).format("DD MMMM  YYYY")}

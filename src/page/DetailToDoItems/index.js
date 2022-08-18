@@ -119,6 +119,7 @@ const DetailToDoItems = (props) => {
   };
 
   const sendTitle = async (e) => {
+    `[data-cy=todo-title]`;
     try {
       const response = await fetch(
         process.env.REACT_APP_URL + `/activity-groups/${detailId}`,

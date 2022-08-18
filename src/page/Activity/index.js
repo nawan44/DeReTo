@@ -61,6 +61,7 @@ const Activity = () => {
   };
 
   const toDetail = (value) => {
+    `[data-cy=activity-item]`;
     navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
       handleDeleteList,
@@ -68,6 +69,8 @@ const Activity = () => {
   };
 
   const deleteData = (id) => {
+    `[data-cy=activity-item-delete-button]`;
+    // handleDeleteList
     const newList = list.filter((item) => item.id !== id);
     try {
       const response = fetch(
@@ -82,7 +85,11 @@ const Activity = () => {
       getListData();
       // onClick();
       handleCloseDeleteList();
-      enqueueSnackbar("Activity berhasil dihapus", { variant: "success" });
+      enqueueSnackbar(
+        "Activity berhasil dihapus",
+        `[data-cy=modal-information]`,
+        { variant: "success" }
+      );
     } catch (err) {
       // console.log(err.message);
     }
