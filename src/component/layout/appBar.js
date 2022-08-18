@@ -145,7 +145,7 @@ const AppBar = (props, ss) => {
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
-            +Tambah Kosong
+            +Tambah
           </Button>
         </span>
       );
