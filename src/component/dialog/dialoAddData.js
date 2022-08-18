@@ -98,29 +98,13 @@ function DialogAddData(props) {
   const [namaList, setNamaList] = useState("");
   const [priority, setPriority] = useState("");
   const [kirim, setKirim] = useState();
-  console.log("valueKirim", valueKirim);
-  //   {
-  //   // activity_group_id:  dataToDoItem ? dataToDoItem.id : detailId,
-  //   title: dataToDoItem?.tile,
 
-  //   priority: dataToDoItem ? dataToDoItem.priority : "",
-  // }
-
-  // console.log("dataToDoItem", dataToDoItem);
-  // useEffect(
-  //   () => {
-
-  //   },
-  //   [valueKirim],
-  // );
   useEffect(() => {
     setKirim({
-      // activity_group_id: dataToDoItem ? dataToDoItem?.id : detailId,
       title: dataToDoItem ? dataToDoItem?.title : "",
 
       priority: dataToDoItem ? dataToDoItem?.priority : "",
     });
-    // console.log("kirim", dataToDoItem);
   }, [dataToDoItem]);
 
   const switchSend = () => {
@@ -137,23 +121,14 @@ function DialogAddData(props) {
       return "POST";
     }
   };
-  console.log(" SEND value", kirim);
 
-  console.log(" SEND VALUEKirim", valueKirim?.title);
+  console.log("ididi", ididi);
 
   useEffect(() => {}, [detailId]);
   const addData = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
-    console.log(" SEND value", value);
-
-    console.log(" SEND VALUEKirim", valueKirim?.title);
     try {
-      // let form = {
-      //   activity_group_id: detailId,
-      //   title: valueKirim.namaList,
-      //   priority: valueKirim.priorityList,
-      // };
       const response = await fetch(process.env.REACT_APP_URL + switchSend(), {
         method: switchMethod(),
         headers: {
@@ -163,7 +138,6 @@ function DialogAddData(props) {
         body: JSON.stringify(dataToDoItem ? kirim : valueKirim),
       });
       // const res = await response.json();
-      console.log("response", response);
       // navigate("/item-list");
       getTodoItemList();
       onClose();
@@ -176,15 +150,9 @@ function DialogAddData(props) {
   const handleClose = () => {
     onClose(selectedValue);
   };
-  // const handleChangePriority = (event) => {
-  //   // event.preventDefault();
-  //   setPriority(event.target.value);
-  // };
+
   const handleChange = (event) => {
     event.preventDefault();
-    // var clickedId = event.target;
-
-    console.log("event");
     setKirim({
       ...kirim,
       [event.target.name]: event.target.value,

@@ -49,6 +49,9 @@ const AppBar = (props, ss) => {
     changeToDoItems,
     value,
     handleOpenAddToDoItems,
+    valueSort,
+    setValueSort,
+    belumSelesai,
     // openAddToDoItems,
     //  setOpenAddToDoItems
   } = props;
@@ -74,17 +77,13 @@ const AppBar = (props, ss) => {
   }, []);
 
   const handleChangeTitle = (event) => {
-    // const keyValue = event.key;
-    // setTitle(event.target.value)
-    // setTitle((value) => value + keyValue);
-    // setTitleDetail(value);
-    // setTitleDetail(event.target.value);
     setTitleDetail(event.target.value);
-    // sendTitle()
   };
 
   const toActivity = (e) => {
-    navigate("/");
+    navigate("/", {
+      state: { value: value, belumSelesai: belumSelesai },
+    });
     sendTitle(e);
   };
 
@@ -97,8 +96,6 @@ const AppBar = (props, ss) => {
           {" "}
           <span>
             <ArrowBackIosIcon onClick={toActivity} />
-            {/* Child:{title} */}
-
             <Input
               // value={title}
               value={titleDetail}
@@ -121,97 +118,18 @@ const AppBar = (props, ss) => {
       return (
         <span>
           <ArrowBackIosIcon onClick={toActivity} />
-
           <Input
             value={titleDetail}
-            // onChange={handleChange}
             onChange={handleChangeTitle}
-            // onChange={event => changeToDoItems(event)}
-            // onFocus={event => event.currentTarget.select()}
-            // autoFocus={props.focus}
-
-            // onKeyUp={
-            //   sendTitle
-            // }
-            // value={title}
-            // onChange={title =>handleTitle(title)}
             label="Rachmat Gunawan"
-            // defaultValue="New Activity"
             placeholder="New Activity"
-            // inputProps={ariaLabel}
             sx={{ fontSize: "24px", fontWeight: "bold" }}
           />
         </span>
       );
     }
   };
-  //   <span>
-  //   {" "}
-  //   <ArrowBackIosIcon onClick={toActivity} /> Daftar Belanja Bulanan{" "}
-  //   <IconButton edge="end" aria-label="comments">
-  //     <CreateIcon style={{ color: "#888888" }} />
-  //   </IconButton>{" "}
-  // </span>
-  //     try {
-  //       console.log(
-  //         "form",  {
-  //           title: title,
-  //          email:"rachmat.d.gunawan@gmail.com",
-  //           priority: "list of priority is : very-high, high, normal, low, very-low"
-  //       }
-  //       )
-  //       const response = await fetch(
-  //         process.env.REACT_APP_URL +
-  //           `/activity-groups`,
-  //         {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
 
-  //           body: JSON.stringify(
-  //             {
-  //     title: title,
-  //    email:"rachmat.d.gunawan@gmail.com",
-  //     priority: "list of priority is : very-high, high, normal, low, very-low"
-  // }
-  //           ),
-  //         }
-  //       );
-  // } catch (err) {
-  //   console.log(err.message);
-  // }
-
-  // const handleAddTodoItems = async () => {
-  //   const newItems = [...list, newList];
-
-  //   try {
-  //     const response = await fetch(
-  //       process.env.REACT_APP_URL +
-  //         // `/todo-items/${id_todo_items}`,
-  //         `/todo-items/id`,
-
-  //       {
-  //         method: "PATCH",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         //           body: JSON.stringify(
-  //         //             {
-  //         //     "title": "item 5.1-2",
-  //         //     "is_active": 1,
-  //         //     "priority": "normal",
-  //         //     "priority": "list of priority is : very-high, high, normal, low, very-low"
-  //         // }
-  //         //           ),
-  //       }
-  //     );
-  //     setList(newList);
-  //     enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // };
   const viewSort = () => {
     if (list?.length > 0 || toDoItemList?.length > 0) {
       return (
@@ -306,6 +224,8 @@ const AppBar = (props, ss) => {
         open={openSort}
         onClose={handleCloseSort}
         sorts={sorts}
+        valueSort={valueSort}
+        setValueSort={setValueSort}
       />
 
       {/* <EmptyDialog

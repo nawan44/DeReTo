@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container } from "@mui/material";
 import AppBar from "../../component/layout/appBar";
-import DeleteListItem from "../../component/dialog/dialogDeleteData";
 import { useSnackbar } from "notistack";
 import ListActivity from "./ListActivity";
 import DialogDeleteData from "../../component/dialog/dialogDeleteData";
@@ -11,6 +10,7 @@ const Activity = () => {
   let location = useLocation();
   const navigate = useNavigate();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { state } = useLocation();
 
   const [openDeleteList, setOpenDeleteList] = useState(false);
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
@@ -27,6 +27,7 @@ const Activity = () => {
   const [clickActivity, setClickActivity] = useState();
 
   const [title, setTitle] = useState();
+  const { value, belumSelesai } = state;
 
   const [idDetail, setIdDetail] = useState();
   const [todoItem, setTodoItem] = useState();
@@ -38,6 +39,8 @@ const Activity = () => {
     name: "",
   });
   const [titleActivity, setTitleActivity] = useState("New Activity");
+  console.log("belumSelesai", belumSelesai);
+  console.log("value", value);
 
   useEffect(() => {
     getListData();
@@ -91,7 +94,6 @@ const Activity = () => {
     getTodoItemDetail();
   }, [clickActivity]);
   const toDetail = (value) => {
-    // setClickActivity(value.id);
     navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
       handleDeleteList,
@@ -183,7 +185,31 @@ const Activity = () => {
     setOpenDeleteList(false);
     setSelectedDeleteList(value);
   };
+  const [valueSort, setValueSort] = useState();
 
+  const sortActivity = () => {
+    if (valueSort === "Terbaru") {
+      return list.sort(
+        (b, a) =>
+          new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      );
+    } else if (valueSort === "Terlama") {
+      return list.sort(
+        (a, b) =>
+          new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      );
+    } else if (valueSort === "A - Z") {
+      return list.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (valueSort === "Z - A") {
+      return list.sort((a, b) => b.title.localeCompare(a.title));
+    } else if (valueSort === "Belum Selesai") {
+      return list.sort((a, b) => b.title.localeCompare(a.title));
+    }
+  };
+  const changeToDoSort = (newValue) => {
+    setValueSort(newValue);
+  };
+  console.log("todoItem ????????????", todoItem);
   return (
     <Container style={{ width: "100%" }}>
       <AppBar
@@ -204,17 +230,21 @@ const Activity = () => {
         handleOpenAddToDoItems={() => handleOpenAddToDoItems()}
         setOpenAddToDoItems={setOpenAddToDoItems}
         openAddToDoItems={openAddToDoItems}
+        valueSort={valueSort}
+        setValueSort={changeToDoSort}
       />
       <ListActivity
         idDetail={idDetail}
         setIdDetail={setIdDetail}
         list={list}
+        sortActivity={sortActivity()}
         clickActivity={clickActivity}
         setClickActivity={setClickActivity}
         handleDeleteList={handleDeleteList}
         toDetail={toDetail}
         handleAddActivityGroup={handleAddActivityGroup}
         open={openDeleteList}
+        valueSort={valueSort}
       />
       <DialogDeleteData
         selectedValue={selectedDeleteList}

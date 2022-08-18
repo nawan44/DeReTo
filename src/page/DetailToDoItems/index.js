@@ -22,7 +22,7 @@ const DetailToDoItems = (props) => {
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const { state } = useLocation();
-  const { value, color } = state;
+  const { value } = state;
 
   const [titleDetail, setTitleDetail] = useState(
     value ? value.title : "New Activity"
@@ -45,7 +45,27 @@ const DetailToDoItems = (props) => {
     itemToDoItems: null,
     aksiToDoItems: "",
   });
-  console.log("openEditToDoItems", openEditToDoItems);
+
+  const [valueSort, setValueSort] = useState();
+
+  const sortToDoItem = () => {
+    if (valueSort === "Terbaru") {
+      return toDoItemList.sort((a, b) => (b.id > a.id ? 1 : -1));
+    } else if (valueSort === "Terlama") {
+      return toDoItemList.sort((a, b) => (a.id > b.id ? 1 : -1));
+    } else if (valueSort === "A - Z") {
+      return toDoItemList.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (valueSort === "Z - A") {
+      return toDoItemList.sort((a, b) => b.title.localeCompare(a.title));
+    } else if (valueSort === "Belum Selesai") {
+      return toDoItemList.sort((a, b) => b.title.localeCompare(a.title));
+    }
+  };
+
+  const changeToDoSort = (newValue) => {
+    setValueSort(newValue);
+  };
+
   const handleOpenDeleteToDoItems = (item) => {
     setOpenDeleteToDoItems(true);
     setIdToDoItems(item.id);
@@ -61,8 +81,6 @@ const DetailToDoItems = (props) => {
     setTitleToDoItems(item.title);
     setDataToDoItem(item);
   };
-
-  console.log("kkk", openEditToDoItems);
 
   const handleClosEditToDoItems = (value) => {
     setOpenEditToDoItems(false);
@@ -147,8 +165,12 @@ const DetailToDoItems = (props) => {
         sendTitle={sendTitle}
         value={value}
         toDoItemList={toDoItemList}
+        valueSort={valueSort}
+        setValueSort={changeToDoSort}
         toDoItemTotal={toDoItemTotal}
+        belumSelesai={toDoItemList?.length}
       />
+
       {toDoItemTotal && toDoItemTotal > 0 ? (
         <span>
           <ItemList
@@ -165,6 +187,8 @@ const DetailToDoItems = (props) => {
             handleClosEditToDoItems={handleClosEditToDoItems}
             handleOpenEditToDoItems={handleOpenEditToDoItems}
             handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
+            sortToDoItem={sortToDoItem()}
+            valueSort={valueSort}
           />
         </span>
       ) : (
@@ -188,7 +212,6 @@ const DetailToDoItems = (props) => {
           />
         </Grid>
       )}
-
       <DialoAddData
         getTodoItemList={getTodoItemList}
         detailId={detailId}

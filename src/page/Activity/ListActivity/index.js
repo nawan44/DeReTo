@@ -9,7 +9,7 @@ const ListActivity = ({
   setClickActivity,
   list,
   handleDeleteList,
-
+  sortActivity,
   click,
   setClick,
   toDashboard,
@@ -19,10 +19,11 @@ const ListActivity = ({
   toDetail,
   setClickTitle,
   handleAddActivityGroup,
+  valueSort,
 }) => {
   return (
     <Container style={{ width: "100%" }}>
-      {list.length === 0 ? (
+      {list?.length === 0 ? (
         <Grid
           style={{
             margin: "0 auto",
@@ -88,25 +89,47 @@ const ListActivity = ({
           rowSpacing={1}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
-          {" "}
-          {list &&
-            list?.map((item, index) => (
-              <CardActivity
-                key={item.id}
-           
-                click={click}
-                setClick={setClick}
-                index={index}
-                item={item}
-                list={list}
-                handleDeleteList={handleDeleteList}
-                toDashboard={toDashboard}
-                toDetail={() => toDetail(item)}
-                // setClickTitle={setClickTitle(true)}
-                setIdDetail={setIdDetail(item.id)}
-                // setIdDetail ={setIdDetail}
-              />
-            ))}
+          {valueSort == undefined ? (
+            <span>
+              {list &&
+                list?.map((item, index) => (
+                  <CardActivity
+                    key={item.id}
+                    click={click}
+                    setClick={setClick}
+                    index={index}
+                    item={item}
+                    list={list}
+                    handleDeleteList={handleDeleteList}
+                    toDashboard={toDashboard}
+                    toDetail={() => toDetail(item)}
+                    // setClickTitle={setClickTitle(true)}
+                    setIdDetail={setIdDetail(item.id)}
+                    // setIdDetail ={setIdDetail}
+                  />
+                ))}
+            </span>
+          ) : (
+            <span>
+              {sortActivity &&
+                sortActivity?.map((item, index) => (
+                  <CardActivity
+                    key={item.id}
+                    click={click}
+                    setClick={setClick}
+                    index={index}
+                    item={item}
+                    list={list}
+                    handleDeleteList={handleDeleteList}
+                    toDashboard={toDashboard}
+                    toDetail={() => toDetail(item)}
+                    // setClickTitle={setClickTitle(true)}
+                    setIdDetail={setIdDetail(item.id)}
+                    // setIdDetail ={setIdDetail}
+                  />
+                ))}
+            </span>
+          )}
         </Grid>
       )}
     </Container>

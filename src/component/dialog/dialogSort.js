@@ -7,10 +7,13 @@ import ListItemText from "@mui/material/ListItemText";
 import Dialog from "@mui/material/Dialog";
 import "../../assets/css/style.css";
 
-
 function DialogSort(props) {
-  const { onClose, selectedValue, open, sorts } = props;
+  const { onClose, selectedValue, open, sorts, valueSort, setValueSort } =
+    props;
   // const [open, setOpen] = useState(false);
+  console.log("sorts", sorts);
+
+  console.log("valueSort", valueSort);
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -18,7 +21,13 @@ function DialogSort(props) {
 
   const handleListItemClick = (value) => {
     onClose(value);
+    setValueSort(value);
+    // console.log(value);
   };
+
+  // const handleChangeTitle = (event) => {
+  //   setTitleDetail(event.target.value);
+  // };
 
   return (
     <Dialog onClose={handleClose} open={open}>
@@ -31,17 +40,16 @@ function DialogSort(props) {
               key={item.title}
             >
               <ListItemAvatar>{item.icon}</ListItemAvatar>
-              <ListItemText sx={{ fontSize: "14px" }}>{item.title}</ListItemText>
+              <ListItemText sx={{ fontSize: "14px" }}>
+                {item.title}
+              </ListItemText>
             </ListItem>
             <Divider />
           </div>
         ))}
-    
-    
       </List>
     </Dialog>
   );
 }
-
 
 export default DialogSort;
