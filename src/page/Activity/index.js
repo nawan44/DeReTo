@@ -223,7 +223,7 @@ const [informasiHapus, setInformasiHapus] = useState(false)
       />
       <DialogDeleteData
 // data-cy="activity-item-delete-button"      
-data-cy="modal-delete-confirm-button"
+data-cy="activity-item-delete-button"
 selectedValue={selectedDeleteList}
         clickActivity={clickActivity}
         open={openDeleteList}
