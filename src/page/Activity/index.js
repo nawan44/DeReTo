@@ -4,7 +4,7 @@ import { Container } from "@mui/material";
 import AppBar from "../../component/layout/appBar";
 import { useSnackbar } from "notistack";
 import ListActivity from "./ListActivity";
-import DialogDeleteData from "../../component/dialog/dialogDeleteData";
+import ModalDeleteActivity from "../../component/dialog/dialogDeleteData";
 import "../../assets/css/style.css";
 import ModalInformation from "../../component/dialog/dialogInformation";
 
@@ -207,10 +207,9 @@ const Activity = () => {
         open={openDeleteList}
         valueSort={valueSort}
       />
-      <DialogDeleteData
+      <ModalDeleteActivity
         // data-cy="activity-item-delete-button"
-        data-cy="activity-item-delete-button"
-        selectedValue={selectedDeleteList}
+        data-cy="modal-delete"        selectedValue={selectedDeleteList}
         clickActivity={clickActivity}
         open={openDeleteList}
         onClose={handleCloseDeleteList}
