@@ -50,7 +50,9 @@ export default function CardActivity(props) {
         </Typography>
         <DeleteIcon
                         // data-cy="modal-delete-confirm-button  " 
-                        data-cy="activity-item-delete-button"
+                        data-cy="modal-delete-confirm-button"
+
+                        // data-cy="activity-item-delete-button"
           onClick={(id) => handleDeleteList(item)}
           style={{ width: "20%", float: "right", color: "#888888" }}
         />
