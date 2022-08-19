@@ -19,7 +19,7 @@ const Activity = () => {
     name: "",
   });
   const [onClick, setOnClick] = useState(false);
-  const [informasiHapus, setInformasiHapus] = useState(false);
+const [informasiHapus, setInformasiHapus] = useState(false)
   const [list, setList] = useState([]);
   const [selectedDeleteList, setSelectedDeleteList] = useState(list[1]);
   const [clickActivity, setClickActivity] = useState();
@@ -83,7 +83,7 @@ const Activity = () => {
       );
       getListData();
       // onClick();
-      setInformasiHapus(true);
+      setInformasiHapus(true)
       handleCloseDeleteList();
       enqueueSnackbar(
         "Activity berhasil dihapus",
@@ -98,25 +98,28 @@ const Activity = () => {
     setOpenAddToDoItems(false);
   };
 
+
   const handleCloseInformasi = (value) => {
     // setTimeout(() => setInformasiHapus(false), 3000)
 
-    setInformasiHapus(false);
-  };
+      setInformasiHapus(false)
+   }
   // const handleOpenInformasi = (value) => {
   //   setInformasiHapus(true)
+  
 
   // }
   //   return () => {
   //     clearTimeout(timeId)
-
+    
   // }
   // }
 
   useEffect(() => {
-    setTimeout(function () {
-      setInformasiHapus(false);
-    }, 3000);
+    setTimeout(function(){
+      setInformasiHapus(false)
+  }, 3000);
+
   }, [informasiHapus]);
 
   const handleAddActivityGroup = async () => {
@@ -162,7 +165,7 @@ const Activity = () => {
   const handleCloseDeleteList = (value) => {
     setOpenDeleteList(false);
     setSelectedDeleteList(value);
-    onClick();
+    setOnClick(true);
   };
   const [valueSort, setValueSort] = useState();
 
@@ -207,6 +210,7 @@ const Activity = () => {
         setValueSort={changeToDoSort}
       />
       <ListActivity
+      handleCloseDeleteList={handleCloseDeleteList}
         idDetail={idDetail}
         setIdDetail={setIdDetail}
         list={list}
@@ -218,8 +222,7 @@ const Activity = () => {
         valueSort={valueSort}
       />
       <DialogDeleteData
-        data-cy="activity-item-delete-button"
-        selectedValue={selectedDeleteList}
+data-cy="activity-item-delete-button"        selectedValue={selectedDeleteList}
         clickActivity={clickActivity}
         open={openDeleteList}
         onClose={handleCloseDeleteList}
@@ -227,12 +230,8 @@ const Activity = () => {
         deleteTitleList={deleteTitleList}
         onClick={() => setOnClick(!onClick)}
       />
-      <DialogInformation
-        open={informasiHapus}
-        data-cy="modal-information"
-        onClose={handleCloseInformasi}
-        setInformasiHapus={setInformasiHapus}
-      />
+      <DialogInformation open={informasiHapus}   data-cy="modal-information"     onClose={handleCloseInformasi}
+ setInformasiHapus={setInformasiHapus}/>
     </Container>
   );
 };

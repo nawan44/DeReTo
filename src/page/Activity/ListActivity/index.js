@@ -1,8 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 import { Container, Typography, Button, Grid } from "@mui/material";
 import CardActivity from "../../../component/layout/cardActivity";
 import AvatarMan from "../../../assets/avatar/avatar-man.png";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Box from '@mui/material/Box';
 
 const ListActivity = ({
   clickActivity,
@@ -19,10 +21,34 @@ const ListActivity = ({
   toDetail,
   setClickTitle,
   handleAddActivityGroup,
-  valueSort,
+  valueSort,handleCloseDeleteList
 }) => {
+  const [close, setClose] = useState(false);
+
+ 
+  const styles = {
+    position: 'absolute',
+    top: 28,
+    right: 0,
+    left: 0,
+    zIndex: 1,
+    border: '1px solid',
+    p: 1,
+    bgcolor: 'background.paper',
+  };
+  const handleClickAway = () => {
+    setClose(false);
+    handleCloseDeleteList()
+    console.log("aaaa")
+  };
   return (
     <Container style={{ width: "100%" }}>
+          <ClickAwayListener
+      mouseEvent="onMouseDown"
+      touchEvent="onTouchStart"
+      onClickAway={handleClickAway}
+      data-cy="activity-item-delete-button"
+    >
       {list?.length === 0 ? (
         <Grid
           style={{
@@ -32,7 +58,8 @@ const ListActivity = ({
             width: "70%",
           }}
           container
-          rowSpacing={1}
+          rowSpacing={1}     
+
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           <Grid
@@ -134,6 +161,8 @@ const ListActivity = ({
           )}
         </Grid>
       )}
+
+      </ClickAwayListener>
     </Container>
   );
 };

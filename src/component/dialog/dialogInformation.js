@@ -37,8 +37,7 @@ function DialogInformasi(props) {
   return (
     <ThemeProvider theme={theme}>
       <Dialog
-        data-cy="modal-add-name-input"
-        onClose={onClose}
+data-cy="modal-information"        onClose={onClose}
         open={open}
         classes={{ paper: classes.dialogPaper }}
       >

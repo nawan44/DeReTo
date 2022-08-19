@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
@@ -50,7 +50,9 @@ function DialogDeleteData(props) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+
+    <>
+    <ThemeProvider theme={theme} >
       <Dialog
                 data-cy="activity-item-delete-button"
 
@@ -99,7 +101,9 @@ function DialogDeleteData(props) {
                 margin: "20px 20px 0 20px",
               }}
               onClick={handleClose}
-              data-cy="modal-delete"
+              data-cy="modal-delete-confirm-button  " 
+
+              // data-cy="modal-delete"
             >
               Batal
             </Button>
@@ -115,7 +119,9 @@ function DialogDeleteData(props) {
                 float: "right",
                 margin: "20px 20px 0 20px",
               }}
-              data-cy="modal-delete-confirm-button  " // data-cy="todo-item-delete-button"
+              data-cy="activity-item-delete-button"
+
+              // data-cy="todo-item-delete-button"
               onClick={() => onRemove(clickActivity)}
             >
               Hapus
@@ -123,7 +129,8 @@ function DialogDeleteData(props) {
           </Grid>
         </Grid>
       </Dialog>{" "}
-    </ThemeProvider>
+    </ThemeProvider>  </>
+
   );
 }
 

@@ -49,6 +49,8 @@ export default function CardActivity(props) {
           {moment(item.created_at).format("DD MMMM  YYYY")}
         </Typography>
         <DeleteIcon
+                        data-cy="modal-delete-confirm-button  " 
+
           onClick={(id) => handleDeleteList(item)}
           style={{ width: "20%", float: "right", color: "#888888" }}
         />
