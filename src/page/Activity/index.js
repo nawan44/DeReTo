@@ -200,7 +200,8 @@ const Activity = () => {
         idDetail={idDetail}
         setIdDetail={setIdDetail}
         list={list}
-        sortActivity={sortActivity( '[data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]')}
+        sortActivity={sortActivity()}
+          // '[data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]')}
         handleDeleteList={handleDeleteList}
         toDetail={toDetail}
         handleAddActivityGroup={handleAddActivityGroup}
