@@ -61,7 +61,6 @@ const Activity = () => {
   };
 
   const toDetail = (value) => {
-    // `[data-cy=activity-item]`;
     navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
       handleDeleteList,
@@ -69,7 +68,6 @@ const Activity = () => {
   };
 
   const deleteData = (id) => {
-    // `[data-cy=activity-item-delete-button]`;
     // handleDeleteList
     const newList = list.filter((item) => item.id !== id);
     try {
@@ -196,7 +194,6 @@ const Activity = () => {
         valueSort={valueSort}
       />
       <DialogDeleteData
-        data-cy="activity-item-delete-button"
         selectedValue={selectedDeleteList}
         clickActivity={clickActivity}
         open={openDeleteList}
