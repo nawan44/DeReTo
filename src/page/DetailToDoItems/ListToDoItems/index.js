@@ -323,6 +323,7 @@ const ListToDoItems = (props) => {
         onRemove={deleteToDoItems}
         toDoItemList={toDoItemList}
         dataToDoItem={dataToDoItem}
+        data-cy="modal-delete"
       />
       <DialogAddData
         onToDoItem={onToDoItem}
