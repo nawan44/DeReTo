@@ -6,7 +6,7 @@ import { useSnackbar } from "notistack";
 import ListActivity from "./ListActivity";
 import DialogDeleteData from "../../component/dialog/dialogDeleteData";
 import "../../assets/css/style.css";
-import DialogInformation from "../../component/dialog/dialogInformation";
+import ModalInformation from "../../component/dialog/dialogInformation";
 
 const Activity = () => {
   const navigate = useNavigate();
@@ -218,9 +218,9 @@ const Activity = () => {
         deleteTitleList={deleteTitleList}
         onClick={() => setOnClick(!onClick)}
       />
-      <DialogInformation
+      <ModalInformation
+      data-cy="modal-information"
         open={informasiHapus}
-        data-cy="modal-information"
         onClose={handleCloseInformasi}
         setInformasiHapus={setInformasiHapus}
       />

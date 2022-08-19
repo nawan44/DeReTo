@@ -25,7 +25,7 @@ const styles = {
   },
 };
 
-function DialogInformasi(props) {
+function ModalInformation(props) {
   const {
     onRemove,
     onClose,
@@ -48,4 +48,4 @@ data-cy="modal-information"        onClose={onClose}
   );
 }
 
-export default withStyles(styles)(DialogInformasi);
+export default withStyles(styles)(ModalInformation);
