@@ -222,7 +222,9 @@ const [informasiHapus, setInformasiHapus] = useState(false)
         valueSort={valueSort}
       />
       <DialogDeleteData
-data-cy="activity-item-delete-button"        selectedValue={selectedDeleteList}
+// data-cy="activity-item-delete-button"      
+data-cy="modal-delete-confirm-button"
+selectedValue={selectedDeleteList}
         clickActivity={clickActivity}
         open={openDeleteList}
         onClose={handleCloseDeleteList}

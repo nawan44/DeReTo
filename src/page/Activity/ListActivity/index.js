@@ -42,7 +42,7 @@ const ListActivity = ({
     console.log("aaaa")
   };
   return (
-    <Container style={{ width: "100%" }}>
+    <Container style={{ width: "100%" }} data-cy="activity-item">
           <ClickAwayListener
       mouseEvent="onMouseDown"
       touchEvent="onTouchStart"

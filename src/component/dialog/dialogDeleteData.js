@@ -120,7 +120,6 @@ function DialogDeleteData(props) {
                 margin: "20px 20px 0 20px",
               }}
               data-cy="activity-item-delete-button"
-
               // data-cy="todo-item-delete-button"
               onClick={() => onRemove(clickActivity)}
             >
