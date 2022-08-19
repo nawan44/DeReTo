@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container } from "@mui/material";
 import AppBar from "../../component/layout/appBar";
-import { useSnackbar } from "notistack";
-import ListActivity from "./ListActivity";import ModalInformation from "../../component/dialog/dialogInformation";
+import ListActivity from "./ListActivity";
+import ModalInformation from "../../component/dialog/dialogInformation";
 
-import ModalHapusActivity from "../../component/dialog/dialogDeleteData";
 import "../../assets/css/style.css";
+import DialogDeleteActivity from "../../component/dialog/dialogDeleteActivity";
+// import DialogDeleteActivity from "../../component/dialog/dialogDeleteActivity";
+// import DialogDeleteData from "../../component/dialog/dialogDeleteData";
 
 const Activity = () => {
   const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar();
   const { state } = useLocation();
+  const [openDeleteActivity, setOpenDeleteActivity] = useState(false);
+
   const [openDeleteList, setOpenDeleteList] = useState(false);
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const [newList, setNewList] = useState({
@@ -21,11 +24,15 @@ const Activity = () => {
   const [onClick, setOnClick] = useState(false);
   const [informasiHapus, setInformasiHapus] = useState(false);
   const [list, setList] = useState([]);
+  const [selectedDeleteActivity, setSelectedDeleteActivity] = useState(list[1]);
+
   const [selectedDeleteList, setSelectedDeleteList] = useState(list[1]);
   const [clickActivity, setClickActivity] = useState();
   const [title, setTitle] = useState();
   const [idDetail, setIdDetail] = useState();
   // const [todoItem, setTodoItem] = useState();
+  // const [deleteTitleList, setDeleteTitleList] = useState("");
+  
   const [deleteTitleList, setDeleteTitleList] = useState("");
   const [todoItemDetail, setTodoItemDetail] = useState();
   const [addActivity, setAddActivity] = useState([]);
@@ -64,12 +71,12 @@ const Activity = () => {
   const toDetail = (value) => {
     navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
-      handleDeleteList,
+      // handleDeleteList,
     });
   };
 
   const deleteData = (id) => {
-    const newList = list.filter((item) => item.id !== id);
+    // const newList = list.filter((item) => item.id !== id);
     try {
       const response = fetch(
         process.env.REACT_APP_URL + `/activity-groups/${clickActivity}`,
@@ -81,14 +88,11 @@ const Activity = () => {
         }
       );
       getListData();
-      // onClick();
+      setOpenDeleteActivity(false);
+
       setInformasiHapus(true);
-      handleCloseDeleteList();
-      enqueueSnackbar(
-        "Activity berhasil dihapus",
-        `[data-cy=modal-information]`,
-        { variant: "success" }
-      );
+      // handleCloseDeleteList();
+
     } catch (err) {
       // console.log(err.message);
     }
@@ -100,7 +104,6 @@ const Activity = () => {
   const handleCloseInformasi = (value) => {
     setInformasiHapus(false);
   };
-
 
   useEffect(() => {
     setTimeout(function () {
@@ -131,7 +134,6 @@ const Activity = () => {
 
       setOpenAddToDoItems(true);
 
-      enqueueSnackbar("Activity berhasil ditambah", { variant: "success" });
       getListData();
     } catch (err) {
       console.log(err.message);
@@ -142,12 +144,24 @@ const Activity = () => {
     setList(newItems);
     setOpenAddToDoItems(true);
   };
-
+  const handleDeleteActivity = (value) => {
+    setOpenDeleteActivity(true);
+    setClickActivity(value.id);
+    setDeleteTitleList(value.title);
+    console.log(value.id)
+  };
+  const handleCloseDeleteActivity = (value) => {
+    
+    setOpenDeleteActivity(false);
+    setSelectedDeleteActivity(value);
+    setOnClick(true);
+  };
   const handleDeleteList = (value) => {
     setOpenDeleteList(true);
     setClickActivity(value.id);
     setDeleteTitleList(value.title);
   };
+  
   const handleCloseDeleteList = (value) => {
     setOpenDeleteList(false);
     setSelectedDeleteList(value);
@@ -156,7 +170,7 @@ const Activity = () => {
   const [valueSort, setValueSort] = useState();
 
   const sortActivity = () => {
-    "    [data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]";
+    // "    [data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]";
     if (valueSort === "Terbaru") {
       return list.sort(
         (b, a) =>
@@ -201,26 +215,28 @@ const Activity = () => {
         setIdDetail={setIdDetail}
         list={list}
         sortActivity={sortActivity()}
-          // '[data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]')}
+        handleDeleteActivity={handleDeleteActivity}
+        // '[data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]')}
         handleDeleteList={handleDeleteList}
         toDetail={toDetail}
         handleAddActivityGroup={handleAddActivityGroup}
-        open={openDeleteList}
+        openDeleteList={openDeleteList}
+        openDeleteActivity={openDeleteActivity}
         valueSort={valueSort}
       />
-      <ModalHapusActivity
-        // data-cy="activity-item-delete-button"
-        data-cy="modal-delete"       
-         selectedValue={selectedDeleteList}
+      <DialogDeleteActivity
+        selectedValue={selectedDeleteActivity}
         clickActivity={clickActivity}
-        open={openDeleteList}
-        onClose={handleCloseDeleteList}
-        ActivityItemDelete={deleteData}
+        open={openDeleteActivity}
+        onClose={handleCloseDeleteActivity}
+        activityItemDelete={deleteData}
         deleteTitleList={deleteTitleList}
-        onClick={() => setOnClick(!onClick)}
+        // onClick={() => setOnClick(!onClick)}
+          // setOnClick ={setOnClick}
+        
       />
       <ModalInformation
-      data-cy="modal-information"
+        data-cy="modal-information"
         open={informasiHapus}
         onClose={handleCloseInformasi}
         setInformasiHapus={setInformasiHapus}

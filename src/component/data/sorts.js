@@ -6,6 +6,7 @@ import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 
 export const sorts = [
     {
+      id:1,
       title: "Terbaru",
       icon: (
         <span>
@@ -25,6 +26,8 @@ export const sorts = [
       ),
     },
     {
+      id:2,
+
       title: "Terlama",
       icon: (
         <span>
@@ -47,6 +50,8 @@ export const sorts = [
       ),
     },
     {
+      id:3,
+
       title: "A - Z",
       icon: (
         <span>
@@ -66,6 +71,8 @@ export const sorts = [
       ),
     },
     {
+      id:4,
+
       title: "Z - A",
       icon: (
         <span>
@@ -87,6 +94,8 @@ export const sorts = [
       ),
     },
     {
+      id:5,
+
       title: "Belum Selesai",
       icon: (
         <SwapVertRoundedIcon

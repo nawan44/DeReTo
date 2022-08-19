@@ -10,7 +10,7 @@ const ListActivity = ({
   clickActivity,
   setClickActivity,
   list,
-  handleDeleteList,
+  handleDeleteList,handleDeleteActivity,
   sortActivity,
   click,
   setClick,
@@ -42,12 +42,14 @@ const ListActivity = ({
     console.log("aaaa")
   };
   return (
-    <Container style={{ width: "100%" }} data-cy="activity-item">
-          <ClickAwayListener
+    <Container style={{ width: "100%" }} 
+    // data-cy="activity-item">
+    >   
+    <ClickAwayListener
       mouseEvent="onMouseDown"
       touchEvent="onTouchStart"
       onClickAway={handleClickAway}
-      data-cy="activity-item-delete-button"
+      // data-cy="activity-item-delete-button"
     >
       {list?.length === 0 ? (
         <Grid
@@ -130,7 +132,7 @@ const ListActivity = ({
                     item={item}
                     list={list}
                     data-cy="activity-item"
-                    handleDeleteList={handleDeleteList}
+                    handleDeleteActivity={handleDeleteActivity}
                     toDashboard={toDashboard}
                     toDetail={() => toDetail(item)}
                     // setClickTitle={setClickTitle(true)}

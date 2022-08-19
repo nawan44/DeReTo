@@ -8,7 +8,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import Button from "@mui/material/Button";
 import "../../assets/css/style.css";
-import { sorts } from "../data/sorts";
+// import { sorts } from "../data/sorts";
 import DialogAddData from "../dialog/dialogAddData";
 import DialogSort from "../dialog/dialogSort";
 const ariaLabel = { "aria-label": "description" };
@@ -43,9 +43,9 @@ const AppBar = (props, ss) => {
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
 
   const [openSort, setOpenSort] = useState(false);
-  const [selectedSort, setSelectedSort] = useState(sorts[1]);
-  const [openAddList, setOpenAddList] = useState(false);
-  const [selectedAddList, setSelectedAddList] = useState(sorts[1]);
+  // const [selectedSort, setSelectedSort] = useState(sorts[1]);
+  // const [openAddList, setOpenAddList] = useState(false);
+  // const [selectedAddList, setSelectedAddList] = useState(sorts[1]);
 
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
@@ -113,7 +113,9 @@ const AppBar = (props, ss) => {
   const RightButton = () => {
     if (list && !toDoItemList) {
       return (
-        <span data-cy="todo-sort-button">
+        // <span data-cy="todo-sort-button">
+        <span>
+          {" "}
           {viewSort()}
           <Button
             onClick={handleAddActivityGroup}
@@ -127,7 +129,8 @@ const AppBar = (props, ss) => {
       );
     } else if (!list && toDoItemList) {
       return (
-        <span data-cy="todo-sort-button">
+        // <span data-cy="todo-sort-button">
+        <span>
           {viewSort()}
           <Button
             onClick={handleOpenAddToDoItems}
@@ -160,7 +163,7 @@ const AppBar = (props, ss) => {
 
   const handleCloseSort = (value) => {
     setOpenSort(false);
-    setSelectedSort(value);
+    // setSelectedSort(value);
   };
 
   return (
@@ -192,10 +195,10 @@ const AppBar = (props, ss) => {
         </Grid>
       </Grid>
       <DialogSort
-        selectedValue={selectedSort}
+        // selectedValue={selectedSort}
         open={openSort}
         onClose={handleCloseSort}
-        sorts={sorts}
+        // sorts={sorts}
         valueSort={valueSort}
         setValueSort={setValueSort}
       />

@@ -9,10 +9,13 @@ import {
 } from "@mui/material";
 
 import "../../assets/css/style.css";
+import { sorts } from "../data/sorts";
 
 function DialogSort(props) {
-  const { onClose, selectedValue, open, sorts, setValueSort } = props;
-
+  const { onClose, selectedValue, open, 
+    // sorts, 
+    setValueSort } = props;
+console.log("sorts",sorts)
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -34,8 +37,8 @@ function DialogSort(props) {
           <div style={{ padding: "5px 0" }}>
             <ListItem
               button
-              onClick={() => handleListItemClick(item.title)}
-              key={item.title}
+              onClick={() => handleListItemClick(item.id)}
+              key={item.id}
             >
               <ListItemAvatar>{item.icon}</ListItemAvatar>
               <ListItemText sx={{ fontSize: "14px" }}>

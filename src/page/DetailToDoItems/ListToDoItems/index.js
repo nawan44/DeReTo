@@ -13,11 +13,11 @@ import {
   Container,
   Grid,
 } from "@mui/material";
-import { useSnackbar } from "notistack";
 import "../../../assets/css/style.css";
-import DialogDeleteData from "../../../component/dialog/dialogDeleteData";
+// import DialogDeleteData from "../../../component/dialog/dialogDeleteToDoItem";
 import DialogAddData from "../../../component/dialog/dialogAddData";
 import { makeStyles } from "@mui/styles";
+import DialogDeleteToDoItem from "../../../component/dialog/dialogDeleteToDoItem";
 
 const useStyles = makeStyles({
   list: {
@@ -69,7 +69,6 @@ const ListToDoItems = (props) => {
   const classes = useStyles();
 
   const [checked, setChecked] = useState([1]);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [todoItem, setTodoItem] = useState(toDoItemList);
   const checkColor = (color) => {
     if (color === "very-high") {
@@ -133,11 +132,7 @@ const ListToDoItems = (props) => {
       onToDoItem();
       onClick();
       handleCloseDeleteToDoItems();
-      enqueueSnackbar(
-        "To Do Item berhasil dihapus",
-        `[data-cy=modal-information]`,
-        { variant: "success" }
-      );
+
     } catch (err) {
       // console.log(err.message);
     }
@@ -320,14 +315,14 @@ const ListToDoItems = (props) => {
           </List>
         )}
       </Grid>
-      <DialogDeleteData
+      <DialogDeleteToDoItem
         onClick={onClick}
         open={openDeleteToDoItems}
         onClose={handleCloseDeleteToDoItems}
-        onRemove={deleteToDoItems}
+        todoItemDelete={deleteToDoItems}
         toDoItemList={toDoItemList}
         dataToDoItem={dataToDoItem}
-        data-cy="modal-delete"
+        // data-cy="modal-delete"
       />
       <DialogAddData
         onToDoItem={onToDoItem}

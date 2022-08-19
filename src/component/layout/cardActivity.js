@@ -16,7 +16,7 @@ export default function CardActivity(props) {
     idDetail,
     setIdDetail,
     toDetail,
-    handleDeleteList,
+    handleDeleteActivity,
     list,
   } = props;
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ export default function CardActivity(props) {
         <DeleteIcon
 data-cy="modal-delete"
                         // data-cy="activity-item-delete-button"
-          onClick={(id) => handleDeleteList(item)}
+          onClick={(id) => handleDeleteActivity(item)}
           style={{ width: "20%", float: "right", color: "#888888" }}
         />
       </CardActions>
