@@ -30,7 +30,7 @@ const styles = {
 
 function DialogDeleteData(props) {
   const {
-    onRemove,
+    ActivityItemDelete,
     deleteTitleList,
     onClose,
     selectedValue,
@@ -51,7 +51,7 @@ function DialogDeleteData(props) {
   return (
 
     <>
-    <ThemeProvider theme={theme}                         data-cy="modal-delete-confirm-button"
+    <ThemeProvider theme={theme}                       data-cy="activity-item-delete-button"
  >
       <Dialog
                 // data-cy="activity-item-delete-button"
@@ -104,7 +104,7 @@ function DialogDeleteData(props) {
               onClick={handleClose}
               // data-cy="modal-delete-confirm-button  " 
 
-              data-cy="modal-delete"
+              data-cy="modal-delete-cancel-button"
             >
               Batal
             </Button>
@@ -122,7 +122,7 @@ function DialogDeleteData(props) {
               }}
               data-cy="activity-item-delete-button"
               // data-cy="todo-item-delete-button"
-              onClick={() => onRemove(clickActivity)}
+              onClick={() => ActivityItemDelete(clickActivity)}
             >
               Hapus
             </Button>

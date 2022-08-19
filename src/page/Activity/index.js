@@ -19,7 +19,7 @@ const Activity = () => {
     name: "",
   });
   const [onClick, setOnClick] = useState(false);
-const [informasiHapus, setInformasiHapus] = useState(false)
+  const [informasiHapus, setInformasiHapus] = useState(false);
   const [list, setList] = useState([]);
   const [selectedDeleteList, setSelectedDeleteList] = useState(list[1]);
   const [clickActivity, setClickActivity] = useState();
@@ -69,7 +69,6 @@ const [informasiHapus, setInformasiHapus] = useState(false)
   };
 
   const deleteData = (id) => {
-    // handleDeleteList
     const newList = list.filter((item) => item.id !== id);
     try {
       const response = fetch(
@@ -83,7 +82,7 @@ const [informasiHapus, setInformasiHapus] = useState(false)
       );
       getListData();
       // onClick();
-      setInformasiHapus(true)
+      setInformasiHapus(true);
       handleCloseDeleteList();
       enqueueSnackbar(
         "Activity berhasil dihapus",
@@ -98,28 +97,15 @@ const [informasiHapus, setInformasiHapus] = useState(false)
     setOpenAddToDoItems(false);
   };
 
-
   const handleCloseInformasi = (value) => {
-    // setTimeout(() => setInformasiHapus(false), 3000)
+    setInformasiHapus(false);
+  };
 
-      setInformasiHapus(false)
-   }
-  // const handleOpenInformasi = (value) => {
-  //   setInformasiHapus(true)
-  
-
-  // }
-  //   return () => {
-  //     clearTimeout(timeId)
-    
-  // }
-  // }
 
   useEffect(() => {
-    setTimeout(function(){
-      setInformasiHapus(false)
-  }, 3000);
-
+    setTimeout(function () {
+      setInformasiHapus(false);
+    }, 3000);
   }, [informasiHapus]);
 
   const handleAddActivityGroup = async () => {
@@ -210,7 +196,7 @@ const [informasiHapus, setInformasiHapus] = useState(false)
         setValueSort={changeToDoSort}
       />
       <ListActivity
-      handleCloseDeleteList={handleCloseDeleteList}
+        handleCloseDeleteList={handleCloseDeleteList}
         idDetail={idDetail}
         setIdDetail={setIdDetail}
         list={list}
@@ -222,18 +208,22 @@ const [informasiHapus, setInformasiHapus] = useState(false)
         valueSort={valueSort}
       />
       <DialogDeleteData
-// data-cy="activity-item-delete-button"      
-data-cy="activity-item-delete-button"
-selectedValue={selectedDeleteList}
+        // data-cy="activity-item-delete-button"
+        data-cy="activity-item-delete-button"
+        selectedValue={selectedDeleteList}
         clickActivity={clickActivity}
         open={openDeleteList}
         onClose={handleCloseDeleteList}
-        onRemove={deleteData}
+        ActivityItemDelete={deleteData}
         deleteTitleList={deleteTitleList}
         onClick={() => setOnClick(!onClick)}
       />
-      <DialogInformation open={informasiHapus}   data-cy="modal-information"     onClose={handleCloseInformasi}
- setInformasiHapus={setInformasiHapus}/>
+      <DialogInformation
+        open={informasiHapus}
+        data-cy="modal-information"
+        onClose={handleCloseInformasi}
+        setInformasiHapus={setInformasiHapus}
+      />
     </Container>
   );
 };

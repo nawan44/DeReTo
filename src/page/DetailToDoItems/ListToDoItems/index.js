@@ -218,6 +218,8 @@ const ListToDoItems = (props) => {
                     <IconButton
                       edge="end"
                       aria-label="comments"
+                      data-cy="edit-todo-item"
+
                       onClick={(id) => handleOpenEditToDoItems(value)}
                     >
                       <CreateIcon
@@ -253,6 +255,7 @@ const ListToDoItems = (props) => {
                   secondaryAction={
                     <IconButton edge="end" aria-label="comments">
                       <DeleteIcon
+  data-cy="modal-delete-confirm-button"
                         onClick={(id) => handleOpenDeleteToDoItems(value)}
                         style={{ color: "#888888" }}
                       />
