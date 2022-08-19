@@ -52,10 +52,10 @@ function DialogDeleteData(props) {
   return (
     <ThemeProvider theme={theme}>
       <Dialog
+        data-cy="modal-delete-cancel-button"
         onClose={handleClose}
         open={open}
         classes={{ paper: classes.dialogPaper }}
-        data-cy="modal-delete"
       >
         <div style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}>
           <WarningAmberIcon
@@ -97,7 +97,7 @@ function DialogDeleteData(props) {
                 margin: "20px 20px 0 20px",
               }}
               onClick={handleClose}
-              data-cy="modal-delete-cancel-button"
+              data-cy="modal-delete"
             >
               Batal
             </Button>
@@ -113,8 +113,7 @@ function DialogDeleteData(props) {
                 float: "right",
                 margin: "20px 20px 0 20px",
               }}
-              data-cy="activity-item-delete-button"
-              // data-cy="todo-item-delete-button"
+              data-cy="modal-delete-confirm-button  " // data-cy="todo-item-delete-button"
               onClick={() => onRemove(clickActivity)}
             >
               Hapus
