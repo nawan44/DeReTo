@@ -156,7 +156,7 @@ const Activity = () => {
   const [valueSort, setValueSort] = useState();
 
   const sortActivity = () => {
-    "    `[data-cy=sort-selection]``[data-cy=todo-sort-button]``[data-cy=todo-sort-button]`;";
+    "    [data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]";
     if (valueSort === "Terbaru") {
       return list.sort(
         (b, a) =>
@@ -200,7 +200,7 @@ const Activity = () => {
         idDetail={idDetail}
         setIdDetail={setIdDetail}
         list={list}
-        sortActivity={sortActivity()}
+        sortActivity={sortActivity( '[data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]')}
         handleDeleteList={handleDeleteList}
         toDetail={toDetail}
         handleAddActivityGroup={handleAddActivityGroup}

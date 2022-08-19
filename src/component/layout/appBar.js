@@ -113,7 +113,7 @@ const AppBar = (props, ss) => {
   const RightButton = () => {
     if (list && !toDoItemList) {
       return (
-        <span>
+        <span data-cy="todo-sort-button">
           {viewSort()}
           <Button
             onClick={handleAddActivityGroup}
@@ -127,7 +127,7 @@ const AppBar = (props, ss) => {
       );
     } else if (!list && toDoItemList) {
       return (
-        <span>
+        <span data-cy="todo-sort-button">
           {viewSort()}
           <Button
             onClick={handleOpenAddToDoItems}

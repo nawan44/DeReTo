@@ -34,7 +34,8 @@ export default function CardActivity(props) {
           {item.title}
         </Typography>
       </CardContent>
-      <CardActions style={{ marginTop: "70px" }}>
+      <CardActions style={{ marginTop: "70px" }}           data-cy="activity-item-delete-button">
+
         <Typography
           style={{
             fontSize: "12px",
