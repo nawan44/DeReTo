@@ -129,6 +129,7 @@ const ListActivity = ({
                     index={index}
                     item={item}
                     list={list}
+                    data-cy="activity-item"
                     handleDeleteList={handleDeleteList}
                     toDashboard={toDashboard}
                     toDetail={() => toDetail(item)}
