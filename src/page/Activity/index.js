@@ -6,6 +6,7 @@ import { useSnackbar } from "notistack";
 import ListActivity from "./ListActivity";
 import DialogDeleteData from "../../component/dialog/dialogDeleteData";
 import "../../assets/css/style.css";
+import DialogInformation from "../../component/dialog/dialogInformation";
 
 const Activity = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Activity = () => {
     name: "",
   });
   const [onClick, setOnClick] = useState(false);
-
+  const [informasiHapus, setInformasiHapus] = useState(false);
   const [list, setList] = useState([]);
   const [selectedDeleteList, setSelectedDeleteList] = useState(list[1]);
   const [clickActivity, setClickActivity] = useState();
@@ -82,6 +83,7 @@ const Activity = () => {
       );
       getListData();
       // onClick();
+      setInformasiHapus(true);
       handleCloseDeleteList();
       enqueueSnackbar(
         "Activity berhasil dihapus",
@@ -95,6 +97,28 @@ const Activity = () => {
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
   };
+
+  const handleCloseInformasi = (value) => {
+    // setTimeout(() => setInformasiHapus(false), 3000)
+
+    setInformasiHapus(false);
+  };
+  // const handleOpenInformasi = (value) => {
+  //   setInformasiHapus(true)
+
+  // }
+  //   return () => {
+  //     clearTimeout(timeId)
+
+  // }
+  // }
+
+  useEffect(() => {
+    setTimeout(function () {
+      setInformasiHapus(false);
+    }, 3000);
+  }, [informasiHapus]);
+
   const handleAddActivityGroup = async () => {
     try {
       const response = await fetch(
@@ -194,6 +218,7 @@ const Activity = () => {
         valueSort={valueSort}
       />
       <DialogDeleteData
+        data-cy="activity-item-delete-button"
         selectedValue={selectedDeleteList}
         clickActivity={clickActivity}
         open={openDeleteList}
@@ -201,6 +226,12 @@ const Activity = () => {
         onRemove={deleteData}
         deleteTitleList={deleteTitleList}
         onClick={() => setOnClick(!onClick)}
+      />
+      <DialogInformation
+        open={informasiHapus}
+        data-cy="modal-information"
+        onClose={handleCloseInformasi}
+        setInformasiHapus={setInformasiHapus}
       />
     </Container>
   );
