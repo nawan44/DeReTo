@@ -97,7 +97,8 @@ function DialogDeleteToDoItem(props) {
                   margin: "20px 20px 0 20px",
                 }}
                 onClick={handleClose()}
-                data-cy="modal-delete-confirm-button  "
+                data-cy="modal-delete-cancel-button"
+                // data-cy="modal-delete-confirm-button  "
 
                 // data-cy="modal-delete-cancel-button"
               >

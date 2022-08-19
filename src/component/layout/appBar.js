@@ -68,7 +68,8 @@ const AppBar = (props, ss) => {
         <span>
           {" "}
           <span>
-            <ArrowBackIosIcon data-cy="todo-title" onClick={toActivity} />
+            <ArrowBackIosIcon onClick={toActivity}         data-cy="todo-title"
+ />
             <Input
               value={titleDetail}
               onChange={handleChangeTitle}
@@ -103,7 +104,7 @@ const AppBar = (props, ss) => {
     if (list?.length > 0 || toDoItemList?.length > 0) {
       return (
         <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
-          <SwapVertRoundedIcon onClick={handleOpenSort} />
+          <SwapVertRoundedIcon data-cy="todo-sort-button" onClick={handleOpenSort} />
         </IconButton>
       );
     } else {

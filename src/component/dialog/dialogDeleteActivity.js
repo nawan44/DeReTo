@@ -31,7 +31,7 @@ function DialogDeleteActivity(props) {
   // };
 
   return (
-    <Dialog onClose={onClose} open={open}>
+    <Dialog onClose={onClose} open={open} data-cy="modal-delete-cancel-button">
 
        <div style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}>
         <WarningAmberIcon
@@ -73,8 +73,7 @@ function DialogDeleteActivity(props) {
               margin: "20px 20px 0 20px",
             }}
             onClick={onClose}
-            data-cy="modal-delete-confirm-button  "
-
+            data-cy="modal-delete-cancel-button"
             // data-cy="modal-delete-cancel-button"
           >
             Batal
@@ -94,7 +93,7 @@ function DialogDeleteActivity(props) {
               margin: "20px 20px 0 20px",
             }}
             // data-cy="activity-item-delete-button"
-
+            data-cy="modal-delete-confirm-button"
             onClick={() => activityItemDelete(clickActivity)}
           >
             Hapus
