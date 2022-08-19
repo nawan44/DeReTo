@@ -49,7 +49,8 @@ const ListActivity = ({
       mouseEvent="onMouseDown"
       touchEvent="onTouchStart"
       onClickAway={handleClickAway}
-      // data-cy="activity-item-delete-button"
+      
+      data-cy="activity-item-delete-button"
     >
       {list?.length === 0 ? (
         <Grid

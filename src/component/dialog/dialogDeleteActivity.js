@@ -31,7 +31,7 @@ function DialogDeleteActivity(props) {
   // };
 
   return (
-    <Dialog onClose={onClose} open={open} data-cy="activity-item-delete-button">
+    <Dialog onClose={onClose} open={open} >
 
        <div style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}>
         <WarningAmberIcon
