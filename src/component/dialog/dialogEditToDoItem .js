@@ -26,7 +26,7 @@ const styles = {
   },
 };
 
-function DialogAddData(props) {
+function DialogEditToDoItem(props) {
   const {
     detailId,
     onToDoItem,
@@ -35,13 +35,8 @@ function DialogAddData(props) {
     onClose,
     open,
     classes,
-    dataToDoItem,
+    dataToDoItem,setOnToDoItem
   } = props;
-  const [valueKirim, setValueKirim] = useState({
-    activity_group_id: dataToDoItem ? dataToDoItem.id : detailId,
-    title: "",
-    priority: "",
-  });
 
   const [kirim, setKirim] = useState();
 
@@ -52,7 +47,7 @@ function DialogAddData(props) {
       priority: dataToDoItem ? dataToDoItem?.priority : "",
     });
   }, [dataToDoItem]);
-
+console.log("kirim", kirim)
   const switchSend = () => {
     if (dataToDoItem) {
       return `/todo-items/${dataToDoItem.id}`;
@@ -67,30 +62,34 @@ function DialogAddData(props) {
       return "POST";
     }
   };
-
-  const addData = async (e) => {
+  const addData = (e) => {
     //  data-cy : "modal-add-save-button";
+    console.log("kirim", kirim);
 
     e.preventDefault();
-    try {
-      const response = await fetch(process.env.REACT_APP_URL + switchSend(), {
-        method: switchMethod(),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToDoItem ? kirim : valueKirim),
-      });
+    // try {
+    const response = fetch(process.env.REACT_APP_URL + switchSend(), {
+      method: switchMethod(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToDoItem ? kirim : ""),
+      // });
+    });
+    onToDoItem()
+    onClose();
+    getTodoItemList()
 
-      // onToDoItem();
-      // onClick();
-      // getTodoItemList();
-      onClose();
-      // handleClosEditToDoItems();
-      // window.location.reload();
-    } catch (err) {
-      console.log(err.message);
-    }
   };
+
+
+  // onToDoItem();
+  // onClick();
+  // getTodoItemList();
+  // onClose();
+  // window.location.reload();
+  // } catch (err) {
+  //   console.log(err.message);
 
   const handleChange = (event) => {
     //  `[data-cy=modal-add-priority-dropdown]`;
@@ -103,21 +102,21 @@ function DialogAddData(props) {
       [event.target.name]: event.target.value,
     });
 
-    setValueKirim({
-      ...valueKirim,
-      [event.target.name]: event.target.value,
-    });
-  };
 
+  };
+// const handleCloseAddDialog= () => {
+//   onClose()
+//   console.log("jjj")
+// }
   return (
     <ThemeProvider theme={theme}>
       <Dialog
-        data-cy="modal-add-name-input"
+        data-cy="modal-edit-todo"
         onClose={onClose}
         open={open}
         classes={{ paper: classes.dialogPaper }}
       >
-        <DialogTitle>Tambah List Item</DialogTitle>
+        <DialogTitle>Edit Item</DialogTitle>
         <Divider />
         <div style={{ padding: "20px" }}>
           <Typography
@@ -150,7 +149,7 @@ function DialogAddData(props) {
             select
             label="Pilih Priority"
             name="priority"
-            value={dataToDoItem ? kirim?.priority : valueKirim.priority}
+            value={ kirim?.priority }
             onChange={handleChange}
             style={{ margin: "10px 0 10px 0", width: "100%" }}
           >
@@ -170,7 +169,7 @@ function DialogAddData(props) {
           justifyContent="flex-end"
         >
           <Button
-            data-cy="modal-add-name-input"
+            data-cy="modal-edit-todo"
             onClick={addData}
             variant="contained"
             color="secondary"
@@ -190,4 +189,4 @@ function DialogAddData(props) {
   );
 }
 
-export default withStyles(styles)(DialogAddData);
+export default withStyles(styles)(DialogEditToDoItem);

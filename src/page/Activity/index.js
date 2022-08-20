@@ -87,7 +87,6 @@ const Activity = () => {
           },
         }
       );
-      getListData();
       setOpenDeleteActivity(false);
 
       setInformasiHapus(true);

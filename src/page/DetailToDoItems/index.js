@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import AvatarWoman from "../../assets/avatar/avatar-woman.jpg";
 import { Container, Grid } from "@mui/material";
-import AddToDoItems from "../../component/dialog/dialogAddData";
+import AddToDoItems from "../../component/dialog/dialogAddToDoItem";
 import AppBar from "../../component/layout/appBar";
 import { useLocation } from "react-router-dom";
 import ItemList from "./ListToDoItems";
-import DialogAddData from "../../component/dialog/dialogAddData";
+import DialogAddData from "../../component/dialog/dialogAddToDoItem";
+import DialogAddToDoItem from "../../component/dialog/dialogAddToDoItem";
 
 const DetailToDoItems = (props) => {
   const {
@@ -42,7 +43,6 @@ const DetailToDoItems = (props) => {
   const [detailTitle, setDetailTitle] = useState(value?.title);
   const [detailId, setDetailId] = useState(value?.id);
   const [onToDoItem, setOnToDoItem] = useState(false);
-  const [onClick, setOnClick] = useState(false);
 
   const [valueSort, setValueSort] = useState();
 
@@ -65,6 +65,7 @@ const DetailToDoItems = (props) => {
   };
 
   const handleOpenDeleteToDoItems = (item) => {
+    console.log("111111111111111111111111")
     setOpenDeleteToDoItems(true);
     setIdToDoItems(item.id);
     setDataToDoItem(item.title);
@@ -92,9 +93,7 @@ const DetailToDoItems = (props) => {
   useEffect(() => {
     getTodoItemList();
   }, []);
-  useEffect(() => {
-    getTodoItemList([]);
-  }, [onClick]);
+
   useEffect(() => {
     getTodoItemList();
   }, [onToDoItem]);
@@ -102,7 +101,7 @@ const DetailToDoItems = (props) => {
   //   setChangeTitle(titleDetail);
   // }, [titleDetail]);
   const getTodoItemList = async () => {
-    try {
+    // try {
       const response = await fetch(
         process.env.REACT_APP_URL +
           `/todo-items?activity_group_id=${value?.id}`,
@@ -115,7 +114,7 @@ const DetailToDoItems = (props) => {
       let res = await response.json();
       setToDoItemList(res.data);
       setToDoItemListTotal(res.total);
-    } catch (err) {}
+    // } catch (err) {}
   };
 
   const sendTitle = async (e) => {
@@ -147,16 +146,17 @@ const DetailToDoItems = (props) => {
   return (
     <Container style={{ width: "100%" }}>
       <AppBar
+      onToDoItem={() => setOnToDoItem(!onToDoItem)}
+
         titleDetail={titleDetail}
         setTitleDetail={changeToDoItems}
         handleOpenAddToDoItems={handleOpenAddToDoItems}
         sendTitle={sendTitle}
-        data-cy="todo-title"
         value={value}
         toDoItemList={toDoItemList}
         valueSort={valueSort}
         setValueSort={changeToDoSort}
-        toDoItemTotal={toDoItemTotal}
+        toDoItemTotal={toDoItemTotal}getTodoItemList={getTodoItemList}
       />
 
       {toDoItemTotal && toDoItemTotal > 0 ? (
@@ -172,15 +172,13 @@ const DetailToDoItems = (props) => {
             value={value}
             getTodoItemList={getTodoItemList}
             handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
-            handle={handleCloseDeleteToDoItems}
+            // handle={handleCloseDeleteToDoItems}
             handleClosEditToDoItems={handleClosEditToDoItems}
             handleOpenEditToDoItems={handleOpenEditToDoItems}
             handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
             sortToDoItem={sortToDoItem()}
             valueSort={valueSort}
-            onClick={() => setOnClick(!onClick)}
 
-            // onClick, setOnClick
           />
         </span>
       ) : (
@@ -204,7 +202,7 @@ const DetailToDoItems = (props) => {
           />
         </Grid>
       )}
-      <DialogAddData
+      <DialogAddToDoItem
         getTodoItemList={getTodoItemList}
         detailId={detailId}
         open={openAddToDoItems}

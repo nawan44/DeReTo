@@ -50,7 +50,7 @@ const ListActivity = ({
       touchEvent="onTouchStart"
       onClickAway={handleClickAway}
       
-      data-cy="activity-item-delete-button"
+      data-cy="modal-delete-cancel-button"
     >
       {list?.length === 0 ? (
         <Grid

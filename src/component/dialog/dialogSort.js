@@ -15,7 +15,6 @@ function DialogSort(props) {
   const { onClose, selectedValue, open, 
     // sorts, 
     setValueSort } = props;
-console.log("sorts",sorts)
   const handleClose = () => {
     onClose(selectedValue);
   };

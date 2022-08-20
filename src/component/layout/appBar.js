@@ -9,13 +9,14 @@ import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import Button from "@mui/material/Button";
 import "../../assets/css/style.css";
 // import { sorts } from "../data/sorts";
-import DialogAddData from "../dialog/dialogAddData";
+import DialogAddData from "../dialog/dialogAddToDoItem";
 import DialogSort from "../dialog/dialogSort";
+import DialogAddToDoItem from "../dialog/dialogAddToDoItem";
 const ariaLabel = { "aria-label": "description" };
 
 const AppBar = (props, ss) => {
   const {
-    handleAddActivityGroup,
+    handleAddActivityGroup,getTodoItemList,
     handle,
     list,
     todoItem,
@@ -36,7 +37,7 @@ const AppBar = (props, ss) => {
     value,
     handleOpenAddToDoItems,
     valueSort,
-    setValueSort,
+    setValueSort,onToDoItem
   } = props;
   const navigate = useNavigate();
   let location = useLocation();
@@ -203,9 +204,10 @@ const AppBar = (props, ss) => {
         valueSort={valueSort}
         setValueSort={setValueSort}
       />
-      <DialogAddData
+      <DialogAddToDoItem onToDoItem={onToDoItem}
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}
+        getTodoItemList={getTodoItemList}
       />
     </>
   );

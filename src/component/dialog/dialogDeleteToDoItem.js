@@ -38,16 +38,16 @@ function DialogDeleteToDoItem(props) {
     clickActivity,
     dataToDoItem,
     // onToDoItem,
-    onClick,
   } = props;
 
   const handleClose = () => {
     onClose(selectedValue);
     // onToDoItem();
-    onClick();
   };
 
   return (
+    <ThemeProvider theme={theme}>
+
         <Dialog
         data-cy="todo-item-delete-button"
           // data-cy="activity-item-delete-button"
@@ -56,7 +56,7 @@ function DialogDeleteToDoItem(props) {
           onClose={handleClose}
           open={open}
         >
-          <div
+      <div
             style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}
           >
             <WarningAmberIcon
@@ -80,7 +80,7 @@ function DialogDeleteToDoItem(props) {
               " {dataToDoItem ? dataToDoItem : deleteTitleList} " ?
             </Typography>
           </div>
-
+     
           <Grid
             container
             rowSpacing={1}
@@ -97,7 +97,7 @@ function DialogDeleteToDoItem(props) {
                   float: "right",
                   margin: "20px 20px 0 20px",
                 }}
-                onClick={handleClose()}
+                onClick={onClose}
                 data-cy="modal-delete-cancel-button"
                 // data-cy="modal-delete-confirm-button  "
 
@@ -125,7 +125,8 @@ function DialogDeleteToDoItem(props) {
             </Grid>
           </Grid>
         </Dialog>
-    
+        </ThemeProvider>
+
   );
 }
 

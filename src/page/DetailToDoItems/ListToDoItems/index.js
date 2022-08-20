@@ -14,10 +14,9 @@ import {
   Grid,
 } from "@mui/material";
 import "../../../assets/css/style.css";
-// import DialogDeleteData from "../../../component/dialog/dialogDeleteToDoItem";
-import DialogAddData from "../../../component/dialog/dialogAddData";
 import { makeStyles } from "@mui/styles";
 import DialogDeleteToDoItem from "../../../component/dialog/dialogDeleteToDoItem";
+import DialogEditToDoItem from "../../../component/dialog/dialogEditToDoItem ";
 
 const useStyles = makeStyles({
   list: {
@@ -64,7 +63,6 @@ const ListToDoItems = (props) => {
     sortToDoItem,
     valueSort,
     onToDoItem,
-    onClick,
   } = props;
   const classes = useStyles();
 
@@ -130,7 +128,6 @@ const ListToDoItems = (props) => {
         }
       );
       onToDoItem();
-      onClick();
       handleCloseDeleteToDoItems();
 
     } catch (err) {
@@ -316,7 +313,6 @@ const ListToDoItems = (props) => {
         )}
       </Grid>
       <DialogDeleteToDoItem
-        onClick={onClick}
         open={openDeleteToDoItems}
         onClose={handleCloseDeleteToDoItems}
         todoItemDelete={deleteToDoItems}
@@ -324,7 +320,7 @@ const ListToDoItems = (props) => {
         dataToDoItem={dataToDoItem}
         // data-cy="modal-delete"
       />
-      <DialogAddData
+      <DialogEditToDoItem
         onToDoItem={onToDoItem}
         open={openEditToDoItems}
         dataToDoItem={dataToDoItem}
