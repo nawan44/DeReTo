@@ -69,7 +69,7 @@ const Activity = () => {
   };
 
   const toDetail = (value) => {
-    navigate(`/detail/${value?.id}`, {
+    cy.navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
       // handleDeleteList,
     });
@@ -227,8 +227,7 @@ const Activity = () => {
       />
       <DialogDeleteActivity
         selectedValue={selectedDeleteActivity}
-        data-cy="modal-delete-confirm-button"
-
+        data-cy="modal-delete"
         clickActivity={clickActivity}
         open={openDeleteActivity}
         onClose={handleCloseDeleteActivity}

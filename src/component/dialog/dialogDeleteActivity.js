@@ -34,8 +34,8 @@ function DialogDeleteActivity(props) {
     onClose,
     selectedValue,
     open,
-    clickActivity, classes
-
+    clickActivity,
+    classes,
   } = props;
   // const classes = useStyles();
 
@@ -44,17 +44,15 @@ function DialogDeleteActivity(props) {
     // onToDoItem();
     // onClick();
     // setOnClick(true);
-
   };
 
   return (
-    <ThemeProvider theme={theme}               data-cy="modal-delete-cancel-button"
-    >
+    <ThemeProvider theme={theme} data-cy="modal-delete-cancel-button">
       <Dialog
-      
         data-cy="modal-delete"
-        onClose={handleClose}
-        open={open} classes={{ paper: classes.dialogPaper }}
+        onClose={onClose}
+        open={open}
+        classes={{ paper: classes.dialogPaper }}
       >
         <div style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}>
           <WarningAmberIcon
@@ -96,11 +94,10 @@ function DialogDeleteActivity(props) {
                 margin: "20px 20px 0 20px",
               }}
               // data-cy="modal-batal-hapus"
-          
+
               // data-cy="modal-batal-delete"
               onClick={onClose}
               data-cy="modal-delete-cancel-button"
-
             >
               Batal
             </Button>
