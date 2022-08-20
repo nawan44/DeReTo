@@ -51,7 +51,7 @@ function DialogDeleteActivity(props) {
     <ThemeProvider theme={theme}>
       <Dialog
       
-        data-cy="modal-delete-cancel-button"
+        data-cy="modal-delete"
         onClose={handleClose}
         open={open} classes={{ paper: classes.dialogPaper }}
       >
@@ -98,7 +98,7 @@ function DialogDeleteActivity(props) {
           
               // data-cy="modal-batal-delete"
               onClick={onClose}
-              data-cy="modal-delete"
+              data-cy="modal-delete-cancel-button"
 
             >
               Batal
@@ -116,8 +116,7 @@ function DialogDeleteActivity(props) {
                 float: "right",
                 margin: "20px 20px 0 20px",
               }}
-              data-cy="activity-item-delete-button"
-              // data-cy="modal-delete-confirm-button"
+              data-cy="modal-delete-confirm-button"
               onClick={() => activityItemDelete(clickActivity)}
             >
               Hapus
