@@ -68,8 +68,8 @@ const Activity = () => {
     }
   };
 
-  const toDetail = (value) => {
-    navigate(`/detail/${value?.id}`, {
+  const toDetail = async (value) => {
+   await navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
       // handleDeleteList,
     });
