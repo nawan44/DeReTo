@@ -49,7 +49,8 @@ function DialogDeleteToDoItem(props) {
     <ThemeProvider theme={theme}>
 
         <Dialog
-        data-cy="todo-item-delete-button"
+        
+        data-cy="modal-delete-cancel-button"
           // data-cy="activity-item-delete-button"
           // data-cy="modal-delete-cancel-button"
           // data-cy="modal-delete-cancel-button"
@@ -98,7 +99,7 @@ function DialogDeleteToDoItem(props) {
                   margin: "20px 20px 0 20px",
                 }}
                 onClick={onClose}
-                data-cy="modal-delete-cancel-button"
+                // data-cy="modal-delete-cancel-button"
                 // data-cy="modal-delete-confirm-button  "
 
                 // data-cy="modal-delete-cancel-button"

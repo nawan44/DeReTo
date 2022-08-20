@@ -94,7 +94,6 @@ function DialogDeleteActivity(props) {
                 margin: "20px 20px 0 20px",
               }}
               onClick={onClose}
-              data-cy="modal-delete-cancel-button"
               // data-cy="modal-delete-cancel-button"
             >
               Batal
