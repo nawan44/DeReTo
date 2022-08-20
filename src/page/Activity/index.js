@@ -69,7 +69,7 @@ const Activity = () => {
   };
 
   const toDetail = (value) => {
-    cy.navigate(`/detail/${value?.id}`, {
+    navigate(`/detail/${value?.id}`, {
       state: { value: value, color: "green" },
       // handleDeleteList,
     });
