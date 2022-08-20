@@ -55,11 +55,11 @@ function DialogDeleteActivity(props) {
         classes={{ paper: classes.dialogPaper }}
       >
         <div style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}>
-          <WarningAmberIcon
+          <WarningAmberIcon data-cy="modal-delete-icon"
             color="danger"
             sx={{ color: "#ED4C5C", fontSize: "50px", marginBottom: "30px" }}
           />
-          <Typography
+          <Typography data-cy="modal-delete-title"
             style={{ fontWeight: 400, fontSize: "14px", lineHeight: "18px" }}
           >
             Apakah anda yakin menghapus List Item

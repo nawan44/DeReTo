@@ -46,11 +46,11 @@ function DialogDeleteToDoItem(props) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}  data-cy="modal-delete-cancel-button">
 
         <Dialog
         
-        data-cy="modal-delete-cancel-button"
+        data-cy="modal-delete"
           // data-cy="activity-item-delete-button"
           // data-cy="modal-delete-cancel-button"
           // data-cy="modal-delete-cancel-button"
@@ -61,10 +61,10 @@ function DialogDeleteToDoItem(props) {
             style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}
           >
             <WarningAmberIcon
-              color="danger"
+              color="danger"  data-cy="modal-delete-icon"
               sx={{ color: "#ED4C5C", fontSize: "50px", marginBottom: "30px" }}
             />
-            <Typography
+            <Typography data-cy="modal-delete-title"
               style={{ fontWeight: 400, fontSize: "14px", lineHeight: "18px" }}
             >
               Apakah anda yakin menghapus List Item
@@ -103,7 +103,7 @@ function DialogDeleteToDoItem(props) {
                 // data-cy="modal-batal-delete"
                 // data-cy="modal-delete-cancel-button"
                 onClick={onClose}
-                data-cy="modal-delete"
+                data-cy="modal-delete-cancel-button"
 
                 // data-cy="modal-delete-cancel-button"
               >
@@ -121,7 +121,7 @@ function DialogDeleteToDoItem(props) {
                   float: "right",
                   margin: "20px 20px 0 20px",
                 }}
-                data-cy="todo-item-delete-button"
+                data-cy="modal-delete-confirm-button"
                 onClick={() => todoItemDelete(clickActivity)}
               >
                 Hapus

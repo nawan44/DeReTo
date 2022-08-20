@@ -227,7 +227,6 @@ const Activity = () => {
       />
       <DialogDeleteActivity
         selectedValue={selectedDeleteActivity}
-        data-cy="modal-delete"
         clickActivity={clickActivity}
         open={openDeleteActivity}
         onClose={handleCloseDeleteActivity}
