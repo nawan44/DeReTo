@@ -202,7 +202,10 @@ const AppBar = (props, ss) => {
           }}
           data-cy="activity-title"
         >
+          <span data-cy="todo-title"> 
           {Title()}
+
+          </span>
         </Grid>
         <Grid item xs={6} data-cy="todo-add-button">
           {RightButton()}

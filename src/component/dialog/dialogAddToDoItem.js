@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import { Divider, TextField, Typography } from "@mui/material";
+import { Divider, IconButton, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
@@ -11,6 +11,7 @@ import "../../assets/css/style.css";
 import { priorities } from "../data/priorities";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Close } from "@material-ui/icons";
 const theme = createTheme({
   palette: {
     secondary: {
@@ -124,15 +125,23 @@ function DialogAddToDoItem(props) {
   return (
     <ThemeProvider theme={theme}>
       <Dialog
-        data-cy="modal-add-todo"
+        data-cy="modal-add"
         onClose={onClose}
         open={open}
         classes={{ paper: classes.dialogPaper }}
       >
-        <DialogTitle>Tambah List Item</DialogTitle>
+        <DialogTitle>
+        <h3 data-cy="modal-add-title" className="dialog-title">Tambah List Item</h3>
+        <IconButton className="button-close-obat" data-cy="modal-add-close-button" onClick={onClose}>
+            {" "}
+            <Close onClick={onClose} className="button-close-obat" />
+          </IconButton>
+       
+        </DialogTitle>
         <Divider />
         <div style={{ padding: "20px" }}>
           <Typography
+          data-cy="modal-add-name-title"
             style={{ fontWeight: 600, fontSize: "12px", lineHeight: "18px" }}
           >
             NAMA LIST ITEM
@@ -140,6 +149,7 @@ function DialogAddToDoItem(props) {
           <TextField
             id="id"
             value={kirim?.title}
+            data-cy="modal-add-name-input"
             name="title"
             onChange={handleChange}
             // onChange={(e) => setValueKirim(e.target.value)}
@@ -154,6 +164,7 @@ function DialogAddToDoItem(props) {
               margin: "10px 0",
               lineHeight: "18px",
             }}
+            data-cy="modal-add-priority-title"
           >
             PRIORITY
           </Typography>
@@ -163,6 +174,7 @@ function DialogAddToDoItem(props) {
             label="Pilih Priority"
             name="_comment"
             value={dataToDoItem ? kirim?.priority : valueKirim._comment}
+            data-cy="modal-add-priority-dropdown"
             onChange={handleChange}
             style={{ margin: "10px 0 10px 0", width: "100%" }}
           >
@@ -182,7 +194,7 @@ function DialogAddToDoItem(props) {
           justifyContent="flex-end"
         >
           <Button
-            data-cy="modal-add-todo"
+            data-cy="modal-add-save-button"
             onClick={addData}
             variant="contained"
             color="secondary"

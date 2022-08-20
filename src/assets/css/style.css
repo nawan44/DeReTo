@@ -22,3 +22,18 @@
 max-width: 1200px;
 height: 100vh;
 }
+.button-close-obat {
+  width: 10%;
+  float: left !important;
+  /* background-color: red; */
+}
+.button-close-obat:hover {
+  color: red;
+}
+.dialog-title {
+  width: 90% ;
+  padding: 10px 0 !important;
+  padding-left: 10px !important;
+  float: left;
+  /* background-color: aqua; */
+}
