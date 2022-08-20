@@ -7,9 +7,14 @@ import {
   ListItemText,
   Dialog,
 } from "@mui/material";
+import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
+import SortIcon from "@mui/icons-material/Sort";
+import SouthIcon from "@mui/icons-material/South";
+import NorthIcon from "@mui/icons-material/North";
+import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 
 import "../../assets/css/style.css";
-import { sorts } from "../data/sorts";
+// import { sorts } from "../data/sorts";
 
 function DialogSort(props) {
   const {
@@ -41,8 +46,8 @@ function DialogSort(props) {
           <ListItem
             button
             data-cy="sort-latest"
-            onClick={() => handleListItemClick(item.id)}
-            key={item.id}
+            onClick={() => handleListItemClick()}
+            
           >
             <ListItemAvatar>
               {" "}
@@ -65,8 +70,8 @@ function DialogSort(props) {
           <ListItem
             button
             data-cy="sort-oldest"
-            onClick={() => handleListItemClick(item.id)}
-            key={item.id}
+            onClick={() => handleListItemClick()}
+            
           >
             <ListItemAvatar>
               {" "}
@@ -89,8 +94,8 @@ function DialogSort(props) {
           <ListItem
             button
             data-cy="sort-az"
-            onClick={() => handleListItemClick(item.id)}
-            key={item.id}
+            onClick={() => handleListItemClick()}
+            
           >
             <ListItemAvatar>
               {" "}
@@ -113,8 +118,8 @@ function DialogSort(props) {
           <ListItem
             button
             data-cy="sort za"
-            onClick={() => handleListItemClick(item.id)}
-            key={item.id}
+            onClick={() => handleListItemClick()}
+            
           >
             <ListItemAvatar>
               {" "}
@@ -137,8 +142,8 @@ function DialogSort(props) {
           <ListItem
             button
             data-cy="sort-unfinished"
-            onClick={() => handleListItemClick(item.id)}
-            key={item.id}
+            onClick={() => handleListItemClick()}
+            
           >
             <ListItemAvatar>
               {" "}
