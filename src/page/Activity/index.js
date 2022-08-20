@@ -227,6 +227,8 @@ const Activity = () => {
       />
       <DialogDeleteActivity
         selectedValue={selectedDeleteActivity}
+        data-cy="modal-delete-confirm-button"
+
         clickActivity={clickActivity}
         open={openDeleteActivity}
         onClose={handleCloseDeleteActivity}

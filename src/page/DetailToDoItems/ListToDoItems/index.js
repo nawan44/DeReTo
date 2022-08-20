@@ -317,7 +317,8 @@ const ListToDoItems = (props) => {
         onClose={handleCloseDeleteToDoItems}
         todoItemDelete={deleteToDoItems}
         toDoItemList={toDoItemList}
-        dataToDoItem={dataToDoItem}
+        dataToDoItem={dataToDoItem}data-cy="modal-delete-confirm-button"
+
         // data-cy="modal-delete"
       />
       <DialogEditToDoItem
