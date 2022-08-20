@@ -21,7 +21,7 @@ const ListActivity = ({
   toDetail,
   setClickTitle,
   handleAddActivityGroup,
-  valueSort,handleCloseDeleteList
+  valueSort,handleCloseDeleteList,handleCloseDeleteActivity
 }) => {
   const [close, setClose] = useState(false);
 
@@ -132,6 +132,7 @@ const ListActivity = ({
                     index={index}
                     item={item}
                     list={list}
+                    handleCloseDeleteActivity={handleCloseDeleteActivity}
                     // data-cy="activity-item"
                     handleDeleteActivity={handleDeleteActivity}
                     toDashboard={toDashboard}

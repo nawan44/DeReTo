@@ -150,7 +150,8 @@ const Activity = () => {
     console.log(value.id)
   };
   const handleCloseDeleteActivity = (value) => {
-    
+        '[data-cy=modal-delete-cancel-button]'
+
     setOpenDeleteActivity(false);
     setSelectedDeleteActivity(value);
     setOnClick(true);
@@ -212,6 +213,7 @@ const Activity = () => {
         handleCloseDeleteList={handleCloseDeleteList}
         idDetail={idDetail}
         setIdDetail={setIdDetail}
+        handleCloseDeleteActivity={handleCloseDeleteActivity}
         list={list}
         sortActivity={sortActivity()}
         handleDeleteActivity={handleDeleteActivity}
