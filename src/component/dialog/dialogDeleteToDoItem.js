@@ -100,9 +100,10 @@ function DialogDeleteToDoItem(props) {
                 }}
                 // data-cy="modal-delete-cancel-button"
                 // data-cy="modal-delete-confirm-button  "
-                data-cy="modal-batal-delete"
+                // data-cy="modal-batal-delete"
                 // data-cy="modal-delete-cancel-button"
                 onClick={onClose}
+                data-cy="modal-delete"
 
                 // data-cy="modal-delete-cancel-button"
               >

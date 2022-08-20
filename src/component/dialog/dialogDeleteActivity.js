@@ -50,6 +50,7 @@ function DialogDeleteActivity(props) {
   return (
     <ThemeProvider theme={theme}>
       <Dialog
+      
         data-cy="modal-delete-cancel-button"
         onClose={handleClose}
         open={open} classes={{ paper: classes.dialogPaper }}
@@ -95,8 +96,9 @@ function DialogDeleteActivity(props) {
               }}
               // data-cy="modal-batal-hapus"
           
-              data-cy="modal-batal-delete"
+              // data-cy="modal-batal-delete"
               onClick={onClose}
+              data-cy="modal-delete"
 
             >
               Batal
