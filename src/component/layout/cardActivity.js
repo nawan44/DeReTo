@@ -34,8 +34,7 @@ export default function CardActivity(props) {
           {item.title}
         </Typography>
       </CardContent>
-      <CardActions style={{ marginTop: "70px" }}           data-cy="activity-item-delete-button">
-
+      <CardActions style={{ marginTop: "70px" }}>
         <Typography
           style={{
             fontSize: "12px",
@@ -50,8 +49,7 @@ export default function CardActivity(props) {
           {moment(item.created_at).format("DD MMMM  YYYY")}
         </Typography>
         <DeleteIcon
-                        data-cy="activity-item-delete-button"
-                        // data-cy="activity-item-delete-button"
+          data-cy="activity-item-delete-button"
           onClick={(id) => handleDeleteActivity(item)}
           style={{ width: "20%", float: "right", color: "#888888" }}
         />

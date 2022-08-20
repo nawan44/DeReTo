@@ -192,6 +192,7 @@ const DetailToDoItems = (props) => {
           container
           rowSpacing={1}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          data-cy="todo-empty-state"
         >
           <img
             alt="Remy Sharp"

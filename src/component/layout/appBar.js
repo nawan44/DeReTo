@@ -16,7 +16,8 @@ const ariaLabel = { "aria-label": "description" };
 
 const AppBar = (props, ss) => {
   const {
-    handleAddActivityGroup,getTodoItemList,
+    handleAddActivityGroup,
+    getTodoItemList,
     handle,
     list,
     todoItem,
@@ -37,7 +38,8 @@ const AppBar = (props, ss) => {
     value,
     handleOpenAddToDoItems,
     valueSort,
-    setValueSort,onToDoItem
+    setValueSort,
+    onToDoItem,
   } = props;
   const navigate = useNavigate();
   let location = useLocation();
@@ -63,14 +65,13 @@ const AppBar = (props, ss) => {
 
   const Title = () => {
     if (location.pathname === `/`) {
-      return <span>Activity</span>;
+      return <span data-cy="activity-title">Activity</span>;
     } else if (location.pathname === `/`) {
       return (
         <span>
           {" "}
           <span>
-            <ArrowBackIosIcon onClick={toActivity}         data-cy="todo-title"
- />
+            <ArrowBackIosIcon onClick={toActivity} data-cy="todo-title" />
             <Input
               value={titleDetail}
               onChange={handleChangeTitle}
@@ -88,8 +89,9 @@ const AppBar = (props, ss) => {
     } else {
       return (
         <span>
-          <ArrowBackIosIcon onClick={toActivity} />
+          <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
           <Input
+            data-cy="todo-title-edit-button"
             value={titleDetail}
             onChange={handleChangeTitle}
             // label="Rachmat Gunawan"
@@ -105,7 +107,10 @@ const AppBar = (props, ss) => {
     if (list?.length > 0 || toDoItemList?.length > 0) {
       return (
         <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
-          <SwapVertRoundedIcon data-cy="todo-sort-button" onClick={handleOpenSort} />
+          <SwapVertRoundedIcon
+            data-cy="todo-sort-button"
+            onClick={handleOpenSort}
+          />
         </IconButton>
       );
     } else {
@@ -117,8 +122,11 @@ const AppBar = (props, ss) => {
       return (
         // <span data-cy="todo-sort-button">
         <span>
-          {" "}
-          {viewSort()}
+         <span      data-cy="todo-sort-button"
+>
+{viewSort()}
+
+</span>
           <Button
             onClick={handleAddActivityGroup}
             variant="contained"
@@ -133,7 +141,11 @@ const AppBar = (props, ss) => {
       return (
         // <span data-cy="todo-sort-button">
         <span>
-          {viewSort()}
+          <span      data-cy="todo-sort-button"
+>
+{viewSort()}
+
+</span>
           <Button
             onClick={handleOpenAddToDoItems}
             data-cy="todo-add-button"
@@ -204,7 +216,8 @@ const AppBar = (props, ss) => {
         valueSort={valueSort}
         setValueSort={setValueSort}
       />
-      <DialogAddToDoItem onToDoItem={onToDoItem}
+      <DialogAddToDoItem
+        onToDoItem={onToDoItem}
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}
         getTodoItemList={getTodoItemList}
