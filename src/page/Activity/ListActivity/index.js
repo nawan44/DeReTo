@@ -18,7 +18,7 @@ const ListActivity = ({
   idDetail,
   setIdDetail,
   checkActivity,
-  toDetail,
+  getDetail,
   setClickTitle,
   handleAddActivityGroup,
   valueSort,handleCloseDeleteList,handleCloseDeleteActivity
@@ -139,7 +139,7 @@ const ListActivity = ({
                     // data-cy="activity-item"
                     handleDeleteActivity={handleDeleteActivity}
                     toDashboard={toDashboard}
-                    toDetail={() => toDetail(item)}
+                    getDetail={() => getDetail(item)}
                     // setClickTitle={setClickTitle(true)}
                     setIdDetail={setIdDetail(item.id)}
                     // setIdDetail ={setIdDetail}
@@ -159,7 +159,7 @@ const ListActivity = ({
                     list={list}
                     handleDeleteList={handleDeleteList}
                     toDashboard={toDashboard}
-                    toDetail={() => toDetail(item)}
+                    getDetail={() => getDetail(item)}
                     // setClickTitle={setClickTitle(true)}
                     setIdDetail={setIdDetail(item.id)}
                     // setIdDetail ={setIdDetail}

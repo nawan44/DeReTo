@@ -68,12 +68,12 @@ const Activity = () => {
     }
   };
 
-  const toDetail =  (value) => {
-    // navigate(`/detail/${value?.id}`, {
-    //   state: { value: value, color: "green" },
-    //   // handleDeleteList,
-    // });
-    navigate(`/detail`);
+  const getDetail =  (value) => {
+    navigate(`/detail/${value?.id}`, {
+      state: { value: value, color: "green" },
+      // handleDeleteList,
+    });
+    // navigate(`/detail`);
   };
 
   const deleteData = (id) => {
@@ -220,7 +220,7 @@ const Activity = () => {
         handleDeleteActivity={handleDeleteActivity}
         // '[data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]')}
         handleDeleteList={handleDeleteList}
-        toDetail={toDetail}
+        getDetail={getDetail}
         handleAddActivityGroup={handleAddActivityGroup}
         openDeleteList={openDeleteList}
         openDeleteActivity={openDeleteActivity}
