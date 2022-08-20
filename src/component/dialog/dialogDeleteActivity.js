@@ -48,7 +48,8 @@ function DialogDeleteActivity(props) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}               data-cy="modal-delete-cancel-button"
+    >
       <Dialog
       
         data-cy="modal-delete"
