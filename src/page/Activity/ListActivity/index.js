@@ -46,10 +46,12 @@ const ListActivity = ({
     // data-cy="activity-item">
     >   
     <ClickAwayListener
+          data-cy="modal-delete-cancel-button"
+
       mouseEvent="onMouseDown"
       touchEvent="onTouchStart"
       onClickAway={handleClickAway}
-      
+
       // data-cy="modal-delete-cancel-button"
     >
       {list?.length === 0 ? (
