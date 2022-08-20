@@ -181,7 +181,7 @@ console.log("kirim", kirim)
               margin: "20px 20px 0 20px",
             }}
           >
-            Simpan
+            Edit
           </Button>
         </Grid>
       </Dialog>{" "}

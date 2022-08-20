@@ -101,6 +101,7 @@ function DialogDeleteToDoItem(props) {
                 onClick={onClose}
                 // data-cy="modal-delete-cancel-button"
                 // data-cy="modal-delete-confirm-button  "
+                data-cy="modal-batal-hapus"
 
                 // data-cy="modal-delete-cancel-button"
               >
