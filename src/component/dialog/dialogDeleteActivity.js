@@ -47,11 +47,9 @@ function DialogDeleteActivity(props) {
   };
 
   return (
-    <ThemeProvider theme={theme} data-cy="modal-delete">
+    <ThemeProvider theme={theme} data-cy="modal-delete-cancel-button">
       <Dialog
-        // data-cy="modal-delete"
-        data-cy="modal-delete-cancel-button"
-
+        data-cy="modal-delete"
         onClose={onClose}
         open={open}
         classes={{ paper: classes.dialogPaper }}
