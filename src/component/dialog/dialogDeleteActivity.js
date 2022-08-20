@@ -97,8 +97,9 @@ function DialogDeleteActivity(props) {
               // data-cy="modal-batal-hapus"
           
               // data-cy="modal-batal-delete"
-              onClick={onClose}
+              // onClick={onClose}
               data-cy="modal-delete"
+              onClick={handleClose}
 
             >
               Batal
