@@ -73,7 +73,22 @@ const Activity = () => {
       state: { value: value, },
       // handleDeleteList,
     });
-    // navigate(`/detail`);
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_URL + `/activity-groups/${value?.id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          // body: JSON.stringify({
+          //   title: titleDetail,
+          //   email: "rachmat.d.gunawan@gmail.com",
+          // }),
+        }
+      );
+    } catch (err) {}
   };
 
   const deleteData = (id) => {

@@ -32,7 +32,7 @@ export default function CardActivity(props) {
   }
   return (
     <Card
-      onClick={(id) => handleClick(id)}
+      onClick={(id) => getDetail(id)}
       data-cy="activity-item"
       key={index}
       sx={{ width: 200, height: "180px", margin: "10px" }}
