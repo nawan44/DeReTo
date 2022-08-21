@@ -22,8 +22,10 @@ export default function CardActivity(props) {
   const navigate = useNavigate();
 
   return (
-    <Card key={index} sx={{ width: 200, height: "180px", margin: "10px" }}>
-      <CardContent data-cy="activity-item" onClick={(id) => getDetail(id)}>
+    <Card data-cy="activity-item" key={index} sx={{ width: 200, height: "180px", margin: "10px" }}>
+      <CardContent 
+      // data-cy="activity-item" 
+      onClick={(id) => getDetail(id)}>
         {/* <CardContent onClick={ (id) =>checkActivity(item)  }> */}
         <Typography
           gutterBottom
