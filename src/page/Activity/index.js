@@ -70,7 +70,7 @@ const Activity = () => {
 
   const getDetail =  (value) => {
     navigate(`/detail/${value?.id}`, {
-      state: { value: value, color: "green" },
+      state: { value: value, },
       // handleDeleteList,
     });
     // navigate(`/detail`);

@@ -139,7 +139,7 @@ const ListActivity = ({
                     // data-cy="activity-item"
                     handleDeleteActivity={handleDeleteActivity}
                     toDashboard={toDashboard}
-                    getDetail={() => getDetail()}
+                    getDetail={() => getDetail(item)}
                     // setClickTitle={setClickTitle(true)}
                     setIdDetail={setIdDetail(item.id)}
                     // setIdDetail ={setIdDetail}

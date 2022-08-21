@@ -15,7 +15,7 @@ export default function CardActivity(props) {
     item,
     idDetail,
     setIdDetail,
-    toDetail,
+    getDetail,
     handleDeleteActivity,
     list,
   } = props;
@@ -23,7 +23,7 @@ export default function CardActivity(props) {
 
   return (
     <Card key={index} sx={{ width: 200, height: "180px", margin: "10px" }}>
-      <CardContent data-cy="activity-item" onClick={(id) => toDetail(id)}>
+      <CardContent data-cy="activity-item" onClick={(id) => getDetail(id)}>
         {/* <CardContent onClick={ (id) =>checkActivity(item)  }> */}
         <Typography
           gutterBottom

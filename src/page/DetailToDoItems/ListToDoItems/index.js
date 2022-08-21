@@ -147,7 +147,7 @@ const ListToDoItems = (props) => {
         container
       >
         {valueSort == undefined ? (
-          <List className={classes.list}>
+          <List className={classes.list} data-cy="todo-item">
             {todoItem?.map((value) => {
               const labelId = `checkbox-list-label-${value}`;
 
@@ -164,7 +164,7 @@ const ListToDoItems = (props) => {
                   secondaryAction={
                     <IconButton edge="end" aria-label="comments">
                       <DeleteIcon
-                      data-cy="modal-delete"
+                      data-cy="todo-item-delete-button"
                         onClick={(id) => handleOpenDeleteToDoItems(value)}
                         style={{ color: "#888888" }}
                       />
@@ -179,6 +179,7 @@ const ListToDoItems = (props) => {
                   >
                     <ListItemIcon>
                       <Checkbox
+                      data-cy="todo-item-checkbox"
                         edge="start"
                         checked={checked.indexOf(value) !== -1}
                         tabIndex={-1}
@@ -188,6 +189,7 @@ const ListToDoItems = (props) => {
                     </ListItemIcon>
                     <IconButton edge="end" aria-label="comments">
                       <FiberManualRecordRoundedIcon
+                      data-cy="todo-item-priority-indicator"
                         sx={{
                           fontSize: 10,
                           color: checkColor(value.priority),
@@ -203,6 +205,7 @@ const ListToDoItems = (props) => {
                       classes={{ primary: classes.text }}
                       id={labelId}
                       // primary={value.title}
+                      data-cy="todo-item-title"
                       className={isChecked(value)}
                     >
                       {value.title}
@@ -211,7 +214,7 @@ const ListToDoItems = (props) => {
                     <IconButton
                       edge="end"
                       aria-label="comments"
-                      data-cy="edit-todo-item"
+                      data-cy="todo-item-edit-button"
 
                       onClick={(id) => handleOpenEditToDoItems(value)}
                     >
@@ -248,7 +251,8 @@ const ListToDoItems = (props) => {
                   secondaryAction={
                     <IconButton edge="end" aria-label="comments">
                       <DeleteIcon
-  data-cy="modal-delete-confirm-button"
+            data-cy="todo-item-delete-button"
+
                         onClick={(id) => handleOpenDeleteToDoItems(value)}
                         style={{ color: "#888888" }}
                       />
@@ -263,6 +267,8 @@ const ListToDoItems = (props) => {
                   >
                     <ListItemIcon>
                       <Checkbox
+                                            data-cy="todo-item-checkbox"
+
                         edge="start"
                         checked={checked.indexOf(value) !== -1}
                         tabIndex={-1}
@@ -272,6 +278,8 @@ const ListToDoItems = (props) => {
                     </ListItemIcon>
                     <IconButton edge="end" aria-label="comments">
                       <FiberManualRecordRoundedIcon
+                      data-cy="todo-item-priority-indicator"
+
                         sx={{
                           fontSize: 10,
                           color: checkColor(value.priority),
@@ -288,11 +296,15 @@ const ListToDoItems = (props) => {
                       // primary={value.title}
                       className={isChecked(value)}
                       classes={{ primary: classes.text }}
+                      data-cy="todo-item-title"
+
                     >
                       {value.title}
                     </ListItemText>
 
                     <IconButton
+                                          data-cy="todo-item-edit-button"
+
                       edge="end"
                       aria-label="comments"
                       onClick={(id) => handleOpenEditToDoItems(value)}
@@ -317,7 +329,8 @@ const ListToDoItems = (props) => {
         onClose={handleCloseDeleteToDoItems}
         todoItemDelete={deleteToDoItems}
         toDoItemList={toDoItemList}
-        dataToDoItem={dataToDoItem}data-cy="modal-delete-confirm-button"
+        dataToDoItem={dataToDoItem}
+        data-cy="modal-delete-confirm-button"
 
         // data-cy="modal-delete"
       />
