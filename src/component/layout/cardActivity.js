@@ -20,12 +20,26 @@ export default function CardActivity(props) {
     list,
   } = props;
   const navigate = useNavigate();
+  function handleClick(id) {
+    console.log("cards click");
+    getDetail(id);
+  }
 
+  function handleSubmit(item) {
+    item.stopPropagation();
+
+    // console.log("button inside card click");
+  }
   return (
-    <Card data-cy="activity-item" key={index} sx={{ width: 200, height: "180px", margin: "10px" }}>
-      <CardContent 
-      // data-cy="activity-item" 
-      onClick={(id) => getDetail(id)}>
+    <Card
+      onClick={(id) => handleClick(id)}
+      data-cy="activity-item"
+      key={index}
+      sx={{ width: 200, height: "180px", margin: "10px" }}
+    >
+      <CardContent
+      // data-cy="activity-item"
+      >
         {/* <CardContent onClick={ (id) =>checkActivity(item)  }> */}
         <Typography
           gutterBottom
@@ -52,7 +66,11 @@ export default function CardActivity(props) {
         </Typography>
         <DeleteIcon
           data-cy="activity-item-delete-button"
-          onClick={(id) => handleDeleteActivity(item)}
+          // onClick={(id) => handleDeleteActivity(item)}
+          onClick={(id) => {
+            handleDeleteActivity(item);
+            id.stopPropagation();
+          }}
           style={{ width: "20%", float: "right", color: "#888888" }}
         />
       </CardActions>
