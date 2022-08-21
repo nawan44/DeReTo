@@ -30,7 +30,7 @@ const Activity = () => {
   const [clickActivity, setClickActivity] = useState();
   const [title, setTitle] = useState();
   const [idDetail, setIdDetail] = useState();
-  // const [todoItem, setTodoItem] = useState();
+  const [detail, setDetail] = useState([]);
   // const [deleteTitleList, setDeleteTitleList] = useState("");
   
   const [deleteTitleList, setDeleteTitleList] = useState("");
@@ -86,11 +86,13 @@ const Activity = () => {
           //   title: titleDetail,
           //   email: "rachmat.d.gunawan@gmail.com",
           // }),
-        }
-      );
+        },
+      ); let res = await response.json();
+
+      setDetail(res);
     } catch (err) {}
   };
-
+console.log("detail",detail)
   const deleteData = (id) => {
     // const newList = list.filter((item) => item.id !== id);
     try {
