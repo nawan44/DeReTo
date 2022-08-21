@@ -31,7 +31,7 @@ function DialogEditToDoItem(props) {
     detailId,
     onToDoItem,
     onClick,
-    getTodoItemList,
+    // getTodoItemList,
     onClose,
     open,
     classes,
@@ -47,7 +47,6 @@ function DialogEditToDoItem(props) {
       priority: dataToDoItem ? dataToDoItem?.priority : "",
     });
   }, [dataToDoItem]);
-console.log("kirim", kirim)
   const switchSend = () => {
     if (dataToDoItem) {
       return `/todo-items/${dataToDoItem.id}`;
@@ -64,7 +63,6 @@ console.log("kirim", kirim)
   };
   const addData = (e) => {
     //  data-cy : "modal-add-save-button";
-    console.log("kirim", kirim);
 
     e.preventDefault();
     // try {
@@ -78,7 +76,7 @@ console.log("kirim", kirim)
     });
     onToDoItem()
     onClose();
-    getTodoItemList()
+    // getTodoItemList()
 
   };
 

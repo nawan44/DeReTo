@@ -21,7 +21,6 @@ export default function CardActivity(props) {
   } = props;
   const navigate = useNavigate();
   function handleClick(id) {
-    console.log("cards click");
     getDetail(id);
   }
 

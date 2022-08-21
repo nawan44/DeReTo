@@ -68,12 +68,17 @@ const Activity = () => {
     }
   };
 
+  // const toDetail = () =>{
+  // if(detail){  
+  // navigate(`/detail/${clickActivity}`, {
+  //     state: {  detail :  detail },
+  //     // handleDeleteList,
+  //   });}
+  // }
+
   const getDetail = async (value) => {
-    navigate(`/detail/${value?.id}`, {
-      state: { value: value, },
-      // handleDeleteList,
-    });
-    try {
+
+    // try {
       const response = await fetch(
         process.env.REACT_APP_URL + `/activity-groups/${value?.id}`,
         {
@@ -87,12 +92,21 @@ const Activity = () => {
           //   email: "rachmat.d.gunawan@gmail.com",
           // }),
         },
-      ); let res = await response.json();
+      ); 
+      let res = await response.json();
 
-      setDetail(res);
-    } catch (err) {}
+      setDetail(res.todo_items);
+
+      navigate(`/detail/${value?.id}`, {
+            state: {value: value,  dataDetail :    res.todo_items},
+          })
+    // } catch (err) {}
   };
-console.log("detail",detail)
+
+//   useEffect(() => {
+//     toDetail()
+//   }, [getDetail]);
+// console.log("detail",detail.length)
   const deleteData = (id) => {
     // const newList = list.filter((item) => item.id !== id);
     try {
@@ -165,7 +179,6 @@ console.log("detail",detail)
     setOpenDeleteActivity(true);
     setClickActivity(value.id);
     setDeleteTitleList(value.title);
-    console.log(value.id)
   };
   const handleCloseDeleteActivity = (value) => {
         '[data-cy=modal-delete-cancel-button]'

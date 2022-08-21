@@ -52,8 +52,8 @@ const ListToDoItems = (props) => {
     openDeleteToDoItems,
     handleDeleteList,
     item,
-    getTodoItemList,
-    toDoItemList,
+    // getTodoItemList,
+    dataDetail,
     handleOpenDeleteToDoItems,
     handleCloseDeleteToDoItems,
     handleOpenEditToDoItems,
@@ -65,9 +65,9 @@ const ListToDoItems = (props) => {
     onToDoItem,
   } = props;
   const classes = useStyles();
-
+console.log("dataDetail",dataDetail)
   const [checked, setChecked] = useState([1]);
-  const [todoItem, setTodoItem] = useState(toDoItemList);
+
   const checkColor = (color) => {
     if (color === "very-high") {
       return "#ED4C5C";
@@ -115,25 +115,7 @@ const ListToDoItems = (props) => {
   // Return classes based on whether item is checked
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
-  const deleteToDoItems = () => {
-    // "[data-cy=modal-delete-confirm-button]";
-    try {
-      const response = fetch(
-        process.env.REACT_APP_URL + `/todo-items/${idToDoItems}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      onToDoItem();
-      handleCloseDeleteToDoItems();
 
-    } catch (err) {
-      // console.log(err.message);
-    }
-  };
 
   return (
     <Container style={{ width: "100%", textAlign: "center", margin: "0 auto" }}>
@@ -148,7 +130,7 @@ const ListToDoItems = (props) => {
       >
         {valueSort == undefined ? (
           <List className={classes.list} data-cy="todo-item">
-            {todoItem?.map((value) => {
+            {dataDetail?.map((value) => {
               const labelId = `checkbox-list-label-${value}`;
 
               return (
@@ -157,6 +139,7 @@ const ListToDoItems = (props) => {
                   key={value.id}
                   style={{
                     width: "100%",
+                    height:"50px",
                     margin: "20px 0",
                     backgroundColor: "#fff",
                     borderRadius: "7px",
@@ -164,7 +147,7 @@ const ListToDoItems = (props) => {
                   secondaryAction={
                     <IconButton edge="end" aria-label="comments">
                       <DeleteIcon
-                      data-cy="todo-item-delete-button"
+                        data-cy="todo-item-delete-button"
                         onClick={(id) => handleOpenDeleteToDoItems(value)}
                         style={{ color: "#888888" }}
                       />
@@ -179,7 +162,7 @@ const ListToDoItems = (props) => {
                   >
                     <ListItemIcon>
                       <Checkbox
-                      data-cy="todo-item-checkbox"
+                        data-cy="todo-item-checkbox"
                         edge="start"
                         checked={checked.indexOf(value) !== -1}
                         tabIndex={-1}
@@ -189,7 +172,7 @@ const ListToDoItems = (props) => {
                     </ListItemIcon>
                     <IconButton edge="end" aria-label="comments">
                       <FiberManualRecordRoundedIcon
-                      data-cy="todo-item-priority-indicator"
+                        data-cy="todo-item-priority-indicator"
                         sx={{
                           fontSize: 10,
                           color: checkColor(value.priority),
@@ -215,7 +198,6 @@ const ListToDoItems = (props) => {
                       edge="end"
                       aria-label="comments"
                       data-cy="todo-item-edit-button"
-
                       onClick={(id) => handleOpenEditToDoItems(value)}
                     >
                       <CreateIcon
@@ -251,8 +233,7 @@ const ListToDoItems = (props) => {
                   secondaryAction={
                     <IconButton edge="end" aria-label="comments">
                       <DeleteIcon
-            data-cy="todo-item-delete-button"
-
+                        data-cy="todo-item-delete-button"
                         onClick={(id) => handleOpenDeleteToDoItems(value)}
                         style={{ color: "#888888" }}
                       />
@@ -267,8 +248,7 @@ const ListToDoItems = (props) => {
                   >
                     <ListItemIcon>
                       <Checkbox
-                                            data-cy="todo-item-checkbox"
-
+                        data-cy="todo-item-checkbox"
                         edge="start"
                         checked={checked.indexOf(value) !== -1}
                         tabIndex={-1}
@@ -278,8 +258,7 @@ const ListToDoItems = (props) => {
                     </ListItemIcon>
                     <IconButton edge="end" aria-label="comments">
                       <FiberManualRecordRoundedIcon
-                      data-cy="todo-item-priority-indicator"
-
+                        data-cy="todo-item-priority-indicator"
                         sx={{
                           fontSize: 10,
                           color: checkColor(value.priority),
@@ -297,14 +276,12 @@ const ListToDoItems = (props) => {
                       className={isChecked(value)}
                       classes={{ primary: classes.text }}
                       data-cy="todo-item-title"
-
                     >
                       {value.title}
                     </ListItemText>
 
                     <IconButton
-                                          data-cy="todo-item-edit-button"
-
+                      data-cy="todo-item-edit-button"
                       edge="end"
                       aria-label="comments"
                       onClick={(id) => handleOpenEditToDoItems(value)}
@@ -324,23 +301,14 @@ const ListToDoItems = (props) => {
           </List>
         )}
       </Grid>
-      <DialogDeleteToDoItem
-        open={openDeleteToDoItems}
-        onClose={handleCloseDeleteToDoItems}
-        todoItemDelete={deleteToDoItems}
-        toDoItemList={toDoItemList}
-        dataToDoItem={dataToDoItem}
-        data-cy="modal-delete-confirm-button"
 
-        // data-cy="modal-delete"
-      />
       <DialogEditToDoItem
         onToDoItem={onToDoItem}
         open={openEditToDoItems}
         dataToDoItem={dataToDoItem}
         onClose={handleClosEditToDoItems}
-        toDoItemList={toDoItemList}
-        getTodoItemList={getTodoItemList}
+        dataDetail={dataDetail}
+        // getTodoItemList={getTodoItemList}
       />
     </Container>
   );

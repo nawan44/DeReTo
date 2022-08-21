@@ -32,7 +32,7 @@ function DialogAddToDoItem(props) {
     detailId,
     onToDoItem,
     onClick,
-    getTodoItemList,
+    // getTodoItemList,
     onClose,
     open,
     classes,
@@ -68,11 +68,9 @@ function DialogAddToDoItem(props) {
       return "POST";
     }
   };
-  console.log("valueKirim", valueKirim);
   const addData = (e) => {
     //  data-cy : "modal-add-save-button";
-    console.log("kirim", kirim);
-    console.log("valueKirim", valueKirim);
+
 
     e.preventDefault();
     // try {
@@ -86,7 +84,7 @@ function DialogAddToDoItem(props) {
     });
     onToDoItem()
     onClose();
-    getTodoItemList()
+    // getTodoItemList()
     setValueKirim ({
       title: "",
       _comment: "",

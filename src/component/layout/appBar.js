@@ -17,7 +17,7 @@ const ariaLabel = { "aria-label": "description" };
 const AppBar = (props, ss) => {
   const {
     handleAddActivityGroup,
-    getTodoItemList,
+    // getTodoItemList,
     handle,
     list,
     todoItem,
@@ -33,7 +33,7 @@ const AppBar = (props, ss) => {
     handleCloseAddTodoItems,
     sendTitle,
     detailTitle,
-    toDoItemList,
+    dataDetail,
     changeToDoItems,
     value,
     handleOpenAddToDoItems,
@@ -104,7 +104,7 @@ const AppBar = (props, ss) => {
   };
 
   const viewSort = () => {
-    if (list?.length > 0 || toDoItemList?.length > 0) {
+    if (list?.length > 0 || dataDetail?.length > 0) {
       return (
         <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
           <SwapVertRoundedIcon
@@ -118,7 +118,7 @@ const AppBar = (props, ss) => {
     }
   };
   const RightButton = () => {
-    if (list && !toDoItemList) {
+    if (list && !dataDetail) {
       return (
         // <span data-cy="todo-sort-button">
         <span>
@@ -137,7 +137,7 @@ const AppBar = (props, ss) => {
           </Button>
         </span>
       );
-    } else if (!list && toDoItemList) {
+    } else if (!list && dataDetail) {
       return (
         // <span data-cy="todo-sort-button">
         <span>
@@ -223,7 +223,7 @@ const AppBar = (props, ss) => {
         onToDoItem={onToDoItem}
         open={openAddToDoItems}
         onClose={handleCloseAddToDoItems}
-        getTodoItemList={getTodoItemList}
+        // getTodoItemList={getTodoItemList}
       />
     </>
   );

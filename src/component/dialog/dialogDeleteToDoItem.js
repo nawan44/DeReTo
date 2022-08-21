@@ -23,7 +23,7 @@ const theme = createTheme({
 const styles = {
   dialogPaper: {
     width: "350px",
-    height: "270px",
+    height: "100%",
     borderRadius: "5px",
   },
 };
@@ -44,9 +44,9 @@ function DialogDeleteToDoItem(props) {
     onClose(selectedValue);
     // onToDoItem();
   };
-
+console.log("clickActivity",clickActivity)
   return (
-    <ThemeProvider theme={theme}  data-cy="modal-delete-cancel-button">
+    <ThemeProvider theme={theme}  >
 
         <Dialog
         

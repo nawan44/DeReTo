@@ -39,13 +39,12 @@ const ListActivity = ({
   const handleClickAway = () => {
     setClose(false);
     handleCloseDeleteList()
-    console.log("aaaa")
   };
   return (
     <Container style={{ width: "100%" }} 
     // data-cy="activity-item">
     >   
-    <ClickAwayListener
+    {/* <ClickAwayListener
           data-cy="modal-delete-cancel-button"
 
       mouseEvent="onMouseDown"
@@ -53,7 +52,7 @@ const ListActivity = ({
       onClickAway={handleClickAway}
 
       // data-cy="modal-delete-cancel-button"
-    >
+    > */}
       {list?.length === 0 ? (
         <Grid
           style={{
@@ -172,7 +171,7 @@ const ListActivity = ({
         </Grid>
       )}
 
-      </ClickAwayListener>
+      {/* </ClickAwayListener> */}
     </Container>
   );
 };
