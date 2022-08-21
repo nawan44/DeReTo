@@ -25,9 +25,9 @@ const DetailToDoItems = (props) => {
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const { state } = useLocation();
   const { value, dataDetail,titleBarDetail } = state;
-console.log("dataDetail >>>", dataDetail)
+console.log("dataDetail >>>", dataDetail.length)
   const [titleDetail, setTitleDetail] = useState(
-    value ? value.title : "New Activity"
+    titleBarDetail ? titleBarDetail : "New Activity"
   );
 
   const [changeTitle, setChangeTitle] = useState();
@@ -46,7 +46,6 @@ console.log("dataDetail >>>", dataDetail)
   const [onToDoItem, setOnToDoItem] = useState(false);
 
   const [valueSort, setValueSort] = useState();
-  console.log("detail",idToDoItems)
 
   const sortToDoItem = () => {
     if (valueSort === "Terbaru") {
@@ -179,7 +178,7 @@ console.log("dataDetail >>>", dataDetail)
         // getTodoItemList={getTodoItemList}
       />
 
-      { dataDetail?.length === 0 ? (
+      { dataDetail.length === 0 ? (
           <Grid
           style={{
             margin: "0 auto",

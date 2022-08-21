@@ -65,7 +65,6 @@ const ListToDoItems = (props) => {
     onToDoItem,
   } = props;
   const classes = useStyles();
-console.log("dataDetail...............",dataDetail)
   const [checked, setChecked] = useState([1]);
 
   const checkColor = (color) => {

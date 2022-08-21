@@ -57,7 +57,6 @@ const AppBar = (props, ss) => {
   const handleChangeTitle = (event) => {
     setTitleDetail(event.target.value);
   };
-console.log("titleBarDetail",titleBarDetail)
   const toActivity = (e) => {
     navigate("/");
     sendTitle(e);
@@ -73,7 +72,7 @@ console.log("titleBarDetail",titleBarDetail)
           <span>
             <ArrowBackIosIcon onClick={toActivity} />
             <Input
-              value={titleDetail}
+              value={titleBarDetail}
               data-cy="todo-title"
 
               onChange={handleChangeTitle}

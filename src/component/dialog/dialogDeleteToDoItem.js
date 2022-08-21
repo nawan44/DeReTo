@@ -44,7 +44,6 @@ function DialogDeleteToDoItem(props) {
     onClose(selectedValue);
     // onToDoItem();
   };
-console.log("clickActivity",clickActivity)
   return (
     <ThemeProvider theme={theme}  >
 
