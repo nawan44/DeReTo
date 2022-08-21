@@ -129,6 +129,7 @@ const ListActivity = ({
               {list &&
                 list?.map((item, index) => (
                   <CardActivity
+                  data-cy="activity-item"
                     key={item.id}
                     click={click}
                     setClick={setClick}
@@ -151,6 +152,7 @@ const ListActivity = ({
               {sortActivity &&
                 sortActivity?.map((item, index) => (
                   <CardActivity
+                  data-cy="activity-item"
                     key={item.id}
                     click={click}
                     setClick={setClick}
