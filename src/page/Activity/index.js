@@ -32,7 +32,7 @@ const Activity = () => {
   const [idDetail, setIdDetail] = useState();
   const [detail, setDetail] = useState([]);
   // const [deleteTitleList, setDeleteTitleList] = useState("");
-  
+  const [titleBar, setTitleBar] = useState()
   const [deleteTitleList, setDeleteTitleList] = useState("");
   const [todoItemDetail, setTodoItemDetail] = useState();
   const [addActivity, setAddActivity] = useState([]);
@@ -96,9 +96,9 @@ const Activity = () => {
       let res = await response.json();
 
       setDetail(res.todo_items);
-
+      setTitleBar(res.title)
       navigate(`/detail/${value?.id}`, {
-            state: {value: value,  dataDetail :    res.todo_items},
+            state: {value: value, titleBarDetail:res.title , dataDetail :    res.todo_items},
           })
     // } catch (err) {}
   };

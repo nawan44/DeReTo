@@ -65,7 +65,7 @@ const ListToDoItems = (props) => {
     onToDoItem,
   } = props;
   const classes = useStyles();
-console.log("dataDetail",dataDetail)
+console.log("dataDetail...............",dataDetail)
   const [checked, setChecked] = useState([1]);
 
   const checkColor = (color) => {
@@ -130,13 +130,13 @@ console.log("dataDetail",dataDetail)
       >
         {valueSort == undefined ? (
           <List className={classes.list} data-cy="todo-item">
-            {dataDetail?.map((value) => {
-              const labelId = `checkbox-list-label-${value}`;
+            {dataDetail?.map((item) => {
+              const labelId = `checkbox-list-label-${item}`;
 
               return (
                 <ListItem
                   sx={{ display: "list-item" }}
-                  key={value.id}
+                  key={item.id}
                   style={{
                     width: "100%",
                     height:"50px",
@@ -148,7 +148,7 @@ console.log("dataDetail",dataDetail)
                     <IconButton edge="end" aria-label="comments">
                       <DeleteIcon
                         data-cy="todo-item-delete-button"
-                        onClick={(id) => handleOpenDeleteToDoItems(value)}
+                        onClick={(id) => handleOpenDeleteToDoItems(item)}
                         style={{ color: "#888888" }}
                       />
                     </IconButton>
@@ -157,14 +157,14 @@ console.log("dataDetail",dataDetail)
                 >
                   <ListItemButton
                     role={undefined}
-                    onClick={handleToggle(value)}
+                    onClick={handleToggle(item)}
                     dense
                   >
                     <ListItemIcon>
                       <Checkbox
                         data-cy="todo-item-checkbox"
                         edge="start"
-                        checked={checked.indexOf(value) !== -1}
+                        checked={checked.indexOf(item) !== -1}
                         tabIndex={-1}
                         disableRipple
                         inputProps={{ "aria-labelledby": labelId }}
@@ -175,7 +175,7 @@ console.log("dataDetail",dataDetail)
                         data-cy="todo-item-priority-indicator"
                         sx={{
                           fontSize: 10,
-                          color: checkColor(value.priority),
+                          color: checkColor(item.priority),
                           margin: "0 10px 0 0",
                         }}
                       />
@@ -183,22 +183,22 @@ console.log("dataDetail",dataDetail)
                     <ListItemText
                       style={{
                         // maxWidth: value.title?.length + 25,
-                        textDecoration: line(value.id),
+                        textDecoration: line(item.id),
                       }}
                       classes={{ primary: classes.text }}
                       id={labelId}
                       // primary={value.title}
                       data-cy="todo-item-title"
-                      className={isChecked(value)}
+                      className={isChecked(item)}
                     >
-                      {value.title}
+                      {item.title}
                     </ListItemText>
 
                     <IconButton
                       edge="end"
                       aria-label="comments"
                       data-cy="todo-item-edit-button"
-                      onClick={(id) => handleOpenEditToDoItems(value)}
+                      onClick={(id) => handleOpenEditToDoItems(item)}
                     >
                       <CreateIcon
                         style={{
@@ -217,13 +217,13 @@ console.log("dataDetail",dataDetail)
           <List
             style={{ width: "100%", textAlign: "center", margin: "0 auto" }}
           >
-            {sortToDoItem?.map((value) => {
-              const labelId = `checkbox-list-label-${value}`;
+            {sortToDoItem?.map((item) => {
+              const labelId = `checkbox-list-label-${item}`;
 
               return (
                 <ListItem
                   sx={{ display: "list-item" }}
-                  key={value.id}
+                  key={item.id}
                   style={{
                     width: "100%",
                     margin: "20px 0",
@@ -234,7 +234,7 @@ console.log("dataDetail",dataDetail)
                     <IconButton edge="end" aria-label="comments">
                       <DeleteIcon
                         data-cy="todo-item-delete-button"
-                        onClick={(id) => handleOpenDeleteToDoItems(value)}
+                        onClick={(id) => handleOpenDeleteToDoItems(item)}
                         style={{ color: "#888888" }}
                       />
                     </IconButton>
@@ -243,14 +243,14 @@ console.log("dataDetail",dataDetail)
                 >
                   <ListItemButton
                     role={undefined}
-                    onClick={handleToggle(value)}
+                    onClick={handleToggle(item)}
                     dense
                   >
                     <ListItemIcon>
                       <Checkbox
                         data-cy="todo-item-checkbox"
                         edge="start"
-                        checked={checked.indexOf(value) !== -1}
+                        checked={checked.indexOf(item) !== -1}
                         tabIndex={-1}
                         disableRipple
                         inputProps={{ "aria-labelledby": labelId }}
@@ -261,7 +261,7 @@ console.log("dataDetail",dataDetail)
                         data-cy="todo-item-priority-indicator"
                         sx={{
                           fontSize: 10,
-                          color: checkColor(value.priority),
+                          color: checkColor(item.priority),
                           margin: "0 10px 0 0",
                         }}
                       />
@@ -269,22 +269,22 @@ console.log("dataDetail",dataDetail)
                     <ListItemText
                       style={{
                         // maxWidth: value.title?.length + 25,
-                        textDecoration: line(value.id),
+                        textDecoration: line(item.id),
                       }}
                       id={labelId}
                       // primary={value.title}
-                      className={isChecked(value)}
+                      className={isChecked(item)}
                       classes={{ primary: classes.text }}
                       data-cy="todo-item-title"
                     >
-                      {value.title}
+                      {item.title}
                     </ListItemText>
 
                     <IconButton
                       data-cy="todo-item-edit-button"
                       edge="end"
                       aria-label="comments"
-                      onClick={(id) => handleOpenEditToDoItems(value)}
+                      onClick={(id) => handleOpenEditToDoItems(item)}
                     >
                       <CreateIcon
                         style={{

@@ -23,7 +23,7 @@ const theme = createTheme({
 const styles = {
   dialogPaper: {
     width: "500px",
-    height: "400px",
+    height: "100%",
   },
 };
 

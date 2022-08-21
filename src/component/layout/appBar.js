@@ -39,7 +39,7 @@ const AppBar = (props, ss) => {
     handleOpenAddToDoItems,
     valueSort,
     setValueSort,
-    onToDoItem,
+    onToDoItem,titleBarDetail
   } = props;
   const navigate = useNavigate();
   let location = useLocation();
@@ -57,7 +57,7 @@ const AppBar = (props, ss) => {
   const handleChangeTitle = (event) => {
     setTitleDetail(event.target.value);
   };
-
+console.log("titleBarDetail",titleBarDetail)
   const toActivity = (e) => {
     navigate("/");
     sendTitle(e);
@@ -71,9 +71,11 @@ const AppBar = (props, ss) => {
         <span>
           {" "}
           <span>
-            <ArrowBackIosIcon onClick={toActivity} data-cy="todo-title" />
+            <ArrowBackIosIcon onClick={toActivity} />
             <Input
               value={titleDetail}
+              data-cy="todo-title"
+
               onChange={handleChangeTitle}
               // label="Rachmat Gunawan"
               placeholder="New Activity"
@@ -89,10 +91,10 @@ const AppBar = (props, ss) => {
     } else {
       return (
         <span>
-          <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
+          <ArrowBackIosIcon data-cy="todo-title-edit-butto" onClick={toActivity} />
           <Input
-            data-cy="todo-title-edit-button"
-            value={titleDetail}
+            data-cy="todo-title"
+            value={titleBarDetail}
             onChange={handleChangeTitle}
             // label="Rachmat Gunawan"
             placeholder="New Activity"
