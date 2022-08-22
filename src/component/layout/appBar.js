@@ -206,32 +206,32 @@ const AppBar = (props, ss) => {
           }}
           data-cy="activity-title"
         >
-          {list == undefined ? (
-            <div>
-              <ArrowBackIosIcon
+          {/* {list == undefined ? (*/}
+            {/* <div>  */}
+            {list == undefined ?  <ArrowBackIosIcon
                 data-cy="todo-back-button"
                 onClick={toActivity}
-              />
+              /> :(<span></span>) }
               <Input
                 data-cy="todo-title"
-                value={titleBarChange ? titleDetail : titleBarChange}
+                value={titleBarChange ? titleDetail : "Activity"}
                 onChange={handleChangeTitle}
                 // label="Rachmat Gunawan"
                 placeholder="New Activity"
                 sx={{ fontSize: "24px", fontWeight: "bold" }}
               />
-              <IconButton
+             {list == undefined ?   <IconButton
                 data-cy="todo-title-edit-button"
                 onClick={sendTitle}
                 edge="end"
                 aria-label="comments"
               >
                 <CreateIcon style={{ color: "#888888" }} />
-              </IconButton>
-            </div>
-          ) : (
+              </IconButton> :(<span></span>) }
+            {/* </div> */}
+          {/* ) : (
             <span data-cy="activity-title">Activity</span>
-          )}
+          )} */}
         </Grid>
         <Grid item xs={6} data-cy="todo-add-button">
           {RightButton()}
