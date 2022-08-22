@@ -90,6 +90,7 @@ const DetailToDoItems = (props) => {
 
   const sendTitle = async (e) => {
     // `[data-cy=todo-title]`;
+    console.log("ffff")
     try {
       const response = await fetch(
         process.env.REACT_APP_URL + `/activity-groups/${detailId}`,
@@ -107,6 +108,7 @@ const DetailToDoItems = (props) => {
       );
     } catch (err) {}
   };
+  console.log("dataDetail", dataDetail)
   const deleteToDoItems = () => {
     // "[data-cy=modal-delete-confirm-button]";
     try {

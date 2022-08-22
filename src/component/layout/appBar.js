@@ -46,7 +46,7 @@ const AppBar = (props, ss) => {
   const navigate = useNavigate();
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
-
+console.log("list",list)
   const [openSort, setOpenSort] = useState(false);
   // const [selectedSort, setSelectedSort] = useState(sorts[1]);
   // const [openAddList, setOpenAddList] = useState(false);
@@ -65,30 +65,32 @@ const AppBar = (props, ss) => {
   };
 
   const TitleActivity = () => {
-    if (location.pathname === `/`) {
-      return <span data-cy="activity-title">Activity</span>;
-    } else if (location.pathname === `/`) {
+    // if (location.pathname === `/` ) {
+    //   return <span data-cy="activity-title">Activity</span>;
+    // } else 
+    // if (location.pathname === `/`) {
+    //   return (
+    //     <div data-cy="todo-title">
+    //       {" "}
+    //       <ArrowBackIosIcon onClick={toActivity} data-cy="todo-back-button" />
+    //       <Input
+    //         value={titleDetail}
+    //         data-cy="todo-title"
+    //         onChange={handleChangeTitle}
+    //         // label="Rachmat Gunawan"
+    //         placeholder="New Activity"
+    //         inputProps={ariaLabel}
+    //         sx={{ fontSize: "24px", fontWeight: "bold" }}
+    //       />
+    //       <IconButton edge="end" aria-label="comments">
+    //         <CreateIcon style={{ color: "#888888" }} />
+    //       </IconButton>{" "}
+    //     </div>
+    //   );
+    // } else
+    if(list == undefined) {
       return (
-        <div data-cy="todo-title">
-          {" "}
-          <ArrowBackIosIcon onClick={toActivity} data-cy="todo-back-button" />
-          <Input
-            value={titleDetail}
-            data-cy="todo-title"
-            onChange={handleChangeTitle}
-            // label="Rachmat Gunawan"
-            placeholder="New Activity"
-            inputProps={ariaLabel}
-            sx={{ fontSize: "24px", fontWeight: "bold" }}
-          />
-          <IconButton edge="end" aria-label="comments">
-            <CreateIcon style={{ color: "#888888" }} />
-          </IconButton>{" "}
-        </div>
-      );
-    } else {
-      return (
-        <div data-cy="todo-title">
+        <div>
           <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
           <Input
             data-cy="todo-title"
@@ -98,8 +100,13 @@ const AppBar = (props, ss) => {
             placeholder="New Activity"
             sx={{ fontSize: "24px", fontWeight: "bold" }}
           />
+           <IconButton  data-cy="todo-title-edit-button" onClick={sendTitle} edge="end" aria-label="comments">
+            <CreateIcon style={{ color: "#888888" }} />
+          </IconButton>
         </div>
       );
+    } else {
+      return <span data-cy="activity-title">Activity</span>
     }
   };
 
@@ -194,7 +201,7 @@ const AppBar = (props, ss) => {
           }}
           data-cy="activity-title"
         >
-          <span data-cy="todo-title">{TitleActivity()}</span>
+          <span >{TitleActivity()}</span>
         </Grid>
         <Grid item xs={6} data-cy="todo-add-button">
           {RightButton()}

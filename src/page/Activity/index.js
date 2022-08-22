@@ -67,7 +67,7 @@ const Activity = () => {
       console.log(err.message);
     }
   };
-
+console.log("list",list)
   // const toDetail = () =>{
   // if(detail){
   // navigate(`/detail/${clickActivity}`, {
