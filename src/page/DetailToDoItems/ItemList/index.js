@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TodoItems = (props) => {
+const ItemList = (props) => {
   const {
     list,
     openEditToDoItems,
@@ -311,4 +311,4 @@ const TodoItems = (props) => {
     </Container>
   );
 };
-export default TodoItems;
+export default ItemList;

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import AvatarWoman from "../../assets/avatar/avatar-woman.jpg";
 import { Container, Grid } from "@mui/material";
 import AddToDoItems from "../../component/dialog/dialogAddToDoItem";
 import AppBar from "../../component/layout/appBar";
 import { useLocation } from "react-router-dom";
-import TodoItems from "./TodoItems";
+import ItemList from "./ItemList";
 import DialogAddData from "../../component/dialog/dialogAddToDoItem";
 import DialogAddToDoItem from "../../component/dialog/dialogAddToDoItem";
 import DialogDeleteToDoItem from "../../component/dialog/dialogDeleteToDoItem";
+import EmptyState from "./ItemList/emptyState";
 
 const DetailToDoItems = (props) => {
   const {
@@ -178,7 +178,7 @@ const DetailToDoItems = (props) => {
       />
 
       {dataDetail?.length > 0 ? (
-        <TodoItems
+        <ItemList
           // onToDoItem={() => setOnToDoItem(!onToDoItem)}
           idToDoItems={idToDoItems}
           titleToDoItems={titleToDoItems}
@@ -196,28 +196,13 @@ const DetailToDoItems = (props) => {
           handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
           sortToDoItem={sortToDoItem()}
           valueSort={valueSort}
+          data-cy="todo-item"
         />
       ) : (
-        <Grid
-          style={{
-            margin: "0 auto",
-            textAlign: "center",
-            padding: "40px 0px",
-            width: "90%",
-          }}
-          container
-          rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        <EmptyState
           data-cy="todo-empty-state"
-        >
-          <img
-            alt="Remy Sharp"
-            width={300}
-            src={AvatarWoman}
-            style={{ margin: "0 auto", textAlign: "center" }}
-            onClick={handleOpenAddToDoItems}
-          />
-        </Grid>
+          handleOpenAddToDoItems={handleOpenAddToDoItems}
+        />
       )}
       <DialogAddToDoItem
         // getTodoItemList={getTodoItemList}
