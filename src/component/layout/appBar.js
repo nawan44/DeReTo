@@ -46,7 +46,7 @@ const AppBar = (props, ss) => {
   const navigate = useNavigate();
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
-  console.log("list", list);
+  console.log("titleBarDetail..........", titleBarDetail);
   const [openSort, setOpenSort] = useState(false);
   const [onEdit, setOnEdit] = useState(false);
   // const [selectedSort, setSelectedSort] = useState(sorts[1]);
@@ -68,29 +68,29 @@ const AppBar = (props, ss) => {
   };
 
   // const TitleActivity = () => {
-    // if (location.pathname === `/` ) {
-    //   return <span data-cy="activity-title">Activity</span>;
-    // } else
-    // if (location.pathname === `/`) {
-    //   return (
-    //     <div data-cy="todo-title">
-    //       {" "}
-    //       <ArrowBackIosIcon onClick={toActivity} data-cy="todo-back-button" />
-    //       <Input
-    //         value={titleDetail}
-    //         data-cy="todo-title"
-    //         onChange={handleChangeTitle}
-    //         // label="Rachmat Gunawan"
-    //         placeholder="New Activity"
-    //         inputProps={ariaLabel}
-    //         sx={{ fontSize: "24px", fontWeight: "bold" }}
-    //       />
-    //       <IconButton edge="end" aria-label="comments">
-    //         <CreateIcon style={{ color: "#888888" }} />
-    //       </IconButton>{" "}
-    //     </div>
-    //   );
-    // } else
+  // if (location.pathname === `/` ) {
+  //   return <span data-cy="activity-title">Activity</span>;
+  // } else
+  // if (location.pathname === `/`) {
+  //   return (
+  //     <div data-cy="todo-title">
+  //       {" "}
+  //       <ArrowBackIosIcon onClick={toActivity} data-cy="todo-back-button" />
+  //       <Input
+  //         value={titleDetail}
+  //         data-cy="todo-title"
+  //         onChange={handleChangeTitle}
+  //         // label="Rachmat Gunawan"
+  //         placeholder="New Activity"
+  //         inputProps={ariaLabel}
+  //         sx={{ fontSize: "24px", fontWeight: "bold" }}
+  //       />
+  //       <IconButton edge="end" aria-label="comments">
+  //         <CreateIcon style={{ color: "#888888" }} />
+  //       </IconButton>{" "}
+  //     </div>
+  //   );
+  // } else
   //   if (list == undefined) {
   //     return (
   //       <div>
@@ -237,17 +237,16 @@ const AppBar = (props, ss) => {
                   {titleBarDetail}
                 </div>
               )}
-
               {/* } */}
-
               <IconButton
                 data-cy="todo-title-edit-button"
-                onClick={clickEdit}
+                onClick={titleBarDetail === titleDetail ? clickEdit : sendTitle}
                 edge="end"
                 aria-label="comments"
               >
                 <CreateIcon style={{ color: "#888888" }} />
-              </IconButton>
+              </IconButton>{" "}
+            
             </div>
           ) : (
             <span data-cy="activity-title">Activity</span>

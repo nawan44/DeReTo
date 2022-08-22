@@ -29,7 +29,7 @@ const DetailToDoItems = (props) => {
     titleBarDetail ? titleBarDetail : "New Activity"
     // value ? value.title : "New Activity"
   );
-
+console.log("titleBarDetail",titleBarDetail)
   const [changeTitle, setChangeTitle] = useState();
 
   // const [toDoItemList, setToDoItemList] = useState(detail);
@@ -139,6 +139,7 @@ const DetailToDoItems = (props) => {
       <AppBar
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
         titleBarChange={titleBarDetail}
+        titleBarDetail={titleBarDetail}
         titleDetail={titleDetail}
         setTitleDetail={changeToDoItems}
         handleOpenAddToDoItems={handleOpenAddToDoItems}
