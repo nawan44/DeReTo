@@ -234,7 +234,7 @@ const AppBar = (props, ss) => {
                   data-cy="todo-title"
                   style={{ width: "70%", float: "left" }}
                 >
-                  {titleBarChange}
+                  {titleBarDetail}
                 </div>
               )}
 
