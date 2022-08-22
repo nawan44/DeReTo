@@ -178,7 +178,28 @@ const DetailToDoItems = (props) => {
         // getTodoItemList={getTodoItemList}
       />
 
-      {dataDetail.length === 0 ? (
+      {dataDetail?.length && dataDetail?.length > 0 ? (
+        <span>
+          <ItemList
+            // onToDoItem={() => setOnToDoItem(!onToDoItem)}
+            idToDoItems={idToDoItems}
+            titleToDoItems={titleToDoItems}
+            dataToDoItem={dataToDoItem}
+            // openDeleteToDoItems={openDeleteToDoItems}
+            openEditToDoItems={openEditToDoItems}
+            dataDetail={dataDetail}
+            value={value}
+            // getTodoItemList={getTodoItemList}
+            handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
+            // handle={handleCloseDeleteToDoItems}
+            handleClosEditToDoItems={handleClosEditToDoItems}
+            handleOpenEditToDoItems={handleOpenEditToDoItems}
+            handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
+            sortToDoItem={sortToDoItem()}
+            valueSort={valueSort}
+          />
+        </span>
+      ) : (
         <Grid
           style={{
             margin: "0 auto",
@@ -199,27 +220,6 @@ const DetailToDoItems = (props) => {
             onClick={handleOpenAddToDoItems}
           />
         </Grid>
-      ) : (
-        <span data-cy="todo-item">
-          <ItemList
-            // onToDoItem={() => setOnToDoItem(!onToDoItem)}
-            idToDoItems={idToDoItems}
-            titleToDoItems={titleToDoItems}
-            dataToDoItem={dataToDoItem}
-            // openDeleteToDoItems={openDeleteToDoItems}
-            openEditToDoItems={openEditToDoItems}
-            dataDetail={dataDetail}
-            value={value}
-            // getTodoItemList={getTodoItemList}
-            handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
-            // handle={handleCloseDeleteToDoItems}
-            handleClosEditToDoItems={handleClosEditToDoItems}
-            handleOpenEditToDoItems={handleOpenEditToDoItems}
-            handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
-            sortToDoItem={sortToDoItem()}
-            valueSort={valueSort}
-          />
-        </span>
       )}
       <DialogAddToDoItem
         // getTodoItemList={getTodoItemList}
