@@ -31,7 +31,6 @@ const DetailToDoItems = (props) => {
   );
 
   const [changeTitle, setChangeTitle] = useState();
-  console.log("titleDetail >>>", titleDetail);
 
   // const [toDoItemList, setToDoItemList] = useState(detail);
   const [toDoItemTotal, setToDoItemListTotal] = useState(dataDetail?.length);
@@ -178,7 +177,7 @@ const DetailToDoItems = (props) => {
         // getTodoItemList={getTodoItemList}
       />
 
-      {dataDetail?.length && dataDetail?.length > 0 ? (
+      {dataDetail.length > 0 ? (
         <span>
           <ItemList
             // onToDoItem={() => setOnToDoItem(!onToDoItem)}

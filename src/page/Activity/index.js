@@ -32,7 +32,7 @@ const Activity = () => {
   const [idDetail, setIdDetail] = useState();
   const [detail, setDetail] = useState([]);
   // const [deleteTitleList, setDeleteTitleList] = useState("");
-  const [titleBar, setTitleBar] = useState()
+  const [titleBar, setTitleBar] = useState();
   const [deleteTitleList, setDeleteTitleList] = useState("");
   const [todoItemDetail, setTodoItemDetail] = useState();
   const [addActivity, setAddActivity] = useState([]);
@@ -69,7 +69,7 @@ const Activity = () => {
   };
 
   // const toDetail = () =>{
-  // if(detail){  
+  // if(detail){
   // navigate(`/detail/${clickActivity}`, {
   //     state: {  detail :  detail },
   //     // handleDeleteList,
@@ -77,36 +77,38 @@ const Activity = () => {
   // }
 
   const getDetail = async (value) => {
-
     // try {
-      const response = await fetch(
-        process.env.REACT_APP_URL + `/activity-groups/${value?.id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          // body: JSON.stringify({
-          //   title: titleDetail,
-          //   email: "rachmat.d.gunawan@gmail.com",
-          // }),
+    const response = await fetch(
+      process.env.REACT_APP_URL + `/activity-groups/${value?.id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
         },
-      ); 
-      let res = await response.json();
 
-      setDetail(res.todo_items);
-      setTitleBar(res.title)
-      navigate(`/detail/${value?.id}`, {
-            state: {value: value, titleBarDetail:res.title , dataDetail :    res.todo_items},
-          })
+        // body: JSON.stringify({
+        //   title: titleDetail,
+        //   email: "rachmat.d.gunawan@gmail.com",
+        // }),
+      }
+    );
+    let res = await response.json();
+
+    setDetail(res.todo_items);
+    setTitleBar(res.title);
+    navigate(`/detail/${value?.id}`, {
+      state: {
+        value: value,
+        titleBarDetail: res.title,
+        dataDetail: res.todo_items,
+      },
+    });
     // } catch (err) {}
   };
 
-//   useEffect(() => {
-//     toDetail()
-//   }, [getDetail]);
-// console.log("detail",detail.length)
+  //   useEffect(() => {
+  //     toDetail()
+  //   }, [getDetail]);
   const deleteData = (id) => {
     // const newList = list.filter((item) => item.id !== id);
     try {
@@ -123,7 +125,6 @@ const Activity = () => {
 
       setInformasiHapus(true);
       // handleCloseDeleteList();
-
     } catch (err) {
       // console.log(err.message);
     }
@@ -181,7 +182,7 @@ const Activity = () => {
     setDeleteTitleList(value.title);
   };
   const handleCloseDeleteActivity = (value) => {
-        '[data-cy=modal-delete-cancel-button]'
+    "[data-cy=modal-delete-cancel-button]";
 
     setOpenDeleteActivity(false);
     setSelectedDeleteActivity(value);
@@ -192,7 +193,7 @@ const Activity = () => {
     setClickActivity(value.id);
     setDeleteTitleList(value.title);
   };
-  
+
   const handleCloseDeleteList = (value) => {
     setOpenDeleteList(false);
     setSelectedDeleteList(value);
@@ -223,7 +224,6 @@ const Activity = () => {
   const changeToDoSort = (newValue) => {
     setValueSort(newValue);
   };
-  // console.log("todoItem ????????????", todoItem);
   return (
     <Container style={{ width: "100%" }}>
       <AppBar
@@ -264,8 +264,7 @@ const Activity = () => {
         activityItemDelete={deleteData}
         deleteTitleList={deleteTitleList}
         // onClick={() => setOnClick(!onClick)}
-          // setOnClick ={setOnClick}
-        
+        // setOnClick ={setOnClick}
       />
       <ModalInformation
         data-cy="modal-information"

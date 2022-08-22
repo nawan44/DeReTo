@@ -31,7 +31,6 @@ function DialogSort(props) {
   const handleListItemClick = (value) => {
     onClose(value);
     setValueSort(value);
-    // console.log(value);
   };
 
   // const handleChangeTitle = (event) => {
@@ -47,7 +46,6 @@ function DialogSort(props) {
             button
             data-cy="sort-latest"
             onClick={() => handleListItemClick()}
-            
           >
             <ListItemAvatar>
               {" "}
@@ -71,7 +69,6 @@ function DialogSort(props) {
             button
             data-cy="sort-oldest"
             onClick={() => handleListItemClick()}
-            
           >
             <ListItemAvatar>
               {" "}
@@ -95,7 +92,6 @@ function DialogSort(props) {
             button
             data-cy="sort-az"
             onClick={() => handleListItemClick()}
-            
           >
             <ListItemAvatar>
               {" "}
@@ -119,7 +115,6 @@ function DialogSort(props) {
             button
             data-cy="sort za"
             onClick={() => handleListItemClick()}
-            
           >
             <ListItemAvatar>
               {" "}
@@ -143,7 +138,6 @@ function DialogSort(props) {
             button
             data-cy="sort-unfinished"
             onClick={() => handleListItemClick()}
-            
           >
             <ListItemAvatar>
               {" "}
