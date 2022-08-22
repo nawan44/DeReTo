@@ -64,7 +64,7 @@ const AppBar = (props, ss) => {
     sendTitle(e);
   };
 
-  const Title = () => {
+  const TitleActivity = () => {
     if (location.pathname === `/`) {
       return <span data-cy="activity-title">Activity</span>;
     } else if (location.pathname === `/`) {
@@ -194,7 +194,7 @@ const AppBar = (props, ss) => {
           }}
           data-cy="activity-title"
         >
-          <span data-cy="todo-title">{Title()}</span>
+          <span data-cy="todo-title">{TitleActivity()}</span>
         </Grid>
         <Grid item xs={6} data-cy="todo-add-button">
           {RightButton()}

@@ -44,7 +44,7 @@ export default function CardActivity(props) {
           gutterBottom
           style={{ textAlign: "left", fontWeight: "bold" }}
           component="div"
-          data-cy="title-todo"
+          data-cy="activity-item-title"
         >
           {item.title}
         </Typography>
