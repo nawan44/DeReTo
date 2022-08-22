@@ -41,6 +41,7 @@ const AppBar = (props, ss) => {
     setValueSort,
     onToDoItem,
     titleBarDetail,
+    titleBarChange,
   } = props;
   const navigate = useNavigate();
   let location = useLocation();
@@ -74,7 +75,7 @@ const AppBar = (props, ss) => {
             <ArrowBackIosIcon onClick={toActivity} data-cy="todo-title" />
             <Input
               value={titleDetail}
-              // data-cy="todo-title"
+              data-cy="todo-title"
               onChange={handleChangeTitle}
               // label="Rachmat Gunawan"
               placeholder="New Activity"
@@ -93,7 +94,7 @@ const AppBar = (props, ss) => {
           <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
           <Input
             data-cy="todo-title"
-            value={titleDetail}
+            value={titleBarChange ? titleDetail : titleBarChange}
             onChange={handleChangeTitle}
             // label="Rachmat Gunawan"
             placeholder="New Activity"

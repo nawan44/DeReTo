@@ -115,7 +115,6 @@ const ListToDoItems = (props) => {
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
 
-
   return (
     <Container style={{ width: "100%", textAlign: "center", margin: "0 auto" }}>
       <Grid
@@ -138,7 +137,7 @@ const ListToDoItems = (props) => {
                   key={item.id}
                   style={{
                     width: "100%",
-                    height:"50px",
+                    height: "50px",
                     margin: "20px 0",
                     backgroundColor: "#fff",
                     borderRadius: "7px",

@@ -164,7 +164,7 @@ const DetailToDoItems = (props) => {
     <Container style={{ width: "100%" }}>
       <AppBar
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
-        titleBarDetail={titleBarDetail}
+        titleBarChange={titleBarDetail}
         titleDetail={titleDetail}
         setTitleDetail={changeToDoItems}
         handleOpenAddToDoItems={handleOpenAddToDoItems}
@@ -177,7 +177,7 @@ const DetailToDoItems = (props) => {
         // getTodoItemList={getTodoItemList}
       />
 
-      {dataDetail.length > 0 ? (
+      {dataDetail?.length > 0 ? (
         <span>
           <ItemList
             // onToDoItem={() => setOnToDoItem(!onToDoItem)}
