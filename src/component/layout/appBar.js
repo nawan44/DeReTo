@@ -199,6 +199,8 @@ const AppBar = (props, ss) => {
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
+          {list == undefined ? (
+
         <Grid
           item
           xs={6}
@@ -207,9 +209,7 @@ const AppBar = (props, ss) => {
             textAlign: "left",
             fontWeight: "bold",
           }}
-          data-cy="activity-title"
         >
-          {list == undefined ? (
             <div>
               <ArrowBackIosIcon
                 style={{
@@ -223,7 +223,7 @@ const AppBar = (props, ss) => {
               />
               {onEdit ? (
                 <Input
-                  value={titleDetail}
+                  value={titleBarDetail !== titleDetail  ? titleDetail :titleBarDetail }   data-cy="todo-title"
                   onChange={handleChangeTitle}
                   // label="Rachmat Gunawan"
                   placeholder="New Activity"
@@ -248,10 +248,25 @@ const AppBar = (props, ss) => {
               </IconButton>{" "}
             
             </div>
+            </Grid>
+
           ) : (
+
+            <Grid
+          item
+          xs={6}
+          style={{
+            fontSize: "24px",
+            textAlign: "left",
+            fontWeight: "bold",
+          }}
+          data-cy="activity-title"
+        >
+
             <span data-cy="activity-title">Activity</span>
+            </Grid>
+
           )}
-        </Grid>
         <Grid item xs={6} data-cy="todo-add-button">
           {RightButton()}
         </Grid>
