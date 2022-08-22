@@ -46,12 +46,15 @@ const AppBar = (props, ss) => {
   const navigate = useNavigate();
   let location = useLocation();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
-  console.log("list", list);
+console.log("list",list)
   const [openSort, setOpenSort] = useState(false);
+  const [onEdit, setOnEdit] = useState(false)
   // const [selectedSort, setSelectedSort] = useState(sorts[1]);
   // const [openAddList, setOpenAddList] = useState(false);
   // const [selectedAddList, setSelectedAddList] = useState(sorts[1]);
-
+const clickEdit =() => {
+  setOnEdit(true)
+}
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
   };
@@ -67,7 +70,7 @@ const AppBar = (props, ss) => {
   const TitleActivity = () => {
     // if (location.pathname === `/` ) {
     //   return <span data-cy="activity-title">Activity</span>;
-    // } else
+    // } else 
     // if (location.pathname === `/`) {
     //   return (
     //     <div data-cy="todo-title">
@@ -88,7 +91,7 @@ const AppBar = (props, ss) => {
     //     </div>
     //   );
     // } else
-    if (list == undefined) {
+    if(list == undefined) {
       return (
         <div>
           <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
@@ -100,18 +103,13 @@ const AppBar = (props, ss) => {
             placeholder="New Activity"
             sx={{ fontSize: "24px", fontWeight: "bold" }}
           />
-          <IconButton
-            data-cy="todo-title-edit-button"
-            onClick={sendTitle}
-            edge="end"
-            aria-label="comments"
-          >
+           <IconButton  data-cy="todo-title-edit-button" onClick={sendTitle} edge="end" aria-label="comments">
             <CreateIcon style={{ color: "#888888" }} />
           </IconButton>
         </div>
       );
     } else {
-      return <span data-cy="activity-title">Activity</span>;
+      return <span data-cy="activity-title">Activity</span>
     }
   };
 
@@ -206,40 +204,29 @@ const AppBar = (props, ss) => {
           }}
           data-cy="activity-title"
         >
-          {/* {list == undefined ? (*/}
-          {/* <div>  */}
-          {list == undefined ? (
-            <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
-          ) : (
-            <span></span>
-          )}
-            {list == undefined ? (
-          <Input
+          {list == undefined ?  
+      
+       ( <div>
+          <ArrowBackIosIcon  style={{ width:"10%", float:"left", padding:"5px 0 0 0", fontSize:"35px"}} data-cy="todo-back-button" onClick={toActivity} />
+          {onEdit ?   <Input
             data-cy="todo-title"
-            value={titleBarChange ? titleDetail :titleBarChange}
+            value={ titleDetail }
             onChange={handleChangeTitle}
             // label="Rachmat Gunawan"
             placeholder="New Activity"
             sx={{ fontSize: "24px", fontWeight: "bold" }}
-          />  ) : (
-            <span>Activity</span>
-          )}
-          {list == undefined ? (
-            <IconButton
-              data-cy="todo-title-edit-button"
-              onClick={sendTitle}
-              edge="end"
-              aria-label="comments"
-            >
-              <CreateIcon style={{ color: "#888888" }} />
-            </IconButton>
-          ) : (
-            <span></span>
-          )}
-          {/* </div> */}
-          {/* ) : (
-            <span data-cy="activity-title">Activity</span>
-          )} */}
+          /> :<div style={{ width:"70%", float:"left"}}>{titleBarChange}</div> }
+
+          {/* } */}
+        
+          
+           <IconButton  data-cy="todo-title-edit-button" onClick={clickEdit} edge="end" aria-label="comments">
+            <CreateIcon style={{ color: "#888888" }} />
+          </IconButton>
+        </div>):
+      (<span data-cy="activity-title">Activity</span>
+)
+    }
         </Grid>
         <Grid item xs={6} data-cy="todo-add-button">
           {RightButton()}
