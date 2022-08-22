@@ -74,7 +74,7 @@ const AppBar = (props, ss) => {
             <ArrowBackIosIcon onClick={toActivity} data-cy="todo-title" />
             <Input
               value={titleDetail}
-              data-cy="todo-title"
+              // data-cy="todo-title"
               onChange={handleChangeTitle}
               // label="Rachmat Gunawan"
               placeholder="New Activity"
@@ -92,7 +92,7 @@ const AppBar = (props, ss) => {
         <span>
           <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
           <Input
-            data-cy="todo-title-edit-button"
+            data-cy="todo-title"
             value={titleDetail}
             onChange={handleChangeTitle}
             // label="Rachmat Gunawan"
