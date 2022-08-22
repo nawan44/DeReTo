@@ -1,16 +1,17 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Container, Typography, Button, Grid } from "@mui/material";
 import CardActivity from "../../../component/layout/cardActivity";
 import AvatarMan from "../../../assets/avatar/avatar-man.png";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Box from '@mui/material/Box';
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Box from "@mui/material/Box";
 
 const ListActivity = ({
   clickActivity,
   setClickActivity,
   list,
-  handleDeleteList,handleDeleteActivity,
+  handleDeleteList,
+  handleDeleteActivity,
   sortActivity,
   click,
   setClick,
@@ -21,30 +22,32 @@ const ListActivity = ({
   getDetail,
   setClickTitle,
   handleAddActivityGroup,
-  valueSort,handleCloseDeleteList,handleCloseDeleteActivity
+  valueSort,
+  handleCloseDeleteList,
+  handleCloseDeleteActivity,
 }) => {
   const [close, setClose] = useState(false);
 
- 
   const styles = {
-    position: 'absolute',
+    position: "absolute",
     top: 28,
     right: 0,
     left: 0,
     zIndex: 1,
-    border: '1px solid',
+    border: "1px solid",
     p: 1,
-    bgcolor: 'background.paper',
+    bgcolor: "background.paper",
   };
   const handleClickAway = () => {
     setClose(false);
-    handleCloseDeleteList()
+    handleCloseDeleteList();
   };
   return (
-    <Container style={{ width: "100%" }} 
-    // data-cy="activity-item">
-    >   
-    {/* <ClickAwayListener
+    <Container
+      style={{ width: "100%" }}
+      // data-cy="activity-item">
+    >
+      {/* <ClickAwayListener
           data-cy="modal-delete-cancel-button"
 
       mouseEvent="onMouseDown"
@@ -62,8 +65,7 @@ const ListActivity = ({
             width: "70%",
           }}
           container
-          rowSpacing={1}     
-
+          rowSpacing={1}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           <Grid
@@ -128,7 +130,7 @@ const ListActivity = ({
               {list &&
                 list?.map((item, index) => (
                   <CardActivity
-                  data-cy="activity-item"
+                    data-cy="activity-item"
                     key={item.id}
                     click={click}
                     setClick={setClick}
@@ -151,7 +153,7 @@ const ListActivity = ({
               {sortActivity &&
                 sortActivity?.map((item, index) => (
                   <CardActivity
-                  data-cy="activity-item"
+                    data-cy="activity-item"
                     key={item.id}
                     click={click}
                     setClick={setClick}
