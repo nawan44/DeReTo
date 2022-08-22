@@ -23,7 +23,7 @@ const theme = createTheme({
 const styles = {
   dialogPaper: {
     width: "500px",
-    height: "100%",
+    height: "400px",
   },
 };
 
@@ -36,7 +36,8 @@ function DialogAddToDoItem(props) {
     onClose,
     open,
     classes,
-    dataToDoItem,setOnToDoItem
+    dataToDoItem,
+    setOnToDoItem,
   } = props;
   const [valueKirim, setValueKirim] = useState({
     activity_group_id: dataToDoItem ? dataToDoItem.id : detailId,
@@ -71,7 +72,6 @@ function DialogAddToDoItem(props) {
   const addData = (e) => {
     //  data-cy : "modal-add-save-button";
 
-
     e.preventDefault();
     // try {
     const response = fetch(process.env.REACT_APP_URL + switchSend(), {
@@ -82,15 +82,14 @@ function DialogAddToDoItem(props) {
       body: JSON.stringify(dataToDoItem ? kirim : valueKirim),
       // });
     });
-    onToDoItem()
+    onToDoItem();
     onClose();
     // getTodoItemList()
-    setValueKirim ({
+    setValueKirim({
       title: "",
       _comment: "",
-    })
+    });
   };
-
 
   // onToDoItem();
   // onClick();
@@ -116,10 +115,10 @@ function DialogAddToDoItem(props) {
       [event.target.name]: event.target.value,
     });
   };
-// const handleCloseAddDialog= () => {
-//   onClose()
-//   console.log("jjj")
-// }
+  // const handleCloseAddDialog= () => {
+  //   onClose()
+  //   console.log("jjj")
+  // }
   return (
     <ThemeProvider theme={theme}>
       <Dialog
@@ -129,17 +128,22 @@ function DialogAddToDoItem(props) {
         classes={{ paper: classes.dialogPaper }}
       >
         <DialogTitle>
-        <h3 data-cy="modal-add-title" className="dialog-title">Tambah List Item</h3>
-        <IconButton className="button-close-obat" data-cy="modal-add-close-button" onClick={onClose}>
+          <h3 data-cy="modal-add-title" className="dialog-title">
+            Tambah List Item
+          </h3>
+          <IconButton
+            className="button-close-obat"
+            data-cy="modal-add-close-button"
+            onClick={onClose}
+          >
             {" "}
             <Close onClick={onClose} className="button-close-obat" />
           </IconButton>
-       
         </DialogTitle>
         <Divider />
         <div style={{ padding: "20px" }}>
           <Typography
-          data-cy="modal-add-name-title"
+            data-cy="modal-add-name-title"
             style={{ fontWeight: 600, fontSize: "12px", lineHeight: "18px" }}
           >
             NAMA LIST ITEM

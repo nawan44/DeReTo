@@ -23,7 +23,7 @@ const theme = createTheme({
 const styles = {
   dialogPaper: {
     width: "350px",
-    height: "100%",
+    height: "400px",
     borderRadius: "5px",
   },
 };
@@ -47,7 +47,7 @@ function DialogDeleteActivity(props) {
   };
 
   return (
-    <ThemeProvider theme={theme} >
+    <ThemeProvider theme={theme}>
       <Dialog
         data-cy="modal-delete"
         onClose={onClose}
@@ -55,11 +55,13 @@ function DialogDeleteActivity(props) {
         classes={{ paper: classes.dialogPaper }}
       >
         <div style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}>
-          <WarningAmberIcon data-cy="modal-delete-icon"
+          <WarningAmberIcon
+            data-cy="modal-delete-icon"
             color="danger"
             sx={{ color: "#ED4C5C", fontSize: "50px", marginBottom: "30px" }}
           />
-          <Typography data-cy="modal-delete-title"
+          <Typography
+            data-cy="modal-delete-title"
             style={{ fontWeight: 400, fontSize: "14px", lineHeight: "18px" }}
           >
             Apakah anda yakin menghapus List Item
@@ -122,8 +124,7 @@ function DialogDeleteActivity(props) {
           </Grid>
         </Grid>
       </Dialog>
-      <span          onClose={handleClose}
-   data-cy="modal-delete"></span>
+      <span onClose={handleClose} data-cy="modal-delete"></span>
     </ThemeProvider>
   );
 }

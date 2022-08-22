@@ -24,13 +24,14 @@ const DetailToDoItems = (props) => {
 
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const { state } = useLocation();
-  const { value, dataDetail,titleBarDetail } = state;
-console.log("dataDetail >>>", dataDetail.length)
+  const { value, dataDetail, titleBarDetail } = state;
   const [titleDetail, setTitleDetail] = useState(
     titleBarDetail ? titleBarDetail : "New Activity"
+    // value ? value.title : "New Activity"
   );
 
   const [changeTitle, setChangeTitle] = useState();
+  console.log("titleDetail >>>", titleDetail);
 
   // const [toDoItemList, setToDoItemList] = useState(detail);
   const [toDoItemTotal, setToDoItemListTotal] = useState(dataDetail?.length);
@@ -150,7 +151,6 @@ console.log("dataDetail >>>", dataDetail.length)
       // onToDoItem();
       // dataDetail()
       setOpenDeleteToDoItems(false);
-
     } catch (err) {
       // console.log(err.message);
     }
@@ -164,8 +164,8 @@ console.log("dataDetail >>>", dataDetail.length)
   return (
     <Container style={{ width: "100%" }}>
       <AppBar
-      onToDoItem={() => setOnToDoItem(!onToDoItem)}
-      titleBarDetail={titleBarDetail}
+        onToDoItem={() => setOnToDoItem(!onToDoItem)}
+        titleBarDetail={titleBarDetail}
         titleDetail={titleDetail}
         setTitleDetail={changeToDoItems}
         handleOpenAddToDoItems={handleOpenAddToDoItems}
@@ -178,8 +178,8 @@ console.log("dataDetail >>>", dataDetail.length)
         // getTodoItemList={getTodoItemList}
       />
 
-      { dataDetail.length === 0 ? (
-          <Grid
+      {dataDetail.length === 0 ? (
+        <Grid
           style={{
             margin: "0 auto",
             textAlign: "center",
@@ -201,27 +201,25 @@ console.log("dataDetail >>>", dataDetail.length)
         </Grid>
       ) : (
         <span data-cy="todo-item">
-        <ItemList
-          // onToDoItem={() => setOnToDoItem(!onToDoItem)}
-          idToDoItems={idToDoItems}
-          titleToDoItems={titleToDoItems}
-          dataToDoItem={dataToDoItem}
-          // openDeleteToDoItems={openDeleteToDoItems}
-          openEditToDoItems={openEditToDoItems}
-          dataDetail={dataDetail}
-          value={value}
-          // getTodoItemList={getTodoItemList}
-          handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
-          // handle={handleCloseDeleteToDoItems}
-          handleClosEditToDoItems={handleClosEditToDoItems}
-          handleOpenEditToDoItems={handleOpenEditToDoItems}
-          handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
-          sortToDoItem={sortToDoItem()}
-          valueSort={valueSort}
-
-        />
-      </span>
-     
+          <ItemList
+            // onToDoItem={() => setOnToDoItem(!onToDoItem)}
+            idToDoItems={idToDoItems}
+            titleToDoItems={titleToDoItems}
+            dataToDoItem={dataToDoItem}
+            // openDeleteToDoItems={openDeleteToDoItems}
+            openEditToDoItems={openEditToDoItems}
+            dataDetail={dataDetail}
+            value={value}
+            // getTodoItemList={getTodoItemList}
+            handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
+            // handle={handleCloseDeleteToDoItems}
+            handleClosEditToDoItems={handleClosEditToDoItems}
+            handleOpenEditToDoItems={handleOpenEditToDoItems}
+            handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
+            sortToDoItem={sortToDoItem()}
+            valueSort={valueSort}
+          />
+        </span>
       )}
       <DialogAddToDoItem
         // getTodoItemList={getTodoItemList}
@@ -231,7 +229,7 @@ console.log("dataDetail >>>", dataDetail.length)
         dataToDoItem={dataToDoItem}
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
       />
-            <DialogDeleteToDoItem
+      <DialogDeleteToDoItem
         open={openDeleteToDoItems}
         onClose={handleCloseDeleteToDoItems}
         todoItemDelete={deleteToDoItems}

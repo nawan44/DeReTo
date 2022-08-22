@@ -39,7 +39,8 @@ const AppBar = (props, ss) => {
     handleOpenAddToDoItems,
     valueSort,
     setValueSort,
-    onToDoItem,titleBarDetail
+    onToDoItem,
+    titleBarDetail,
   } = props;
   const navigate = useNavigate();
   let location = useLocation();
@@ -70,11 +71,10 @@ const AppBar = (props, ss) => {
         <span>
           {" "}
           <span>
-            <ArrowBackIosIcon onClick={toActivity} />
+            <ArrowBackIosIcon onClick={toActivity} data-cy="todo-title" />
             <Input
-              value={titleBarDetail}
+              value={titleDetail}
               data-cy="todo-title"
-
               onChange={handleChangeTitle}
               // label="Rachmat Gunawan"
               placeholder="New Activity"
@@ -90,10 +90,10 @@ const AppBar = (props, ss) => {
     } else {
       return (
         <span>
-          <ArrowBackIosIcon data-cy="todo-title-edit-butto" onClick={toActivity} />
+          <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
           <Input
-            data-cy="todo-title"
-            value={titleBarDetail}
+            data-cy="todo-title-edit-button"
+            value={titleDetail}
             onChange={handleChangeTitle}
             // label="Rachmat Gunawan"
             placeholder="New Activity"
@@ -123,11 +123,7 @@ const AppBar = (props, ss) => {
       return (
         // <span data-cy="todo-sort-button">
         <span>
-         <span      data-cy="todo-sort-button"
->
-{viewSort()}
-
-</span>
+          <span data-cy="todo-sort-button">{viewSort()}</span>
           <Button
             onClick={handleAddActivityGroup}
             variant="contained"
@@ -142,11 +138,7 @@ const AppBar = (props, ss) => {
       return (
         // <span data-cy="todo-sort-button">
         <span>
-          <span      data-cy="todo-sort-button"
->
-{viewSort()}
-
-</span>
+          <span data-cy="todo-sort-button">{viewSort()}</span>
           <Button
             onClick={handleOpenAddToDoItems}
             data-cy="todo-add-button"
@@ -203,10 +195,7 @@ const AppBar = (props, ss) => {
           }}
           data-cy="activity-title"
         >
-          <span data-cy="todo-title"> 
-          {Title()}
-
-          </span>
+          <span data-cy="todo-title">{Title()}</span>
         </Grid>
         <Grid item xs={6} data-cy="todo-add-button">
           {RightButton()}
