@@ -155,7 +155,7 @@ const AppBar = (props, ss) => {
           <span data-cy="todo-sort-button">{viewSort()}</span>
           <Button
             onClick={handleOpenAddToDoItems}
-            data-cy="todo-add-button"
+            data-cy="modal-add"
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
@@ -225,6 +225,7 @@ const AppBar = (props, ss) => {
                 <Input
                   value={titleBarDetail !== titleDetail  ? titleDetail :titleBarDetail }   data-cy="todo-title"
                   onChange={handleChangeTitle}
+               onKeyUp={sendTitle}
                   // label="Rachmat Gunawan"
                   placeholder="New Activity"
                   sx={{ fontSize: "24px", fontWeight: "bold" }}
