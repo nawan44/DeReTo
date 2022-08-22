@@ -4,7 +4,7 @@ import { Container, Grid } from "@mui/material";
 import AddToDoItems from "../../component/dialog/dialogAddToDoItem";
 import AppBar from "../../component/layout/appBar";
 import { useLocation } from "react-router-dom";
-import ItemList from "./ListToDoItems";
+import TodoItems from "./TodoItems";
 import DialogAddData from "../../component/dialog/dialogAddToDoItem";
 import DialogAddToDoItem from "../../component/dialog/dialogAddToDoItem";
 import DialogDeleteToDoItem from "../../component/dialog/dialogDeleteToDoItem";
@@ -178,26 +178,25 @@ const DetailToDoItems = (props) => {
       />
 
       {dataDetail?.length > 0 ? (
-        <span>
-          <ItemList
-            // onToDoItem={() => setOnToDoItem(!onToDoItem)}
-            idToDoItems={idToDoItems}
-            titleToDoItems={titleToDoItems}
-            dataToDoItem={dataToDoItem}
-            // openDeleteToDoItems={openDeleteToDoItems}
-            openEditToDoItems={openEditToDoItems}
-            dataDetail={dataDetail}
-            value={value}
-            // getTodoItemList={getTodoItemList}
-            handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
-            // handle={handleCloseDeleteToDoItems}
-            handleClosEditToDoItems={handleClosEditToDoItems}
-            handleOpenEditToDoItems={handleOpenEditToDoItems}
-            handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
-            sortToDoItem={sortToDoItem()}
-            valueSort={valueSort}
-          />
-        </span>
+        <TodoItems
+          // onToDoItem={() => setOnToDoItem(!onToDoItem)}
+          idToDoItems={idToDoItems}
+          titleToDoItems={titleToDoItems}
+          dataToDoItem={dataToDoItem}
+          // openDeleteToDoItems={openDeleteToDoItems}
+          openEditToDoItems={openEditToDoItems}
+          dataDetail={dataDetail}
+          value={value}
+          // getTodoItemList={getTodoItemList}
+
+          handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
+          // handle={handleCloseDeleteToDoItems}
+          handleClosEditToDoItems={handleClosEditToDoItems}
+          handleOpenEditToDoItems={handleOpenEditToDoItems}
+          handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
+          sortToDoItem={sortToDoItem()}
+          valueSort={valueSort}
+        />
       ) : (
         <Grid
           style={{
