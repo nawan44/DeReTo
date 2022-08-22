@@ -87,34 +87,6 @@ const DetailToDoItems = (props) => {
   const changeToDoItems = (newValue) => {
     setTitleDetail(newValue);
   };
-  // useEffect(() => {}, [titleDetail]);
-
-  // useEffect(() => {
-  //   getTodoItemList();
-  // }, []);
-
-  // useEffect(() => {
-  //   getTodoItemList();
-  // }, [onToDoItem]);
-  // useEffect(() => {
-  //   setChangeTitle(titleDetail);
-  // }, [titleDetail]);
-  // const getTodoItemList = async () => {
-  //   // try {
-  //     const response = await fetch(
-  //       process.env.REACT_APP_URL +
-  //         `/todo-items?activity_group_id=${value?.id}`,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //     let res = await response.json();
-  //     setToDoItemList(res.data);
-  //     // setToDoItemListTotal(res.total);
-  //   // } catch (err) {}
-  // };
 
   const sendTitle = async (e) => {
     // `[data-cy=todo-title]`;

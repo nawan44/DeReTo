@@ -69,28 +69,26 @@ const AppBar = (props, ss) => {
       return <span data-cy="activity-title">Activity</span>;
     } else if (location.pathname === `/`) {
       return (
-        <span>
+        <div data-cy="todo-title">
           {" "}
-          <span>
-            <ArrowBackIosIcon onClick={toActivity} data-cy="todo-title" />
-            <Input
-              value={titleDetail}
-              data-cy="todo-title"
-              onChange={handleChangeTitle}
-              // label="Rachmat Gunawan"
-              placeholder="New Activity"
-              inputProps={ariaLabel}
-              sx={{ fontSize: "24px", fontWeight: "bold" }}
-            />
-          </span>
+          <ArrowBackIosIcon onClick={toActivity} data-cy="todo-back-button" />
+          <Input
+            value={titleDetail}
+            data-cy="todo-title"
+            onChange={handleChangeTitle}
+            // label="Rachmat Gunawan"
+            placeholder="New Activity"
+            inputProps={ariaLabel}
+            sx={{ fontSize: "24px", fontWeight: "bold" }}
+          />
           <IconButton edge="end" aria-label="comments">
             <CreateIcon style={{ color: "#888888" }} />
           </IconButton>{" "}
-        </span>
+        </div>
       );
     } else {
       return (
-        <span>
+        <div data-cy="todo-title">
           <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
           <Input
             data-cy="todo-title"
@@ -100,7 +98,7 @@ const AppBar = (props, ss) => {
             placeholder="New Activity"
             sx={{ fontSize: "24px", fontWeight: "bold" }}
           />
-        </span>
+        </div>
       );
     }
   };
