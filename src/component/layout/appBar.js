@@ -207,28 +207,36 @@ const AppBar = (props, ss) => {
           data-cy="activity-title"
         >
           {/* {list == undefined ? (*/}
-            {/* <div>  */}
-            {list == undefined ?  <ArrowBackIosIcon
-                data-cy="todo-back-button"
-                onClick={toActivity}
-              /> :(<span></span>) }
-              <Input
-                data-cy="todo-title"
-                value={titleBarChange ? titleDetail : "Activity"}
-                onChange={handleChangeTitle}
-                // label="Rachmat Gunawan"
-                placeholder="New Activity"
-                sx={{ fontSize: "24px", fontWeight: "bold" }}
-              />
-             {list == undefined ?   <IconButton
-                data-cy="todo-title-edit-button"
-                onClick={sendTitle}
-                edge="end"
-                aria-label="comments"
-              >
-                <CreateIcon style={{ color: "#888888" }} />
-              </IconButton> :(<span></span>) }
-            {/* </div> */}
+          {/* <div>  */}
+          {list == undefined ? (
+            <ArrowBackIosIcon data-cy="todo-back-button" onClick={toActivity} />
+          ) : (
+            <span></span>
+          )}
+            {list == undefined ? (
+          <Input
+            data-cy="todo-title"
+            value={titleBarChange ? titleDetail :titleBarChange}
+            onChange={handleChangeTitle}
+            // label="Rachmat Gunawan"
+            placeholder="New Activity"
+            sx={{ fontSize: "24px", fontWeight: "bold" }}
+          />  ) : (
+            <span>Activity</span>
+          )}
+          {list == undefined ? (
+            <IconButton
+              data-cy="todo-title-edit-button"
+              onClick={sendTitle}
+              edge="end"
+              aria-label="comments"
+            >
+              <CreateIcon style={{ color: "#888888" }} />
+            </IconButton>
+          ) : (
+            <span></span>
+          )}
+          {/* </div> */}
           {/* ) : (
             <span data-cy="activity-title">Activity</span>
           )} */}
