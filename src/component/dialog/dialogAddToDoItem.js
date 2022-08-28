@@ -54,6 +54,9 @@ function DialogAddToDoItem(props) {
       _comment: dataToDoItem ? dataToDoItem?.priority : "",
     });
   }, [dataToDoItem]);
+  console.log("detailId",detailId)
+  console.log("onToDoItem",onToDoItem)
+  console.log("dataToDoItem",dataToDoItem)
 
   const switchSend = () => {
     if (dataToDoItem) {

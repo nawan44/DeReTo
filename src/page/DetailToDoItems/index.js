@@ -114,8 +114,10 @@ const DetailToDoItems = (props) => {
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
   };
-  const handleOpenAddToDoItems = () => {
+  const handleOpenAddToDoItems = (item) => {
     setOpenAddToDoItems(true);
+    setDataToDoItem(item.title);
+
   };
   
   // const viewSort = () => {
@@ -193,8 +195,8 @@ const DetailToDoItems = (props) => {
             // onClick={toActivity}
             onClick={() => navigate("/")}
           />
-          {onEdit ? (
-                <div data-cy="todo-title" style={{ width: "50%", float: "left",textAlign:"left"  }}>
+          {/* {onEdit ? (
+                <div style={{ width: "50%", float: "left",textAlign:"left"  }}>
             <Input
               value={titleDetail }
               onChange={handleChangeTitle}
@@ -204,11 +206,11 @@ const DetailToDoItems = (props) => {
               sx={{ fontSize: "30px", fontWeight: "bold" }}
             />
             </div>
-           ) : (
+           ) : ( */}
             <div data-cy="todo-title" style={{ width: "50%", float: "left",textAlign:"left"}}>
               {titleBarDetil}
             </div>
-          )} 
+          {/* // )}  */}
           <div style={{ float:"left"}}>
           <IconButton 
                 data-cy="todo-title-edit-button"

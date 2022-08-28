@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container, Grid, Input, Button } from "@mui/material";
-import AppBar from "../../component/layout/appBar";
 import ListActivity from "./ListActivity";
 import ModalInformation from "../../component/dialog/dialogInformation";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import IconButton from "@mui/material/IconButton";
-import CreateIcon from "@mui/icons-material/Create";
 import "../../assets/css/style.css";
 import DialogDeleteActivity from "../../component/dialog/dialogDeleteActivity";
-// import DialogDeleteActivity from "../../component/dialog/dialogDeleteActivity";
-// import DialogDeleteData from "../../component/dialog/dialogDeleteData";
+
 import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import DialogSort from "../../component/dialog/dialogSort";
 const Activity = () => {
@@ -54,10 +50,6 @@ const Activity = () => {
     getListData();
   }, [onClick]);
 
-  // useEffect(() => {
-
-  //   getListData();
-  // }, [deleteData]);
 
   const getListData = async () => {
     try {
@@ -78,21 +70,13 @@ const Activity = () => {
       console.log(err.message);
     }
   };
-  console.log("list", list);
-  // const toDetail = () =>{
-  // if(detail){
-  // navigate(`/detail/${clickActivity}`, {
-  //     state: {  detail :  detail },
-  //     // handleDeleteList,
-  //   });}
-  // }
+
   const handleOpenSort = () => {
     setOpenSort(true);
   };
 
   const getDetail = async (value) => {
     // try {
-      console.log("value?.id",value?.id)
     const response = await fetch(
       process.env.REACT_APP_URL + `/activity-groups/${value?.id}`,
       {
@@ -137,52 +121,7 @@ const Activity = () => {
       return <span></span>;
     }
   };
-  const RightButton = () => {
-    // if (list && !detail) {
-      return (
-        <span>
-          <span data-cy="todo-sort-button">{viewSort()}</span>
-          <Button
-            onClick={handleAddActivityGroup}
-            variant="contained"
-            data-cy="activity-add-button"
-            style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
-          >
-            + Tambah
-          </Button>
-        </span>
-      );
-    } 
-  //   else if (!list && detail) {
-  //     return (
-  //       <span>
-  //         <Button
-  //           onClick={handleOpenAddToDoItems}
-  //           variant="contained"
-  //           style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
-  //         >
-  //           + Tambah
-  //         </Button>
-  //       </span>
-  //     );
-  //   } else {
-  //     return (
-  //       <span>
-  //         {" "}
-  //         <Button
-  //           variant="contained"
-  //           style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
-  //         >
-  //           +Tambah
-  //         </Button>
-  //       </span>
-  //     );
-  //   }
-  // };
-
-  //   useEffect(() => {
-  //     toDetail()
-  //   }, [getDetail]);
+  
 
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
@@ -282,20 +221,7 @@ const Activity = () => {
   };
   return (
     <Container style={{ width: "100%" }}>
-      {/* <AppBar
-        idDetail={idDetail}
-        setIdDetail={setIdDetail}
-        handleAddActivityGroup={handleAddActivityGroup}
-        setList={setList}
-        list={list}
-        clickActivity={clickActivity}
-        handleCloseAddToDoItems={handleCloseAddToDoItems}
-        handleOpenAddToDoItems={() => handleOpenAddToDoItems()}
-        setOpenAddToDoItems={setOpenAddToDoItems}
-        openAddToDoItems={openAddToDoItems}
-        valueSort={valueSort}
-        setValueSort={changeToDoSort}
-      /> */}
+
       <Grid
         style={{
           margin: "0 auto",
@@ -306,42 +232,7 @@ const Activity = () => {
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
-        {/* {list == undefined ? (
-          <Grid
-            item
-            xs={6}
-            style={{
-              fontSize: "24px",
-              textAlign: "left",
-              fontWeight: "bold",
-            }}
-          >
-            <div>
-              <ArrowBackIosIcon
-                style={{
-                  width: "10%",
-                  float: "left",
-                  padding: "5px 0 0 0",
-                  fontSize: "35px",
-                }}
-                data-cy="todo-back-button"
-                // onClick={toActivity}
-                onClick={() => navigate("/")}
-              />
-            
-              {/* } 
-              <IconButton
-                data-cy="todo-title-edit-button"
-                onClick={titleBar === titleDetail ? clickEdit : sendTitle}
-                edge="end"
-                aria-label="comments"
-              >
-                <CreateIcon style={{ color: "#888888" }} />
-              </IconButton>
-            </div>
-          </Grid>
-        ) : (
-           */}
+
           <Grid
             item
             xs={6}
@@ -405,12 +296,7 @@ const Activity = () => {
         valueSort={valueSort}
         setValueSort={setValueSort}
       />
-      {/* <DialogAddToDoItem
-        onToDoItem={onToDoItem}
-        open={openAddToDoItems}
-        onClose={handleCloseAddToDoItems}
-        // getTodoItemList={getTodoItemList}
-      /> */}
+     
     </Container>
   );
 };
