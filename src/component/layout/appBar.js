@@ -219,8 +219,9 @@ const AppBar = (props, ss) => {
                   fontSize: "35px",
                 }}
                 data-cy="todo-back-button"
-                onClick={toActivity}
-              />
+                // onClick={toActivity}
+onClick={() => navigate("/")}
+/>
               {onEdit ? (
                 <Input
                   value={titleBarDetail !== titleDetail  ? titleDetail :titleBarDetail }   data-cy="todo-title"
