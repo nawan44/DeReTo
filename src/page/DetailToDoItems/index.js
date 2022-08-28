@@ -294,7 +294,6 @@ const DetailToDoItems = (props) => {
       </Grid>
       {detail?.length === 0 ? (
         <EmptyState
-          data-cy="todo-empty-state"
           handleOpenAddToDoItems={handleOpenAddToDoItems}
         />
       ) : (

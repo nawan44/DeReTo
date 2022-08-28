@@ -61,6 +61,7 @@ const ListActivity = ({
             padding: "0px 30px",
             width: "70%",
           }}
+
           container
           rowSpacing={1}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
@@ -73,7 +74,6 @@ const ListActivity = ({
               textAlign: "center",
               fontWeight: "bold",
             }}
-            data-cy="activity-empty-state"
           >
             <img
               alt="Remy Sharp"
