@@ -305,7 +305,6 @@ const DetailToDoItems = (props) => {
           idToDoItems={idToDoItems}
           titleToDoItems={titleToDoItems}
           dataToDoItem={dataToDoItem}
-          // openDeleteToDoItems={openDeleteToDoItems}
           openEditToDoItems={openEditToDoItems}
           detail={detail}
           value={value}
