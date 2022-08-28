@@ -221,7 +221,7 @@ const DetailToDoItems = (props) => {
       >
         
         <div   
-         data-cy="todo-title"
+        //  
         style={{
               width: "50%",
 
@@ -245,6 +245,7 @@ const DetailToDoItems = (props) => {
           {/* {onEdit ? (
                 <div style={{ width: "50%", float: "left",textAlign:"left"  }}> */}
             <Input
+            data-cy="todo-title"
               value={titleTodo }
               onChange={handleChangeTitle}
               onKeyUp={sendTitle}
@@ -252,12 +253,7 @@ const DetailToDoItems = (props) => {
               placeholder="New Activity"
               sx={{ fontSize: "30px", fontWeight: "bold" }}
             />
-            {/* </div> */}
-           {/* ) : (
-            <div data-cy="todo-title" style={{ width: "50%", float: "left",textAlign:"left"}}>
-              {titleTodo}
-            </div>
-        )}  */}
+           
           <div style={{ float:"left"}}>
           <IconButton 
                 data-cy="todo-title-edit-button"
