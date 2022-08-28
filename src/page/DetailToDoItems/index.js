@@ -249,6 +249,8 @@ const DetailToDoItems = (props) => {
               value={titleTodo }
               onChange={handleChangeTitle}
               onKeyUp={sendTitle}
+              onKeyDown={sendTitle}
+
               // label="Rachmat Gunawan"
               placeholder="New Activity"
               sx={{ fontSize: "30px", fontWeight: "bold" }}
