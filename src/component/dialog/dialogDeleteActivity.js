@@ -23,7 +23,7 @@ const theme = createTheme({
 const styles = {
   dialogPaper: {
     width: "350px",
-    height: "400px",
+    height: "300px",
     borderRadius: "5px",
   },
 };
@@ -35,7 +35,7 @@ function DialogDeleteActivity(props) {
     selectedValue,
     open,
     clickActivity,
-    classes,
+    classes,onClick,setOpenDeleteActivity,setInformasiHapus
   } = props;
   // const classes = useStyles();
 
@@ -45,7 +45,28 @@ function DialogDeleteActivity(props) {
     // onClick();
     // setOnClick(true);
   };
+  const deleteData = (id) => {
+    // const newList = list.filter((item) => item.id !== id);
+    try {
+      const response = fetch(
+        process.env.REACT_APP_URL + `/activity-groups/${clickActivity}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+onClick()
+setOpenDeleteActivity(false);
 
+      setInformasiHapus(true);
+
+      // handleCloseDeleteList();
+    } catch (err) {
+      // console.log(err.message);
+    }
+  };
   return (
     <ThemeProvider theme={theme}>
       <Dialog
@@ -117,7 +138,7 @@ function DialogDeleteActivity(props) {
                 margin: "20px 20px 0 20px",
               }}
               data-cy="modal-delete-confirm-button"
-              onClick={() => activityItemDelete(clickActivity)}
+              onClick={() => deleteData(clickActivity)}
             >
               Hapus
             </Button>

@@ -31,6 +31,7 @@ const DetailToDoItems = (props) => {
   );
 console.log("titleBarDetail",titleBarDetail)
   const [changeTitle, setChangeTitle] = useState();
+  const [onClick, setOnClick] = useState(false);
 
   // const [toDoItemList, setToDoItemList] = useState(detail);
   const [toDoItemTotal, setToDoItemListTotal] = useState(dataDetail?.length);
@@ -108,26 +109,8 @@ console.log("titleBarDetail",titleBarDetail)
       );
     } catch (err) {}
   };
-  console.log("dataDetail", dataDetail)
-  const deleteToDoItems = () => {
-    // "[data-cy=modal-delete-confirm-button]";
-    try {
-      const response = fetch(
-        process.env.REACT_APP_URL + `/todo-items/${idToDoItems}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      // onToDoItem();
-      // dataDetail()
-      setOpenDeleteToDoItems(false);
-    } catch (err) {
-      // console.log(err.message);
-    }
-  };
+  console.log("dataDetail...", dataDetail)
+
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
   };
@@ -190,11 +173,13 @@ console.log("titleBarDetail",titleBarDetail)
       <DialogDeleteToDoItem
         open={openDeleteToDoItems}
         onClose={handleCloseDeleteToDoItems}
-        todoItemDelete={deleteToDoItems}
+        // todoItemDelete={deleteToDoItems}
+        onClick={() => setOnClick(!onClick)}
         dataDetail={dataDetail}
         dataToDoItem={dataToDoItem}
         data-cy="modal-delete-confirm-button"
-
+        idToDoItems={idToDoItems}
+        setOpenDeleteToDoItems={setOpenDeleteToDoItems}
         // data-cy="modal-delete"
       />
     </Container>

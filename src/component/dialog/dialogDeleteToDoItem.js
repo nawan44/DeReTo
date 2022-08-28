@@ -23,7 +23,7 @@ const theme = createTheme({
 const styles = {
   dialogPaper: {
     width: "350px",
-    height: "400px",
+    height: "300px",
     borderRadius: "5px",
   },
 };
@@ -36,13 +36,33 @@ function DialogDeleteToDoItem(props) {
     selectedValue,
     open,
     clickActivity,
-    dataToDoItem,
+    dataToDoItem,onClick,idToDoItems,setOpenDeleteToDoItems
     // onToDoItem,
   } = props;
 
   const handleClose = () => {
     onClose(selectedValue);
     // onToDoItem();
+  };
+  const deleteToDoItems = () => {
+    // "[data-cy=modal-delete-confirm-button]";
+    try {
+      const response = fetch(
+        process.env.REACT_APP_URL + `/todo-items/${idToDoItems}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      // onToDoItem();
+      // dataDetail()
+      setOpenDeleteToDoItems(false);
+      onClick()
+    } catch (err) {
+      // console.log(err.message);
+    }
   };
   return (
     <ThemeProvider theme={theme}>

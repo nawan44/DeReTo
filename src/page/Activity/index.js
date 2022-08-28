@@ -48,6 +48,12 @@ const Activity = () => {
   useEffect(() => {
     getListData();
   }, [onClick]);
+ 
+  // useEffect(() => {
+    
+  //   getListData();
+  // }, [deleteData]);
+
   const getListData = async () => {
     try {
       const response = await fetch(
@@ -109,26 +115,7 @@ console.log("list",list)
   //   useEffect(() => {
   //     toDetail()
   //   }, [getDetail]);
-  const deleteData = (id) => {
-    // const newList = list.filter((item) => item.id !== id);
-    try {
-      const response = fetch(
-        process.env.REACT_APP_URL + `/activity-groups/${clickActivity}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setOpenDeleteActivity(false);
 
-      setInformasiHapus(true);
-      // handleCloseDeleteList();
-    } catch (err) {
-      // console.log(err.message);
-    }
-  };
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
   };
@@ -140,7 +127,7 @@ console.log("list",list)
   useEffect(() => {
     setTimeout(function () {
       setInformasiHapus(false);
-    }, 3000);
+    }, 2000);
   }, [informasiHapus]);
 
   const handleAddActivityGroup = async () => {
@@ -261,9 +248,12 @@ console.log("list",list)
         clickActivity={clickActivity}
         open={openDeleteActivity}
         onClose={handleCloseDeleteActivity}
-        activityItemDelete={deleteData}
+        // activityItemDelete={deleteData}
         deleteTitleList={deleteTitleList}
-        // onClick={() => setOnClick(!onClick)}
+        onClick={() => setOnClick(!onClick)}
+        setOpenDeleteActivity={setOpenDeleteActivity}
+        setInformasiHapus={setInformasiHapus}
+
         // setOnClick ={setOnClick}
       />
       <ModalInformation
