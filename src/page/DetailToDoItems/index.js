@@ -319,7 +319,6 @@ const DetailToDoItems = (props) => {
           handleCloseDeleteToDoItems={handleCloseDeleteToDoItems}
           sortToDoItem={sortToDoItem()}
           valueSort={valueSort}
-          data-cy="todo-item"
         />
       )}
       <DialogAddToDoItem
