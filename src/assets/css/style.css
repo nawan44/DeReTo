@@ -13,21 +13,20 @@
 
 /* .MuiListItemText-root .MuiListItemText-dense .css-tlelie-MuiListItemText-root  */
 
-.css-tlelie-MuiListItemText-root{
-  /* -webkit-flex : 0 */
+/* .css-tlelie-MuiListItemText-root{
   flex: none !important;
 }
 
 .css-1oqqzyl-MuiContainer-root {
 max-width: 1200px;
 height: 100vh;
-}
-.button-close-obat {
+} */
+.button-close {
   width: 10%;
   float: left !important;
   /* background-color: red; */
 }
-.button-close-obat:hover {
+.button-close:hover {
   color: red;
 }
 .dialog-title {
@@ -36,4 +35,8 @@ height: 100vh;
   padding-left: 10px !important;
   float: left;
   /* background-color: aqua; */
+}
+.MuiList-root .MuiList-padding .jss1  {
+  width: 100% !important;
+  padding : 0 ;
 }

@@ -54,9 +54,9 @@ function DialogAddToDoItem(props) {
       _comment: dataToDoItem ? dataToDoItem?.priority : "",
     });
   }, [dataToDoItem]);
-  console.log("detailId",detailId)
-  console.log("onToDoItem",onToDoItem)
-  console.log("dataToDoItem",dataToDoItem)
+  // console.log("detailId",detailId)
+  // console.log("onToDoItem",onToDoItem)
+  // console.log("dataToDoItem",dataToDoItem)
 
   const switchSend = () => {
     if (dataToDoItem) {
@@ -131,12 +131,12 @@ function DialogAddToDoItem(props) {
             Tambah List Item
           </h3>
           <IconButton
-            className="button-close-obat"
+            className="button-close"
             data-cy="modal-add-close-button"
             onClick={onClose}
           >
             {" "}
-            <Close onClick={onClose} className="button-close-obat" />
+            <Close onClick={onClose} className="button-close" />
           </IconButton>
         </DialogTitle>
         <Divider />

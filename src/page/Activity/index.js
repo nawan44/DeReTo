@@ -29,14 +29,12 @@ const Activity = () => {
   const [clickActivity, setClickActivity] = useState();
   const [title, setTitle] = useState();
   const [idDetail, setIdDetail] = useState();
-  const [detail, setDetail] = useState([]);
   // const [deleteTitleList, setDeleteTitleList] = useState("");
 
 
   const [deleteTitleList, setDeleteTitleList] = useState("");
   const [todoItemDetail, setTodoItemDetail] = useState();
   const [addActivity, setAddActivity] = useState([]);
-  const [detailId, setDetailId] = useState();
   const [newAddActivity, setNewAddActivity] = useState({
     title: "New Activity",
     name: "",
@@ -76,52 +74,19 @@ const Activity = () => {
   };
 
   const getDetail = async (value) => {
-    // try {
-    const response = await fetch(
-      process.env.REACT_APP_URL + `/activity-groups/${value?.id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    
 
-        // body: JSON.stringify({
-        //   title: titleDetail,
-        //   email: "rachmat.d.gunawan@gmail.com",
-        // }),
-      }
-    );
-    let res = await response.json();
-    setDetailId(res.id);
-    setDetail(res.todo_items);
-    // setTitleBar(res.title);
-    navigate(`/detail/${value?.id}`
-    , {
+    navigate(`/detail/${value?.id}` , {
       state: {
         value: value,
-        titleBarDetil: res.title,
-        dataDetail: res.todo_items,
+        // titleBarDetil: res.title,
+        // dataDetail: res.todo_items,
       },
     }
     );
-    // } catch (err) {}
   };
 
-  const viewSort = () => {
-    if (list?.length > 0 || detail?.length > 0) {
-      return (
-        <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
-          <SwapVertRoundedIcon
-            data-cy="todo-sort-button"
-            onClick={handleOpenSort}
-          />
-        </IconButton>
-      );
-    } else {
-      return <span></span>;
-    }
-  };
-  
+
 
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
