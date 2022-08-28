@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Container, Grid } from "@mui/material";
-import AddToDoItems from "../../component/dialog/dialogAddToDoItem";
-import AppBar from "../../component/layout/appBar";
-import { useLocation } from "react-router-dom";
+import { Container, Grid, Input, Button } from "@mui/material";
+// import AddToDoItems from "../../component/dialog/dialogAddToDoItem";
+// import AppBar from "../../component/layout/appBar";
+import { useLocation, useNavigate } from "react-router-dom";
 import ItemList from "./ItemList";
-import DialogAddData from "../../component/dialog/dialogAddToDoItem";
+// import DialogAddData from "../../component/dialog/dialogAddToDoItem";
 import DialogAddToDoItem from "../../component/dialog/dialogAddToDoItem";
 import DialogDeleteToDoItem from "../../component/dialog/dialogDeleteToDoItem";
 import EmptyState from "./ItemList/emptyState";
+import DialogSort from "../../component/dialog/dialogSort";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import IconButton from "@mui/material/IconButton";
+import CreateIcon from "@mui/icons-material/Create";
+import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
+
 
 const DetailToDoItems = (props) => {
   const {
@@ -21,17 +27,18 @@ const DetailToDoItems = (props) => {
     idDetail,
     handleDeleteList,
   } = props;
-
+  const navigate = useNavigate();
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const { state } = useLocation();
-  const { value, dataDetail, titleBarDetail } = state;
-  const [titleDetail, setTitleDetail] = useState(
-    titleBarDetail ? titleBarDetail : "New Activity"
-    // value ? value.title : "New Activity"
-  );
-console.log("titleBarDetail",titleBarDetail)
+  const { value, dataDetail, titleBarDetil } = state;
+
   const [changeTitle, setChangeTitle] = useState();
   const [onClick, setOnClick] = useState(false);
+  const [onEdit, setOnEdit] = useState(false);
+
+  console.log("value", value);
+  console.log("dataDetail", dataDetail);
+  console.log("titleBarDetil", titleBarDetil);
 
   // const [toDoItemList, setToDoItemList] = useState(detail);
   const [toDoItemTotal, setToDoItemListTotal] = useState(dataDetail?.length);
@@ -45,9 +52,13 @@ console.log("titleBarDetail",titleBarDetail)
   const [detailTitle, setDetailTitle] = useState(value?.title);
   const [detailId, setDetailId] = useState(value?.id);
   const [onToDoItem, setOnToDoItem] = useState(false);
-
+  const [openSort, setOpenSort] = useState(false);
   const [valueSort, setValueSort] = useState();
-
+  const [titleBar, setTitleBar] = useState();
+  const [titleDetail, setTitleDetail] = useState(
+    titleBarDetil ? titleBarDetil : "New Activity"
+    // value ? value.title : "New Activity"
+  );
   const sortToDoItem = () => {
     if (valueSort === "Terbaru") {
       return dataDetail.sort((a, b) => (b.id > a.id ? 1 : -1));
@@ -61,11 +72,19 @@ console.log("titleBarDetail",titleBarDetail)
       return dataDetail.sort((a, b) => b.title.localeCompare(a.title));
     }
   };
-
+  const clickEdit = () => {
+    setOnEdit(true);
+  };
   const changeToDoSort = (newValue) => {
     setValueSort(newValue);
   };
-
+  const handleCloseSort = (value) => {
+    setOpenSort(false);
+    // setSelectedSort(value);
+  };
+  const handleOpenSort = () => {
+    setOpenSort(true);
+  };
   const handleOpenDeleteToDoItems = (item) => {
     setOpenDeleteToDoItems(true);
     setIdToDoItems(item.id);
@@ -73,6 +92,9 @@ console.log("titleBarDetail",titleBarDetail)
   };
   const handleCloseDeleteToDoItems = (value) => {
     setOpenDeleteToDoItems(false);
+  };
+  const handleChangeTitle = (event) => {
+    setTitleDetail(event.target.value);
   };
 
   const handleOpenEditToDoItems = (item) => {
@@ -89,9 +111,23 @@ console.log("titleBarDetail",titleBarDetail)
     setTitleDetail(newValue);
   };
 
+  const handleCloseAddToDoItems = (value) => {
+    setOpenAddToDoItems(false);
+  };
+  const handleOpenAddToDoItems = () => {
+    setOpenAddToDoItems(true);
+  };
+  
+  // const viewSort = () => {
+  //   if (list?.length > 0 || detail?.length > 0) {
+  //     return (
+        
+      // );
+  //   } else {
+  //     return <span></span>;
+  //   }
+  // };
   const sendTitle = async (e) => {
-    // `[data-cy=todo-title]`;
-    console.log("ffff")
     try {
       const response = await fetch(
         process.env.REACT_APP_URL + `/activity-groups/${detailId}`,
@@ -109,20 +145,12 @@ console.log("titleBarDetail",titleBarDetail)
       );
     } catch (err) {}
   };
-  console.log("dataDetail...", dataDetail)
-
-  const handleCloseAddToDoItems = (value) => {
-    setOpenAddToDoItems(false);
-  };
-  const handleOpenAddToDoItems = () => {
-    setOpenAddToDoItems(true);
-  };
   return (
     <Container style={{ width: "100%" }}>
-      <AppBar
+      {/* <AppBar
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
-        titleBarChange={titleBarDetail}
-        titleBarDetail={titleBarDetail}
+        titleBarChange={titleBarDetil}
+        titleBarDetil={titleBarDetil}
         titleDetail={titleDetail}
         setTitleDetail={changeToDoItems}
         handleOpenAddToDoItems={handleOpenAddToDoItems}
@@ -133,9 +161,98 @@ console.log("titleBarDetail",titleBarDetail)
         setValueSort={changeToDoSort}
         toDoItemTotal={toDoItemTotal}
         // getTodoItemList={getTodoItemList}
-      />
+      /> */}
+      <Grid
+        style={{
+          margin: "0 auto",
+          textAlign: "center",
+          margin: "50px",
+        }}
+        container
+        // rowSpacing={1}
+        // columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      >
+        
+        <div         style={{
+              width: "50%",
 
-      {dataDetail?.length > 0 ? (
+              float: "left",
+              padding: "5px 0 0 0",
+              fontSize: "35px",
+              fontWeight : "bold"
+            }}>
+          
+          <ArrowBackIosIcon
+            sx={{
+              width: "10%",
+              float: "left",
+              padding: "5px 0 0 0",
+              fontSize: "35px",
+            }}
+            data-cy="todo-back-button"
+            // onClick={toActivity}
+            onClick={() => navigate("/")}
+          />
+          {onEdit ? (
+                <div data-cy="todo-title" style={{ width: "50%", float: "left",textAlign:"left"  }}>
+            <Input
+              value={titleDetail }
+              onChange={handleChangeTitle}
+              onKeyUp={sendTitle}
+              // label="Rachmat Gunawan"
+              placeholder="New Activity"
+              sx={{ fontSize: "30px", fontWeight: "bold" }}
+            />
+            </div>
+           ) : (
+            <div data-cy="todo-title" style={{ width: "50%", float: "left",textAlign:"left"}}>
+              {titleBarDetil}
+            </div>
+          )} 
+          <div style={{ float:"left"}}>
+          <IconButton 
+                data-cy="todo-title-edit-button"
+                onClick={titleBarDetil === titleDetail ? clickEdit : sendTitle}
+                edge="end"
+                aria-label="comments"
+              >
+                <CreateIcon style={{ color: "#888888" }} />
+              </IconButton>
+
+          </div>
+                 </div>
+
+        <div   style={{
+              width: "50%",
+              float: "left",
+              padding: "5px 0 0 0",
+              fontSize: "35px",
+              fontWeight : "bold"
+            }}>
+        <span data-cy="todo-sort-button">
+        <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
+          <SwapVertRoundedIcon
+            data-cy="todo-sort-button"
+            onClick={handleOpenSort}
+          />
+        </IconButton>
+          </span>
+          <Button
+            onClick={handleOpenAddToDoItems}
+            data-cy="modal-add"
+            variant="contained"
+            style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+          >
+            + Tambah
+          </Button>
+          </div>
+      </Grid>
+      {dataDetail?.length === 0 ? (
+        <EmptyState
+          data-cy="todo-empty-state"
+          handleOpenAddToDoItems={handleOpenAddToDoItems}
+        />
+      ) : (
         <ItemList
           // onToDoItem={() => setOnToDoItem(!onToDoItem)}
           idToDoItems={idToDoItems}
@@ -156,11 +273,6 @@ console.log("titleBarDetail",titleBarDetail)
           valueSort={valueSort}
           data-cy="todo-item"
         />
-      ) : (
-        <EmptyState
-          data-cy="todo-empty-state"
-          handleOpenAddToDoItems={handleOpenAddToDoItems}
-        />
       )}
       <DialogAddToDoItem
         // getTodoItemList={getTodoItemList}
@@ -180,7 +292,15 @@ console.log("titleBarDetail",titleBarDetail)
         data-cy="modal-delete-confirm-button"
         idToDoItems={idToDoItems}
         setOpenDeleteToDoItems={setOpenDeleteToDoItems}
-        // data-cy="modal-delete"
+      />
+
+      <DialogSort
+        // selectedValue={selectedSort}
+        open={openSort}
+        onClose={handleCloseSort}
+        // sorts={sorts}
+        valueSort={valueSort}
+        setValueSort={setValueSort}
       />
     </Container>
   );

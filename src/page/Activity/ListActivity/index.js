@@ -45,16 +45,13 @@ const ListActivity = ({
   return (
     <Container
       style={{ width: "100%" }}
-      // data-cy="activity-item">
     >
       {/* <ClickAwayListener
-          data-cy="modal-delete-cancel-button"
 
       mouseEvent="onMouseDown"
       touchEvent="onTouchStart"
       onClickAway={handleClickAway}
 
-      // data-cy="modal-delete-cancel-button"
     > */}
       {list?.length === 0 ? (
         <Grid
@@ -138,7 +135,6 @@ const ListActivity = ({
                     item={item}
                     list={list}
                     handleCloseDeleteActivity={handleCloseDeleteActivity}
-                    // data-cy="activity-item"
                     handleDeleteActivity={handleDeleteActivity}
                     toDashboard={toDashboard}
                     getDetail={() => getDetail(item)}

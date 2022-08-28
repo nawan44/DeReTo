@@ -116,9 +116,6 @@ setOpenDeleteActivity(false);
                 float: "right",
                 margin: "20px 20px 0 20px",
               }}
-              // data-cy="modal-batal-hapus"
-
-              // data-cy="modal-batal-delete"
               onClick={onClose}
               data-cy="modal-delete-cancel-button"
             >

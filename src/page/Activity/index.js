@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Container } from "@mui/material";
+import { Container, Grid, Input, Button } from "@mui/material";
 import AppBar from "../../component/layout/appBar";
 import ListActivity from "./ListActivity";
 import ModalInformation from "../../component/dialog/dialogInformation";
-
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import IconButton from "@mui/material/IconButton";
+import CreateIcon from "@mui/icons-material/Create";
 import "../../assets/css/style.css";
 import DialogDeleteActivity from "../../component/dialog/dialogDeleteActivity";
 // import DialogDeleteActivity from "../../component/dialog/dialogDeleteActivity";
 // import DialogDeleteData from "../../component/dialog/dialogDeleteData";
-
+import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
+import DialogSort from "../../component/dialog/dialogSort";
 const Activity = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [openDeleteActivity, setOpenDeleteActivity] = useState(false);
-
+  const [openSort, setOpenSort] = useState(false);
   const [openDeleteList, setOpenDeleteList] = useState(false);
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const [newList, setNewList] = useState({
@@ -32,10 +35,12 @@ const Activity = () => {
   const [idDetail, setIdDetail] = useState();
   const [detail, setDetail] = useState([]);
   // const [deleteTitleList, setDeleteTitleList] = useState("");
-  const [titleBar, setTitleBar] = useState();
+
+
   const [deleteTitleList, setDeleteTitleList] = useState("");
   const [todoItemDetail, setTodoItemDetail] = useState();
   const [addActivity, setAddActivity] = useState([]);
+  const [detailId, setDetailId] = useState();
   const [newAddActivity, setNewAddActivity] = useState({
     title: "New Activity",
     name: "",
@@ -48,9 +53,9 @@ const Activity = () => {
   useEffect(() => {
     getListData();
   }, [onClick]);
- 
+
   // useEffect(() => {
-    
+
   //   getListData();
   // }, [deleteData]);
 
@@ -73,7 +78,7 @@ const Activity = () => {
       console.log(err.message);
     }
   };
-console.log("list",list)
+  console.log("list", list);
   // const toDetail = () =>{
   // if(detail){
   // navigate(`/detail/${clickActivity}`, {
@@ -81,9 +86,13 @@ console.log("list",list)
   //     // handleDeleteList,
   //   });}
   // }
+  const handleOpenSort = () => {
+    setOpenSort(true);
+  };
 
   const getDetail = async (value) => {
     // try {
+      console.log("value?.id",value?.id)
     const response = await fetch(
       process.env.REACT_APP_URL + `/activity-groups/${value?.id}`,
       {
@@ -99,18 +108,77 @@ console.log("list",list)
       }
     );
     let res = await response.json();
-
+    setDetailId(res.id);
     setDetail(res.todo_items);
-    setTitleBar(res.title);
-    navigate(`/detail/${value?.id}`, {
+    // setTitleBar(res.title);
+    navigate(`/detail/${value?.id}`
+    , {
       state: {
         value: value,
-        titleBarDetail: res.title,
+        titleBarDetil: res.title,
         dataDetail: res.todo_items,
       },
-    });
+    }
+    );
     // } catch (err) {}
   };
+
+  const viewSort = () => {
+    if (list?.length > 0 || detail?.length > 0) {
+      return (
+        <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
+          <SwapVertRoundedIcon
+            data-cy="todo-sort-button"
+            onClick={handleOpenSort}
+          />
+        </IconButton>
+      );
+    } else {
+      return <span></span>;
+    }
+  };
+  const RightButton = () => {
+    // if (list && !detail) {
+      return (
+        <span>
+          <span data-cy="todo-sort-button">{viewSort()}</span>
+          <Button
+            onClick={handleAddActivityGroup}
+            variant="contained"
+            data-cy="activity-add-button"
+            style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+          >
+            + Tambah
+          </Button>
+        </span>
+      );
+    } 
+  //   else if (!list && detail) {
+  //     return (
+  //       <span>
+  //         <Button
+  //           onClick={handleOpenAddToDoItems}
+  //           variant="contained"
+  //           style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+  //         >
+  //           + Tambah
+  //         </Button>
+  //       </span>
+  //     );
+  //   } else {
+  //     return (
+  //       <span>
+  //         {" "}
+  //         <Button
+  //           variant="contained"
+  //           style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+  //         >
+  //           +Tambah
+  //         </Button>
+  //       </span>
+  //     );
+  //   }
+  // };
 
   //   useEffect(() => {
   //     toDetail()
@@ -120,8 +188,13 @@ console.log("list",list)
     setOpenAddToDoItems(false);
   };
 
+
   const handleCloseInformasi = (value) => {
     setInformasiHapus(false);
+  };
+  const handleCloseSort = (value) => {
+    setOpenSort(false);
+    // setSelectedSort(value);
   };
 
   useEffect(() => {
@@ -150,9 +223,7 @@ console.log("list",list)
       );
       const newItems = [...addActivity, newAddActivity];
       setAddActivity(newItems);
-
       setOpenAddToDoItems(true);
-
       getListData();
     } catch (err) {
       console.log(err.message);
@@ -169,7 +240,6 @@ console.log("list",list)
     setDeleteTitleList(value.title);
   };
   const handleCloseDeleteActivity = (value) => {
-    "[data-cy=modal-delete-cancel-button]";
 
     setOpenDeleteActivity(false);
     setSelectedDeleteActivity(value);
@@ -189,7 +259,6 @@ console.log("list",list)
   const [valueSort, setValueSort] = useState();
 
   const sortActivity = () => {
-    "    [data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]";
     if (valueSort === "Terbaru") {
       return list.sort(
         (b, a) =>
@@ -213,7 +282,7 @@ console.log("list",list)
   };
   return (
     <Container style={{ width: "100%" }}>
-      <AppBar
+      {/* <AppBar
         idDetail={idDetail}
         setIdDetail={setIdDetail}
         handleAddActivityGroup={handleAddActivityGroup}
@@ -226,7 +295,77 @@ console.log("list",list)
         openAddToDoItems={openAddToDoItems}
         valueSort={valueSort}
         setValueSort={changeToDoSort}
-      />
+      /> */}
+      <Grid
+        style={{
+          margin: "0 auto",
+          textAlign: "center",
+          margin: "50px",
+        }}
+        container
+        rowSpacing={1}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      >
+        {/* {list == undefined ? (
+          <Grid
+            item
+            xs={6}
+            style={{
+              fontSize: "24px",
+              textAlign: "left",
+              fontWeight: "bold",
+            }}
+          >
+            <div>
+              <ArrowBackIosIcon
+                style={{
+                  width: "10%",
+                  float: "left",
+                  padding: "5px 0 0 0",
+                  fontSize: "35px",
+                }}
+                data-cy="todo-back-button"
+                // onClick={toActivity}
+                onClick={() => navigate("/")}
+              />
+            
+              {/* } 
+              <IconButton
+                data-cy="todo-title-edit-button"
+                onClick={titleBar === titleDetail ? clickEdit : sendTitle}
+                edge="end"
+                aria-label="comments"
+              >
+                <CreateIcon style={{ color: "#888888" }} />
+              </IconButton>
+            </div>
+          </Grid>
+        ) : (
+           */}
+          <Grid
+            item
+            xs={6}
+            style={{
+              fontSize: "24px",
+              textAlign: "left",
+              fontWeight: "bold",
+            }}
+            data-cy="activity-title"
+          >
+            <span data-cy="activity-title">Activity</span>
+          </Grid>
+        
+        <Grid item xs={6} data-cy="todo-add-button">
+        <Button
+            onClick={handleAddActivityGroup}
+            variant="contained"
+            data-cy="activity-add-button"
+            style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
+          >
+            + Tambah
+          </Button>
+        </Grid>
+      </Grid>
       <ListActivity
         handleCloseDeleteList={handleCloseDeleteList}
         idDetail={idDetail}
@@ -235,7 +374,6 @@ console.log("list",list)
         list={list}
         sortActivity={sortActivity()}
         handleDeleteActivity={handleDeleteActivity}
-        // '[data-cy=sort-selection],[data-cy=todo-sort-button],[data-cy=todo-sort-button]')}
         handleDeleteList={handleDeleteList}
         getDetail={getDetail}
         handleAddActivityGroup={handleAddActivityGroup}
@@ -248,13 +386,10 @@ console.log("list",list)
         clickActivity={clickActivity}
         open={openDeleteActivity}
         onClose={handleCloseDeleteActivity}
-        // activityItemDelete={deleteData}
         deleteTitleList={deleteTitleList}
         onClick={() => setOnClick(!onClick)}
         setOpenDeleteActivity={setOpenDeleteActivity}
         setInformasiHapus={setInformasiHapus}
-
-        // setOnClick ={setOnClick}
       />
       <ModalInformation
         data-cy="modal-information"
@@ -262,6 +397,20 @@ console.log("list",list)
         onClose={handleCloseInformasi}
         setInformasiHapus={setInformasiHapus}
       />
+
+      <DialogSort
+        open={openSort}
+        onClose={handleCloseSort}
+        // sorts={sorts}
+        valueSort={valueSort}
+        setValueSort={setValueSort}
+      />
+      {/* <DialogAddToDoItem
+        onToDoItem={onToDoItem}
+        open={openAddToDoItems}
+        onClose={handleCloseAddToDoItems}
+        // getTodoItemList={getTodoItemList}
+      /> */}
     </Container>
   );
 };

@@ -45,7 +45,6 @@ function DialogDeleteToDoItem(props) {
     // onToDoItem();
   };
   const deleteToDoItems = () => {
-    // "[data-cy=modal-delete-confirm-button]";
     try {
       const response = fetch(
         process.env.REACT_APP_URL + `/todo-items/${idToDoItems}`,
@@ -68,9 +67,7 @@ function DialogDeleteToDoItem(props) {
     <ThemeProvider theme={theme}>
       <Dialog
         data-cy="modal-delete"
-        // data-cy="activity-item-delete-button"
-        // data-cy="modal-delete-cancel-button"
-        // data-cy="modal-delete-cancel-button"
+
         onClose={handleClose}
         open={open}
       >
@@ -115,14 +112,10 @@ function DialogDeleteToDoItem(props) {
                 float: "right",
                 margin: "20px 20px 0 20px",
               }}
-              // data-cy="modal-delete-cancel-button"
-              // data-cy="modal-delete-confirm-button  "
-              // data-cy="modal-batal-delete"
-              // data-cy="modal-delete-cancel-button"
+             
               onClick={onClose}
               data-cy="modal-delete-cancel-button"
 
-              // data-cy="modal-delete-cancel-button"
             >
               Batal
             </Button>

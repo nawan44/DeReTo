@@ -82,7 +82,6 @@ const ItemList = (props) => {
   };
 
   const handleToggle = (value) => () => {
-    "[data-cy=todo-item-checkbox]";
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 

@@ -62,7 +62,6 @@ function DialogEditToDoItem(props) {
     }
   };
   const addData = (e) => {
-    //  data-cy : "modal-add-save-button";
 
     e.preventDefault();
     // try {
@@ -90,10 +89,7 @@ function DialogEditToDoItem(props) {
   //   console.log(err.message);
 
   const handleChange = (event) => {
-    //  `[data-cy=modal-add-priority-dropdown]`;
-    // `[data-cy=todo-add-button]`;
-    // `[data-cy=modal-add-priority-dropdown]`;
-    // `[data-cy=modal-add-priority-dropdown]`;
+  
     event.preventDefault();
     setKirim({
       ...kirim,
