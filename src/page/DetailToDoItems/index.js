@@ -31,7 +31,7 @@ const DetailToDoItems = (props) => {
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const { state } = useLocation();
   const { value,  } = state;
-    // detail, titleDetail 
+    // detail, titleTodo 
   
     const [detailId, setDetailId] = useState();
 
@@ -59,13 +59,13 @@ const DetailToDoItems = (props) => {
   const [openSort, setOpenSort] = useState(false);
   const [valueSort, setValueSort] = useState();
   const [titleBar, setTitleBar] = useState();
-  const [titleDetail, setTitleDetail] = useState(
-    // titleDetail ? titleDetail : 
+  const [titleTodo, setTitleTodo] = useState(
+    // titleTodo ? titleTodo : 
     // "New Activity"
     // value ? value.title : "New Activity"
   );
 
-  console.log("titleDetail", titleDetail);
+  console.log("titleTodo", titleTodo);
   console.log("value", value);
   console.log("detail", detail);
 
@@ -104,7 +104,7 @@ const DetailToDoItems = (props) => {
     setOpenDeleteToDoItems(false);
   };
   const handleChangeTitle = (event) => {
-    setTitleDetail(event.target.value);
+    setTitleTodo(event.target.value);
   };
 
   const handleOpenEditToDoItems = (item) => {
@@ -118,7 +118,7 @@ const DetailToDoItems = (props) => {
     setOpenEditToDoItems(false);
   };
   const changeToDoItems = (newValue) => {
-    setTitleDetail(newValue);
+    setTitleTodo(newValue);
   };
 
   const handleCloseAddToDoItems = (value) => {
@@ -153,7 +153,7 @@ const DetailToDoItems = (props) => {
         },
 
         // body: JSON.stringify({
-        //   title: titleDetail,
+        //   title: titleTodo,
         //   email: "rachmat.d.gunawan@gmail.com",
         // }),
       }
@@ -161,13 +161,13 @@ const DetailToDoItems = (props) => {
     let res = await response.json();
     setDetailId(res.id);
     setDetail(res.todo_items);
-    setTitleDetail(res.title)
+    setTitleTodo(res.title)
     // setTitleBar(res.title);
     // navigate(`/detail/${value?.id}`
     // , {
     //   state: {
     //     value: value,
-    //     titleDetail: res.title,
+    //     titleTodo: res.title,
     //     detail: res.todo_items,
     //   },
     // }
@@ -185,7 +185,7 @@ const DetailToDoItems = (props) => {
           },
 
           body: JSON.stringify({
-            title: titleDetail,
+            title: titleTodo,
             email: "rachmat.d.gunawan@gmail.com",
           }),
         }
@@ -196,10 +196,10 @@ const DetailToDoItems = (props) => {
     <Container style={{ width: "100%" }}>
       {/* <AppBar
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
-        titleBarChange={titleDetail}
-        titleDetail={titleDetail}
-        titleDetail={titleDetail}
-        setTitleDetail={changeToDoItems}
+        titleBarChange={titleTodo}
+        titleTodo={titleTodo}
+        titleTodo={titleTodo}
+        setTitleTodo={changeToDoItems}
         handleOpenAddToDoItems={handleOpenAddToDoItems}
         sendTitle={sendTitle}
         value={value}
@@ -220,7 +220,9 @@ const DetailToDoItems = (props) => {
         // columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         
-        <div         style={{
+        <div   
+         data-cy="todo-title"
+        style={{
               width: "50%",
 
               float: "left",
@@ -240,26 +242,26 @@ const DetailToDoItems = (props) => {
             // onClick={toActivity}
             onClick={() => navigate("/")}
           />
-          {onEdit ? (
-                <div style={{ width: "50%", float: "left",textAlign:"left"  }}>
+          {/* {onEdit ? (
+                <div style={{ width: "50%", float: "left",textAlign:"left"  }}> */}
             <Input
-              value={titleDetail }
+              value={titleTodo }
               onChange={handleChangeTitle}
               onKeyUp={sendTitle}
               // label="Rachmat Gunawan"
               placeholder="New Activity"
               sx={{ fontSize: "30px", fontWeight: "bold" }}
             />
-            </div>
-           ) : (
+            {/* </div> */}
+           {/* ) : (
             <div data-cy="todo-title" style={{ width: "50%", float: "left",textAlign:"left"}}>
-              {titleDetail}
+              {titleTodo}
             </div>
-        )} 
+        )}  */}
           <div style={{ float:"left"}}>
           <IconButton 
                 data-cy="todo-title-edit-button"
-                onClick={titleDetail === titleDetail ? clickEdit : sendTitle}
+                onClick={sendTitle}
                 edge="end"
                 aria-label="comments"
               >
