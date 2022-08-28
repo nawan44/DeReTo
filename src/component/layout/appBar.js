@@ -224,7 +224,8 @@ onClick={() => navigate("/")}
 />
               {onEdit ? (
                 <Input
-                  value={titleBarDetail !== titleDetail  ? titleDetail :titleBarDetail }   data-cy="todo-title"
+                  value={titleBarDetail !== titleDetail  ? titleDetail :titleBarDetail }   
+                  // data-cy="todo-title"
                   onChange={handleChangeTitle}
                onKeyUp={sendTitle}
                   // label="Rachmat Gunawan"
