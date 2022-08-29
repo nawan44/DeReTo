@@ -125,7 +125,7 @@ const ItemList = (props) => {
         }}
         container
       >
-        {valueSort == undefined ? (
+        {/* {valueSort == undefined ? (
           <List className={classes.list} data-cy="todo-item">
             {detail?.map((item) => {
               const labelId = `checkbox-list-label-${item}`;
@@ -210,7 +210,9 @@ const ItemList = (props) => {
               );
             })}
           </List>
-        ) : (
+        ) :
+         (
+           */}
           <List  data-cy="todo-item"
             style={{ width: "100%", textAlign: "center", margin: "0 auto" }}
           >
@@ -296,7 +298,7 @@ const ItemList = (props) => {
               );
             })}
           </List>
-        )}
+        {/* )} */}
       </Grid>
 
       <DialogEditToDoItem
