@@ -74,6 +74,7 @@ const ListActivity = ({
               textAlign: "center",
               fontWeight: "bold",
             }}
+            data-cy="activity-empty-state"
           >
             <img
               alt="Remy Sharp"

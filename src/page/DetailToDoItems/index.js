@@ -31,7 +31,7 @@ const DetailToDoItems = (props) => {
   const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
   const { state } = useLocation();
   const { value,  } = state;
-    // detail, titleTodo 
+    // detail, title 
   
     const [detailId, setDetailId] = useState();
 
@@ -59,13 +59,13 @@ const DetailToDoItems = (props) => {
   const [openSort, setOpenSort] = useState(false);
   const [valueSort, setValueSort] = useState();
   const [titleBar, setTitleBar] = useState();
-  const [titleTodo, setTitleTodo] = useState(
-    // titleTodo ? titleTodo : 
+  const [title, setTitleTodo] = useState(
+    // title ? title : 
     // "New Activity"
     // value ? value.title : "New Activity"
   );
 
-  console.log("titleTodo", titleTodo);
+  console.log("title", title);
   console.log("value", value);
   console.log("detail", detail);
 
@@ -153,7 +153,7 @@ const DetailToDoItems = (props) => {
         },
 
         // body: JSON.stringify({
-        //   title: titleTodo,
+        //   title: title,
         //   email: "rachmat.d.gunawan@gmail.com",
         // }),
       }
@@ -167,7 +167,7 @@ const DetailToDoItems = (props) => {
     // , {
     //   state: {
     //     value: value,
-    //     titleTodo: res.title,
+    //     title: res.title,
     //     detail: res.todo_items,
     //   },
     // }
@@ -185,7 +185,7 @@ const DetailToDoItems = (props) => {
           },
 
           body: JSON.stringify({
-            title: titleTodo,
+            title: title,
             email: "rachmat.d.gunawan@gmail.com",
           }),
         }
@@ -196,9 +196,9 @@ const DetailToDoItems = (props) => {
     <Container style={{ width: "100%" }}>
       {/* <AppBar
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
-        titleBarChange={titleTodo}
-        titleTodo={titleTodo}
-        titleTodo={titleTodo}
+        titleBarChange={title}
+        title={title}
+        title={title}
         setTitleTodo={changeToDoItems}
         handleOpenAddToDoItems={handleOpenAddToDoItems}
         sendTitle={sendTitle}
@@ -246,7 +246,7 @@ const DetailToDoItems = (props) => {
                 <div style={{ width: "50%", float: "left",textAlign:"left"  }}> */}
             <Input
             data-cy="todo-title"
-              value={titleTodo }
+              value={title }
               onChange={handleChangeTitle}
               onKeyUp={sendTitle}
               onKeyDown={sendTitle}
@@ -296,6 +296,7 @@ const DetailToDoItems = (props) => {
       </Grid>
       {detail?.length === 0 ? (
         <EmptyState
+        data-cy="todo-empty-state"
           handleOpenAddToDoItems={handleOpenAddToDoItems}
         />
       ) : (
@@ -308,7 +309,7 @@ const DetailToDoItems = (props) => {
           detail={detail}
           value={value}
           // getTodoItemList={getTodoItemList}
-
+          data-cy="todo-item"
           handleOpenDeleteToDoItems={handleOpenDeleteToDoItems}
           // handle={handleCloseDeleteToDoItems}
           handleClosEditToDoItems={handleClosEditToDoItems}
