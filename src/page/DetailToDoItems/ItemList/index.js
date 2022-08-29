@@ -53,7 +53,6 @@ const ItemList = (props) => {
     handleDeleteList,
     item,
     // getTodoItemList,
-    dataDetail,
     handleOpenDeleteToDoItems,
     handleCloseDeleteToDoItems,
     handleOpenEditToDoItems,
@@ -62,6 +61,7 @@ const ItemList = (props) => {
     value,
     sortToDoItem,
     valueSort,
+    detail,
     onToDoItem,
   } = props;
   const classes = useStyles();
@@ -127,7 +127,7 @@ const ItemList = (props) => {
       >
         {valueSort == undefined ? (
           <List className={classes.list} data-cy="todo-item">
-            {dataDetail?.map((item) => {
+            {detail?.map((item) => {
               const labelId = `checkbox-list-label-${item}`;
 
               return (
@@ -304,7 +304,7 @@ const ItemList = (props) => {
         open={openEditToDoItems}
         dataToDoItem={dataToDoItem}
         onClose={handleClosEditToDoItems}
-        dataDetail={dataDetail}
+        detail={detail}
         // getTodoItemList={getTodoItemList}
       />
     </Container>
