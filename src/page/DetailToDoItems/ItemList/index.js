@@ -216,7 +216,7 @@ const ItemList = (props) => {
           <List  data-cy="todo-item"
             style={{ width: "100%", textAlign: "center", margin: "0 auto" }}
           >
-            {sortToDoItem?.map((item) => {
+            {detail?.map((item) => {
               const labelId = `checkbox-list-label-${item}`;
 
               return (
