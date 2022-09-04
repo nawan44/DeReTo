@@ -376,34 +376,35 @@ const DetailToDoItems = (props) => {
           </Button>
         </div>
       </Grid>
-      <div >
+      <div           data-cy="todo-empty-state"
+>
         {detail?.length === 0 ? (
-          // <EmptyState
-          // data-cy="todo-empty-state"
-          //   handleOpenAddToDoItems={handleOpenAddToDoItems}
-          // />
-          <div data-cy="empty-state">
-          <Grid
-            style={{
-              margin: "0 auto",
-              textAlign: "center",
-              padding: "40px 0px",
-              width: "90%",
-            }}
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            data-cy="todo-empty-state"
-          >
-            <img
-              alt="Remy Sharp"
-              width={300}
-              src={AvatarWoman}
-              style={{ margin: "0 auto", textAlign: "center" }}
-              onClick={handleOpenAddToDoItems}
-            />
-          </Grid>
-          </div>
+          <EmptyState
+          data-cy="empty-state"
+            handleOpenAddToDoItems={handleOpenAddToDoItems}
+          />
+          // <div data-cy="empty-state">
+          // <Grid
+          //   style={{
+          //     margin: "0 auto",
+          //     textAlign: "center",
+          //     padding: "40px 0px",
+          //     width: "90%",
+          //   }}
+          //   container
+          //   rowSpacing={1}
+          //   columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          //   data-cy="todo-empty-state"
+          // >
+          //   <img
+          //     alt="Remy Sharp"
+          //     width={300}
+          //     src={AvatarWoman}
+          //     style={{ margin: "0 auto", textAlign: "center" }}
+          //     onClick={handleOpenAddToDoItems}
+          //   />
+          // </Grid>
+          // </div>
         ) : (
           // <ItemList
           //   // onToDoItem={() => setOnToDoItem(!onToDoItem)}
