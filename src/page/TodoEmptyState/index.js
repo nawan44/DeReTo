@@ -46,7 +46,7 @@ const useStyles = makeStyles({
     margin: "0 auto",
   },
 });
-const DetailToDoItems = (props) => {
+const TodoEmptyState = (props) => {
   const {
     clickActivity,
     list,
@@ -267,31 +267,13 @@ const DetailToDoItems = (props) => {
       })
     : "";
 
-  // useEffect(() => {
-  //   getTodoItemList([]);
-  // }, [onToDoItem]);
 
-  // Return classes based on whether item is checked
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
   console.log("checked", checked);
   return (
     <Container style={{ width: "100%" }}>
-      {/* <AppBar
-        onToDoItem={() => setOnToDoItem(!onToDoItem)}
-        titleBarChange={title}
-        title={title}
-        title={title}
-        setTitleTodo={changeToDoItems}
-        handleOpenAddToDoItems={handleOpenAddToDoItems}
-        sendTitle={sendTitle}
-        value={value}
-        detail={detail}
-        valueSort={valueSort}
-        setValueSort={changeToDoSort}
-        toDoItemTotal={toDoItemTotal}
-        // getTodoItemList={getTodoItemList}
-      /> */}
+
       <Grid
         style={{
           margin: "0 auto",
@@ -358,7 +340,7 @@ const DetailToDoItems = (props) => {
             fontWeight: "bold",
           }}
         >
-          <span data-cy="todo-sort-button">
+          <span >
             <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
               <SwapVertRoundedIcon
                 data-cy="todo-sort-button"
@@ -376,11 +358,12 @@ const DetailToDoItems = (props) => {
           </Button>
         </div>
       </Grid>
-      <div           data-cy="todo-empty-state"
+      <div               data-cy="todo-empty-state"
+   
 >
-        {detail?.length === 0 ? (
+        {detail.length === 0 ? (
           <EmptyState
-          data-cy="empty-state"
+          data-cy="todo-empty-state"
             handleOpenAddToDoItems={handleOpenAddToDoItems}
           />
           // <div data-cy="empty-state">
@@ -424,7 +407,7 @@ const DetailToDoItems = (props) => {
           //   sortToDoItem={sortToDoItem()}
           //   valueSort={valueSort}
           // />
-          <div data-cy="item-list">
+          <div data-cy="todo-item-list">
             {valueSort == undefined ? (
               <List className={classes.list} data-cy="todo-item-list">
                 {detail?.map((item) => {
@@ -644,4 +627,4 @@ const DetailToDoItems = (props) => {
     </Container>
   );
 };
-export default DetailToDoItems;
+export default TodoEmptyState;
