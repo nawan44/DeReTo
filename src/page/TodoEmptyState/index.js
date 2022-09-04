@@ -363,29 +363,30 @@ const TodoEmptyState = (props) => {
    
 >
         {detail.length === 0 ? (
-          <EmptyState
-            handleOpenAddToDoItems={handleOpenAddToDoItems}
-          />
+          // <EmptyState
+          //   handleOpenAddToDoItems={handleOpenAddToDoItems}
+          // />
           // <div data-cy="empty-state">
-          // <Grid
-          //   style={{
-          //     margin: "0 auto",
-          //     textAlign: "center",
-          //     padding: "40px 0px",
-          //     width: "90%",
-          //   }}
-          //   container
-          //   rowSpacing={1}
-          //   columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          // >
-          //   <img
-          //     alt="Remy Sharp"
-          //     width={300}
-          //     src={AvatarWoman}
-          //     style={{ margin: "0 auto", textAlign: "center" }}
-          //     onClick={handleOpenAddToDoItems}
-          //   />
-          // </Grid>
+          <Grid
+            style={{
+              margin: "0 auto",
+              textAlign: "center",
+              padding: "40px 0px",
+              width: "90%",
+            }}
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
+            <img
+              alt="Remy Sharp"
+              width={300}
+              src={AvatarWoman}
+              style={{ margin: "0 auto", textAlign: "center" }}
+              onClick={handleOpenAddToDoItems}
+              data-cy="todo-empty-state"
+            />
+          </Grid>
           // </div>
         ) : (
           // <ItemList
