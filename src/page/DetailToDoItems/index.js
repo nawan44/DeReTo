@@ -382,6 +382,7 @@ const DetailToDoItems = (props) => {
           // data-cy="todo-empty-state"
           //   handleOpenAddToDoItems={handleOpenAddToDoItems}
           // />
+          <div data-cy="empty-state">
           <Grid
             style={{
               margin: "0 auto",
@@ -392,7 +393,7 @@ const DetailToDoItems = (props) => {
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            data-cy="empty-state"
+            data-cy="todo-empty-state"
           >
             <img
               alt="Remy Sharp"
@@ -402,6 +403,7 @@ const DetailToDoItems = (props) => {
               onClick={handleOpenAddToDoItems}
             />
           </Grid>
+          </div>
         ) : (
           // <ItemList
           //   // onToDoItem={() => setOnToDoItem(!onToDoItem)}
@@ -423,7 +425,7 @@ const DetailToDoItems = (props) => {
           // />
           <div data-cy="item-list">
             {valueSort == undefined ? (
-              <List className={classes.list} data-cy="todo-item">
+              <List className={classes.list} data-cy="todo-item-list">
                 {detail?.map((item) => {
                   const labelId = `checkbox-list-label-${item}`;
 
