@@ -313,7 +313,7 @@ const TodoEmptyState = (props) => {
             value={title}
             onChange={handleChangeTitle}
             onKeyUp={sendTitle}
-            onKeyDown={sendTitle}
+            // onKeyDown={sendTitle}
             // label="Rachmat Gunawan"
             placeholder="New Activity"
             sx={{ fontSize: "30px", fontWeight: "bold" }}
@@ -322,7 +322,7 @@ const TodoEmptyState = (props) => {
           <div style={{ float: "left" }}>
             <IconButton
               data-cy="todo-title-edit-button"
-              onClick={sendTitle}
+              onClick={(e) => sendTitle(e)}
               edge="end"
               aria-label="comments"
             >
@@ -359,7 +359,7 @@ const TodoEmptyState = (props) => {
           </Button>
         </div>
       </Grid>
-      <div               data-cy="todo-empty-state"
+      <div   data-cy="item-list-empty-state"         
    
 >
         {detail.length === 0 ? (
@@ -378,7 +378,6 @@ const TodoEmptyState = (props) => {
           //   container
           //   rowSpacing={1}
           //   columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          //   data-cy="todo-empty-state"
           // >
           //   <img
           //     alt="Remy Sharp"
