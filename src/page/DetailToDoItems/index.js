@@ -368,7 +368,7 @@ const DetailToDoItems = (props) => {
           </span>
           <Button
             onClick={handleOpenAddToDoItems}
-            data-cy="modal-add"
+            data-cy="todo-add-button"
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
