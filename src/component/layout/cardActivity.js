@@ -36,7 +36,8 @@ export default function CardActivity(props) {
       key={index}
       sx={{ width: 200, height: "180px", margin: "10px" }}
     >
-      <CardContent
+      <CardContent 
+       data-cy="todo-title"
       >
         {/* <CardContent onClick={ (id) =>checkActivity(item)  }> */}
         <Typography
