@@ -211,7 +211,7 @@ const Activity = () => {
             <span data-cy="activity-title">Activity</span>
           </Grid>
         
-        <Grid item xs={6} >
+          <Grid item xs={6} data-cy="todo-add-button">
         <Button
             onClick={handleAddActivityGroup}
             variant="contained"
