@@ -350,7 +350,8 @@ const TodoEmptyState = (props) => {
           </span>
           <Button
             onClick={handleOpenAddToDoItems}
-            data-cy="todo-add-button"
+            // data-cy="todo-add-button"
+            data-cy="modal-add"
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
