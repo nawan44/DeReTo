@@ -319,16 +319,16 @@ const TodoEmptyState = (props) => {
             sx={{ fontSize: "30px", fontWeight: "bold" }}
           />
 
-          <div style={{ float: "left" }}>
+          {/* <div style={{ float: "left" }}> */}
             <IconButton
-              
+               data-cy="todo-title-edit-button"
+               onClick={sendTitle}
               edge="end"
               aria-label="comments"
             >
-              <CreateIcon style={{ color: "#888888" }}  data-cy="todo-title-edit-button"
-              onClick={sendTitle}/>
+              <CreateIcon style={{ color: "#888888" }} />
             </IconButton>
-          </div>
+          {/* </div> */}
         </div>
 
         <div
@@ -364,7 +364,6 @@ const TodoEmptyState = (props) => {
 >
         {detail.length === 0 ? (
           <EmptyState
-          data-cy="todo-empty-state"
             handleOpenAddToDoItems={handleOpenAddToDoItems}
           />
           // <div data-cy="empty-state">
