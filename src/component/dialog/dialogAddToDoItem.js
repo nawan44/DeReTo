@@ -37,21 +37,23 @@ function DialogAddToDoItem(props) {
     open,
     classes,
     dataToDoItem,
-    setOnToDoItem,
+    setOnToDoItem,getDetail
   } = props;
-  const [valueKirim, setValueKirim] = useState({
-    activity_group_id: dataToDoItem ? dataToDoItem.id : detailId,
-    title: "",
-    _comment: "",
-  });
 
-  const [kirim, setKirim] = useState();
+  console.log("detailId", detailId)
+  // console.log("detailId", detailId)
+
+
+  const [kirim, setKirim] = useState({
+    _comment : "very-high"
+  });
 
   useEffect(() => {
     setKirim({
+      activity_group_id: detailId,
+
       title: dataToDoItem ? dataToDoItem?.title : "",
 
-      _comment: dataToDoItem ? dataToDoItem?.priority : "",
     });
   }, [dataToDoItem]);
   // console.log("detailId",detailId)
@@ -76,18 +78,19 @@ function DialogAddToDoItem(props) {
 
     e.preventDefault();
     // try {
-    const response = fetch(process.env.REACT_APP_URL + switchSend(), {
-      method: switchMethod(),
+    const response = fetch(process.env.REACT_APP_URL + "/todo-items", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(dataToDoItem ? kirim : valueKirim),
+      body: JSON.stringify( kirim),
       // });
     });
     onToDoItem();
     onClose();
+    getDetail()
     // getTodoItemList()
-    setValueKirim({
+    setKirim({
       title: "",
       _comment: "",
     });
@@ -109,10 +112,7 @@ function DialogAddToDoItem(props) {
       [event.target.name]: event.target.value,
     });
 
-    setValueKirim({
-      ...valueKirim,
-      [event.target.name]: event.target.value,
-    });
+  
   };
   // const handleCloseAddDialog= () => {
   //   onClose()
@@ -174,10 +174,10 @@ function DialogAddToDoItem(props) {
             select
             label="Pilih Priority"
             name="_comment"
-            value={dataToDoItem ? kirim?.priority : valueKirim._comment}
+            defaultValue="very-high"
+            value={kirim._comment}
             data-cy="modal-add-priority-dropdown"
             onChange={handleChange}
-            style={{ margin: "10px 0 10px 0", width: "100%" }}
           >
             {priorities.map((option) => (
               <MenuItem key={option.value} value={option.value}>

@@ -36,8 +36,12 @@ function DialogDeleteToDoItem(props) {
     selectedValue,
     open,
     clickActivity,
-    dataToDoItem,onClick,idToDoItems,setOpenDeleteToDoItems
-    // onToDoItem,
+    dataToDoItem,
+    onClick,
+    idToDoItems,
+    setOpenDeleteToDoItems,
+    getDetail,
+    onToDoItem,
   } = props;
 
   const handleClose = () => {
@@ -45,7 +49,7 @@ function DialogDeleteToDoItem(props) {
     // onToDoItem();
   };
   const deleteToDoItems = () => {
-    try {
+    // try {
       const response = fetch(
         process.env.REACT_APP_URL + `/todo-items/${idToDoItems}`,
         {
@@ -55,22 +59,19 @@ function DialogDeleteToDoItem(props) {
           },
         }
       );
-      // onToDoItem();
+      onToDoItem();
+      getDetail();
+      // setOnToDoItem(!onToDoItem)
       // dataDetail()
       setOpenDeleteToDoItems(false);
-      onClick()
-    } catch (err) {
-      // console.log(err.message);
-    }
+      // onClick();
+    // } catch (err) {
+    //   // console.log(err.message);
+    // }
   };
   return (
     <ThemeProvider theme={theme}>
-      <Dialog
-        data-cy="modal-delete"
-
-        onClose={handleClose}
-        open={open}
-      >
+      <Dialog data-cy="modal-delete" onClose={handleClose} open={open}>
         <div style={{ padding: "20px", margin: "0 auto", textAlign: "center" }}>
           <WarningAmberIcon
             color="danger"
@@ -112,10 +113,8 @@ function DialogDeleteToDoItem(props) {
                 float: "right",
                 margin: "20px 20px 0 20px",
               }}
-             
               onClick={onClose}
               data-cy="modal-delete-cancel-button"
-
             >
               Batal
             </Button>
@@ -132,7 +131,7 @@ function DialogDeleteToDoItem(props) {
                 margin: "20px 20px 0 20px",
               }}
               data-cy="modal-delete-confirm-button"
-              onClick={() => todoItemDelete(clickActivity)}
+              onClick={ deleteToDoItems}
             >
               Hapus
             </Button>

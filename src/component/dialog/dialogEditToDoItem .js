@@ -22,7 +22,7 @@ const theme = createTheme({
 const styles = {
   dialogPaper: {
     width: "500px",
-    height: "100%",
+    height: "400px",
   },
 };
 
@@ -35,73 +35,71 @@ function DialogEditToDoItem(props) {
     onClose,
     open,
     classes,
-    dataToDoItem,setOnToDoItem
+    dataToDoItem,
+    setOnToDoItem,
+    getDetail,
+    is_active,
+    checked,
   } = props;
 
-  const [kirim, setKirim] = useState();
+  const [kirim, setKirim] = useState(
+    {
+    // title: "",
+    // is_active: 1,
+    // priority: "",
+  }
+  );
 
   useEffect(() => {
-    setKirim({
-      title: dataToDoItem ? dataToDoItem?.title : "",
+    setKirim({   ...kirim,
+      title: dataToDoItem ? dataToDoItem.title : "",
+      is_active : is_active ? is_active : 1,
+      priority: dataToDoItem ? dataToDoItem.priority : "",
+      // _comment: dataToDoItem ? dataToDoItem?.priority : "",
 
-      priority: dataToDoItem ? dataToDoItem?.priority : "",
     });
   }, [dataToDoItem]);
-  const switchSend = () => {
-    if (dataToDoItem) {
-      return `/todo-items/${dataToDoItem.id}`;
-    } else {
-      return "/todo-items";
-    }
-  };
-  const switchMethod = () => {
-    if (dataToDoItem) {
-      return "PATCH";
-    } else {
-      return "POST";
-    }
-  };
-  const addData = (e) => {
 
+  const editData = async (e) => {
+    console.log("kirim 2222", kirim);
     e.preventDefault();
-    // try {
-    const response = fetch(process.env.REACT_APP_URL + switchSend(), {
-      method: switchMethod(),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToDoItem ? kirim : ""),
-      // });
-    });
-    onToDoItem()
-    onClose();
-    // getTodoItemList()
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_URL + `/todo-items/${checked.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: kirim.title,
+            priority: kirim.priority,
+            is_active: kirim.is_active,
 
+          }),
+          // });
+        }
+      );
+      let res = await response.json();
+
+      console.log("response", res);
+      // onToDoItem()
+      onClose();
+      getDetail();
+    } catch (err) {
+      console.log(err.message);
+    }
   };
-
-
-  // onToDoItem();
-  // onClick();
-  // getTodoItemList();
-  // onClose();
-  // window.location.reload();
-  // } catch (err) {
-  //   console.log(err.message);
 
   const handleChange = (event) => {
-  
     event.preventDefault();
     setKirim({
       ...kirim,
       [event.target.name]: event.target.value,
     });
-
-
   };
-// const handleCloseAddDialog= () => {
-//   onClose()
-//   console.log("jjj")
-// }
+
+  console.log(" kirim[1]",  kirim);
   return (
     <ThemeProvider theme={theme}>
       <Dialog
@@ -120,7 +118,7 @@ function DialogEditToDoItem(props) {
           </Typography>
           <TextField
             id="id"
-            value={kirim?.title}
+            value={  kirim.title}
             name="title"
             onChange={handleChange}
             // onChange={(e) => setValueKirim(e.target.value)}
@@ -143,7 +141,7 @@ function DialogEditToDoItem(props) {
             select
             label="Pilih Priority"
             name="priority"
-            value={ kirim?.priority }
+            value={ kirim.priority}
             onChange={handleChange}
             style={{ margin: "10px 0 10px 0", width: "100%" }}
           >
@@ -164,7 +162,7 @@ function DialogEditToDoItem(props) {
         >
           <Button
             data-cy="modal-edit-todo"
-            onClick={addData}
+            onClick={editData}
             variant="contained"
             color="secondary"
             sx={{

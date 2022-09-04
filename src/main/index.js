@@ -9,7 +9,7 @@ import { StylesProvider, createGenerateClassName } from '@mui/styles';
 const MainApp = () => {
 
   return (
-    <>
+    // <>
       <Router>
         <StylesProvider injectFirst>
           <Layout>
@@ -22,7 +22,7 @@ const MainApp = () => {
           </Layout>
         </StylesProvider>
       </Router>
-    </>
+    // </>
   );
 };
 
