@@ -276,7 +276,7 @@ const DetailToDoItems = (props) => {
     checked.includes(item) ? "checked-item" : "not-checked-item";
  console.log("checked", checked)
     return (
-    <Container style={{ width: "100%" }}>
+    <Container style={{ width: "100%" }} data-cy="todo-empty-state">
       {/* <AppBar
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
         titleBarChange={title}
