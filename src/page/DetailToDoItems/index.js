@@ -376,7 +376,7 @@ const DetailToDoItems = (props) => {
           </Button>
         </div>
       </Grid>
-      <div  data-cy="todo-empty-state">
+      <div >
         {detail?.length === 0 ? (
           // <EmptyState
           // data-cy="todo-empty-state"
@@ -421,7 +421,7 @@ const DetailToDoItems = (props) => {
           //   sortToDoItem={sortToDoItem()}
           //   valueSort={valueSort}
           // />
-          <div>
+          <div data-cy="todo-item-list">
             {valueSort == undefined ? (
               <List className={classes.list} data-cy="todo-item">
                 {detail?.map((item) => {
