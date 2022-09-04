@@ -392,7 +392,7 @@ const DetailToDoItems = (props) => {
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            data-cy="todo-empty-state"
+            data-cy="empty-state"
           >
             <img
               alt="Remy Sharp"
@@ -421,7 +421,7 @@ const DetailToDoItems = (props) => {
           //   sortToDoItem={sortToDoItem()}
           //   valueSort={valueSort}
           // />
-          <div data-cy="todo-item-list">
+          <div data-cy="item-list">
             {valueSort == undefined ? (
               <List className={classes.list} data-cy="todo-item">
                 {detail?.map((item) => {
