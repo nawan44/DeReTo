@@ -312,7 +312,7 @@ const TodoEmptyState = (props) => {
             data-cy="todo-title"
             value={title}
             onChange={handleChangeTitle}
-            onKeyUp={sendTitle}
+            // onKeyUp={sendTitle}
             // onKeyDown={sendTitle}
             // label="Rachmat Gunawan"
             placeholder="New Activity"
@@ -321,12 +321,12 @@ const TodoEmptyState = (props) => {
 
           <div style={{ float: "left" }}>
             <IconButton
-              data-cy="todo-title-edit-button"
-              onClick={(e) => sendTitle(e)}
+              
               edge="end"
               aria-label="comments"
             >
-              <CreateIcon style={{ color: "#888888" }} />
+              <CreateIcon style={{ color: "#888888" }}  data-cy="todo-title-edit-button"
+              onClick={sendTitle}/>
             </IconButton>
           </div>
         </div>
