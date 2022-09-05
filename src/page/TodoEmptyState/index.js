@@ -272,7 +272,7 @@ const TodoEmptyState = (props) => {
   console.log("checked", checked);
   return (
     <Container style={{ width: "100%" }}>
-      <Grid
+      <Grid class="todo-header"
         style={{
           margin: "0 auto",
           textAlign: "center",
@@ -283,8 +283,7 @@ const TodoEmptyState = (props) => {
         // columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         <div
-          //
-          style={{
+class="todo-title"          style={{
             width: "50%",
 
             float: "left",
@@ -354,7 +353,7 @@ const TodoEmptyState = (props) => {
           </Button>
         </div>
       </Grid>
-      <div data-cy="item-list-empty-state">
+      <div class="detail-content">
         {detail.length === 0 ? (
           // <EmptyState
           //   handleOpenAddToDoItems={handleOpenAddToDoItems}
@@ -370,14 +369,16 @@ const TodoEmptyState = (props) => {
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            onClick={handleOpenAddToDoItems}
+            data-cy="todo-empty-state"
+            class="empty-item"
           >
             <img
               alt="Remy Sharp"
               width={300}
               src={AvatarWoman}
               style={{ margin: "0 auto", textAlign: "center" }}
-              onClick={handleOpenAddToDoItems}
-              data-cy="todo-empty-state"
+        
             />
           </Grid>
         ) : (
@@ -580,7 +581,8 @@ const TodoEmptyState = (props) => {
       <DialogAddToDoItem
         // getTodoItemList={getTodoItemList}
         detailId={value.id}
-        open={openAddToDoItems}         data-cy="modal-add"
+        open={openAddToDoItems}         
+        data-cy="modal-add"
 
         onClose={handleCloseAddToDoItems}
         dataToDoItem={dataToDoItem}
