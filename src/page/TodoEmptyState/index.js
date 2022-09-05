@@ -267,13 +267,11 @@ const TodoEmptyState = (props) => {
       })
     : "";
 
-
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
   console.log("checked", checked);
   return (
     <Container style={{ width: "100%" }}>
-
       <Grid
         style={{
           margin: "0 auto",
@@ -312,22 +310,19 @@ const TodoEmptyState = (props) => {
             data-cy="todo-title"
             value={title}
             onChange={handleChangeTitle}
-            // onKeyUp={sendTitle}
-            // onKeyDown={sendTitle}
             // label="Rachmat Gunawan"
             placeholder="New Activity"
             sx={{ fontSize: "30px", fontWeight: "bold" }}
           />
 
           {/* <div style={{ float: "left" }}> */}
-            <IconButton
-               data-cy="todo-title-edit-button"
-               onClick={sendTitle}
-              edge="end"
-              aria-label="comments"
-            >
-              <CreateIcon style={{ color: "#888888" }} />
-            </IconButton>
+          <IconButton edge="end" aria-label="comments">
+            <CreateIcon
+              style={{ color: "#888888" }}
+              data-cy="todo-title-edit-button"
+              onClick={sendTitle}
+            />
+          </IconButton>
           {/* </div> */}
         </div>
 
@@ -340,7 +335,7 @@ const TodoEmptyState = (props) => {
             fontWeight: "bold",
           }}
         >
-          <span >
+          <span>
             <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
               <SwapVertRoundedIcon
                 data-cy="todo-sort-button"
@@ -359,9 +354,7 @@ const TodoEmptyState = (props) => {
           </Button>
         </div>
       </Grid>
-      <div   data-cy="item-list-empty-state"         
-   
->
+      <div data-cy="item-list-empty-state">
         {detail.length === 0 ? (
           // <EmptyState
           //   handleOpenAddToDoItems={handleOpenAddToDoItems}
@@ -387,8 +380,8 @@ const TodoEmptyState = (props) => {
               data-cy="todo-empty-state"
             />
           </Grid>
-          // </div>
         ) : (
+          // </div>
           // <ItemList
           //   // onToDoItem={() => setOnToDoItem(!onToDoItem)}
           //   idToDoItems={idToDoItems}
