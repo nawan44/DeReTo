@@ -32,12 +32,12 @@ export default function CardActivity(props) {
   return (
     <Card
       onClick={(id) => getDetail(id)}
-      data-cy="activity-item"
+      data-cy="todo-empty-state"
       key={index}
       sx={{ width: 200, height: "180px", margin: "10px" }}
     >
       <CardContent 
-      //  data-cy="todo-title"
+       data-cy="todo-title"
       >
         {/* <CardContent onClick={ (id) =>checkActivity(item)  }> */}
         <Typography
