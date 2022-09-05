@@ -207,7 +207,7 @@ const TodoEmptyState = (props) => {
     // );
     // } catch (err) {}
   };
-  const sendTitle = async (e) => {
+  const updateTitle = async (e) => {
     // try {
       const response = await fetch(
         process.env.REACT_APP_URL + `/activity-groups/${detailId}`,
@@ -307,7 +307,7 @@ const TodoEmptyState = (props) => {
           {/* {onEdit ? (
                 <div style={{ width: "50%", float: "left",textAlign:"left"  }}> */}
           <Input
-            data-cy="todo-title"
+            // data-cy="todo-title"
             value={title}
             onChange={handleChangeTitle}
             // label="Rachmat Gunawan"
@@ -320,7 +320,7 @@ const TodoEmptyState = (props) => {
             <CreateIcon
               style={{ color: "#888888" }}
               data-cy="todo-title-edit-button"
-              onClick={sendTitle}
+              onClick={updateTitle}
             />
           </IconButton>
           {/* </div> */}
