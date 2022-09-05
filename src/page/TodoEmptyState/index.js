@@ -208,7 +208,7 @@ const TodoEmptyState = (props) => {
     // } catch (err) {}
   };
   const sendTitle = async (e) => {
-    try {
+    // try {
       const response = await fetch(
         process.env.REACT_APP_URL + `/activity-groups/${detailId}`,
         {
@@ -219,11 +219,11 @@ const TodoEmptyState = (props) => {
 
           body: JSON.stringify({
             title: title,
-            email: "rachmat.d.gunawan@gmail.com",
+            // email: "rachmat.d.gunawan@gmail.com",
           }),
         }
       );
-    } catch (err) {}
+    // } catch (err) {}
   };
   const classes = useStyles();
   const [checked, setChecked] = useState([1]);
