@@ -580,7 +580,8 @@ const TodoEmptyState = (props) => {
       <DialogAddToDoItem
         // getTodoItemList={getTodoItemList}
         detailId={value.id}
-        open={openAddToDoItems}
+        open={openAddToDoItems}         data-cy="modal-add"
+
         onClose={handleCloseAddToDoItems}
         dataToDoItem={dataToDoItem}
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
@@ -611,6 +612,8 @@ const TodoEmptyState = (props) => {
       />
       <DialogSort
         // selectedValue={selectedSort}
+        data-cy="modal-add"
+
         open={openSort}
         onClose={handleCloseSort}
         // sorts={sorts}
