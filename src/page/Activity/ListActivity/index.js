@@ -118,7 +118,8 @@ const ListActivity = ({
             textAlign: "center",
             width: "90%",
           }}
-          container                     data-cy="activity-item"
+          container                     
+          // data-cy="activity-item"
 
           rowSpacing={1}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}

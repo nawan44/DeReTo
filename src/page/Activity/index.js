@@ -225,6 +225,8 @@ const Activity = () => {
       </Grid>
       <ListActivity
       class="dashboard-content"
+      data-cy="todo-empty-state"
+
         handleCloseDeleteList={handleCloseDeleteList}
         idDetail={idDetail}
         setIdDetail={setIdDetail}
