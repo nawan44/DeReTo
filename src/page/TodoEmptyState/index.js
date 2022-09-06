@@ -232,7 +232,7 @@ const TodoEmptyState = (props) => {
   };
   const classes = useStyles();
   const [checked, setChecked] = useState([1]);
-
+console.log(".todo_items?.length < 1 ", detail.todo_items?.length < 1 )
   const checkColor = (color) => {
     if (color === "very-high") {
       return "#ED4C5C";
@@ -363,7 +363,7 @@ class="todo-title"          style={{
       </Grid>
       <div className="detail-content">
 
-        {detail.length === 0 ? (
+        {detail?.todo_items?.length < 1 ?(
           // <EmptyState
           //   showAddItem={showAddItem}
           // />
