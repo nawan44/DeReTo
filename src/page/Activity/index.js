@@ -196,6 +196,7 @@ const Activity = () => {
         container
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        class="todo-header"
       >
 
           <Grid
@@ -223,6 +224,9 @@ const Activity = () => {
         </Grid>
       </Grid>
       <ListActivity
+                  data-cy="activity-empty-state"
+
+      class="dashboard-content"
         handleCloseDeleteList={handleCloseDeleteList}
         idDetail={idDetail}
         setIdDetail={setIdDetail}
@@ -248,7 +252,7 @@ const Activity = () => {
         setInformasiHapus={setInformasiHapus}
       />
       <ModalInformation
-        data-cy="modal-information"
+        // data-cy="modal-information"
         open={informasiHapus}
         onClose={handleCloseInformasi}
         setInformasiHapus={setInformasiHapus}

@@ -16,7 +16,7 @@ const MainApp = () => {
             <Routes>
               <PrivateRoute
                 path="/" >
-                <Activity />
+                <Activity  class="dashboard-content"/>
               </PrivateRoute>
             </Routes>
           </Layout>

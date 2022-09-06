@@ -44,6 +44,8 @@ data-cy="modal-information"        onClose={onClose}
         <Typography  sx={{padding:"5px", fontSize:"13px"}}      classes={{ paper: classes.dialogTitle }} ><CheckCircleIcon style={{margin: "0 10px 0 0", }}/>Berhasil Di Hapus </Typography>
       
       </Dialog>{" "}
+      <div onClose={onClose} data-cy="modal-information"></div>
+
     </ThemeProvider>
   );
 }
