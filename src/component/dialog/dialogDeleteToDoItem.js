@@ -138,7 +138,7 @@ function DialogDeleteToDoItem(props) {
           </Grid>
         </Grid>
       </Dialog>
-      <span onClose={handleClose} data-cy="modal-delete"></span>
+      <div onClose={handleClose} data-cy="modal-delete"></div>
     </ThemeProvider>
   );
 }

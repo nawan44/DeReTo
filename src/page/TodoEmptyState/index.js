@@ -12,6 +12,8 @@ import {
   Checkbox,
   IconButton,
 } from "@mui/material";
+import ModalInformation from "../../component/dialog/dialogInformation";
+
 // import AddToDoItems from "../../component/dialog/dialogAddToDoItem";
 // import AppBar from "../../component/layout/appBar";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -94,11 +96,14 @@ const TodoEmptyState = (props) => {
     // "New Activity"
     // value ? value.title : "New Activity"
   );
+  const [informasiHapus, setInformasiHapus] = useState(false);
 
   console.log("title", title);
   console.log("value", value);
   console.log("detail", detail);
-
+  const handleCloseInformasi = (value) => {
+    setInformasiHapus(false);
+  };
   const sortToDoItem = () => {
     if (valueSort === "Terbaru") {
       return detail.sort((a, b) => (b.id > a.id ? 1 : -1));
@@ -305,8 +310,9 @@ class="todo-title"          style={{
           />
           {/* {onEdit ? (
                 <div style={{ width: "50%", float: "left",textAlign:"left"  }}> */}
+        
           <Input
-            // data-cy="todo-title"
+            data-cy="todo-title"
             value={title}
             onChange={handleChangeTitle}
             // label="Rachmat Gunawan"
@@ -315,11 +321,11 @@ class="todo-title"          style={{
           />
 
           {/* <div style={{ float: "left" }}> */}
-          <IconButton edge="end" aria-label="comments">
+          <IconButton edge="end" aria-label="comments"    onClick={updateTitle}            data-cy="todo-title-edit-button"
+>
             <CreateIcon
               style={{ color: "#888888" }}
-              data-cy="todo-title-edit-button"
-              onClick={updateTitle}
+             
             />
           </IconButton>
           {/* </div> */}
@@ -335,10 +341,10 @@ class="todo-title"          style={{
           }}
         >
           <span>
-            <IconButton variant="outlined" sx={{ margin: "0 10px" }}>
+            <IconButton   id="ButtonSort" data-cy="todo-sort-button"
+                onClick={handleOpenSort} variant="outlined" sx={{ margin: "0 10px" }}>
               <SwapVertRoundedIcon
-                data-cy="todo-sort-button"
-                onClick={handleOpenSort}
+             
               />
             </IconButton>
           </span>
@@ -622,6 +628,13 @@ class="todo-title"          style={{
         valueSort={valueSort}
         setValueSort={setValueSort}
       />
+       <ModalInformation
+        // data-cy="modal-information"
+        open={informasiHapus}
+        onClose={handleCloseInformasi}
+        setInformasiHapus={setInformasiHapus}
+      />
+
     </Container>
   );
 };

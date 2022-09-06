@@ -211,6 +211,8 @@ function DialogAddToDoItem(props) {
           </Button>
         </Grid>
       </Dialog>{" "}
+      <div onClose={onClose}   data-cy="modal-add"></div>
+
     </ThemeProvider>
   );
 }

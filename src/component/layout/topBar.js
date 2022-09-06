@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function TopBar() {
   return (
     <>
-      <Box sx={{ flexGrow: 1 }} data-cy="header-background" class="container">
+      <Box sx={{ flexGrow: 1 }} data-cy="header-background" class="header">
         <AppBar
           position="fixed"
           sx={{
