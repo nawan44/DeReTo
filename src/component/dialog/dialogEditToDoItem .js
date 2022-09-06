@@ -61,7 +61,6 @@ function DialogEditToDoItem(props) {
   }, [dataToDoItem]);
 
   const editData = async (e) => {
-    console.log("kirim 2222", kirim);
     e.preventDefault();
     try {
       const response = await fetch(
@@ -82,7 +81,6 @@ function DialogEditToDoItem(props) {
       );
       let res = await response.json();
 
-      console.log("response", res);
       // onToDoItem()
       onClose();
       getDetail();
@@ -99,7 +97,6 @@ function DialogEditToDoItem(props) {
     });
   };
 
-  console.log(" kirim[1]",  kirim);
   return (
     <ThemeProvider theme={theme}>
       <Dialog

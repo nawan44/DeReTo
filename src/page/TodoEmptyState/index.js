@@ -98,9 +98,6 @@ const TodoEmptyState = (props) => {
   );
   const [informasiHapus, setInformasiHapus] = useState(false);
 
-  console.log("title", title);
-  console.log("value", value);
-  console.log("detail", detail);
   const handleCloseInformasi = (value) => {
     setInformasiHapus(false);
   };
@@ -198,8 +195,9 @@ const TodoEmptyState = (props) => {
     );
     let res = await response.json();
     setDetailId(res.id);
-    setDetail(res.todo_items);
+    setDetail(res);
     setTitleTodo(res.title);
+    console.log("res",res.todo_items )
     // setTitleBar(res.title);
     // navigate(`/detail/${value?.id}`
     // , {
@@ -232,7 +230,7 @@ const TodoEmptyState = (props) => {
   };
   const classes = useStyles();
   const [checked, setChecked] = useState([1]);
-console.log(".todo_items?.length < 1 ", detail.todo_items?.length < 1 )
+
   const checkColor = (color) => {
     if (color === "very-high") {
       return "#ED4C5C";
@@ -246,7 +244,7 @@ console.log(".todo_items?.length < 1 ", detail.todo_items?.length < 1 )
       return "#8942C1";
     }
   };
-
+console.log("detail", detail?.length <1)
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -274,7 +272,6 @@ console.log(".todo_items?.length < 1 ", detail.todo_items?.length < 1 )
 
   var isChecked = (item) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
-  console.log("checked", checked);
   return (
     <Container style={{ width: "100%" }}>
       <Grid class="todo-header"
@@ -363,21 +360,22 @@ class="todo-title"          style={{
       </Grid>
       <div className="detail-content">
 
-        {detail?.todo_items?.length < 1 ?(
+        {detail.todo_items?.length <1 ? (
           // <EmptyState
           //   showAddItem={showAddItem}
           // />
           // <div data-cy="empty-state">
-          <Grid
+          <div
             style={{
               margin: "0 auto",
               textAlign: "center",
               padding: "40px 0px",
-              width: "90%",
+              marginTop:"30px",
+              width: "100%", 
             }}
             container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            // rowSpacing={1}
+            // columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             data-cy="todo-empty-state"          
               class="empty-item"
           >
@@ -390,7 +388,7 @@ class="todo-title"          style={{
               // alt="empty"
               id="TextEmptyTodo"
             />
-          </Grid>
+          </div>
         ) : (
           // </div>
           // <ItemList
@@ -414,7 +412,7 @@ class="todo-title"          style={{
           <div className="content-item" data-cy="todo-item">
             {valueSort == undefined ? (
               <List className={classes.list} data-cy="todo-item-list">
-                {detail?.map((item) => {
+                {detail?.todo_items?.map((item) => {
                   const labelId = `checkbox-list-label-${item}`;
 
                   return (

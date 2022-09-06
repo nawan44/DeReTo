@@ -40,8 +40,7 @@ function DialogAddToDoItem(props) {
     setOnToDoItem,getDetail
   } = props;
 
-  console.log("detailId", detailId)
-  // console.log("detailId", detailId)
+
 
 
   const [kirim, setKirim] = useState({
@@ -56,9 +55,6 @@ function DialogAddToDoItem(props) {
 
     });
   }, [dataToDoItem]);
-  // console.log("detailId",detailId)
-  // console.log("onToDoItem",onToDoItem)
-  // console.log("dataToDoItem",dataToDoItem)
 
   const switchSend = () => {
     if (dataToDoItem) {
@@ -116,7 +112,6 @@ function DialogAddToDoItem(props) {
   };
   // const handleCloseAddDialog= () => {
   //   onClose()
-  //   console.log("jjj")
   // }
   return (
     <ThemeProvider theme={theme}>
