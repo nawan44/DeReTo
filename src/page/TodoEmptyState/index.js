@@ -159,7 +159,7 @@ const TodoEmptyState = (props) => {
   const handleCloseAddToDoItems = (value) => {
     setOpenAddToDoItems(false);
   };
-  const handleOpenAddToDoItems = (item) => {
+  const showAddItem = (item) => {
     setOpenAddToDoItems(true);
     setDataToDoItem(item.title);
   };
@@ -350,7 +350,7 @@ class="todo-title"          style={{
             </IconButton>
           </span>
           <Button
-            onClick={handleOpenAddToDoItems}
+            onClick={() =>  setOpenAddToDoItems(true)}
             data-cy="todo-add-button"
             id="ButtonAddDetail"
             // data-cy="modal-add"
@@ -365,7 +365,7 @@ class="todo-title"          style={{
 
         {detail.length === 0 ? (
           // <EmptyState
-          //   handleOpenAddToDoItems={handleOpenAddToDoItems}
+          //   showAddItem={showAddItem}
           // />
           // <div data-cy="empty-state">
           <Grid
@@ -386,7 +386,7 @@ class="todo-title"          style={{
               width={300}
               src={AvatarWoman}
               style={{ margin: "0 auto", textAlign: "center" }}
-              onClick={handleOpenAddToDoItems}
+              onClick={() =>  setOpenAddToDoItems(true)}
               // alt="empty"
               id="TextEmptyTodo"
             />
@@ -593,7 +593,7 @@ class="todo-title"          style={{
         detailId={value.id}
         open={openAddToDoItems}         
 
-        onClose={handleCloseAddToDoItems}
+        onClose={() => setOpenAddToDoItems(false)}
         dataToDoItem={dataToDoItem}
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
         getDetail={getDetail}
