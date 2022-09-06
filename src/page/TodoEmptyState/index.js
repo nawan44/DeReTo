@@ -351,6 +351,7 @@ class="todo-title"          style={{
           <Button
             onClick={handleOpenAddToDoItems}
             data-cy="todo-add-button"
+            id="ButtonAddDetail"
             // data-cy="modal-add"
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
@@ -359,7 +360,8 @@ class="todo-title"          style={{
           </Button>
         </div>
       </Grid>
-      <div class="detail-content">
+      <div             data-cy="todo-empty-state"
+ class="dashboard-content">
         {detail.length === 0 ? (
           // <EmptyState
           //   handleOpenAddToDoItems={handleOpenAddToDoItems}
@@ -376,7 +378,7 @@ class="todo-title"          style={{
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             onClick={handleOpenAddToDoItems}
-            data-cy="todo-empty-state"
+            data-cy="todo-add-button"
             class="empty-item"
           >
             <img
@@ -588,7 +590,6 @@ class="todo-title"          style={{
         // getTodoItemList={getTodoItemList}
         detailId={value.id}
         open={openAddToDoItems}         
-        data-cy="modal-add"
 
         onClose={handleCloseAddToDoItems}
         dataToDoItem={dataToDoItem}
@@ -603,7 +604,6 @@ class="todo-title"          style={{
         getDetail={getDetail}
         detail={detail}
         dataToDoItem={dataToDoItem}
-        data-cy="modal-delete-confirm-button"
         idToDoItems={idToDoItems}
         setOpenDeleteToDoItems={setOpenDeleteToDoItems}
       />
@@ -620,7 +620,6 @@ class="todo-title"          style={{
       />
       <DialogSort
         // selectedValue={selectedSort}
-        data-cy="modal-add"
 
         open={openSort}
         onClose={handleCloseSort}
