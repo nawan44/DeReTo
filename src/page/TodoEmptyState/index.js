@@ -212,7 +212,7 @@ const TodoEmptyState = (props) => {
     // );
     // } catch (err) {}
   };
-  const updateTitle = async (e) => {
+  const handleEditTitle = async (e) => {
     // try {
       const response = await fetch(
         process.env.REACT_APP_URL + `/activity-groups/${detailId}`,
@@ -321,7 +321,8 @@ class="todo-title"          style={{
           />
 
           {/* <div style={{ float: "left" }}> */}
-          <IconButton edge="end" aria-label="comments"    onClick={updateTitle}            data-cy="todo-title-edit-button"
+          <IconButton edge="end" aria-label="comments"    onClick={handleEditTitle}           
+           data-cy="todo-title-edit-button"
 >
             <CreateIcon
               style={{ color: "#888888" }}
@@ -360,8 +361,8 @@ class="todo-title"          style={{
           </Button>
         </div>
       </Grid>
-      <div             data-cy="todo-empty-state"
- class="dashboard-content">
+      <div className="detail-content">
+
         {detail.length === 0 ? (
           // <EmptyState
           //   handleOpenAddToDoItems={handleOpenAddToDoItems}
@@ -377,16 +378,17 @@ class="todo-title"          style={{
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            onClick={handleOpenAddToDoItems}
-            data-cy="todo-add-button"
-            class="empty-item"
+            data-cy="todo-empty-state"          
+              class="empty-item"
           >
             <img
               alt="Remy Sharp"
               width={300}
               src={AvatarWoman}
               style={{ margin: "0 auto", textAlign: "center" }}
-        
+              onClick={handleOpenAddToDoItems}
+              // alt="empty"
+              id="TextEmptyTodo"
             />
           </Grid>
         ) : (
@@ -409,7 +411,7 @@ class="todo-title"          style={{
           //   sortToDoItem={sortToDoItem()}
           //   valueSort={valueSort}
           // />
-          <div data-cy="todo-item-list">
+          <div className="content-item" data-cy="todo-item">
             {valueSort == undefined ? (
               <List className={classes.list} data-cy="todo-item-list">
                 {detail?.map((item) => {
