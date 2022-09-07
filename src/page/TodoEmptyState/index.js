@@ -61,7 +61,7 @@ const TodoEmptyState = (props) => {
     handleDeleteList,
   } = props;
   const navigate = useNavigate();
-  const [openAddToDoItems, setOpenAddToDoItems] = useState(false);
+  const [showAddItem, setShowAddItem] = useState(false);
   const { state } = useLocation();
   const { value } = state;
   // detail, title
@@ -154,12 +154,12 @@ const TodoEmptyState = (props) => {
   };
 
   const handleCloseAddToDoItems = (value) => {
-    setOpenAddToDoItems(false);
+    setShowAddItem(false);
   };
-  const showAddItem = (item) => {
-    setOpenAddToDoItems(true);
-    setDataToDoItem(item.title);
-  };
+  // const showAddItem = (item) => {
+  //   setShowAddItem(true);
+  //   setDataToDoItem(item.title);
+  // };
 
   // const viewSort = () => {
   //   if (list?.length > 0 || detail?.length > 0) {
@@ -347,7 +347,7 @@ class="todo-title"          style={{
             </IconButton>
           </span>
           <Button
-            onClick={() =>  setOpenAddToDoItems(true)}
+            onClick={() =>  setShowAddItem(true)}
             data-cy="todo-add-button"
             id="ButtonAddDetail"
             // data-cy="modal-add"
@@ -384,7 +384,7 @@ class="todo-title"          style={{
               width={300}
               src={AvatarWoman}
               style={{ margin: "0 auto", textAlign: "center" }}
-              onClick={() =>  setOpenAddToDoItems(true)}
+              onClick={() =>  setShowAddItem(true)}
               // alt="empty"
               id="TextEmptyTodo"
             />
@@ -589,9 +589,9 @@ class="todo-title"          style={{
       <DialogAddToDoItem
         // getTodoItemList={getTodoItemList}
         detailId={value.id}
-        open={openAddToDoItems}         
+        open={showAddItem}         
 
-        onClose={() => setOpenAddToDoItems(false)}
+        onClose={() => setShowAddItem(false)}
         dataToDoItem={dataToDoItem}
         onToDoItem={() => setOnToDoItem(!onToDoItem)}
         getDetail={getDetail}

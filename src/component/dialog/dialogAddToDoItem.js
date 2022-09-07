@@ -115,27 +115,30 @@ function DialogAddToDoItem(props) {
   // }
   return (
     <ThemeProvider theme={theme}>
-      <Dialog
+      <Dialog 
         data-cy="modal-add"
         onClose={onClose}
         open={open}
         classes={{ paper: classes.dialogPaper }}
       >
-        <DialogTitle>
-          <h3 data-cy="modal-add-title" className="dialog-title">
+        {/* <DialogTitle> */}
+        <div class="modal-header">
+          <h3 data-cy="modal-add-title" className="dialog-title" style={{width:"90%", float:"left"}}>
             Tambah List Item
           </h3>
-          <IconButton
-            className="button-close"
+          {/* <IconButton
+          > */}
+            {" "}
+            <Close             className="button-close"
             data-cy="modal-add-close-button"
             onClick={onClose}
-          >
-            {" "}
-            <Close onClick={onClose} className="button-close" />
-          </IconButton>
-        </DialogTitle>
+            style={{width:"10%", float:"left"}}
+ />
+ </div>
+          {/* </IconButton> */}
+        {/* </DialogTitle> */}
         <Divider />
-        <div style={{ padding: "20px" }}>
+        <div style={{ padding: "20px" }} class="modal-body">
           <Typography
             data-cy="modal-add-name-title"
             style={{ fontWeight: 600, fontSize: "12px", lineHeight: "18px" }}
@@ -175,7 +178,7 @@ function DialogAddToDoItem(props) {
             onChange={handleChange}
           >
             {priorities.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem key={option.value} value={option.value} data-cy="modal-add-priority-item">
                 {option.circle}
                 {option.label}
               </MenuItem>
@@ -187,7 +190,7 @@ function DialogAddToDoItem(props) {
         <Grid
           container
           sx={{ padding: "0 0 20px 0 " }}
-          justifyContent="flex-end"
+          justifyContent="flex-end" class="pb-4 modal-footer"
         >
           <Button
             data-cy="modal-add-save-button"

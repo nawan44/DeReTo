@@ -42,9 +42,12 @@ const ListActivity = ({
     setClose(false);
     handleCloseDeleteList();
   };
+  console.log("list", list)
+
+  console.log("list?.data?.length < 1", list?.data?.length < 1)
   return (
     <Container
-      style={{ width: "100%" }}
+      style={{ width: "100%" }} class="dashboard-content"
     >
       {/* <ClickAwayListener
 
@@ -53,7 +56,7 @@ const ListActivity = ({
       onClickAway={handleClickAway}
 
     > */}
-      {list?.length === 0 ? (
+      {list?.data?.length < 1 ? (
         <Grid
           style={{
             margin: "0 auto",
@@ -74,9 +77,11 @@ const ListActivity = ({
               textAlign: "center",
               fontWeight: "bold",
             }}
-            data-cy="activity-empty-state"
+             className="empty-item"
           >
             <img
+            data-cy="activity-empty-state"
+            onClick= {handleAddActivityGroup}
               alt="Remy Sharp"
               width={250}
               src={AvatarMan}
@@ -126,8 +131,7 @@ const ListActivity = ({
         >
           {valueSort == undefined ? (
             <>
-              {list &&
-                list?.map((item, index) => (
+              {list?.data?.map((item, index) => (
                   <CardActivity
                     data-cy="activity-item"
                     key={item.id}

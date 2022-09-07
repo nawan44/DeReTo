@@ -62,7 +62,7 @@ const Activity = () => {
         }
       );
       let res = await response.json();
-      setList(res.data);
+      setList(res);
       setOnClick(true);
     } catch (err) {
       console.log(err.message);
