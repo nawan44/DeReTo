@@ -329,23 +329,23 @@ class="todo-title"          style={{
           {/* </div> */}
         </div>
 
-        <div
+        <div 
           style={{
             width: "50%",
             float: "left",
             padding: "5px 0 0 0",
             fontSize: "35px",
             fontWeight: "bold",
-          }}
+          }} className="d-flex"
         >
-          <span>
+          {/* <span> */}
             <IconButton   id="ButtonSort" data-cy="todo-sort-button"
                 onClick={handleOpenSort} variant="outlined" sx={{ margin: "0 10px" }}>
               <SwapVertRoundedIcon
              
               />
             </IconButton>
-          </span>
+          {/* </span> */}
           <Button
             onClick={() =>  setShowAddItem(true)}
             data-cy="todo-add-button"
@@ -354,7 +354,7 @@ class="todo-title"          style={{
             variant="contained"
             style={{ backgroundColor: "#16ABF8", borderRadius: "20px" }}
           >
-            + Tambah
+             <span >+ </span> Tambah
           </Button>
         </div>
       </Grid>
