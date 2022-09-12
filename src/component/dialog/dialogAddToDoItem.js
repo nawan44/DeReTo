@@ -114,11 +114,11 @@ function DialogAddToDoItem(props) {
   //   onClose()
   // }
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}  data-cy="modal-add">
       <Dialog 
-        data-cy="modal-add"
+        // data-cy="modal-add"
         onClose={onClose}
-        open={open}
+        open={open}  data-cy="modal-add"
         classes={{ paper: classes.dialogPaper }}
       >
         {/* <DialogTitle> */}
@@ -209,7 +209,7 @@ function DialogAddToDoItem(props) {
           </Button>
         </Grid>
       </Dialog>{" "}
-      <div onClose={onClose}   data-cy="modal-add"></div>
+      <div onClose={onClose} ></div>
 
     </ThemeProvider>
   );
