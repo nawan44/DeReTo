@@ -114,7 +114,8 @@ function DialogAddToDoItem(props) {
   //   onClose()
   // }
   return (
-    <ThemeProvider theme={theme}  data-cy="modal-add">
+    <div  data-cy="modal-add">
+    <ThemeProvider theme={theme} >
       <Dialog 
         // data-cy="modal-add"
         onClose={onClose}
@@ -212,6 +213,7 @@ function DialogAddToDoItem(props) {
       <div onClose={onClose} ></div>
 
     </ThemeProvider>
+    </div>
   );
 }
 
